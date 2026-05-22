@@ -1983,9 +1983,11 @@
     }
 
     const savedPwdAtInit = loadSavedPassword();
+    let initialUnlockShown = false;
     if (!savedPwdAtInit) {
       setupOverlay(true);
       openSecretOverlay(overlay);
+      initialUnlockShown = true;
     }
 
     // 检查是否已经存在 secret.private（用于区分“解锁”与“初始化”）
@@ -2055,8 +2057,10 @@
             }
           }
           // 没有保存的密码或自动解锁失败：展示解锁/游客界面
-          setupOverlay(true);
-          openSecretOverlay(overlay);
+          if (!initialUnlockShown) {
+            setupOverlay(true);
+            openSecretOverlay(overlay);
+          }
         } else {
           // 不存在 secret.private：始终展示初始化向导
           setupOverlay(false);

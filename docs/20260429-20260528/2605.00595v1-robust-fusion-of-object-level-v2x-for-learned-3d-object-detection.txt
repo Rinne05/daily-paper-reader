@@ -1,0 +1,430 @@
+Title: Robust Fusion of Object-Level V2X for Learned 3D Object Detection
+
+URL Source: https://arxiv.org/pdf/2605.00595v1
+
+Published Time: Mon, 04 May 2026 00:47:40 GMT
+
+Number of Pages: 7
+
+Markdown Content:
+# Robust Fusion of Object-Level V2X for Learned 3D Object Detection 
+
+Lukas Ostendorf 1, Lennart Reiher 1, Onn Haran 2, Lutz Eckstein †
+
+© 2026 IEEE. Personal use of this material is permitted. Permission from IEEE must be obtained for all other uses, in any current or future media, including reprinting/republishing this material for advertising or promotional purposes, creating new collective works, for resale or redistribution to servers or lists, or reuse of any copyrighted component of this work in other works. 
+
+Abstract —Perception for automated driving is largely based on onboard environmental sensors, such as cameras and radar, which are cost-effective but limited by line-of-sight and field-of-view constraints. These inherent limitations may cause onboard perception to fail under occlusions or poor visibility conditions. In parallel, cooperative awareness via vehicle-to-everything (V2X) communication is becoming increasingly available, enabling ve-hicles and infrastructure to share their own state as object-level information that complements onboard perception. In this work, we study how such V2X information can be integrated into 3D object detection and how robust the resulting system is to realistic V2X imperfections. Using the nuScenes dataset, we emulate object-level cooperative awareness messages from ground truth, injecting controlled noise and object dropout to mimic real-world conditions such as latency, localization errors, and low V2X penetration rates. We convert these messages into a dedicated bird’s-eye view (BEV) input and fuse them into a 
+
+BEVFusion -style detector. Our results demonstrate that while object-level cooperative information can substantially improve detection performance, achieving an NDS of 0.80 under favorable conditions, models trained on idealized data become fragile and over-reliant on V2X. Conversely, our proposed noise-aware training strategy, coupled with explicit confidence encoding, enhances robustness, maintaining performance gains even under severe noise and reduced V2X penetration. 
+
+Index Terms —V2X, cooperative awareness, 3D object detec-tion, BEVFusion. 
+
+I. I NTRODUCTION 
+
+Road traffic accidents remain a leading cause of death and injury worldwide [1]. Automated and autonomous driving systems aim to reduce the number of accidents, relying on perception systems that must be accurate and reliable under diverse conditions. In current series-production vehicles, per-ception is typically based on onboard environment sensors such as cameras and radar. Cameras are low-cost and provide rich semantic information but suffer from limited field-of-view and failures in adverse weather. Radar is more robust to weather and provides direct velocity measurements but has limited angular resolution. LiDAR offers dense, accurate 3D measurements, but remains prohibitively costly for most series-production vehicles. As a result, purely onboard en-vironment sensing faces fundamental limitations in complex traffic scenes.  
+
+> 1
+
+The authors are with the Institute for Automotive Engi-neering, RWTH Aachen University, 52074 Aachen, Germany. 
+
+firstname.lastname@ika.rwth-aachen.de  
+
+> 2
+
+The author is with Qualcomm Technologies, Inc., Kfar-Netter, Israel. This research has been funded by Qualcomm.  
+
+> †
+
+Lutz Eckstein is head of the Institute for Automotive Engineering (ika). partial 
+
+> occlusion
+> field-of-view
+
+Onboard Sensor Perception localization  
+
+> error
+> latency
+> missing sender
+
+V2X Perception  Joint Perception Fig. 1. Comparison of perception modalities: (left) onboard sensors with limited field-of-view and occlusions, (center) V2X that reveals occluded actors but suffers localization error and latency, and (right) joint perception that combines both for more robust scene understanding. 
+
+As illustrated in Figure 1, vehicle-to-everything (V2X) com-munication provides complementary information by enabling vehicles and infrastructure to exchange self-localized states. Thereby, it extends sensing horizons and exposes participants that would otherwise remain hidden. Object-level data in V2X messages can, in principle, cover blind spots of onboard environment sensors and provide semantic cues. In practice, V2X messages suffer from imperfections. Positioning based on a Global Navigation Satellite System (GNSS) can be off by several meters in urban canyons [2, 3], and end-to-end delivery often incurs tens to hundreds of milliseconds of latency [4]. In bird’s-eye view (BEV), these issues appear as spatial misalignment and temporal lag. Na¨ ıvely overlaying stale or mislocalized V2X object in-formation on top of camera or radar detections risks false associations, hallucinated objects, and brittle performance. To use V2X as an additional input for 3D object detection, it is necessary to understand how to integrate this information into modern multi-modal networks and how sensitive such integration is to localization errors and low V2X penetration rates. In practice, not all vehicles transmit V2X messages, and some object classes may never participate (e.g., cones, barriers, pedestrians), so robust integration strategies must handle partial or incomplete V2X information. In this work, we focus on object-level V2X information that provides object states (position, orientation, velocity) from remote vehicles and infrastructure. We use ground-truth annotations from the nuScenes dataset [5] to emulate such V2X information under controlled noise and object dropout. Our emulation explicitly models latency and localization errors via object-level and frame-level rotation and translation noise. 
+
+> arXiv:2605.00595v1 [cs.CV] 1 May 2026
+
+It also incorporates object-level and class-level dropout to account for vehicles that lack V2X capability and object classes that do not participate in V2X communication. We in-tegrate the V2X-derived BEV input into a BEVFusion -style [6] architecture using a dedicated V2X encoder and gating-based fusion mechanism, for both camera-only and radar+camera configurations. This design allows us to systematically study how V2X information improves detection and how perfor-mance degrades as V2X becomes noisy, incomplete, or sparse. We address three key questions:  
+
+> •
+
+How can V2X information be incorporated into 3D object detection frameworks? We propose a control-lable V2X emulation pipeline with a dedicated encoder and gating-based fusion for BEVFusion [6].  
+
+> •
+
+How robust is such integration to V2X noise and limited V2X penetration rates? We conduct system-atic experiments on nuScenes [5] and demonstrate that noise-aware training with confidence encoding improves robustness.  
+
+> •
+
+How does performance compare to camera-only and radar baselines across varying V2X quality? We show that appropriate training strategies maintain gains even under severe imperfections. II. R ELATED WORK 
+
+We review V2X communication standards and their inte-gration into learning-based perception, then discuss 3D object detection methods that form the foundation of our approach. 
+
+A. V2X Communication 
+
+Vehicle-to-Everything communication enables vehicles, in-frastructure, and other road users to share information wire-lessly. In Europe, it is standardized by the European Telecom-munications Standards Institute (ETSI). Within this frame-work, Cooperative Awareness Messages (CAMs) broadcast a sender’s own state: position, motion, and basic status, so nearby participants know where it is and what it is doing. Collective Perception Messages (CPMs) build on this by sharing the objects detected in the sender’s surroundings, enabling others to benefit from its sensing capabilities. A key challenge when using V2X data as auxiliary per-ception input is the spatiotemporal inaccuracy of transmitted information. GNSS-based positioning suffers from satellite blockage, multipath, and atmospheric effects that introduce meter-level and time-varying errors [2, 3]. Message timeliness is further degraded by channel contention and processing delays, creating latency and jitter that misalign received states with the local perception frame [4, 7]. Recent datasets, such as V2AIX [8], empirically characterize these real-world effects, highlighting the need for fusion strategies that can reliably accommodate uncertain and delayed information. 
+
+B. V2X in Learning-Based Perception 
+
+Recent work demonstrates that V2X information can sub-stantially enhance learning-based perception. Integration meth-ods span a spectrum from early fusion of exchanged point clouds [9] to mid-level sharing of latent features [10, 11] and late fusion of object lists [12], enabling agents to complement each other under occlusions. Public datasets and simulators including DAIR-V2X and OPV2V have enabled systematic evaluation across camera- and LiDAR-based stacks [13, 14]. However, these approaches typically rely on CPM-style co-operative perception, which assumes access to rich sensor features or object reports. In contrast, the use of lightweight CAM-style object-level information to guide 3D object detec-tors remains much less explored. Prior work has examined deep fusion of transmitted object boxes and demonstrated that localization noise can severely degrade their utility [12], while probabilistic frameworks high-light the importance of modeling uncertainty when combining CAM- or CPM-style object lists with onboard perception [15]. Building on these insights, we investigate how self-transmitted CAM-style information can be integrated into a BEV-based 3D detector and systematically quantify the sensitivity of this fusion to localization error, latency, and reduced V2X penetration. 
+
+C. 3D Object Detection and BEV Representations 
+
+Modern 3D object detection increasingly relies on bird’s-eye view (BEV) representations that align all sensor modalities in a common ground-plane coordinate system, providing a nat-ural interface for multi-sensor fusion. While early monocular approaches [16, 17] struggled with depth ambiguity, recent multi-view BEV detectors lift image features into a shared BEV space for unified geometric reasoning. Foundational methods such as BEVDepth [18], and transformer-based de-signs like BEVFormer [19] demonstrate the effectiveness of BEV feature lifting and temporal aggregation. BEVFusion [6] exemplifies this paradigm by fusing camera, radar, and LiDAR in BEV through learned transformations, achieving state-of-the-art performance on nuScenes [5]. However, existing BEV fusion methods do not exploit V2X object information, which provides complementary spatial coverage but arrives with localization errors and latency that can corrupt the BEV representation if naively integrated. III. M ETHODOLOGY 
+
+Our goal is to integrate V2X object-level information into a BEVFusion -style detector and to study robustness to V2X imperfections in a controlled way. To this end, we (A) emulate V2X messages from nuScenes ground-truth annotations with configurable noise and object dropout, (B) convert the noisy object list into a multi-channel V2X BEV input, and (C) extend 
+
+BEVFusion with a V2X branch and gating-based fusion. 
+
+A. V2X Emulation 
+
+We implement ground-truth based V2X emulation on 
+
+nuScenes . For each frame, we use the 3D bounding box annotations (position, size, orientation, velocity, class) as a proxy for object-level V2X messages and inject controlled imperfections to mimic realistic behavior. Since nuScenes 
+
+annotates only sensor-visible objects, fully occluded actors are V2X BEV Representation       
+
+> 3D Object Detection Head
+> BEVFusion Base
+> BEVFusion Base
+> Our Extension
+> Multi-View Images
+> Radar Targets
+> BEV
+> Encoder
+> Radar BEV
+> Features
+> Pillar
+> Encoder V2X
+> Encoder
+> Camera
+> Encoder
+> View
+> Transformation
+> V2X BEV
+> Features
+> V2X
+> Modulation
+> Camera BEV
+> Features
+> Camera
+> Features
+> BEV
+> Fusion Fig. 2. Architecture overview: BEVFusion [6] with an added V2X branch and gating-based fusion at the BEV feature level. The V2X BEV input is encoded by a ResNet [20] backbone, aligned with camera and radar features, and modulated by a learnable gate before entering the detection head to weight V2X contributions by reliability.
+
+absent, making our evaluation conservative. This setup allows systematic variation of localization errors, latency effects, and missing senders. Importantly, we model both transmitter-side and ego-vehicle-side effects by separately applying object-level and frame-level perturbations. We apply four synthetic noise mechanisms:  
+
+> •
+
+Object-level rotation/translation noise: Independent perturbations to each object’s heading and position.  
+
+> •
+
+Frame-level rotation/translation noise: Global pertur-bations applied uniformly to all objects in a frame.  
+
+> •
+
+Object-level dropout: Random removal of individual objects from the emulated V2X information.  
+
+> •
+
+Class-level dropout: Systematic removal of entire object classes from the emulated V2X information. These perturbations correspond to common V2X failure modes: object-level noise reflects transmitter-side inaccuracies (e.g., GNSS error or stale states due to latency), frame-level noise models ego-pose drift affecting all received objects, object-level dropout represents missing transmitters, and class-level dropout captures non-broadcasting categories. In our studies, we sample the noise perturbation ε from multiple distributions:  
+
+> •
+
+Uniform: ε ∼ U (a, b ) 
+
+> •
+
+Gaussian (fixed σ): ε ∼ N (0 , σ 2) 
+
+> •
+
+Gaussian (var. σ): σ ∼ U (σmin , σ max ), ε ∼ N (0 , σ 2).         
+
+> X (m)
+> Y (m)
+> -50 -25 025 50
+> -40
+> -20
+> 0
+> 20
+> 40
+> (a) Object Annotations
+> X (m)
+> -50 -25 025 50
+> (b) Emulated V2X Input Layer
+> Fig. 3. BEV input visualization: (left) ground-truth 3D boxes in the ego frame, (right) the corresponding Gaussian rasterized BEV map used as V2X input.
+
+B. V2X BEV Input Generation 
+
+After applying noise and object dropout, we convert the resulting object list into a fixed-size BEV representation. We discretize the BEV plane into a grid and rasterize each object using an oriented anisotropic Gaussian footprint. For a box with size (dx, d y ) and yaw θ, we transform each relative offset (∆ x, ∆y) from the box center to the box’s local coordinate frame via 
+
+u = ∆ x cos θ + ∆ y sin θ, v = −∆x sin θ + ∆ y cos θ, 
+
+then calculate an anisotropic Gaussian 
+
+g(u, v ) = exp 
+
+
+
+− 12
+
+ udx/2
+
+2
+
++
+
+ vdy /2
+
+2 
+
+.
+
+We write g(u, v ) into the corresponding class channel using a per-cell maximum over overlapping boxes. For additional channels encoding object properties (orientation, height, ve-locity), we multiply g(u, v ) by the normalized property value. The resulting BEV tensor contains  
+
+> •
+
+one occupancy channel per object class;  
+
+> •
+
+two orientation channels: sin( θ) and cos( θ); 
+
+> •
+
+one height channel ( z coordinate);  
+
+> •
+
+and two velocity channels: vx and vy .All channels are normalized to the range [0 , 1] . A visualization of the BEV representation can be seen in Figure 3 Each object’s contribution is weighted by a confidence value derived from the noise standard deviation. Formally, the confidence c is an inverse function of the standard deviation 
+
+σ. This mimics realistic V2X metadata (e.g., GNSS accuracy indicators). Crucially, we encode only the standard deviation used to generate noise, not the realized error, providing an uncertainty estimate rather than a correction signal. This encourages the network to learn appropriate trust levels for V2X information. 
+
+C. Network Architecture and Fusion 
+
+We build on BEVFusion [6], a multi-sensor fusion architec-ture that unifies sensor data in a shared BEV representation. This BEV-centric design is particularly suitable for V2X integration, as V2X messages can be converted into the same BEV space, enabling seamless, principled fusion with existing sensor modalities. We use only the camera and radar branches, disabling the original LiDAR branch. Figure 2 provides an overview of the architecture and our V2X fusion scheme. 
+
+1) Base BEVFusion backbone: A Swin-T backbone and LSS view transformer convert multi-view images into an 80 -channel BEV feature map, which is then passed to a BEV decoder and CenterHead detector. For radar+camera experi-ments, radar features are projected and fused following the standard BEVFusion design. Additional configuration details are provided in Section IV. 
+
+2) V2X branch: The V2X BEV input (Section III-B) is processed by a dedicated branch: a ResNet backbone and LSSFPN neck generate V2X BEV features that are spatially aligned with the camera and radar BEV representations, en-abling fusion at a shared resolution. 
+
+3) Gating-based fusion: At BEVFusion ’s decoder stage, we inject V2X BEV features via a learnable gating mechanism. Let Ffused denote the fused BEV features from camera and radar, and Fv2x denote the encoded V2X features. A learnable gate produces spatially varying weights: 
+
+G = σ(Conv ([ Ffused , Fv2x ])) ,
+
+where σ is the sigmoid activation. The gated V2X features 
+
+G ⊙ Fv2x are fused with the decoder features via learnable residual and scaling pathways. This mechanism enables adap-tive weighting of V2X contributions based on the available fused features. 
+
+4) Training noise and confidence: During training, we ap-ply Gaussian noise with uniformly sampled standard deviation per object, encoded as confidence in the V2X input. This exposes the network to varying V2X confidence levels. Frame-level noise is applied the same way and contributes to the con-fidence of all objects simultaneously. At test time, we evaluate under various noise and object dropout configurations using Gaussian noise with fixed standard deviation to characterize robustness. For exact configurations, see Section IV. 
+
+5) V2X dropout for V2X penetration rate modeling: To emulate V2X penetration rates, we apply object-level V2X dropout. During training, this is implemented as Bernoulli dropout on individual V2X objects with fixed drop rates (25 % , 50 % , 75 % ), corresponding to different assumed V2X penetration rates. At test time, we sweep the drop rate for a given model to obtain performance as a function of the effective V2X penetration rate, as detailed in Section IV. This setup allows us to study how training with missing V2X data affects robustness to reduced V2X penetration. IV. E XPERIMENTAL SETUP AND EVALUATION 
+
+METHODOLOGY 
+
+This section details the dataset, metrics, model configura-tions, training setup, noise models, and ablation studies used to evaluate V2X integration. 
+
+A. Experimental Overview 1) Metrics: We follow the official nuScenes evaluation protocol [5]. Unless stated otherwise, nuScenes Detection Score (NDS) is computed over all ten object categories. For class-wise analyses (Section IV-C), we additionally report per-class average precision (AP). 
+
+2) Dataset: All experiments use nuScenes with the official train/validation/test splits and 10-class taxonomy [5]. V2X em-ulation follows Section III-A. Because nuScenes annotations only cover objects visible to the onboard perception sensors, fully occluded actors are absent. This makes our V2X gains conservative, as real deployments can surface such occluded participants. 
+
+3) Model configuration: Input images are resized to 
+
+256 ×704 pixels. The BEV grid spans −51 .2 m to 51 .2 m in 
+
+x and y at 0.4 m resolution, with a depth range of 1 m to 
+
+60 m and vertical extent −10 m to 10 m . The view transformer yields an 80 -channel BEV feature map processed by a BEV decoder and a CenterHead with output stride 8. 
+
+4) Modalities: We consider two sensor configurations:  
+
+> •
+
+Camera-only BEVFusion : 6 multi-view cameras.  
+
+> •
+
+Radar+Camera BEVFusion : fusion of the front-center radar and front-center camera. For both configurations, we train baselines without V2X and variants with the V2X branch and gating-based fusion. 
+
+5) Training: We train for 20 epochs using AdamW with learning rate 2 × 10 −4, weight decay 0.01 , and a cyclic learning rate schedule with a 500-iteration warm-up, using FP16. Data augmentation follows the standard BEVFusion 
+
+recipe, including 2D resizing and rotation, 3D rotation and scaling, and horizontal flips. V2X-augmented networks use the noise and confidence encoding described in Section III-C. 
+
+B. Noise Configurations 
+
+We assess robustness using single-parameter noise sweeps and combined sweeps applied to emulated V2X data. The 
+
+0.3 rad and 2 m maxima reflect common GNSS/odometry drift and short-latency pose errors; lower steps cover moderate misalignment. Combined levels mirror these ranges so joint perturbations stay realistic while spanning mild to severe degradation. 
+
+1) Single-parameter sweeps: We vary one noise source at a time while keeping all others at zero. We independently sweep object rotation, object translation, frame rotation, and frame translation in the x-y plane. Rotation sweeps use σrot ∈{0.0, 0.05 , 0.1, 0.15 , 0.2, 0.3} rad , and translation sweeps use 
+
+σtrans ∈ { 0.0, 0.25 , 0.5, 0.75 , 1.0, 1.5, 2.0} m.
+
+2) Combined sweeps: All noise types are simultaneously active using the configurations in Table I-a. 
+
+3) Training noise levels: The networks in Section IV-C use uniformly sampled Gaussian noise during training with the ranges in Table I-b. 
+
+C. Ablation Studies 
+
+We perform five experiments (Experiments A–E), all using the training and evaluation protocol defined above. 
+
+Experiment A: V2X without training noise: We train a camera+V2X model without V2X noise to measure its best-case benefit and sensitivity to noise. TABLE I V2X N OISE CONFIGURATIONS                                          
+
+> (a) Noise during test: fixed σ
+> Noise Level Object Level Frame Level Rot. [ rad ]Trans. [ m]Rot. [ rad ]Trans. [ m]
+> Low 0.05 0.25 0.05 0.25 Medium-low 0.10 0.50 0.10 0.50 Medium-high 0.15 0.75 0.15 0.75 High 0.30 1.50 0.30 1.50 (b) Noise during training: σsampled from range
+> Level Object Level Frame Level Rot. [ rad ]Trans. [ m]Rot. [ rad ]Trans. [ m]
+> Low 0.0005–0.005 0.01–1.0 0.0005–0.005 0.01–1.0 Medium 0.001–0.01 0.02–2.0 0.001–0.01 0.02–2.0 High 0.002–0.02 0.03–3.0 0.002–0.02 0.03–3.0
+
+Experiment B: Training with noise: We train camera+V2X and radar+camera+V2X BEVFusion models with noise-enabled V2X. Gaussian noise with uniformly sampled standard deviation is injected and encoded as confidence, encouraging confidence-aware fusion for noisy V2X inputs. 
+
+Experiment C: Training noise level: We train low-, medium-, and high-noise variants for each configuration to study how the magnitude of training-time V2X noise in-fluences the learned fusion behavior. This ablation isolates whether exposure to noise during training causes the model to rely on V2X inputs, learn confidence-aware fusion that is robust to degradation, or downweight noisy V2X signals. 
+
+Experiment D: Class-limited V2X Input: We restrict V2X information to classes likely to carry V2X units (car, truck, bus, trailer, motorcycle, and bicycle), explicitly excluding pedestrians, cones, and barriers. This setup enables class-wise AP analysis to assess how different semantic categories are affected by the availability of V2X information. For brevity, we report only camera+V2X results. 
+
+Experiment E: V2X penetration rate: We simulate varying V2X penetration rates by randomly dropping object-level V2X messages at test time for the model from Experiment D. The penetration rate is defined as the fraction of V2X-capable actors that transmit messages. To test whether training with missing messages improves robustness, we also train three camera+V2X variants with fixed training-time dropout rates of 25 % , 50 % , and 75 % . At evaluation, we measure perfor-mance for the original and dropout-trained models across test-time penetration rates of 25 % , 50 % , 75 % , and 100 % . This experiment assesses whether exposure to object dropout during training reduces sensitivity to reduced V2X penetration. V. R ESULTS 
+
+In this section, we present the evaluation of our V2X integration approach, following the ablation studies defined in Section IV-C. We analyze the potential of V2X integration, the impact of noise-aware training on robustness, the trade-off between peak performance and stability, and the effects of class-limited V2X input and V2X penetration rates. 
+
+Experiment A: Potential of V2X Integration 
+
+To assess the upper bound of performance gains from V2X integration, we first evaluate a camera+V2X BEVFusion 
+
+model trained with ideal, noise-free V2X input. Under perfect conditions (no test-time noise), this model achieves an NDS of 
+
+0.90 , a substantial improvement over the camera-only baseline (NDS 0.39 ). This large gain is expected, as noise-free V2X emulation effectively provides ground-truth object informa-tion, drastically enhancing perception by resolving occlusions and providing accurate depth and velocity cues. However, as illustrated in Figure 4, this performance is highly fragile. While the model is relatively robust to object-level rotation noise (Figure 4a), it exhibits catastrophic degra-dation under other perturbations. For instance, frame rotation (Figure 4c) causes NDS to drop to 0.08 , and translation errors (Figure 4b, d) lead to NDS values around 0.10 at σ = 2 m .This indicates that without exposure to noise during training, the network over-relies on precise spatial alignment and fails to generalize to realistic V2X imperfections. 
+
+Experiment B: Robustness through Noise-Aware Training 
+
+Training with Gaussian V2X noise substantially improves robustness. In the combined noise setting (Figure 4e), which simultaneously applies object- and frame-level rotation and translation noise (Table I), models trained with low, medium, or high noise degrade gracefully and stay close to or above the camera-only baseline across most settings. In stark con-trast, the zero-noise model from Experiment A collapses to NDS 0.02 at high combined noise. This demonstrates that noise-aware training enables the network to learn confidence-weighted fusion, effectively down-weighting V2X information when it is unreliable rather than over-relying on it. To provide context for alternative sensor modalities, we also evaluate radar+camera fusion (front radar and front camera) under identical noise conditions. Figure 4j shows that radar+camera models trained with low and medium noise levels follow qualitatively similar robustness trends as camera+V2X and maintain performance well above the radar+camera baseline across all noise settings. Under maxi-mum combined noise, the low-noise radar+camera model still achieves NDS 0.49 , illustrating the inherent robustness benefit of adding radar to the fusion stack. 
+
+Experiment C: Impact of Training Noise Magnitude 
+
+Varying the training noise level reveals a trade-off be-tween peak performance and robustness. For camera+V2X (Figure 4e), the low-noise trained model peaks highest with NDS 0.80 ) but collapses under heavy test noise to NDS 0.37 ,even below the camera-only baseline ( 0.39 ). The high-noise trained model starts lower ( 0.64 ) yet remains stable, dropping only to 0.53 . The medium-noise trained model strikes abalance, retaining most clean-scenario accuracy while staying consistent across noise sweeps. This shows that higher training noise mitigates V2X over-reliance at the expense of peak performance. Camera+V2X                                        
+
+> 00.10.20.3
+> 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> Object rotation std ( rad )
+> NDS
+> (a) Object Rotation
+> 00.511.52
+> Object translation std ( m)
+> (b) Object Translation
+> 00.10.20.3
+> Frame rotation std ( rad )
+> (c) Frame Rotation
+> 00.511.52
+> Frame translation std ( m)
+> (d) Frame Translation
+> low med-med+ high
+> Combined noise level
+> (e) Combined Noise
+> Baseline No Noise Training Low Noise Training Medium Noise Training High Noise Training
+> Radar+Camera+V2X (only front camera and front radar)
+> 00.10.20.3
+> 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> Object rotation std ( rad )
+> NDS
+> (f) Object Rotation
+> 00.511.52
+> Object translation std ( m)
+> (g) Object Translation
+> 00.10.20.3
+> Frame rotation std ( rad )
+> (h) Frame Rotation
+> 00.511.52
+> Frame translation std ( m)
+> (i) Frame Translation
+> low med-med+ high
+> Combined noise level
+> (j) Combined Noise
+> Fig. 4. Noise robustness for Experiments A–C: NDS versus noise for camera+V2X (top, panels (a)–(e)) and radar+camera+V2X (bottom, panels (f)–(j)). Columns sweep object/frame rotation and translation plus a combined setting from Table I.
+
+Radar+camera fusion follows the same pattern. The low-noise trained model peaks at NDS 0.71 but falls to 0.49 
+
+under high test noise, whereas the high-noise trained model peaks at 0.55 and degrades only to 0.52 . The medium-noise variant again balances the trade-off, starting at 0.64 
+
+and remaining steady at 0.57 . Overall, Figure 4 demonstrates that noise-aware training induces a largely modality-agnostic robustness–accuracy trade-off. 
+
+Experiment D: Effect of Class-Limited V2X Input 
+
+This experiment isolates the impact of restricting V2X to actively transmitting classes by comparing two identically trained camera+V2X models: one with full V2X coverage and one with V2X disabled for pedestrians, cones, and barriers. Both networks were trained with medium noise (Table I-a) and evaluated under medium-high noise (Table I-b). Results      
+
+> car
+> truck
+> bus
+> bicycle
+> motorcycle
+> trailer
+> construction
+> pedestrian †
+> cone †
+> barrier †
+> 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> Average Precision
+> Fig. 5. Per-class AP under medium-high noise comparing: camera-only baseline , camera+V2X with full V2X input (medium training noise) , and camera+V2X restricted to transmitting classes only . Classes marked with †are non-transmitting and excluded from V2X input. All V2X models are trained with medium noise and evaluated at medium-high noise.
+
+reflect a single training run, so class-level metrics may vary due to initialization and sampling noise. The per-class analysis in Figure 5 shows that V2X availability influences classes asymmetrically. Transmitting classes continue to exhibit strong gains over the baseline. For example, cars achieve an AP of 0.64 compared to the 0.56 baseline, and motorcycles also see substantial improvements. Non-transmitting classes align more closely with their camera-only baselines, with pedestrian AP at 0.38 (baseline 0.37) and traffic cones at 0.54 (baseline 0.55). This pattern indicates that the network exploits V2X cues where present while maintaining baseline-level camera performance for classes without V2X support. 
+
+Experiment E: Influence of V2X Penetration Rate 
+
+Figure 6 shows how performance varies with V2X pene-tration rate. The model from Experiment D, trained without object dropout (orange), performs well under full penetration (NDS 0.69 at 100 % penetration) but degrades sharply as penetration decreases, reaching NDS 0.34 at 25 % penetra-tion. Models trained with V2X dropout exhibit substantially improved robustness. The low-dropout variant ( 25 % , green) achieves NDS 0.44 at 25 % penetration, and the medium and high-dropout models (50 % , 75 % ) further flatten the performance curve at the cost of a reduced peak NDS. Overall, incorporating object dropout during training yields a much more stable performance profile across partial V2X penetration scenarios, indicating that robustness to missing V2X messages is critical during real-world rollout. 0.25 0.5 0.75 1
+
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+V2X penetration rate 
+
+> NDS
+
+Object Dropout Robustness 
+
+Baseline 
+
+No object dropout (med. noise) 
+
+25% object dropout (train) 
+
+50% object dropout (train) 
+
+75% object dropout (train) 
+
+Fig. 6. Robustness to partial V2X penetration: NDS versus V2X penetration rate. The no-dropout V2X model peaks at full penetration but falls steeply as availability drops, while dropout-trained variants trade peak NDS for flatter performance across penetration rates. 
+
+VI. D ISCUSSION AND CONCLUSION 
+
+Our study shows that object-level V2X, where each partic-ipant broadcasts information about its own state, can mean-ingfully improve a BEVFusion -style detector, but only when fusion explicitly accounts for V2X uncertainty and intermittent availability. Because nuScenes annotates only sensor-visible objects, our results are conservative relative to deployments where V2X can reveal fully occluded actors. Experiments A-C highlight that V2X must be treated as an uncertainty-bearing input rather than ground truth. Training on perfectly clean V2X induces brittle over-reliance, whereas noise-aware training with confidence cues enables adaptive gating that balances V2X against ego-sensor evidence. The injected noise level defines an operating point: low noise maximizes clean-condition NDS, while higher noise trades a small performance drop for substantially improved robustness under spatial perturbations. Experiments D and E show that V2X benefits depend on both message quality and V2X penetration rates. Even at low penetration, models trained with dropout retain meaningful im-provements over the baseline, and gains grow with penetration. This underscores that early deployments can already deliver relevant benefits, while higher coverage amplifies them. Our emulation assumes independent Gaussian pose errors and does not capture correlated failures, non-Gaussian noise, time-varying latency, or feature-level V2X messages. The absence of fully occluded actors in nuScenes bounds our evaluation; datasets with occlusion-heavy scenes and real V2X traces are essential to quantify the full potential of cooperative awareness data in 3D object detection. Future work should incorporate temporal and correlated error models, online uncertainty calibration, and stress-testing on occlusion-aware benchmarks. In summary, our noise-aware V2X fusion improves 3D object detection across a wide range of V2X quality and pen-etration rates, with graceful degradation as V2X deteriorates. REFERENCES [1] World Health Organization, “Global status report on road safety 2023,” World Health Organization, Geneva, Switzerland, Tech. Rep., 2023. [2] E. D. Kaplan and C. J. Hegarty, Understanding GPS/GNSS: Principles and Applications , 3rd ed. Norwood, MA: Artech House, 2017. [3] P. D. Groves, “Shadow matching: A new gnss positioning technique for urban canyons,” Journal of Navigation , vol. 64, no. 3, 2011. [4] B. Coll-Perales, M. C. Lucas-Est˜ an, T. Shimizu, J. Gozalvez, T. Higuchi, S. Avedisov, O. Altintas, and M. Sepulcre, “End-to-end v2x latency modeling and analysis in 5g networks,” IEEE Transactions on Vehicular Technology , vol. 72, no. 4, 2023. [5] H. Caesar, V. Bankiti, A. H. Lang, S. Vora, V. Liong, Q. Xu, A. Krishnan, Y. Pan, G. Baldan, and O. Beijbom, “nuscenes: A multimodal dataset for autonomous driving,” Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , 2020. [6] Z. Liu, H. Tang, A. Amini, X. Yang, H. Mao, D. Rus, and S. Han, “Bevfusion: Multi-task multi-sensor fusion with unified bird’s-eye view representation,” in IEEE International Conference on Robotics and Automation (ICRA) , 2023. [7] M. Emara, M. C. Filippou, and D. Sabella, “Mec-assisted end-to-end latency evaluations for c-v2x communications,” in 2018 European Conference on Networks and Communications (EuCNC) , 2018. [8] G. K¨ uppers, J.-P. Busch, L. Reiher, and L. Eckstein, “V2aix: A multi-modal real-world dataset of etsi its v2x messages in public road traffic,” in 2024 IEEE International Conference on Intelligent Transportation Systems (ITSC) , Edmonton, Canada, 2024. [9] Q. Chen, S. Tang, Q. Yang, and S. Fu, “Cooper: Cooperative perception for connected autonomous vehicles based on 3d point clouds,” in IEEE 39th International Conference on Distributed Computing Systems , 2019. [10] Q. Chen, X. Ma, S. Tang, J. Guo, Q. Yang, and S. Fu, “F-cooper: Feature based cooperative perception for autonomous vehicle edge computing system using 3d point clouds,” in Proceedings of the 4th ACM/IEEE Symposium on Edge Computing . ACM, 2019. [11] R. Xu, H. Xiang, Z. Tu, X. Xia, M.-H. Yang, and J. Ma, “V2x-vit: Vehicle-to-everything cooperative perception with vision transformer,” in Computer Vision – ECCV Workshops . Springer, 2022. [12] Y. Yuan, H. Cheng, and M. Sester, “Keypoints-based deep feature fusion for cooperative vehicle detection of autonomous driving,” IEEE Robotics and Automation Letters , vol. 7, no. 2, 2022. [13] H. Yu, Y. Luo, M. Shu, Y. Huo, Z. Yang, Y. Shi, Z. Guo, H. Li, X. Hu, J. Yuan, and Z. Nie, “Dair-v2x: A large-scale dataset for vehicle-infrastructure cooperative 3d object detection,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , 2022. [14] R. Xu, H. Xiang, X. Xia, X. Han, J. Li, and J. Ma, “Opv2v: An open benchmark dataset and fusion pipeline for perception with vehicle-to-vehicle communication,” in 2022 IEEE International Conference on Robotics and Automation (ICRA) , 2022. [15] M. Shan, K. Narula, S. Worrall, Y. Wong, J. S. B. Perez, P. Gray, and E. Nebot, “A novel probabilistic v2x data fusion framework for cooperative perception,” in IEEE 25th International Conference on Intelligent Transportation Systems (ITSC) . IEEE, 2022. [16] X. Chen, K. Kundu, Z. Zhang, H. Ma, S. Fidler, and R. Urtasun, “Monocular 3d object detection for autonomous driving,” in IEEE Conference on Computer Vision and Pattern Recognition . IEEE, 2016. [17] M. Ding, Y. Huo, H. Yi, Z. Wang, J. Shi, Z. Lu, and P. Luo, “Learn-ing depth-guided convolutions for monocular 3d object detection,” in 
+
+IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . IEEE, Jun. 2020. [18] Y. Li, Z. Ge, G. Yu, J. Yang, Z. Wang, Y. Shi, J. Sun, and Z. Li, “Bevdepth: Acquisition of reliable depth for multi-view 3d object detection,” in Proceedings of the Thirty-Seventh AAAI Conference on Artificial Intelligence , 2023. [19] Z. Li, W. Wang, H. Li, E. Xie, C. Sima, T. Lu, Y. Qiao, and J. Dai, “Bevformer: Learning bird’s-eye-view representation from multi-camera images via spatiotemporal transformers,” in Computer Vision – ECCV Lecture Notes in Computer Science, vol. 13669 . Springer, 2022. [20] K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” in IEEE Conference on Computer Vision and Pattern Recognition (CVPR) . IEEE, 2016.

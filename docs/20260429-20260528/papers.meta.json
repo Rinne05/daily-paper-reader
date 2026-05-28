@@ -1,0 +1,69 @@
+{
+  "label": "2026-04-29 ~ 2026-05-28",
+  "date": "2026-04-29 ~ 2026-05-28",
+  "generated_at": "2026-05-28T06:28:21",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "20260429-20260528/2605.00595v1-robust-fusion-of-object-level-v2x-for-learned-3d-object-detection",
+      "section": "quick",
+      "title_en": "Robust Fusion of Object-Level V2X for Learned 3D Object Detection",
+      "authors": "Lukas Ostendorf, Lennart Reiher, Onn Haran, Lutz Eckstein",
+      "date": "2026-05-01",
+      "pdf": "https://arxiv.org/pdf/2605.00595v1",
+      "score": "9.0",
+      "evidence": "使用nuScenes数据集研究V2X融合的3D目标检测",
+      "tldr": "自动驾驶车载感知受限于视距和视野，V2X通信可共享对象级信息作为补充。本文利用nuScenes数据集模拟带有噪声和丢包的V2X消息，将其转化为BEV输入并融合到BEVFusion检测器中。理想条件下NDS达0.80，但模型对噪声敏感；提出的噪声感知训练和置信度编码显著提升了鲁棒性，在严重噪声和低V2X渗透率下仍保持性能。该工作验证了融合不完美V2X信息对3D检测的有效性和实用价值。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Perception for automated driving is largely based on onboard environmental sensors, such as cameras and radar, which are cost-effective but limited by line-of-sight and field-of-view constraints. These inherent limitations may cause onboard perception to fail under occlusions or poor visibility conditions. In parallel, cooperative awareness via vehicle-to-everything (V2X) communication is becoming increasingly available, enabling vehicles and infrastructure to share their own state as object-level information that complements onboard perception. In this work, we study how such V2X information can be integrated into 3D object detection and how robust the resulting system is to realistic V2X imperfections. Using the nuScenes dataset, we emulate object-level cooperative awareness messages from ground truth, injecting controlled noise and object dropout to mimic real-world conditions such as latency, localization errors, and low V2X penetration rates. We convert these messages into a dedicated bird's-eye view (BEV) input and fuse them into a BEVFusion-style detector. Our results demonstrate that while object-level cooperative information can substantially improve detection performance, achieving an NDS of 0.80 under favorable conditions, models trained on idealized data become fragile and over-reliant on V2X. Conversely, our proposed noise-aware training strategy, coupled with explicit confidence encoding, enhances robustness, maintaining performance gains even under severe noise and reduced V2X penetration.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "20260429-20260528/2605.14110v1-store3d-sparse-token-relevance-in-vits-for-efficient-multi-view-3d-object-detection",
+      "section": "quick",
+      "title_en": "SToRe3D: Sparse Token Relevance in ViTs for Efficient Multi-View 3D Object Detection",
+      "authors": "Sandro Papais, Lezhou Feng, Charles Cossette, Lingting Ge",
+      "date": "2026-05-13",
+      "pdf": "https://arxiv.org/pdf/2605.14110v1",
+      "score": "9.0",
+      "evidence": "在nuScenes上进行多视角3D目标检测的稀疏性框架",
+      "tldr": "多视图3D检测采用Vision Transformer时，密集的token和查询处理导致高延迟。现有2D稀疏方法无法直接扩展。SToRe3D提出互相关注意力头，联合选择2D图像token和3D对象查询，并存储过滤特征用于再激活。在nuScenes上实现3倍推理加速，精度损失极小。该方法实现了实时大规模ViT基3D检测，保持对规划关键智能体的准确性。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Vision Transformers (ViTs) enable strong multi-view 3D detection but are limited by high inference latency from dense token and query processing across multiple views and large 3D regions. Existing sparsity methods, designed mainly for 2D vision, prune or merge image tokens but do not extend to full-model sparsity or address 3D object queries. We introduce SToRe3D, a relevance-aligned sparsity framework that jointly selects 2D image tokens and 3D object queries while storing filtered features for reactivation. Mutual 2D-3D relevance heads allocate compute to driving-critical content and preserve other embeddings. Evaluated on nuScenes and our new nuScenes-Relevance benchmark, SToRe3D achieves up to 3x faster inference with marginal accuracy loss, establishing real-time large-scale ViT-based 3D detection while maintaining accuracy on planning-critical agents.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "20260429-20260528/2605.01924v1-simpb-simultaneously-detecting-2d-and-3d-objects-from-multiple-cameras",
+      "section": "quick",
+      "title_en": "SimPB++: Simultaneously Detecting 2D and 3D Objects from Multiple Cameras",
+      "authors": "Yingqi Tang, Zhaotie Meng, Erkang Cheng, Haibin Ling",
+      "date": "2026-05-03",
+      "pdf": "https://arxiv.org/pdf/2605.01924v1",
+      "score": "8.0",
+      "evidence": "多相机纯视觉同时检测2D和3D物体",
+      "tldr": "多相机自动驾驶中，2D透视视角与3D鸟瞰图（BEV）的联合检测面临挑战。现有两阶段方法仅将2D结果作为3D检测的初始线索。本文提出SimPB++，统一两项任务到端到端模型，采用混合解码器架构，通过动态查询分配和自适应查询聚合实现深度交互。支持混合监督，减少3D标签依赖。在nuScenes上两项任务均达SOTA，并在Argoverse2上实现150米远距离检测。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Simultaneous perception of 2D objects in perspective view and 3D objects in Bird's Eye View (BEV) is challenging for multi-camera autonomous driving. Existing two-stage pipelines use 2D results only as a one-time cue for 3D detection. We propose SimPB++, which simultaneously detects 2D objects in perspective and 3D objects in BEV from multiple cameras. It unifies both tasks into an end-to-end model with a hybrid decoder architecture, coupling multi-view 2D and 3D decoders interactively. Two novel modules enable deep interaction: Dynamic Query Allocation adaptively assigns 2D queries to 3D candidates, and Adaptive Query Aggregation refines 3D representations using multi-view 2D features, forming a cyclic 3D-2D-3D refinement. For multi-view 2D detection, we use Query-group Attention for intra-group communication. We also design a Crop-and-Scale strategy for long-range perception and a Propagating Denoising strategy with an auxiliary RoI detector. SimPB++ supports mixed supervision with 2D-only and fully annotated data, reducing reliance on expensive 3D labels. Experiments show state-of-the-art performance on nuScenes for both tasks and strong long-range detection (up to 150m) on Argoverse2.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "20260429-20260528/2605.14781v1-monoprio-adaptive-prior-conditioning-for-unified-monocular-3d-object-detection",
+      "section": "quick",
+      "title_en": "MonoPRIO: Adaptive Prior Conditioning for Unified Monocular 3D Object Detection",
+      "authors": "Leon Davies, Qinggang Meng, Mohamad Saada, Baihua Li, Simon Sølvsten",
+      "date": "2026-05-14",
+      "pdf": "https://arxiv.org/pdf/2605.14781v1",
+      "score": "8.0",
+      "evidence": "纯视觉单目3D检测方法",
+      "tldr": "单目3D检测中尺寸与深度信息模糊，多类场景下尺寸估计尤其不稳定。MonoPRIO通过自适应先验条件，离线构建类感知尺寸原型并引入软混合路由与不确定性感知对数空间调节，同时使用聚类对齐先验正则化训练。在KITTI测试集上，该模型在统一多类设置中取得最佳综合结果，车类检测中达到最高3D AP且计算量更小。消融实验表明，自适应先验在证据不足时增益显著，验证了方法的有效性。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Monocular 3D object detection remains challenging because metric size and depth are underdetermined by single-view evidence, particularly under occlusion, truncation, and projection-induced scale-depth ambiguity. Although recent methods improve depth and geometric reasoning, metric size remains unstable in unified multi-class settings, where class variability and partial visibility broaden plausible size modes. We propose MonoPRIO, a unified monocular 3D detector that targets this bottleneck through adaptive prior conditioning in the size pathway. MonoPRIO constructs class-aware size prototypes offline, routes each decoder query to a soft mixture prior, applies uncertainty-aware log-space conditioning, and uses Cluster-Aligned Prior (CAP) regularisation on matched positives during training. On the official KITTI test server, MonoPRIO achieves the strongest fully reported unified multi-class result among methods reporting complete Car, Pedestrian, and Cyclist metrics. In the car-only setting, it also achieves the strongest 3D bounding-box AP across Easy/Moderate/Hard categories among compared methods without extra data, while using substantially less compute than MonoCLUE. Ablations and diagnostics show complementary gains from routed injection and CAP, with the largest benefits in ambiguity-prone, partially occluded, and low-data regimes. These findings indicate that adaptive priors are most effective when image evidence underdetermines metric size, while atypical geometry or extreme visibility loss can still cause mismatch between routed priors and true instance geometry. Code, trained models, result logs, and reproducibility material are available at https://github.com/bigggs/MonoPRIO.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,215 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-28T20:51:28.121266+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2605.22997v1",
+      "source": "arxiv",
+      "title": "Scene Reconstruction as Mapping Priors for 3D Detection",
+      "abstract": "In autonomous driving, mapping is critical for motion planning but remains an under-utilized resource for perception tasks such as 3D object detection. Maps can provide robust structural priors of the static environment, helping resolve ambiguities and correct for sensor data sparsity or noise, especially for distant objects or under adverse weather conditions. However, conventional High-Definition (HD) maps are resource-intensive to obtain and maintain, which presents a challenge for efficient, large-scale deployment. In this paper, we propose a scalable solution to systematically leverage mapping to improve 3D detection by overcoming two primary challenges. First, we introduce a pipeline to automatically build dense mapping priors from aggregated sensor data, eliminating the need for human labeling. Second, we design a novel Mapping Priors Augmented 3D Detection (MPA3D) framework to effectively integrate mapping priors with different sensor modalities. Extensive experiments on the Waymo Open Dataset demonstrate that our approach achieves new state-of-the-art results, proving the effectiveness of scalable reconstructed scene priors for enhancing 3D detection.",
+      "authors": [
+        "Yang Fu",
+        "Yuliang Zou",
+        "Hao Xiang",
+        "Xin Huang",
+        "Yijing Bai",
+        "Chen Song",
+        "Weijing Shi",
+        "Govind Thattai",
+        "Dragomir Anguelov",
+        "Mingxing Tan",
+        "Yingwei Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-21T19:52:22+00:00",
+      "link": "https://arxiv.org/pdf/2605.22997v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "proposes mapping priors for 3D detection in autonomous driving",
+      "llm_evidence_cn": "提出用于自动驾驶中3D检测的地图先验方法",
+      "llm_evidence": "提出用于自动驾驶中3D检测的地图先验方法",
+      "canonical_evidence": "提出用于自动驾驶中3D检测的地图先验方法",
+      "llm_tldr_en": "Proposes a scalable pipeline to build dense mapping priors from aggregated sensor data to improve 3D object detection accuracy and robustness.",
+      "llm_tldr_cn": "该论文针对自动驾驶中3D目标检测对地图先验依赖的问题，提出了一种利用聚合传感器数据自动构建密集地图先验的可扩展管道，从而在不依赖高精地图的情况下提升检测精度和鲁棒性，尤其适用于远距离和恶劣天气场景。实验结果验证了该方法在多个检测器上的有效性。",
+      "llm_tldr": "该论文针对自动驾驶中3D目标检测对地图先验依赖的问题，提出了一种利用聚合传感器数据自动构建密集地图先验的可扩展管道，从而在不依赖高精地图的情况下提升检测精度和鲁棒性，尤其适用于远距离和恶劣天气场景。实验结果验证了该方法在多个检测器上的有效性。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.25262v1",
+      "source": "arxiv",
+      "title": "Semantics-Guided Multimodal Masked Autoencoder Pretraining for 3D BEV Object Detection",
+      "abstract": "Accurate 3D bird's-eye view (BEV) object detection is essential for autonomous driving, and depends strongly on effective multimodal representations from complementary sensors such as cameras and LiDAR. Multimodal masked autoencoders have shown strong potential for learning such representations for downstream 3D BEV object detection. However, existing methods typically apply uniform random masking to camera and LiDAR inputs, treating all regions equally, and learn representations only through masked reconstruction. We propose a semantics-guided multimodal masked autoencoder framework that introduces semantic information during pretraining through two separate components: (i) semantics-guided LiDAR voxel masking, which preserves semantically important LiDAR regions more strongly, and (ii) an auxiliary point-wise LiDAR semantic decoder branch that injects semantic guidance in addition to reconstruction. On BEVFusion 3D object detection, our semantics-guided pretraining strategy improves performance on the nuScenes mini validation set compared to the standard UniM2AE baseline: semantics-guided LiDAR voxel masking yields +1.49% mean Average Precision (mAP) and +1.66% nuScenes Detection Score (NDS), while decoder-side point semantic supervision yields +1.39% mAP and +3.22% NDS over the baseline.",
+      "authors": [
+        "Prabuddhi Wariyapperuma",
+        "Rajitha de Silva",
+        "Marc Hanheide",
+        "Thomas Bohné",
+        "Leonardo Guevara"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-24T21:24:11+00:00",
+      "link": "https://arxiv.org/pdf/2605.25262v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "pretraining framework for 3D BEV object detection",
+      "llm_evidence_cn": "3D BEV目标检测预训练框架",
+      "llm_evidence": "3D BEV目标检测预训练框架",
+      "canonical_evidence": "3D BEV目标检测预训练框架",
+      "llm_tldr_en": "Proposes semantics-guided multimodal masked autoencoder for 3D BEV object detection pretraining, improving downstream detection.",
+      "llm_tldr_cn": "现有方法在3D BEV目标检测预训练中使用均匀随机掩码，忽略了语义信息。本文提出语义引导的多模态掩码自编码器，通过语义引导的LiDAR体素掩码和相机图像掩码，在预训练中引入语义信息，提升下游3D检测性能。实验证明该方法有效。",
+      "llm_tldr": "现有方法在3D BEV目标检测预训练中使用均匀随机掩码，忽略了语义信息。本文提出语义引导的多模态掩码自编码器，通过语义引导的LiDAR体素掩码和相机图像掩码，在预训练中引入语义信息，提升下游3D检测性能。实验证明该方法有效。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.27178v1",
+      "source": "arxiv",
+      "title": "FoundObj: Self-supervised Foundation Models as Rewards for Label-free 3D Object Segmentation",
+      "abstract": "We address the challenging task of 3D object segmentation in complex scene point clouds without relying on any scene-level human annotations during training. Existing methods are typically constrained to identifying simple objects, primarily due to insufficient object priors in the learning process. In this paper, we present FoundObj, a novel framework featuring a superpoint-based object discovery agent that incrementally merges suitable neighboring superpoints, guided by our innovative semantic and geometric reward modules. These modules synergistically leverage semantic and geometric priors from self-supervised 2D/3D foundation models, providing complementary feedback to the object discovery agent and enabling robust identification of multi-class objects through reinforcement learning. Extensive experiments on diverse benchmarks demonstrate that our approach consistently outperforms existing baselines. Notably, our method exhibits strong generalization in zero-shot and long-tail scenarios, underscoring its potential for scalable, label-free 3D object segmentation.",
+      "authors": [
+        "Zihui Zhang",
+        "Zhixuan Sun",
+        "Yafei Yang",
+        "Jinxi Li",
+        "Jiahao Chen",
+        "Bo Yang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "published": "2026-05-26T15:32:32+00:00",
+      "link": "https://arxiv.org/pdf/2605.27178v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "3D object segmentation from point clouds using self-supervised foundation models",
+      "llm_evidence_cn": "基于自监督基础模型的点云3D目标分割方法",
+      "llm_evidence": "基于自监督基础模型的点云3D目标分割方法",
+      "canonical_evidence": "基于自监督基础模型的点云3D目标分割方法",
+      "llm_tldr_en": "FoundObj presents a self-supervised framework for 3D object segmentation in point clouds, leveraging semantic and geometric priors from foundation models without scene-level annotations, achieving robust object discovery.",
+      "llm_tldr_cn": "该论文针对无标注点云场景中的3D目标分割难题，提出FoundObj框架，利用自监督2D/3D基础模型提供语义和几何奖励，引导超点合并代理逐步发现目标物体。实验表明，该方法在复杂场景中能鲁棒地识别并分割出物体，无需人工标注，为3D目标检测提供了新的无监督途径。",
+      "llm_tldr": "该论文针对无标注点云场景中的3D目标分割难题，提出FoundObj框架，利用自监督2D/3D基础模型提供语义和几何奖励，引导超点合并代理逐步发现目标物体。实验表明，该方法在复杂场景中能鲁棒地识别并分割出物体，无需人工标注，为3D目标检测提供了新的无监督途径。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2605.21112v1",
+      "source": "arxiv",
+      "title": "RCGDet3D: Rethinking 4D Radar-Camera Fusion-based 3D Object Detection with Enhanced Radar Feature Encoding",
+      "abstract": "4D automotive radar is indispensable for autonomous driving due to its low cost and robustness, yet its point cloud sparsity challenges 3D object detection. Existing 4D radar-camera fusion methods focus on complex fusion strategies, trading inference speed for marginal gains. This trade-off hinders real-time deployment due to heavy computation on dense feature maps. In contrast, feature extraction from sparse radar points is less time-consuming but remains under-explored. This work uncovers that simply enhancing radar feature extraction can achieve comparable or even higher performance than elaborate fusion modules, while maintaining real-time performance. Based on this finding, we propose RCGDet3D, which centers on radar feature encoding and simplifies multi-modal fusion. Its encoder inherits from the efficient Gaussian Splatting-based Point Gaussian Encoder (PGE) in RadarGaussianDet3D with two key improvements. First, the Ray-centric PGE (R-PGE) predicts Gaussian attributes in ray-aligned coordinate systems before unifying them to Bird's-Eye View (BEV) space, significantly improving geometric consistency and reducing learning difficulty by decoupling the coordinate transformation from representation learning. Second, a Semantic Injection (SI) module incorporates visual cues from images, producing more geometrically accurate and semantically enriched radar features. Experiments on View-of-Delft (VoD) and TJ4DRadSet show that RCGDet3D outperforms state-of-the-art methods in both accuracy and speed, setting a new benchmark for real-time deployment.",
+      "authors": [
+        "Weiyi Xiong",
+        "Bing Zhu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-20T12:45:01+00:00",
+      "link": "https://arxiv.org/pdf/2605.21112v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "enhanced radar feature encoding for 3D detection",
+      "llm_evidence_cn": "增强雷达特征编码用于3D检测",
+      "llm_evidence": "增强雷达特征编码用于3D检测",
+      "canonical_evidence": "增强雷达特征编码用于3D检测",
+      "llm_tldr_en": "Shows that enhancing radar feature extraction can rival complex fusion methods for 3D object detection, and proposes RCGDet3D that achieves real-time performance.",
+      "llm_tldr_cn": "该论文发现增强4D雷达点云特征提取即可达到甚至超越复杂雷达-相机融合方法的性能，并保持实时性。基于此提出了RCGDet3D框架，通过轻量级雷达特征编码实现了高效的3D目标检测，平衡了精度与速度。",
+      "llm_tldr": "该论文发现增强4D雷达点云特征提取即可达到甚至超越复杂雷达-相机融合方法的性能，并保持实时性。基于此提出了RCGDet3D框架，通过轻量级雷达特征编码实现了高效的3D目标检测，平衡了精度与速度。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2605.23281v1",
+      "source": "arxiv",
+      "title": "DepthAgent: Towards Better Universal Depth Estimation via Sample-wise Expert Selection",
+      "abstract": "Monocular metric depth estimation has achieved strong progress with large-scale training and universal-camera modeling, yet robust deployment across diverse camera settings, such as perspective, fisheye, and panoramic images, remains challenging. Existing methods typically rely on a single depth estimator, overlooking that different models encode different camera assumptions and perform best under different input domains. In this paper, we show that depth experts exhibit strong sample-wise complementarity: model preference is highly correlated with camera geometry, and multi-model fusion brings the largest gains on difficult samples where individual experts are unreliable. Motivated by these observations, we propose \\textbf{\\ours}, a vision-language agent for adaptive monocular depth estimation. DepthAgent treats existing depth models as frozen tools and learns to analyze scene and camera cues, invoke suitable experts through multi-turn tool utilization, and select or fuse their predictions for each input. To optimize such discrete decision-making toward dense geometric quality, we design a multi-reward reinforcement fine-tuning scheme that jointly encourages valid tool execution, camera/scene analysis, expert-selection quality, and inference efficiency. Extensive experiments across perspective, fisheye, and panoramic benchmarks show that \\ours consistently outperforms individual experts, fixed model fusion, and different selection strategies, with strong improvements on challenging samples, highlighting the critical role of expert selection and fusion. The code and model will be released upon publication.",
+      "authors": [
+        "Jie Zhu",
+        "Girish Chandar Ganesan",
+        "Xiaoming Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-22T06:47:19+00:00",
+      "link": "https://arxiv.org/pdf/2605.23281v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "monocular depth estimation enabling camera-only 3D detection",
+      "llm_evidence_cn": "单目深度估计为纯视觉3D检测提供核心几何线索",
+      "llm_evidence": "单目深度估计为纯视觉3D检测提供核心几何线索",
+      "canonical_evidence": "单目深度估计为纯视觉3D检测提供核心几何线索",
+      "llm_tldr_en": "DepthAgent proposes a multi-expert fusion framework for monocular depth estimation, showing improved robustness across diverse camera types, which is a foundational component for camera-only 3D object detection.",
+      "llm_tldr_cn": "该论文针对单目深度估计在不同相机设置下的泛化问题，提出样本级专家选择策略，融合多个深度模型。实验表明该方法在多种相机类型上提升了深度估计的准确性，尤其对困难样本效果显著。该工作为纯视觉3D目标检测提供了关键的深度信息支持。",
+      "llm_tldr": "该论文针对单目深度估计在不同相机设置下的泛化问题，提出样本级专家选择策略，融合多个深度模型。实验表明该方法在多种相机类型上提升了深度估计的准确性，尤其对困难样本效果显著。该工作为纯视觉3D目标检测提供了关键的深度信息支持。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "pure visual 3D detection without LiDAR",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

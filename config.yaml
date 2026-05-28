@@ -25,3 +25,75 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
+  intent_profiles:
+    - tag: nuscenes-dod
+      description: 使用nuScenes数据集的多视角纯视觉3D目标检测相关论文
+      enabled: true
+      paper_sources:
+        - arxiv
+        - biorxiv
+      keywords:
+        - keyword: nuScenes dataset
+          keyword_cn: nuScenes数据集
+          query: nuScenes dataset for autonomous driving
+        - keyword: 3D object detection
+          keyword_cn: 3D目标检测
+          query: 3D object detection methods
+        - keyword: nuScenes multi-view 3D detection
+          keyword_cn: nuScenes多视角3D检测
+          query: nuScenes multi-view camera-only 3D detection
+        - keyword: nuScenes 3D object detection
+          keyword_cn: nuScenes 3D目标检测
+          query: 3D object detection on nuScenes dataset
+        - keyword: camera-only 3D detection
+          keyword_cn: 纯视觉3D检测
+          query: pure visual 3D detection without LiDAR
+      intent_queries:
+        - query: research papers on 3D object detection using the nuScenes dataset
+          query_cn: 使用nuScenes数据集进行3D目标检测的研究论文
+          enabled: true
+          source: manual
+          note: ''
+        - query: nuScenes multi view camera only 3D object detection papers
+          query_cn: nuScenes多视角纯视觉3D目标检测论文
+          enabled: true
+          source: manual
+          note: ''
+        - query: multi view 3D object detection on nuScenes dataset
+          query_cn: 在nuScenes数据集上的多视角3D目标检测
+          enabled: true
+          source: manual
+          note: ''
+        - query: pure visual 3D detection using nuScenes
+          query_cn: 使用nuScenes的纯视觉3D检测
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-28T06:19:00.229Z'
+source_backends:
+  arxiv:
+    papers_table: arxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_arxiv_papers
+    vector_rpc_exact: match_arxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_arxiv_papers_bm25
+    sync_table: arxiv_sync_status
+    sync_success_value: success
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
+  biorxiv:
+    papers_table: biorxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_biorxiv_papers_exact
+    vector_rpc_exact: match_biorxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_biorxiv_papers_bm25
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq

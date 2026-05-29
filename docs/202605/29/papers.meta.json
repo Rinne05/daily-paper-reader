@@ -1,0 +1,24 @@
+{
+  "label": "2026-05-29",
+  "date": "2026-05-29",
+  "generated_at": "2026-05-29T21:23:33",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202605/29/2605.26725v1-joint-2d-3d-segmentation-and-association-in-street-level-imaging",
+      "section": "quick",
+      "title_en": "Joint 2D-3D Segmentation and Association in Street-level Imaging",
+      "authors": "Amir Melnikov, Masayuki Tanaka, Yusuke Monno, Masatoshi Okutomi",
+      "date": "2026-05-26",
+      "pdf": "https://arxiv.org/pdf/2605.26725v1",
+      "score": "6.0",
+      "evidence": "用于街景3D理解的多视图几何推理",
+      "tldr": "城市街景解析对大规模地图和数字孪生至关重要。本文提出联合2D-3D分割与关联的统一框架，将视觉语义与多视图几何推理结合。利用零样本检测分割和运动恢复结构建立稳定跨视图对应，以3D几何一致性替代传统2D多目标跟踪实现身份保持。在挑战性城市场景中，相比最新2D跟踪方法，覆盖率和身份保持提升22%，且适用于多种对象类型。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Accurate interpretation of street-level imagery is essential for large-scale urban mapping and the creation of Spatial Digital Twin (SDT) environments. This work presents a unified framework for joint 2D-3D segmentation and association that integrates visual semantics with multi-view geometric reasoning. Unlike conventional approaches that rely heavily on sequential frames for temporal tracking, our method leverages zero-shot detection and segmentation together with structure-from-motion reconstruction to establish stable cross-view correspondences. A 3D-driven association mechanism replaces traditional 2D multi-object tracking, using geometric consistency to guide identity preservation across wide-baseline viewpoints and varying imaging conditions. By combining 2D texture cues with global 3D context, the proposed pipeline is well-suited for scalable street-level processing and can be used for a variety of object types. Experiments demonstrate substantially improved coverage of ground-truth sequences and more robust identity retention compared to state-of-the-art 2D-only tracking methods, achieving a 22% performance gain in challenging urban scenarios.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

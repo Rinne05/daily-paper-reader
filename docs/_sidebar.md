@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-05-29 <!--dpr-date:20260529-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202605/29/2605.26725v1-joint-2d-3d-segmentation-and-association-in-street-level-imaging" data-sidebar-item="{&quot;title&quot;: &quot;Joint 2D-3D Segmentation and Association in Street-level Imaging&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2605.26725v1-joint-2d-3d-segmentation-and-association-in-street-level-imaging&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;用于街景3D理解的多视图几何推理&quot;}">Joint 2D-3D Segmentation and Association in Street-level Imaging</a>
   * 2026-05-28 <!--dpr-date:20260528-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202605/28/2605.22997v1-scene-reconstruction-as-mapping-priors-for-3d-detection" data-sidebar-item="{&quot;title&quot;: &quot;Scene Reconstruction as Mapping Priors for 3D Detection&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2605.22997v1-scene-reconstruction-as-mapping-priors-for-3d-detection&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;提出用于自动驾驶中3D检测的地图先验方法&quot;}">Scene Reconstruction as Mapping Priors for 3D Detection</a>

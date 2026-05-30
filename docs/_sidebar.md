@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-05-30 <!--dpr-date:20260530-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202605/30/2605.26642v1-adaptation-free-heterogeneous-collaborative-perception-with-unseen-agent-configurations" data-sidebar-item="{&quot;title&quot;: &quot;Adaptation-Free Heterogeneous Collaborative Perception with Unseen Agent Configurations&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2605.26642v1-adaptation-free-heterogeneous-collaborative-perception-with-unseen-agent-configurations&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;提出用于3D目标检测的协同感知框架&quot;}">Adaptation-Free Heterogeneous Collaborative Perception with Unseen Agent Configurations</a>
   * 2026-05-29 <!--dpr-date:20260529-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202605/29/2605.26725v1-joint-2d-3d-segmentation-and-association-in-street-level-imaging" data-sidebar-item="{&quot;title&quot;: &quot;Joint 2D-3D Segmentation and Association in Street-level Imaging&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2605.26725v1-joint-2d-3d-segmentation-and-association-in-street-level-imaging&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;用于街景3D理解的多视图几何推理&quot;}">Joint 2D-3D Segmentation and Association in Street-level Imaging</a>

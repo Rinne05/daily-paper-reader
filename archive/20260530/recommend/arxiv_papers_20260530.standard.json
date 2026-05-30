@@ -1,0 +1,53 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-30T20:55:24.412606+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2605.26642v1",
+      "source": "arxiv",
+      "title": "Adaptation-Free Heterogeneous Collaborative Perception with Unseen Agent Configurations",
+      "abstract": "Collaborative perception improves 3D object detection by enabling agents to share complementary observations, but most existing methods assume fixed or known collaborator encoder configurations, limiting deployment in practice. In this work, we consider an open-world setting in which auxiliary agents with unseen configurations may appear after deployment, such as different LiDAR beam counts or encoder architectures. To address this challenge, we propose ALF, a collaborative perception framework that enables zero-adaptation collaboration with unseen agent configurations by lifting lightweight box-level messages into ego-compatible auxiliary features. ALF converts auxiliary box-level messages into pseudo-BEV maps and synthesizes ego-compatible latent features by combining object-centric cues with scene context from the ego feature. On V2X-Real, under a zero-shot evaluation across 64 case studies, ALF outperforms the strongest prior baseline by 35.91% in relative mAP@0.7 while requiring only 120 bytes per agent per frame (approximately 9.6 Kbps bandwidth at 10 Hz).",
+      "authors": [
+        "Hyunchul Bae",
+        "Heejin Ahn"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-26T07:26:34+00:00",
+      "link": "https://arxiv.org/pdf/2605.26642v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "proposes collaborative perception framework for 3D object detection",
+      "llm_evidence_cn": "提出用于3D目标检测的协同感知框架",
+      "llm_evidence": "提出用于3D目标检测的协同感知框架",
+      "canonical_evidence": "提出用于3D目标检测的协同感知框架",
+      "llm_tldr_en": "ALF enables zero-adaptation collaborative 3D object detection with unseen agent configurations by converting box-level messages into pseudo-BEV maps, addressing practical heterogeneity without retraining.",
+      "llm_tldr_cn": "针对实际部署中辅助智能体配置未知且需零适应协作的挑战，本文提出ALF框架，通过将轻量级框级消息提升为伪BEV图并合成与自车兼容的辅助特征，实现与未知配置智能体的零适应协同感知。该方法无需重新训练即可处理不同LiDAR线束或编码器架构，显著提升了3D目标检测在异构场景下的泛化能力。",
+      "llm_tldr": "针对实际部署中辅助智能体配置未知且需零适应协作的挑战，本文提出ALF框架，通过将轻量级框级消息提升为伪BEV图并合成与自车兼容的辅助特征，实现与未知配置智能体的零适应协同感知。该方法无需重新训练即可处理不同LiDAR线束或编码器架构，显著提升了3D目标检测在异构场景下的泛化能力。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "label": "2026-05-30",
+  "date": "2026-05-30",
+  "generated_at": "2026-05-30T20:56:45",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202605/30/2605.26642v1-adaptation-free-heterogeneous-collaborative-perception-with-unseen-agent-configurations",
+      "section": "quick",
+      "title_en": "Adaptation-Free Heterogeneous Collaborative Perception with Unseen Agent Configurations",
+      "authors": "Hyunchul Bae, Heejin Ahn",
+      "date": "2026-05-26",
+      "pdf": "https://arxiv.org/pdf/2605.26642v1",
+      "score": "7.0",
+      "evidence": "提出用于3D目标检测的协同感知框架",
+      "tldr": "协同感知通常假设辅助智能体配置固定或已知，但实际部署中可能遇到不可见配置（如不同LiDAR线束或编码器架构）。ALF框架通过将轻量级框级消息提升为自车兼容的潜在特征，实现零适配协作。在V2X-Real数据集上的64种零样本场景测试中，ALF相对mAP@0.7提升35.91%，且每智能体每帧仅需120字节带宽。该方法显著提升了协同感知在开放环境下的泛化能力。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Collaborative perception improves 3D object detection by enabling agents to share complementary observations, but most existing methods assume fixed or known collaborator encoder configurations, limiting deployment in practice. In this work, we consider an open-world setting in which auxiliary agents with unseen configurations may appear after deployment, such as different LiDAR beam counts or encoder architectures. To address this challenge, we propose ALF, a collaborative perception framework that enables zero-adaptation collaboration with unseen agent configurations by lifting lightweight box-level messages into ego-compatible auxiliary features. ALF converts auxiliary box-level messages into pseudo-BEV maps and synthesizes ego-compatible latent features by combining object-centric cues with scene context from the ego feature. On V2X-Real, under a zero-shot evaluation across 64 case studies, ALF outperforms the strongest prior baseline by 35.91% in relative mAP@0.7 while requiring only 120 bytes per agent per frame (approximately 9.6 Kbps bandwidth at 10 Hz).",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

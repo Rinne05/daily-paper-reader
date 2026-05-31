@@ -6,28 +6,31 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-05-30
-- 运行时间：2026-05-30 20:56:36 UTC
+- 最新运行日期：2026-05-31
+- 运行时间：2026-05-31 20:40:24 UTC
 - 运行状态：成功
-- 本次总论文数：1
+- 本次总论文数：2
 - 精读区：0
-- 速读区：1
+- 速读区：2
 
 ### 今日简报（AI）
-今日速读一篇异构协作感知论文，聚焦无需适应即可应对未见智能体配置的难题。
+今日速读两篇AI前沿论文，分别聚焦无人驾驶协同动态场景重建与三维空间视觉语言建模。
 
-值得关注的方向：提出新颖方法，使感知系统在不重新训练下直接适配不同配置的智能体。
+推荐关注“无标定协作驾驶视图重建”和“3D感知空间视觉语言建模”两个方向，各获6.0分评价。
 
-对于普通读者，建议留意该研究在自动驾驶等场景中降低部署成本、提升异构系统兼容性的潜力。
-- 详情：[/202605/30/README](/202605/30/README)
+建议后续精读原文并追踪其开源代码或数据集，深入理解技术细节。
+- 详情：[/202605/31/README](/202605/31/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Adaptation-Free Heterogeneous Collaborative Perception with Unseen Agent Configurations](/202605/30/2605.26642v1-adaptation-free-heterogeneous-collaborative-perception-with-unseen-agent-configurations)  
-   标签：评分：7.0/10、query:nuscenes-dod
-   evidence：提出用于3D目标检测的协同感知框架
+1. [FRUC: Feedforward Dynamic Scene Reconstruction from Uncalibrated Collaborative Driving Views](/202605/31/2605.29997v1-fruc-feedforward-dynamic-scene-reconstruction-from-uncalibrated-collaborative-driving-views)  
+   标签：评分：6.0/10、query:nuscenes-dod
+   evidence：从未标定驾驶视角进行前馈3D重建
+2. [Grounded 3D-Aware Spatial Vision-Language Modeling](/202605/31/2605.30307v1-grounded-3d-aware-spatial-vision-language-modeling)  
+   标签：评分：6.0/10、query:nuscenes-dod
+   evidence：用于空间接地单目3D边界框预测
 
 
 <div class="dpr-home-promo-card">

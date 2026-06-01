@@ -1,0 +1,146 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-01T22:29:58.981235+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2605.31572v1",
+      "source": "arxiv",
+      "title": "nuReasoning: A Reasoning-Centric Dataset and Benchmark for Long-Tail Autonomous Driving",
+      "abstract": "Reasoning is essential for autonomous driving (AD) in long-tail scenarios, where vehicles must apply commonsense knowledge, understand spatial relations, infer agent interactions, and make safe decisions. However, existing AD datasets and benchmarks mainly target perception, prediction, or planning, and provide limited supervision for reasoning over realistic long-tail driving scenes. We introduce nuReasoning, a large-scale real-world dataset and benchmark for reasoning-centric AD. Following the lineage of nuScenes and nuPlan, nuReasoning advances real-world AD datasets and benchmarks toward reasoning in long-tail driving scenarios. The dataset contains 20,000 clips, each 20 seconds long, collected across multiple cities, with synchronized multi-camera images, LiDAR data, HD maps, object annotations, and human-verified reasoning annotations spanning Spatial Reasoning, Decision Reasoning, and Counterfactual Reasoning. Unlike prior datasets that focus primarily on visual question answering, nuReasoning supports both reasoning evaluation and planning evaluation, enabling a direct study of how reasoning supervision affects driving performance. Experiments show that fine-tuning VLMs on nuReasoning substantially improves driving-specific question answering, while incorporating reasoning supervision into VLA training improves planning performance even when textual reasoning outputs are disabled at inference time. These results establish nuReasoning as a foundation for evaluating and improving robust, interpretable, reasoning-driven AD systems in realistic long-tail settings.",
+      "authors": [
+        "Zhiyu Huang",
+        "Johnson Liu",
+        "Rui Song",
+        "Zewei Zhou",
+        "Ruining Yang",
+        "Yun Zhang",
+        "Tianhui Cai",
+        "Hanyin Zhang",
+        "Mingxuan Gao",
+        "Valeria Xu",
+        "Jiali Chen",
+        "Yishan Shen",
+        "Yiluan Guo",
+        "Tony",
+        "Qi",
+        "Jiaqi Ma"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-29T17:40:04+00:00",
+      "link": "https://arxiv.org/pdf/2605.31572v1",
+      "tags": [
+        "keyword:nuscenes-dod"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "nuReasoning dataset follows nuScenes lineage for autonomous driving reasoning",
+      "llm_evidence_cn": "nuReasoning数据集继承nuScenes系列，用于自动驾驶推理",
+      "llm_evidence": "nuReasoning数据集继承nuScenes系列，用于自动驾驶推理",
+      "canonical_evidence": "nuReasoning数据集继承nuScenes系列，用于自动驾驶推理",
+      "llm_tldr_en": "Introduces nuReasoning, a large-scale real-world dataset and benchmark for reasoning-centric autonomous driving, building upon nuScenes and nuPlan.",
+      "llm_tldr_cn": "该论文提出nuReasoning数据集和基准，专注于自动驾驶中的推理任务。它继承nuScenes和nuPlan的数据格式，包含2万个长尾驾驶场景片段，提供丰富的推理标注。该数据集弥补了现有基准在复杂推理方面的不足，推动自动驾驶向更高认知水平发展。",
+      "llm_tldr": "该论文提出nuReasoning数据集和基准，专注于自动驾驶中的推理任务。它继承nuScenes和nuPlan的数据格式，包含2万个长尾驾驶场景片段，提供丰富的推理标注。该数据集弥补了现有基准在复杂推理方面的不足，推动自动驾驶向更高认知水平发展。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "nuScenes dataset for autonomous driving",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2605.26368v2",
+      "source": "arxiv",
+      "title": "Unified Panoramic Geometry Estimation via Multi-View Foundation Models",
+      "abstract": "Geometry estimation from perspective images has greatly advanced, maturing to the point where off-the-shelf foundation models are able to reconstruct 3D scene structure not only from multi-view imagery, but even from a single view. A natural extension is 3D reconstruction from panoramas, with the exciting prospect of recovering a full 360-degree scene from a single panoramic image. In this work, we introduce PaGeR (Panoramic Geometry Reconstruction), a framework to lift powerful 3D foundation models designed for perspective imagery to the panorama domain. Our strategy is to start from a pre-trained transformer for 3D reconstruction and turn it into a unified high-performance model that predicts scale-invariant depth, metric depth, surface normals, and sky masks from both perspective and omnidirectional images, in a single forward pass. By keeping architectural changes to a minimum and mixing perspective and panoramic images during training, PaGeR retains the rich 3D prior of the underlying foundation model while learning to also estimate geometrically consistent 360-degree scenes from single panoramas. We extensively test our method in both indoor and outdoor environments and find that it delivers state-of-the-art performance and excellent zero-shot performance across a wide range of scenes. Code, data and models are available $\\href{https://github.com/prs-eth/PaGeR}{\\text{here}}$.",
+      "authors": [
+        "Vukasin Bozic",
+        "Isidora Slavkovic",
+        "Dominik Narnhofer",
+        "Nando Metzger",
+        "Denis Rozumny",
+        "Konrad Schindler",
+        "Nikolai Kalischek"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-05-25T22:32:42+00:00",
+      "link": "https://arxiv.org/pdf/2605.26368v2",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "panoramic geometry estimation from multi-view images",
+      "llm_evidence_cn": "基于多视图的全景几何估计",
+      "llm_evidence": "基于多视图的全景几何估计",
+      "canonical_evidence": "基于多视图的全景几何估计",
+      "llm_tldr_en": "Lifts 3D foundation models from perspective to panorama domain for unified geometry estimation including depth and surface normals from a single panoramic image.",
+      "llm_tldr_cn": "该论文提出PaGeR框架，将面向透视图像的3D基础模型迁移至全景域，实现从单张全景图像预测尺度不变深度、度量深度及表面法线等几何属性。方法利用预训练Transformer，无需微调即可获得全景3D重建，扩展了3D感知的应用场景。",
+      "llm_tldr": "该论文提出PaGeR框架，将面向透视图像的3D基础模型迁移至全景域，实现从单张全景图像预测尺度不变深度、度量深度及表面法线等几何属性。方法利用预训练Transformer，无需微调即可获得全景3D重建，扩展了3D感知的应用场景。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.26725v1",
+      "source": "arxiv",
+      "title": "Joint 2D-3D Segmentation and Association in Street-level Imaging",
+      "abstract": "Accurate interpretation of street-level imagery is essential for large-scale urban mapping and the creation of Spatial Digital Twin (SDT) environments. This work presents a unified framework for joint 2D-3D segmentation and association that integrates visual semantics with multi-view geometric reasoning. Unlike conventional approaches that rely heavily on sequential frames for temporal tracking, our method leverages zero-shot detection and segmentation together with structure-from-motion reconstruction to establish stable cross-view correspondences. A 3D-driven association mechanism replaces traditional 2D multi-object tracking, using geometric consistency to guide identity preservation across wide-baseline viewpoints and varying imaging conditions. By combining 2D texture cues with global 3D context, the proposed pipeline is well-suited for scalable street-level processing and can be used for a variety of object types. Experiments demonstrate substantially improved coverage of ground-truth sequences and more robust identity retention compared to state-of-the-art 2D-only tracking methods, achieving a 22% performance gain in challenging urban scenarios.",
+      "authors": [
+        "Amir Melnikov",
+        "Masayuki Tanaka",
+        "Yusuke Monno",
+        "Masatoshi Okutomi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-26T09:04:51+00:00",
+      "link": "https://arxiv.org/pdf/2605.26725v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "joint 2D-3D segmentation and association for street-level imaging",
+      "llm_evidence_cn": "街景图像中的2D-3D联合分割与关联",
+      "llm_evidence": "街景图像中的2D-3D联合分割与关联",
+      "canonical_evidence": "街景图像中的2D-3D联合分割与关联",
+      "llm_tldr_en": "Proposes a unified framework for joint 2D-3D segmentation and association in street-level imagery using multi-view geometric reasoning, enabling cross-view correspondence without temporal tracking.",
+      "llm_tldr_cn": "该论文针对街景图像理解，提出一个联合2D-3D分割与关联的统一框架。通过多视图几何推理建立稳定的跨视图对应，避免了时序跟踪的依赖。方法结合零样本检测与运动恢复结构，在街景数据集上展示了有效性，为3D目标检测等下游任务提供支持。",
+      "llm_tldr": "该论文针对街景图像理解，提出一个联合2D-3D分割与关联的统一框架。通过多视图几何推理建立稳定的跨视图对应，避免了时序跟踪的依赖。方法结合零样本检测与运动恢复结构，在街景数据集上展示了有效性，为3D目标检测等下游任务提供支持。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

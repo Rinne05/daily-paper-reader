@@ -1,0 +1,511 @@
+Title: MoEIoU: Rethinking Bounding-Box Regression as a Mixture of Experts
+
+URL Source: https://arxiv.org/pdf/2606.00844v1
+
+Published Time: Tue, 02 Jun 2026 01:13:45 GMT
+
+Number of Pages: 17
+
+Markdown Content:
+> arXiv:2606.00844v1 [cs.CV] 30 May 2026
+
+MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 1
+
+# MoEIoU: Rethinking Bounding-Box Regression as a Mixture of Experts 
+
+Vinay Edula 
+
+vinaykumarreddyedula@gmail.com 
+
+Priyanka Bagade 
+
+pbagade@iitk.ac.in 
+
+Department of Computer Science and Engineering Indian Institute of Technology Kanpur Kanpur, U.P, India 
+
+Abstract 
+
+Bounding-box regression is a fundamental component of object detection, playing a critical role in precise object localization. Existing Intersection-over-Union (IoU)-based loss functions extend the IoU objective by incorporating geometric penalties, such as center-distance and aspect-ratio mismatch, to improve bounding-box regression. How-ever, these penalties typically remain fixed throughout training and do not account for the optimization dynamics in which predicted boxes initially exhibit large center-distance and shape errors, with later stages focusing on improving overlap with the ground truth. To address this limitation, we introduce MoEIoU, a mixture-of-experts based regression loss that jointly models overlap, center alignment, and aspect-ratio mismatch. MoEIoU aggregates these components using a log-sum-exp function, which emphasizes the dom-inant localization error while maintaining smooth contributions from other terms. Addi-tionally, a curriculum-based weighting schedule is employed to prioritize correcting box position and shape in early training stages and improving overlap in later stages. We evaluated proposed MoEIoU on PASCAL VOC, HRIPCB, and MS COCO using multi-ple YOLO architectures, along with large-scale simulation experiments. It consistently outperforms standard and recent state-of-the-art losses, demonstrating faster convergence and improved localization accuracy. We further show that this adaptive aggregation im-proves existing IoU-based losses, yielding consistent gains and providing more effective optimization guidance for bounding-box regression in object detection frameworks. 
+
+# 1 Introduction 
+
+Object detection has made substantial progress in recent years, with bounding-box regression remaining a critical component of modern detection systems [24]. Early detectors treated box prediction as a coordinate-wise regression problem, optimizing sum-squared or Smooth-ℓ1 losses over independent box parameters (x, y, w, h) [5, 8, 17]. Because these losses optimize coordinates independently, they do not directly capture box overlap with the ground truth, which is the main metric for detection per-formance [12]. This motivated a shift toward IoU-based losses that treat the bounding box as a unified geometric object. UnitBox introduced − log (IoU ), providing scale-invariant supervision that is directly aligned with detection evaluation metrics [22]. 
+
+© 2026. The copyright of this document resides with its authors. It may be distributed unchanged freely in print or electronic forms. 2 MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 
+
+Figure 1: Overview of the proposed MoEIoU loss. However, IoU yields zero gradients for non-overlapping boxes, stalling optimization in early training [18]. GIoU addressed this by incorporating the smallest enclosing box as an additional penalty [18], but this term can encourage the predicted box to enlarge rather than move toward the ground truth, and it vanishes once the enclosing box equals the union of the two boxes [25]. DIoU resolved this by introducing a normalized center-distance penalty that directly guides the predicted box toward the target even without overlap [25]. CIoU further added an aspect-ratio mismatch term, jointly supervising overlap, position, and shape, and has since become the dominant regression loss in YOLO-based detectors [26]. Later work focused on geo-metric refinements, for example, EIoU penalizes differences in box side lengths for more direct size supervision [23]; SIoU adds cost angle to guide the predicted box towards the tar-get [4]; and Focal-EIoU incorporates a focal weighting scheme that increases the influence of high-quality anchors during training [23]. More recent losses focus on dynamically adjusting the contribution of individual predic-tions rather than refining fixed geometric terms [13, 15, 21]. WIoU focuses regression on medium-quality boxes by suppressing unstable gradients from poor predictions and weak signals from already well-localized predictions [21]. PIoU and PIoU-v2 address the chal-lenge that equal localization errors can have disproportionate effects on small versus large objects, introducing size-adaptive penalty factors and a non-monotonic attention mechanism to scale regression updates appropriately [13]. UIoU applies a curriculum-style dynamic scaling strategy to refine localization by emphasizing on low-quality predictions to correct large errors, and as training progresses shifting toward high-quality predictions [15]. Despite these advances, existing losses use fixed additive formulations , keeping the con-tribution of each geometric term constant across training and predictions. In practice, how-ever, different localization errors dominate at different stages. Early training benefits more from geometric cues such as center distance and aspect-ratio mismatch, while later stages require stronger overlap-based supervision for precise refinement. An adaptive regression loss that emphasizes the dominant localization error of each prediction is therefore a natural step toward more effective bounding-box optimization. Utilizing this fact, we propose MoEIoU , a bounding-box regression loss that explic-itly accounts for the dominant localization error in each prediction. The name reflects its mixture-of-experts [9] design, where each component —log-IoU, center distance, and MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 3
+
+aspect-ratio mismatch, which acts as an expert capturing a distinct aspect of localization quality. As illustrated in Figure 1, rather than adding these components with fixed weights, MoEIoU aggregates them using a weighted log-sum-exp function that behaves as a soft mixture-of-experts, naturally emphasizing the most informative signal for each prediction while retaining smooth contributions from the remaining terms. A curriculum-based weight-ing strategy [1] further modulates these contributions during training, placing greater em-phasis on geometric terms in early stages when predictions are far from the target, and pro-gressively increasing the influence of the overlap term as predictions improve and precise localization becomes the primary objective. The main contributions of this work are: • We propose MoEIoU , a bounding-box regression loss that jointly models overlap, center alignment, and aspect-ratio mismatch. • We introduce a weighted log-sum-exp(LSE) aggregation that adaptively empha-sizes the dominant localization error while preserving smooth contributions from other terms. • We design a curriculum weighting strategy that shifts supervision from early geo-metric correction to later overlap refinement. • We analyze MoEIoU through large-scale simulation experiments and compare its op-timization behavior with existing IoU-based losses. • We validate MoEIoU on PASCAL VOC, HRIPCB, and MS COCO using recent YOLO-based detectors, showing consistent localization gains. 
+
+# 2 Methodology 
+
+This section presents the proposed MoEIoU loss for bounding box regression. Specifically, Sec. 2.1 defines the regression components, Sec. 2.2 introduces the training curriculum, Sec. 2.3 presents the final MoEIoU objective, and Sec. 2.4 analyzes its gradient behavior. 
+
+2.1 Bounding Box Geometry and Regression Components 
+
+Let the predicted bounding box be b = ( x1, y1, x2, y2) and the ground-truth box be bgt =(xgt  
+
+> 1
+
+, ygt  
+
+> 1
+
+, xgt  
+
+> 2
+
+, ygt  
+
+> 2
+
+), where the two coordinate pairs denote the top-left and bottom-right cor-ners. The proposed MoEIoU models bounding-box regression through three complementary components, a) an overlap term, b) a center-distance term, and c) an aspect-ratio mismatch term, each capturing a distinct aspect of localization quality. 
+
+Overlap Term. The IoU metric measures the overlap between b and bgt as IoU (b, bgt ) = |b ∩ bgt ||b ∪ bgt | , (1) Although IoU is widely used for localization evaluation and regression, the linear penalty 1 −
+
+IoU provides weak supervision for low-overlap predictions [22]. To strengthen the overlap penalty, we define the IoU term in logarithmic form: 
+
+Tiou = − log (IoU + ε), (2) 4 MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS       
+
+> b
+> bgt
+> |b∩bgt |
+> Intersection Area
+> (Numerator)
+> b
+> bgt
+> |b∪bgt |
+> Union Area
+> (Denominator)
+
+(a) IoU computation         
+
+> 00.20.40.60.81
+> 0
+> 2
+> 4
+> IoU
+> Loss
+> 1−IoU
+> −log (IoU )
+
+(b) Linear vs. logarithmic loss 
+
+Figure 2: IoU and logarithmic IoU penalty. (a) IoU is computed as the ratio between the intersection area and the union area of the predicted box b and ground-truth box bgt . (b) Compared with the linear loss 1 − IoU, the logarithmic loss − log (IoU ) assigns a stronger penalty to low-overlap predictions. where ε > 0 avoids undefined values when IoU approaches zero. The negative logarithm penalizes small IoU values more strongly, encouraging larger updates for poorly aligned boxes while preserving the ordering induced by IoU. Figure 2 illustrates IoU computation and the difference between linear and logarithmic overlap penalties. 
+
+Center-Distance Term. Beyond overlap, bounding-box regression requires spatial align-ment between the predicted and ground-truth box centers. Let (cx, cy) and (cgt x , cgt y ) denote the respective centers. Their squared Euclidean distance is 
+
+ρ2 = ( cx − cgt x )2 + ( cy − cgt y )2. (3) This displacement is normalized by the squared diagonal of the smallest enclosing box cov-ering b and bgt . Denoting the enclosing box width and height as wc and hc, the diagonal is 
+
+c2 = w2 
+
+> c
+
++ h2 
+
+> c
+
+, and the center-distance term is defined as 
+
+Tcenter =
+
+r ρ2
+
+c2 + ε. (4) This normalization makes the term scale-aware and ensures it remains informative even when the two boxes have little or no overlap. 
+
+Aspect-Ratio Term. To capture shape mismatch independently of absolute box scale, we use a CIoU based aspect-ratio term [26] based on the angular difference between the predicted and ground-truth width-height ratios: 
+
+Taspect = 4
+
+π2
+
+
+
+arctan 
+
+ wgt 
+
+hgt 
+
+
+
+− arctan 
+
+ wh
+
+2
+
+. (5) Since this term depends only on w/h and wgt /hgt , it penalizes shape discrepancy without conflating it with position or size errors. Figure 3 illustrates both geometric components. 
+
+2.2 Curriculum Scheduling 
+
+A key idea behind the proposed method is that different parts of the loss function are useful at different stages of training. During the early stages, predicted bounding boxes are typically MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 5        
+
+> b
+> (cx,cy)
+> bgt
+> (cgt x,cgt y)
+> ρ
+> c
+> wc
+> hc
+> Tcenter =pρ2/c2+ε
+
+(a) Normalized center distance            
+
+> bgt
+> wgt
+> hgt αgt
+> Ground truth
+> αgt =arctan (wgt /hgt )
+> b
+> w
+> h
+> α
+> Predicted
+> α=arctan (w/h)
+> Ground truth Predicted
+> ∆α
+> Angle mismatch
+> ∆α=αgt −α
+
+(b) Aspect-ratio mismatch 
+
+Figure 3: Geometric components used in MoEIoU. (a) The center-distance term measures the displacement ρ between predicted and ground-truth box centers and normalizes it by the enclosing-box diagonal c. (b) The aspect-ratio term [26] represents each box shape by an angle and penalizes the angular mismatch between predicted and ground-truth aspect ratios. coarse and may be significantly misaligned with the ground-truth boxes, sometimes even exhibiting no overlap. In such cases, relying on overlap-based supervision can lead to weak or unstable optimization signals. Geometric terms, such as center alignment and shape mis-match, remain informative even under large localization errors and therefore provide a more reliable guide for improving predictions. As training progresses and the predicted boxes become more closely aligned with the target objects, overlap-based supervision becomes in-creasingly meaningful. At that point, the optimization process should gradually place greater emphasis on improving the IoU between predicted and ground-truth boxes. To model this transition smoothly, a scalar training-progress variable p ∈ [0, 1] is defined, where p = 0 corresponds to the beginning of training and p = 1 corresponds to the end. This progress value is then passed through a smoothstep scheduling function [16]: 
+
+s = p2(3 − 2p). (6) This function is monotonic, bounded in [0, 1], and differentiable, making it well suited for curriculum-style weighting [1]. It changes gradually near the endpoints and more actively in the middle, thereby avoiding abrupt shifts in the optimization objective. Using this schedule, the influence of the IoU component gradually increases during training, 
+
+wiou = 0.10 + 0.90 s, (7) while the geometric components are kept active throughout training with a slight reduction in weight, 
+
+wgeo = 1.00 − 0.20 s. (8) At the early stages of training, when predicted boxes are often poorly aligned with the ground truth, geometric terms provide more reliable guidance for correcting large localiza-tion errors. As training progresses and predictions become closer to the target boxes, overlap becomes a more informative signal. Increasing the weight of the IoU term therefore en-courages the model to focus progressively on improving the overlap between predicted and ground-truth boxes. The geometric terms remain present throughout training to maintain stable spatial alignment and shape consistency. 6 MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 
+
+2.3 MoEIoU Loss Formulation 
+
+The final regression objective combines the overlap term (2), center-distance term (4), and aspect-ratio term (5): 
+
+T = [ Tiou , Tcenter , Taspect ]. (9) Rather than summing these components with fixed coefficients, they are aggregated using a weighted LSE formulation: 
+
+LMoEIoU = 1
+
+τ log ∑
+
+> i
+
+wi exp (τTi)
+
+!
+
+, (10) where Ti denotes the i-th component, wi is its corresponding weight, and τ > 0 is a tempera-ture parameter controlling the sharpness of the aggregation. Using the curriculum-scheduled weights wiou and wgeo defined in Eq. (7) and Eq. (8), respectively, LMoEIoU is expanded as: 
+
+LMoEIoU = 1
+
+τ log 
+
+
+
+wiou eτTiou + wgeo eτTcenter + wgeo eτTaspect 
+
+
+
+. (11) This form admits a natural mixture-of-experts interpretation [9]. Each term can be viewed as an expert focusing on a distinct aspect of localization quality: overlap, positional alignment, and shape consistency. The LSE operator does not merely average these signals; instead, it emphasizes the terms that are currently most informative, while still preserving contribution from the others. In this sense, allowing the optimization process to attend more strongly to whichever regression error dominates at a given moment. 00.51 0 0.5100.51      
+
+> T1
+> T2
+> L
+> Hard Max 00.51 0 0.5100.51
+> T1
+> T2
+> τ=200.51 0 0.5100.51
+> T1
+> T2
+> τ=600.51 0 0.5100.51
+> T1
+> T2
+> τ=12
+
+Figure 4: Comparison of hard maximum and Log-Sum-Exp surfaces over T1, T2 ∈ [0, 1].For small values of temperature parameter τ, the aggregation behaves similarly to a weighted average, allowing all components to contribute. As τ increases, the aggregation becomes progressively sharper, placing greater emphasis on the component with the largest value and reducing the influence of the others; for large τ, it behaves like a hard maximum. Figure 4 illustrates an example of this effect for the LSE formulation over two terms. The hard maximum forms a sharp ridge along the boundary where the two components are equal, at which the function is not differentiable. In contrast, the LSE formulation remains smooth and differentiable across the entire domain. For lower values of τ, the transition between components is gradual, while for larger values of τ, it becomes increasingly sharp and more closely approximates the hard maximum without introducing non-differentiability. MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 7
+
+2.4 Effect of LSE Aggregation on Gradient Behavior 
+
+Although the proposed use of LSE aggregation and the conventional weighted sum both combine multiple regression components, they lead to fundamentally different optimization behavior. Differentiating proposed MoEIoU loss defined in eq.10 with respect to Ti gives 
+
+∂ LMoEIoU 
+
+∂ Ti
+
+= wieτTi
+
+∑ j w jeτTj . (12) This derivative has a normalized softmax-like form where the gradient assigned to each component is determined dynamically by its relative magnitude. Components with larger values receive stronger gradient emphasis, while smaller components still retain nonzero differentiable contributions. This differs fundamentally from a conventional weighted sum, 
+
+Lsum = ∑
+
+> i
+
+wiTi, for which ∂ Lsum 
+
+∂ Ti
+
+= wi. (13) Under the weighted-sum formulation, each term contributes according to a fixed coefficient regardless of whether it is currently dominant or negligible. In contrast, LSE adapts the gradient distribution to the current error profile of each sample. The temperature parameter τ controls how the gradient is distributed across different components as illustrated in Figure 5. It shows how the gradient assigned to T1 varies with the difference between the two terms, defined as ∆ = T1 − T2. When ∆ = 0, both terms re-ceive equal gradient contribution. For small τ, the gradients are assigned more uniformly, indicating that it is shared smoothly between the two components. As τ increases, the tran-sition becomes steeper, so even a small difference between T1 and T2 leads to most of the gradient being assigned to the larger term. Thus, τ determines the transition from balanced optimization across all components to focusing primarily on the dominant error term.                            
+
+> −2.5−2−1.5−1−0.500.511.522.5
+> 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> Component difference ∆=T1−T2
+> Gradient share assigned to  T1
+> Influence of τon Gradient Redistribution
+> τ=0.5
+> τ=1
+> τ=2
+> τ=5
+> τ=10
+
+Figure 5: Gradient redistribution under different temperature values τ.For bounding box regression, some predictions may primarily suffer from poor overlap, whereas others may be affected more strongly by center displacement or shape mismatch. The LSE formulation therefore allows the optimization process to respond automatically to the most critical localization error in each case, without requiring manually designed switching rules or case-specific heuristics. 8 MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 
+
+# 3 Simulation Experiment 
+
+We evaluate bounding-box regression losses using a controlled simulation experiment to compare how different losses guide the optimization of a predicted box toward the ground-truth box. In object detection models, the regression loss influences performance through backpropagation and gradient descent based parameter updates. As a result, it is difficult to isolate the individual effect of the loss function from the overall optimization process and final detection performance. To focus only on the behavior of the regression loss, instead of running through the overall optimization process of training a detector, we directly update the predicted bounding box using the gradient of the selected loss with respect to a fixed ground-truth box. Starting from an initial predicted box, the box parameters are iteratively updated until they move closer to the ground-truth box. 
+
+3.1 Simulation Setup 
+
+We generate 10 million synthetic box pairs, where each sample consists of a ground-truth box and an initial predicted box represented in center-size form (cx, cy, w, h). The synthetic pairs are designed to mimic common localization errors produced by real-world object detec-tors. The ground-truth box centers are sampled from [7, 13 ] × [7, 13 ], with box area sampled log-uniformly from [0.1, 4.0] and aspect ratio sampled log-uniformly from [0.2, 5.0]. The ini-tial predicted boxes are then sampled to cover eight distinct kinds of localization errors: far non-overlap, where the prediction is shifted by roughly 1 .5–4 .0 times the box size; near non-overlap, where the prediction is close to the target but has little or no overlap; low, medium, and high-overlap cases with initial IoU ranges [0.05 , 0.30 ], [0.30 , 0.60 ], and [0.60 , 0.95 ], re-spectively; center-shape mismatch, where the center is correct but width and height are inac-curate; shifted boxes, where the shape is correct but the center is displaced; and nested boxes, where the prediction lies inside the ground truth. The distribution is intentionally biased to-ward difficult regression cases, with approximately 40% far non-overlapping predictions and the remaining 60% distributed across the other seven categories.           
+
+> B(t)
+> n=B(t−1)
+> n−ηt
+>  2−IoU (B(t−1)
+> n,Gn)∇B(t−1)
+> n
+> L(B(t−1)
+> n,Gn)
+
+. (14) We adopt the DIoU/CIoU simulation algorithm [25, 26] for bounding box optimization. For a regression loss L, each predicted box B(t) 
+
+> n
+
+is updated toward its corresponding ground-truth box Gn using the gradient-descent update in Eq. 14. The factor (2 − IoU ) increases the update magnitude for poorly overlapping boxes and reduces it as the prediction approaches the target. The learning rate ( ηt ) uses the same three-stage schedule with ηt = 0.1 for the first 80% of iterations, ηt = 0.01 for the next 10%, and ηt = 0.001 for the final 10%. Box widths and heights are clamped after each update to remain positive. 
+
+3.2 Evaluation 
+
+To evaluate the optimization behavior of different regression losses, we track the mean IoU across all simulated cases during the optimization process. At each iteration, the IoU be-tween the predicted box and the corresponding ground-truth box is computed, and the aver-age IoU over all box pairs is recorded. MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 9
+
+Figure 6 (a) shows the mean IoU over 150 optimization iterations for all compared re-gression losses. After 150 iterations, MoEIoU reaches the highest final mean IoU of 0.8996. The next best result is obtained by WIoU [21] with a final mean IoU of 0.8714. An important observation is that the advantage of MoEIoU is not limited to the final mean IoU. Among all compared methods, the proposed MoEIoU’s curve remains above all other losses throughout the optimization process. This indicates that MoEIoU provides a stronger optimization sig-nal across different stages of box refinement, leading to both faster convergence and better final localization quality.  
+
+> (a) Mean IoU over iterations (b) Final regression error
+
+Figure 6: Simulation-based comparison of bounding-box regression losses. (a) Mean IoU over optimization iterations. (b) Final regression error produced by IoU, CIoU, and MoEIoU. After optimization, for each anchor center (x, y), the final regression error is computed as the L1 distance between the predicted box parameters and the ground-truth box parameters. Figure 6 (b) visualizes this final regression error across all anchor locations. It depicts a 3D scatter plot where each point corresponds to one optimization run starting from a specific location (x, y). The height of each point represents the total final regression error after T
+
+iterations. The basic IoU loss (1 − IoU ), which is one of the earliest bounding-box regres-sion losses [22], produces the largest errors and the widest spread across spatial locations. CIoU [26], which is used in modern detectors, substantially reduces both the magnitude and variability of the regression error. The proposed MoEIoU further improves this behav-ior, producing the lowest errors and the most concentrated distribution. This indicates more accurate and stable bounding-box regression during optimization. 
+
+# 4 Results 
+
+4.1 Experimental Setup 
+
+All experiments use the Ultralytics implementation [11]. For a fair comparison, only the bounding-box regression loss is changed; the detector architecture, data processing, and training configuration are kept fixed within each setting. Unless otherwise stated, models are trained at 640 × 640 resolution with batch size 16 using SGD with learning rate 0.01, momentum 0.9, and weight decay 5 × 10 −4. We fix the random seed to 42 for Python, NumPy, and PyTorch, enable deterministic CuDNN behavior, and run experiments on an NVIDIA RTX A6000 GPU. For MoEIoU, we choose the temperature parameter τ through short trial runs before full training. We first train for a few epochs using τ ∈ { 1, 4, 8, 10 , 12 }10 MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 
+
+and select the value with the best validation result. We then check nearby values for a few more epochs if needed. We did not observe additional gains for τ > 12 on either benchmark datasets or simulation experiments. 
+
+4.2 Datasets 
+
+We evaluate MoEIoU on three object-detection benchmarks: PASCAL VOC [3], HRIPCB [7], and MS COCO [12]. PASCAL VOC is used to evaluate general object detection across 20 everyday object categories with variations in scale, pose, occlusion, and background clutter. We train using the union of the VOC2007 and VOC2012 train/val splits and evaluate on the VOC2007 test split. HRIPCB [7] is used to evaluate small-defect localization in industrial PCB inspection. It contains 1,386 annotated PCB images with six defect categories: missing hole, mouse bite, open circuit, short, spur, and spurious copper. These defects are often small and visually similar to surrounding circuit patterns, making precise localization challenging [2]. For MS COCO, we use the curated 20% subset of the train2017 split introduced by prior work [19]. This subset contains approximately 25K images while preserving the class distri-bution, object-scale statistics, and difficulty of the full train2017 set. COCO contains com-plex everyday scenes with 80 object categories and large variation in object scale, viewpoint, occlusion, and scene composition. 
+
+4.3 Benchmark Results 
+
+The main benchmark results are reported in Tables 1–3. Across the three datasets, only the bounding-box regression loss is changed, while the model architecture and training configu-ration are kept fixed within each setting. Table 1: Comparison of different bounding-box regression losses on the PASCAL VOC.                                                               
+
+> Loss YOLOv12 YOLO26 mAP 50 mAP 75 mAP 50:95 mAP 50 mAP 75 mAP 50:95
+> DIoU (2019) 75.4 59.6 54.3 72.7 57.0 51.8 GIoU (2019) 75.1 60.1 54.4 72.8 57.0 51.9 CIoU (2020) 74.8 58.8 53.9 72.3 56.9 51.4 EIoU (2021) 74.5 58.6 53.2 72.4 56.3 51.1 SIoU (2022) 75.4 59.7 54.3 73.4 56.9 52.1 WIoU (2023) 75.2 59.4 53.9 72.9 57.8 51.6 PIoU (2024) 75.4 59.5 54.2 72.6 56.8 51.4 UIoU (2024) 75.3 59.4 54.2 72.6 56.5 51.4
+> MoEIoU 76.2 61.0 55.0 74.1 57.9 52.4
+> Note: Best results in each column are shown in bold. IoU denotes Intersection over Union, and mAP denotes mean Average Precision.
+
+Across the three benchmarks, MoEIoU achieves the best mAP 50:95 for both YOLOv12 and YOLO26. On PASCAL VOC, it improves YOLOv12 [20] mAP 50:95 to 55.0 and YOLO26 [10] to 52.4. On HRIPCB, MoEIoU gives the strongest strict-localization results. On MS COCO, MoEIoU is best across all reported metrics for both detectors. The qualitative YOLOv12 results in Fig. 7 further show that MoEIoU produces tighter and more accurate bounding boxes compared with other IoU-based losses. These results indicate that the proposed loss improves localization quality across both general-object and small-defect detection settings. MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 11 
+
+Table 2: Comparison of different bounding-box regression losses on the HRIPCB dataset. 
+
+Loss YOLOv12 YOLO26 mAP 50 mAP 75 mAP 50:95 mAP 50 mAP 75 mAP 50:95 
+
+DIoU (2019) 98.0 61.8 58.4 98.0 64.4 59.0 GIoU (2019) 97.2 61.2 57.8 97.7 64.2 58.9 CIoU (2020) 98.1 62.9 58.4 97.7 62.7 59.2 EIoU (2021) 97.9 60.4 58.1 97.9 64.4 58.3 SIoU (2022) 97.7 63.2 58.5 97.7 64.9 59.0 WIoU (2023) 97.6 61.9 58.0 97.9 65.9 59.2 PIoU (2024) 97.9 59.5 58.1 98.0 64.8 59.1 UIoU (2024) 98.1 61.9 58.1 97.9 65.5 58.6 
+
+MoEIoU 98.6 66.9 59.4 98.6 67.2 59.7  
+
+> Note: Best results in each column are shown in bold. IoU denotes Intersection over Union, and mAP denotes mean Average Precision.
+
+Table 3: Comparison of different bounding-box regression losses on the MS COCO dataset. 
+
+Loss YOLOv12 YOLO26 mAP 50 mAP 75 mAP 50:95 mAP 50 mAP 75 mAP 50:95 
+
+DIoU (2019) 47.1 35.1 32.5 45.8 34.1 31.7 GIoU (2019) 46.6 34.8 32.1 46.3 34.8 32.1 CIoU (2020) 47.5 35.1 32.7 46.4 34.7 32.2 EIoU (2021) 46.9 34.9 32.3 46.1 34.2 31.7 SIoU (2022) 46.9 34.9 32.3 46.2 34.7 32.0 WIoU (2023) 47.7 35.4 32.9 46.4 34.7 31.9 PIoU (2024) 47.3 34.9 32.6 46.2 34.7 32.0 UIoU (2024) 47.1 35.0 32.5 46.0 34.3 31.8 
+
+MoEIoU 48.6 35.7 33.1 46.6 34.9 32.3  
+
+> Note: Best results in each column are shown in bold. IoU denotes Intersection over Union, and mAP denotes mean Average Precision.
+
+Figure 7: Comparison of bounding box predictions produced by YOLOv12 [20] trained with different IoU-based loss functions on the PASCAL VOC test set [3] .
+
+4.4 Effect of LSE Aggregation 
+
+To evaluate the effect of the aggregation strategy, we replace the additive formulation of CIoU, DIoU, GIoU, EIoU, and SIoU with LSE aggregation while keeping their original geo-metric terms unchanged. These losses are selected because they contain multiple geometric terms, making them suitable for LSE-based aggregation, which adaptively emphasizes the dominant localization error among participating terms. WIoU is excluded since it mainly uses a single geometric term, while PIoU and UIoU already include their own weighting mechanisms, making LSE redundant. All variants are trained on MS COCO using the same YOLOv12n configuration for 100 epochs. Table 4 shows that LSE aggregation improves 12 MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 
+
+every evaluated IoU-based loss. The gains are consistent on mAP 50:95 , with relative im-provements of +2.23% for CIoU, +5.57% for DIoU, +6.62% for GIoU, +2.52% for EIoU, and +3.09% for SIoU. These results demonstrate the effectiveness of LSE as an adaptive aggregation mechanism. Training curves for these variants are provided in Fig 8. 
+
+Figure 8: Comparison of validation mAP curves and final-epoch mAP gains. Table 4: IoU-based loss formulations, their LSE counterparts, and performance comparison. 
+
+Loss Formulation mAP 50 mAP 65 mAP 75 mAP 50:95 
+
+CIoU Tiou = 1 − IoU, Tcenter = ρ2     
+
+> c2,Taspect =αv
+
+33.75 29.01 23.68 22.32 LSE-CIoU LLSE-CIoU = LSE (Tiou , Tcenter , Taspect ) 35.00 29.87 24.36 22.72 
+
+∆ (%) Relative gain over CIoU +3.70 +2.96 +2.87 +1.79 DIoU Tiou = 1 − IoU, Tcenter = ρ2 
+
+> c2
+
+33.70 29.12 23.61 22.18 LSE-DIoU LLSE-DIoU = LSE (Tiou , Tcenter ) 35.26 30.66 25.25 23.41 
+
+∆ (%) Relative gain over DIoU +4.63 +5.29 +6.94 +5.57 GIoU Tiou = 1 − IoU, Tenclosure = |C\(A∪B)||C| 33.20 28.72 23.42 21.95 LSE-GIoU LLSE-GIoU = LSE (Tiou , Tenclosure ) 35.57 30.86 24.91 23.40 
+
+∆ (%) Relative gain over GIoU +7.16 +7.43 +6.37 +6.62 EIoU Tiou = 1 − IoU, Tcenter = ρ2         
+
+> c2,Tshape =(w−wgt )2
+> w2
+> c+(h−hgt )2
+> h2
+> c
+
+34.10 29.55 24.03 22.55 LSE-EIoU LLSE-EIoU = LSE (Tiou , Tcenter , Tshape ) 35.38 30.56 24.60 23.12 
+
+∆ (%) Relative gain over EIoU +3.75 +3.43 +2.37 +2.52 SIoU Tiou = 1 − IoU, Tdist = ∆     
+
+> 2,Tshape =Ω
+> 2
+
+34.29 29.80 24.57 22.75 LSE-SIoU LLSE-SIoU = LSE (Tiou , Tdist , Tshape ) 35.42 30.73 25.33 23.46 
+
+∆ (%) Relative gain over SIoU +3.28 +3.15 +3.10 +3.09 
+
+Note: For each baseline loss, the loss is the fixed summation of the listed penalty terms. The corresponding LSE variant uses the same terms but replaces fixed summation with LSE (T1, . . . , Tn) = 1 
+
+> τ
+
+log ∑i exp (τTi). Here, ρ is the center distance, c is the enclosing-box diagonal, A and B are the predicted and ground-truth boxes, C is their smallest enclosing box, wc, hc are enclosing-box dimensions, v and α are the CIoU aspect-ratio term and balancing coefficient, and ∆, Ω denote the SIoU distance and shape costs. 
+
+# 5 Ablation Study 
+
+We conduct ablation studies using the YOLOv12n model on the curated MS COCO dataset [19] to evaluate the contribution of each design component in MoEIoU. MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 13 
+
+Table 5: Effect of individual MoEIoU components                               
+
+> CIoU Loss LogSumExp Log-IoU Curriculum mAP 50 mAP 75 mAP 50:95
+> ✓×××33.7 23.7 22.3
+> ✓✓××35.0 24.1 22.7
+> ✓✓✓×35.0 24.4 22.8
+> ✓✓✓✓35.0 24.7 23.0
+
+Effect of individual MoEIoU components. We use standard CIoU as the baseline and in-crementally introduce the MoEIoU components, keeping all training settings fixed for 100 epochs with a patience of 10. As reported in Table 5, replacing the additive CIoU formu-lation with LSE aggregation improves mAP 50 from 33.7 to 35.0, mAP 75 from 23.7 to 24.1, and mAP 50:95 from 22.3 to 22.7, showing the benefit of adaptively emphasizing the dominant localization error. Adding the Log-IoU overlap term further improves mAP at higher thresh-olds, increasing mAP 75 to 24.4 and mAP 50:95 to 22.8. Finally, introducing curriculum-based weighting gives the best overall result, further raising mAP 75 to 24.7 and mAP 50:95 to 23.0. Table 6: Ablation study on geometric term rescaling under LSE aggregation.                       
+
+> Formulation Center Term Aspect Term mAP 50 mAP 75 mAP 50:95
+> CIoU terms ρ2
+> c2v·α40.0 29.0 26.7 Rescaled aspect term ρ2
+> c2v40.4 28.8 26.9 Proposed
+> qρ2
+> c2v41.0 29.2 27.3
+
+Rescaling the geometric terms. We further rescale the geometric terms to better align with LSE aggregation. In standard CIoU [26], the aspect-ratio term is weighted by α, and the center-distance term uses ρ2 
+
+> c2
+
+. Under LSE, however, the Log-IoU term can dominate due to its larger magnitude. To balance the terms, we remove the α scaling and replace ρ2 
+
+> c2
+
+with 
+
+q ρ2 
+
+> c2
+
+. Since LSE acts as a soft maximum, better-scaled terms allow each component to contribute more effectively during optimization. Table 6 shows that this rescaling improves performance. Table 7: Ablation study on the weighting strategy in MoEIoU.                                               
+
+> Weights mAP 50 mAP 75 mAP 50:95
+> wiou =s,wgeo =134.6 24.1 22.6
+> wiou =0.10 +0.90 s,wgeo =134.7 24.2 22.7
+> wiou =s,wgeo =1.00 −0.20 s34.6 24.1 22.7
+> wiou =0.10 +0.90 s,wgeo =1.00 −0.20 s35.0 24.7 23.0
+
+Ablation of weighting strategy. We further ablate the weighting strategy used for the over-lap and geometric terms in MoEIoU while keeping the loss terms and LSE aggregation un-changed. Let s = ssmoothstep (p) denote the smoothstep schedule, where p = t/T is the normal-ized training progress, t is the current epoch, and T is the total number of training epochs. This ablation shows whether the IoU term should start from zero or retain a small early contribution, and whether the geometric terms should remain fixed or mildly decay during training. Table 7 shows that the best performance is obtained with wiou = 0.10 + 0.90 s and 
+
+wgeo = 1.00 − 0.20 s. Compared with starting the IoU weight directly from zero, the small initial IoU weight provides early overlap supervision, while the mild decay of the geometric weight gradually shifts emphasis toward precise overlap optimization. 14 MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 
+
+Table 8: Ablation study on aspect-ratio formulation.                              
+
+> Formulation Aspect-Ratio Term mAP 50 mAP 75 mAP 50:95
+> EIoU-based (w1−w2)2
+> w2
+> c
+> +(h1−h2)2
+> h2
+> c
+> 34.8 24.6 22.8 Log-ratio 
+> log w1
+> h1−log w2
+> h2
+> 2
+> 34.5 24.4 22.7 Normalized ratio
+> w1
+> h1−w2
+> h2
+> w1
+> h1+w2
+> h2
+> 2
+> 34.2 24.5 22.8 CIoU-based 4
+> π2
+> 
+> arctan w2
+> h2−arctan w1
+> h1
+> 2
+> 35.0 24.7 23.0
+
+Ablation of aspect-ratio formulation We further study the effect of the aspect-ratio formu-lation while keeping the overlap and center-distance terms unchanged. Here, (w1, h1) and 
+
+(w2, h2) denote the predicted and ground-truth box sizes, respectively, and (wc, hc) denotes the size of the smallest enclosing box. Table 8 shows that the CIoU-style aspect-ratio term gives the best performance across all metrics. Table 9: Curriculum scheduling ablation in MoEIoU with schedule curves.                          
+
+> Schedule mAP 50 mAP 75 mAP 50:95
+> Linear 34.5 24.6 22.7 Cosine [14] 34.6 24.4 22.7 Sigmoid 34.6 24.0 22.6 Warmup [6] 34.6 24.1 22.5 Smoothstep [16] 35.0 24.7 23.0 00.20.40.60.81
+> 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> Raw progress p
+> Scheduled progress  s
+> Linear
+> Sigmoid
+> Warmup
+> Cosine
+> Smoothstep
+
+Ablation of curriculum schedule We also ablate the curriculum schedule while keeping all other loss components fixed. Table 9 shows that the smoothstep schedule achieves the best performance across all metrics. Compared with linear, cosine, sigmoid, and warmup schedules, it provides smoother transitions between overlap and geometric terms, resulting in more stable optimization. 
+
+# 6 Conclusion 
+
+In this work, we introduced MoEIoU, a bounding-box regression loss that adapts to the changing nature of localization errors during training. Instead of using a fixed additive for-mulation, MoEIoU employs weighted LSE aggregation to dynamically emphasize the most informative regression component for each prediction. A curriculum-based weighting strat-egy further prioritizes geometric guidance in early training and gradually increases the in-fluence of the IoU term during later refinement stages. Extensive experiments on simulation settings and real detection benchmarks demonstrate the effectiveness of the proposed ap-proach. MoEIoU achieves faster convergence and stronger refinement behavior than existing IoU-based losses, while consistently delivering the best or highly competitive performance across PASCAL VOC, HRIPCB, and the MS COCO subset on multiple YOLO architec-tures. Ablation studies further confirm the contribution of each component, including LSE aggregation, logarithmic IoU term, curriculum scheduling, and refined geometric formula-tion. Overall, the results show that adaptively combining multiple localization signals yields more effective optimization than fixed loss formulations. MoEIoU serves as a simple drop-in replacement for existing IoU-based losses and integrates easily into modern object detectors without architectural changes. MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 15 
+
+# References 
+
+[1] Yoshua Bengio, Jérôme Louradour, Ronan Collobert, and Jason Weston. Curriculum learning. In Proceedings of the 26th Annual International Conference on Machine Learning , ICML ’09, page 41–48, New York, NY, USA, 2009. Association for Com-puting Machinery. ISBN 9781605585161. doi: 10.1145/1553374.1553380. [2] Weixun Chen, Xuneng Ke, and Siming Meng. Small defect detection in printed circuit boards based on the multiscale edge strengthening and an improved yolov10. Scientific Reports , 15, 10 2025. doi: 10.1038/s41598-025-20387-x. [3] Mark Everingham, Luc Van Gool, Christopher Williams, John Winn, and Andrew Zis-serman. The pascal visual object classes (voc) challenge. International Journal of Computer Vision , 88:303–338, 06 2010. doi: 10.1007/s11263-009-0275-4. [4] Zhora Gevorgyan. Siou loss: More powerful learning for bounding box regression, 2022. [5] Ross Girshick. Fast r-cnn. In 2015 IEEE International Conference on Computer Vision (ICCV) , pages 1440–1448, 2015. doi: 10.1109/ICCV.2015.169. [6] Priya Goyal, Piotr Dollar, Ross Girshick, Pieter Noordhuis, Lukasz Wesolowski, Aapo Kyrola, Andrew Tulloch, Yangqing Jia, and Kaiming He. Accurate, large minibatch sgd: Training imagenet in 1 hour. arXiv preprint arXiv:1706.02677 , 2017. [7] Weibo Huang, Peng Wei, Manhua Zhang, and Hong Liu. Hripcb: a challenging dataset for pcb defects detection and classification. The Journal of Engineering , 2020(13): 303–309, 2020. doi: https://doi.org/10.1049/joe.2019.1183. [8] Peter J. Huber. Robust Estimation of a Location Parameter. The Annals of Math-ematical Statistics , 35(1):73 – 101, 1964. doi: 10.1214/aoms/1177703732. URL 
+
+https://doi.org/10.1214/aoms/1177703732 .[9] Robert A. Jacobs, Michael I. Jordan, Steven J. Nowlan, and Geoffrey E. Hinton. Adaptive mixtures of local experts. Neural Computation , 3:79–87, 1991. doi: https://doi.org/10.1162/neco.1991.3.1.79. [10] Glenn Jocher and Jing Qiu. Ultralytics yolo26, 2026. URL https://github. com/ultralytics/ultralytics .[11] Glenn Jocher, Jing Qiu, and Ayush Chaurasia. Ultralytics YOLO, January 2023. URL 
+
+https://github.com/ultralytics/ultralytics .[12] Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva Ramanan, Piotr Dollár, and C. Lawrence Zitnick. Microsoft coco: Common ob-jects in context. In David Fleet, Tomas Pajdla, Bernt Schiele, and Tinne Tuyte-laars, editors, Computer Vision – ECCV 2014 , pages 740–755, Cham, 2014. Springer International Publishing. ISBN 978-3-319-10602-1. doi: https://doi.org/10.1007/ 978-3-319-10602-1_48. 16 MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 
+
+[13] Can Liu, Kaige Wang, Qing Li, Fazhan Zhao, Kun Zhao, and Hongtu Ma. Powerful-iou: More straightforward and faster bounding box regression loss with a nonmono-tonic focusing mechanism. Neural Networks , 170:276–284, 2024. ISSN 0893-6080. doi: https://doi.org/10.1016/j.neunet.2023.11.041. [14] Ilya Loshchilov and Frank Hutter. Sgdr: Stochastic gradient descent with warm restarts. In International Conference on Learning Representations , 2017. [15] Xiangjie Luo, Zhihao Cai, Bo Shao, and Yingxun Wang. Unified-iou: For high-quality object detection, 2024. [16] Ken Perlin. Improving noise. ACM Trans. Graph. , 21(3):681–682, July 2002. ISSN 0730-0301. doi: 10.1145/566654.566636. URL https://doi.org/10.1145/ 566654.566636 .[17] Joseph Redmon, Santosh Kumar Divvala, Ross B. Girshick, and Ali Farhadi. You only look once: Unified, real-time object detection. 2016 IEEE Conference on Com-puter Vision and Pattern Recognition (CVPR) , pages 779–788, 2015. doi: https: //doi.org/10.48550/arXiv.1506.02640. URL https://api.semanticscholar. org/CorpusID:206594738 .[18] Hamid Rezatofighi, Nathan Tsoi, JunYoung Gwak, Amir Sadeghian, Ian Reid, and Sil-vio Savarese. Generalized Intersection Over Union: A Metric and a Loss for Bound-ing Box Regression . In 2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 658–666, Los Alamitos, CA, USA, June 2019. IEEE Com-puter Society. doi: 10.1109/CVPR.2019.00075. [19] Nermin Samet, Samet Hicsonmez, and Emre Akbas. Houghnet: Integrating near and long-range evidence for bottom-up object detection. In Computer Vision – ECCV 2020: 16th European Conference, Glasgow, UK, August 23–28, 2020, Proceedings, Part XXV ,page 406–423, Berlin, Heidelberg, 2020. Springer-Verlag. ISBN 978-3-030-58594-5. doi: 10.1007/978-3-030-58595-2_25. [20] Yunjie Tian, Qixiang Ye, and David Doermann. Yolov12: Attention-centric real-time object detectors, 2025. [21] Zanjia Tong, Yuhang Chen, Zewei Xu, and Rong Yu. Wise-iou: Bounding box regres-sion loss with dynamic focusing mechanism, 2023. [22] Jiahui Yu, Yuning Jiang, Zhangyang Wang, Zhimin Cao, and Thomas Huang. Unit-box: An advanced object detection network. In Proceedings of the 24th ACM In-ternational Conference on Multimedia , MM ’16, page 516–520, New York, NY, USA, 2016. Association for Computing Machinery. ISBN 9781450336031. doi: 10.1145/2964284.2967274. [23] Yi-Fan Zhang, Weiqiang Ren, Zhang Zhang, Zhen Jia, Liang Wang, and Tieniu Tan. Focal and efficient iou loss for accurate bounding box regression. Neurocomputing ,506:146–157, 2022. ISSN 0925-2312. doi: https://doi.org/10.1016/j.neucom.2022.07. 042. MOEIOU: RETHINKING BOUNDING-BOX REGRESSION AS A MIXTURE OF EXPERTS 17 
+
+[24] Zhong-Qiu Zhao, Peng Zheng, Shou-Tao Xu, and Xindong Wu. Object detection with deep learning: A review. IEEE Transactions on Neural Networks and Learning Sys-tems , 30(11):3212–3232, 2019. doi: 10.1109/TNNLS.2018.2876865. [25] Zhaohui Zheng, Ping Wang, Wei Liu, Jinze Li, Rongguang Ye, and Dongwei Ren. Distance-iou loss: Faster and better learning for bounding box regression. In Pro-ceedings of the AAAI Conference on Artificial Intelligence (AAAI) , volume 34, pages 12993–13000, 2020. doi: 10.1609/aaai.v34i07.6999. [26] Zhaohui Zheng, Ping Wang, Dongwei Ren, Wei Liu, Rongguang Ye, Qinghua Hu, and Wangmeng Zuo. Enhancing geometric factors in model learning and inference for object detection and instance segmentation. IEEE Transactions on Cybernetics , 52: 8574–8586, 2020. doi: 10.48550/arXiv.2005.03572.

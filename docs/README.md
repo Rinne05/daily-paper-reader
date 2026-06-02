@@ -6,29 +6,29 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-01
-- 运行时间：2026-06-01 22:32:45 UTC
+- 最新运行日期：2026-06-02
+- 运行时间：2026-06-02 22:38:28 UTC
 - 运行状态：成功
 - 本次总论文数：3
 - 精读区：1
 - 速读区：2
 
 ### 今日简报（AI）
-今日精读《nuReasoning》自动驾驶长尾推理数据集与基准，速读街景全景几何与分割两篇。最值得关注的是自动驾驶在罕见场景下的零样本推理能力。建议优先阅读精读文章以把握长尾问题的最新评测方法。
-- 详情：[/202606/01/README](/202606/01/README)
+今日精选一篇重新思考边界框回归的混合专家方法，以及两篇3D检测论文。最值得关注的是《MoEIoU》提出的基于IoU的专家混合策略，显著提升回归精度；同时《PillarDETR》将YOLO骨干与RT-DETR头结合实现实时3D检测。普通读者可从边界框回归优化入手，尝试理解MoEIoU的专家混合思路，或关注PillarDETR的高效实时方案。
+- 详情：[/202606/02/README](/202606/02/README)
 
 ### 精读区论文标签
-1. [nuReasoning: A Reasoning-Centric Dataset and Benchmark for Long-Tail Autonomous Driving](/202606/01/2605.31572v1-nureasoning-a-reasoning-centric-dataset-and-benchmark-for-long-tail-autonomous-driving)  
+1. [MoEIoU: Rethinking Bounding-Box Regression as a Mixture of Experts](/202606/02/2606.00844v1-moeiou-rethinking-bounding-box-regression-as-a-mixture-of-experts)  
    标签：评分：8.0/10、query:nuscenes-dod
-   evidence：nuReasoning数据集继承nuScenes系列，用于自动驾驶推理
+   evidence：使用混合专家的新型边界框回归损失，直接改进目标检测方法
 
 ### 速读区论文标签
-1. [Unified Panoramic Geometry Estimation via Multi-View Foundation Models](/202606/01/2605.26368v2-unified-panoramic-geometry-estimation-via-multi-view-foundation-models)  
+1. [PillarDETR: YOLO-Backbone and RT-DETR Head for Real-Time 3D Object Detection](/202606/02/2606.01757v1-pillardetr-yolo-backbone-and-rt-detr-head-for-real-time-3d-object-detection)  
+   标签：评分：7.0/10、query:nuscenes-dod
+   evidence：实时3D目标检测方法
+2. [Shape-Prior-Based Point Cloud Completion for Single-Stage Fully Sparse 3D Object Detection](/202606/02/2606.00688v1-shape-prior-based-point-cloud-completion-for-single-stage-fully-sparse-3d-object-detection)  
    标签：评分：6.0/10、query:nuscenes-dod
-   evidence：基于多视图的全景几何估计
-2. [Joint 2D-3D Segmentation and Association in Street-level Imaging](/202606/01/2605.26725v1-joint-2d-3d-segmentation-and-association-in-street-level-imaging)  
-   标签：评分：6.0/10、query:nuscenes-dod
-   evidence：街景图像中的2D-3D联合分割与关联
+   evidence：基于点云补全的3D目标检测
 
 
 <div class="dpr-home-promo-card">

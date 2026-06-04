@@ -1,0 +1,24 @@
+{
+  "label": "2026-06-04",
+  "date": "2026-06-04",
+  "generated_at": "2026-06-04T21:31:20",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202606/04/2606.03568v1-learned-non-maximum-suppression-for-3d-object-detection",
+      "section": "deep",
+      "title_en": "Learned Non-Maximum Suppression for 3D Object Detection",
+      "authors": "Timo Osterburg, Stefan Schütte, Torsten Bertram",
+      "date": "2026-06-02",
+      "pdf": "https://arxiv.org/pdf/2606.03568v1",
+      "score": "9.0",
+      "evidence": "提出学习型NMS用于3D检测，在nuScenes上评估",
+      "tldr": "传统3D物体检测后处理使用启发式非极大抑制（NMS）可能丢弃有效检测。本文提出两种学习型过滤模块D2D-Rescore和GossipNet3D，分别通过transformer注意力与鸟瞰图消息传递利用检测关系。在nuScenes上优于CircleNMS，提升mAP、NDS和真阳性质量，尤其对小类物体。无需修改检测网络即可增强可靠性，为后处理提供原则性替代方案。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Post-processing is a critical stage in LiDAR-based 3D object detection, where dense and overlapping proposals must be filtered for compact and reliable perception. This work introduces two learned filtering modules that replace heuristic non-maximum suppression (NMS) by leveraging relations among detections. D2D-Rescore employs transformer-based detection-to-detection (D2D) attention, while GossipNet3D adapts the 2D GossipNet concept to 3D through localized message passing in bird's-eye view. A metric-aware matching strategy aligned with the nuScenes evaluation protocol ensures consistent training and validation behavior, improving overall detection performance. Both approaches improve mean average precision (mAP), nuScenes detection score (NDS), and true positive quality compared to CircleNMS, particularly for small and infrequent classes, while adding minimal computational overhead. These results demonstrate that learned, detection-level filtering can enhance 3D detector reliability without modifying the base network, offering a principled alternative to heuristic suppression. Code is available at https://github.com/rst-tu-dortmund/learned-3d-nms .",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

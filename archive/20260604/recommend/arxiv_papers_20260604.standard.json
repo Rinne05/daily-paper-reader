@@ -1,0 +1,56 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-04T21:30:22.022927+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2606.03568v1",
+      "source": "arxiv",
+      "title": "Learned Non-Maximum Suppression for 3D Object Detection",
+      "abstract": "Post-processing is a critical stage in LiDAR-based 3D object detection, where dense and overlapping proposals must be filtered for compact and reliable perception. This work introduces two learned filtering modules that replace heuristic non-maximum suppression (NMS) by leveraging relations among detections. D2D-Rescore employs transformer-based detection-to-detection (D2D) attention, while GossipNet3D adapts the 2D GossipNet concept to 3D through localized message passing in bird's-eye view. A metric-aware matching strategy aligned with the nuScenes evaluation protocol ensures consistent training and validation behavior, improving overall detection performance. Both approaches improve mean average precision (mAP), nuScenes detection score (NDS), and true positive quality compared to CircleNMS, particularly for small and infrequent classes, while adding minimal computational overhead. These results demonstrate that learned, detection-level filtering can enhance 3D detector reliability without modifying the base network, offering a principled alternative to heuristic suppression. Code is available at https://github.com/rst-tu-dortmund/learned-3d-nms .",
+      "authors": [
+        "Timo Osterburg",
+        "Stefan Schütte",
+        "Torsten Bertram"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "published": "2026-06-02T12:34:14+00:00",
+      "link": "https://arxiv.org/pdf/2606.03568v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proposes learned NMS for 3D detection, evaluated on nuScenes",
+      "llm_evidence_cn": "提出学习型NMS用于3D检测，在nuScenes上评估",
+      "llm_evidence": "提出学习型NMS用于3D检测，在nuScenes上评估",
+      "canonical_evidence": "提出学习型NMS用于3D检测，在nuScenes上评估",
+      "llm_tldr_en": "Introduces learned filtering modules D2D-Rescore and GossipNet3D to replace heuristic NMS in LiDAR-based 3D object detection, improving mAP and NDS on nuScenes.",
+      "llm_tldr_cn": "针对LiDAR-based 3D目标检测中后处理NMS依赖启发式规则的问题，本文提出两种学习型过滤模块：基于Transformer的检测间注意力(D2D-Rescore)和基于鸟瞰图局部消息传递的GossipNet3D。在nuScenes数据集上的实验表明，该方法在mAP、NDS和真阳性质量上均有提升，且与nuScenes评估协议对齐。这项工作展示了用可学习模块替代手工设计的后处理步骤的有效性。",
+      "llm_tldr": "针对LiDAR-based 3D目标检测中后处理NMS依赖启发式规则的问题，本文提出两种学习型过滤模块：基于Transformer的检测间注意力(D2D-Rescore)和基于鸟瞰图局部消息传递的GossipNet3D。在nuScenes数据集上的实验表明，该方法在mAP、NDS和真阳性质量上均有提升，且与nuScenes评估协议对齐。这项工作展示了用可学习模块替代手工设计的后处理步骤的有效性。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection on nuScenes dataset",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}

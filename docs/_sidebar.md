@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-06-04 <!--dpr-date:20260604-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/04/2606.03568v1-learned-non-maximum-suppression-for-3d-object-detection" data-sidebar-item="{&quot;title&quot;: &quot;Learned Non-Maximum Suppression for 3D Object Detection&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.03568v1-learned-non-maximum-suppression-for-3d-object-detection&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;提出学习型NMS用于3D检测，在nuScenes上评估&quot;}">Learned Non-Maximum Suppression for 3D Object Detection</a>
   * 2026-06-02 <!--dpr-date:20260602-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/02/2606.00844v1-moeiou-rethinking-bounding-box-regression-as-a-mixture-of-experts" data-sidebar-item="{&quot;title&quot;: &quot;MoEIoU: Rethinking Bounding-Box Regression as a Mixture of Experts&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.00844v1-moeiou-rethinking-bounding-box-regression-as-a-mixture-of-experts&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;使用混合专家的新型边界框回归损失，直接改进目标检测方法&quot;}">MoEIoU: Rethinking Bounding-Box Regression as a Mixture of Experts</a>

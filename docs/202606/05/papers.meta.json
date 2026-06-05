@@ -1,0 +1,24 @@
+{
+  "label": "2026-06-05",
+  "date": "2026-06-05",
+  "generated_at": "2026-06-05T20:33:25",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202606/05/2606.04656v1-instance-level-post-hoc-uncertainty-quantification-in-object-detection",
+      "section": "quick",
+      "title_en": "Instance-Level Post Hoc Uncertainty Quantification in Object Detection",
+      "authors": "Chongzhe Zhang, Zifan Zeng, Qunli Zhang, Feng Liu, Zheng Hu",
+      "date": "2026-06-03",
+      "pdf": "https://arxiv.org/pdf/2606.04656v1",
+      "score": "7.0",
+      "evidence": "提出了目标检测中的后验不确定性量化方法，适用于3D检测",
+      "tldr": "自动驾驶目标检测需要量化边界框预测的不确定性以确保安全。现有事后方法如线性化推理效率低或非完全事后。本文提出MC-GLM，结合蒙特卡洛与广义线性模型，实现常数样本的并行化实例级事后不确定性量化。在nuScenes数据集上验证了有效性，不确定性质量良好。该方法平衡了效率和后事特性。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Object detection is a safety-critical component of autonomous driving. It is essential to quantify the uncertainty in bounding-box predictions for safety assurance. Post hoc uncertainty quantification without retraining aligns with real-world deployment requirements; therefore, we employ the Laplace approximation. Because instance-level uncertainty is needed, linearized inference methods that require multiple backpropagations are not time-efficient, and sampling-based methods are not fully post hoc. We propose Monte-Carlo generalized linearized model (MC-GLM), which provides instance-level and approximately post hoc uncertainty quantification. The number of samples required in the Monte Carlo step is constant and independent of the number of output instances, so it can be parallelized. Experiments on the nuScenes dataset with the CenterPoint detector validate the effectiveness of our method, and the resulting uncertainties exhibit good quality.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

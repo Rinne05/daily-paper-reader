@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-06-05 <!--dpr-date:20260605-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/05/2606.04656v1-instance-level-post-hoc-uncertainty-quantification-in-object-detection" data-sidebar-item="{&quot;title&quot;: &quot;Instance-Level Post Hoc Uncertainty Quantification in Object Detection&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.04656v1-instance-level-post-hoc-uncertainty-quantification-in-object-detection&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;提出了目标检测中的后验不确定性量化方法，适用于3D检测&quot;}">Instance-Level Post Hoc Uncertainty Quantification in Object Detection</a>
   * 2026-06-04 <!--dpr-date:20260604-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/04/2606.03568v1-learned-non-maximum-suppression-for-3d-object-detection" data-sidebar-item="{&quot;title&quot;: &quot;Learned Non-Maximum Suppression for 3D Object Detection&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.03568v1-learned-non-maximum-suppression-for-3d-object-detection&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;提出学习型NMS用于3D检测，在nuScenes上评估&quot;}">Learned Non-Maximum Suppression for 3D Object Detection</a>

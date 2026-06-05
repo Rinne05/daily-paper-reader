@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-04T21:30:22.023469+00:00",
-  "updated_date": "20260604",
+  "generated_at": "2026-06-05T20:32:48.865169+00:00",
+  "updated_date": "20260605",
   "carryover_days": 9,
   "tag_states": {
     "nuscenes-dod": {
-      "updated_date": "20260604",
+      "updated_date": "20260605",
       "carryover_days": 9,
       "items": []
     }

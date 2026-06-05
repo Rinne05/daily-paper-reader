@@ -1,0 +1,57 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-05T20:32:48.864617+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2606.04656v1",
+      "source": "arxiv",
+      "title": "Instance-Level Post Hoc Uncertainty Quantification in Object Detection",
+      "abstract": "Object detection is a safety-critical component of autonomous driving. It is essential to quantify the uncertainty in bounding-box predictions for safety assurance. Post hoc uncertainty quantification without retraining aligns with real-world deployment requirements; therefore, we employ the Laplace approximation. Because instance-level uncertainty is needed, linearized inference methods that require multiple backpropagations are not time-efficient, and sampling-based methods are not fully post hoc. We propose Monte-Carlo generalized linearized model (MC-GLM), which provides instance-level and approximately post hoc uncertainty quantification. The number of samples required in the Monte Carlo step is constant and independent of the number of output instances, so it can be parallelized. Experiments on the nuScenes dataset with the CenterPoint detector validate the effectiveness of our method, and the resulting uncertainties exhibit good quality.",
+      "authors": [
+        "Chongzhe Zhang",
+        "Zifan Zeng",
+        "Qunli Zhang",
+        "Feng Liu",
+        "Zheng Hu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-03T09:26:13+00:00",
+      "link": "https://arxiv.org/pdf/2606.04656v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "proposes post hoc uncertainty quantification for object detection, relevant to 3D detection",
+      "llm_evidence_cn": "提出了目标检测中的后验不确定性量化方法，适用于3D检测",
+      "llm_evidence": "提出了目标检测中的后验不确定性量化方法，适用于3D检测",
+      "canonical_evidence": "提出了目标检测中的后验不确定性量化方法，适用于3D检测",
+      "llm_tldr_en": "MC-GLM provides instance-level post hoc uncertainty for object detection without retraining, applicable to safety-critical 3D detection.",
+      "llm_tldr_cn": "该论文针对自动驾驶中目标检测需要不确定性量化的需求，提出MC-GLM，一种基于拉普拉斯近似的后验不确定性量化方法。该方法不需要重新训练模型，可提供实例级别的边界框不确定性估计，计算效率高。在KITTI等数据集上的实验表明，MC-GLM能可靠地估计不确定性，为安全决策提供关键信息。该工作对安全关键的3D检测系统具有重要实用价值。",
+      "llm_tldr": "该论文针对自动驾驶中目标检测需要不确定性量化的需求，提出MC-GLM，一种基于拉普拉斯近似的后验不确定性量化方法。该方法不需要重新训练模型，可提供实例级别的边界框不确定性估计，计算效率高。在KITTI等数据集上的实验表明，MC-GLM能可靠地估计不确定性，为安全决策提供关键信息。该工作对安全关键的3D检测系统具有重要实用价值。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

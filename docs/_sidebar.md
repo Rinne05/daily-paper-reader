@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-06-08 <!--dpr-date:20260608-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/08/2606.04271v1-standarde2e-a-unified-framework-for-end-to-end-autonomous-driving-datasets" data-sidebar-item="{&quot;title&quot;: &quot;StandardE2E: A Unified Framework for End-to-End Autonomous Driving Datasets&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.04271v1-standarde2e-a-unified-framework-for-end-to-end-autonomous-driving-datasets&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;提供端到端驾驶数据集的统一接口，对nuScenes实验有益&quot;}">StandardE2E: A Unified Framework for End-to-End Autonomous Driving Datasets</a>
   * 2026-06-05 <!--dpr-date:20260605-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/05/2606.04656v1-instance-level-post-hoc-uncertainty-quantification-in-object-detection" data-sidebar-item="{&quot;title&quot;: &quot;Instance-Level Post Hoc Uncertainty Quantification in Object Detection&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.04656v1-instance-level-post-hoc-uncertainty-quantification-in-object-detection&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;提出了目标检测中的后验不确定性量化方法，适用于3D检测&quot;}">Instance-Level Post Hoc Uncertainty Quantification in Object Detection</a>

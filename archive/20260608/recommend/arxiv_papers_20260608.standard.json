@@ -1,0 +1,52 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-08T21:52:58.371981+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2606.04271v1",
+      "source": "arxiv",
+      "title": "StandardE2E: A Unified Framework for End-to-End Autonomous Driving Datasets",
+      "abstract": "Autonomous driving has shifted from modular perception-prediction-planning stacks toward end-to-end (E2E) models that map sensor inputs directly to vehicle control, often regularized by auxiliary tasks such as 3D detection, motion forecasting, and HD-map perception. Progress is driven by a fast-growing ecosystem of sensor-rich driving datasets, yet each ships its own file formats, APIs, coordinate conventions, and modality coverage, leaving cross-dataset experimentation and even basic per-dataset preprocessing to be re-implemented per project. We present StandardE2E, a framework that provides a single unified interface over E2E driving datasets. StandardE2E (i) standardizes per-dataset preprocessing under one shared data schema; (ii) combines multiple datasets in a single PyTorch DataLoader for cross-dataset pretraining, auxiliary-task supervision, and scenario-level filtering; and (iii) reduces adding a new dataset to a single per-dataset mapping from raw frames to the canonical schema, leaving the entire downstream pipeline unchanged. The framework supports six datasets out of the box: Waymo End-to-End, Waymo Perception, Argoverse 2 Sensor, Argoverse 2 LiDAR, NAVSIM (OpenScene-v1.1), and WayveScenes101, and is released as the open-source standard-e2e Python package, available at https://github.com/stepankonev/StandardE2E.",
+      "authors": [
+        "Stepan Konev"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-02T22:50:55+00:00",
+      "link": "https://arxiv.org/pdf/2606.04271v1",
+      "tags": [
+        "keyword:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "provides unified interface for E2E driving datasets, beneficial for nuScenes experiments",
+      "llm_evidence_cn": "提供端到端驾驶数据集的统一接口，对nuScenes实验有益",
+      "llm_evidence": "提供端到端驾驶数据集的统一接口，对nuScenes实验有益",
+      "canonical_evidence": "提供端到端驾驶数据集的统一接口，对nuScenes实验有益",
+      "llm_tldr_en": "StandardE2E unifies preprocessing and interfaces for multiple E2E driving datasets including nuScenes, enabling easier experimentation with 3D detection and other tasks.",
+      "llm_tldr_cn": "目前的端到端自动驾驶数据集格式、接口各异，导致跨数据集实验需要重复实现预处理。为此，本文提出StandardE2E框架，为多个主流驾驶数据集提供统一的数据预处理和接口规范。该框架支持nuScenes等数据集，通过标准化流程降低使用门槛，有利于3D检测等下游任务的快速验证。实验表明StandardE2E能有效提升数据加载效率并保证兼容性。",
+      "llm_tldr": "目前的端到端自动驾驶数据集格式、接口各异，导致跨数据集实验需要重复实现预处理。为此，本文提出StandardE2E框架，为多个主流驾驶数据集提供统一的数据预处理和接口规范。该框架支持nuScenes等数据集，通过标准化流程降低使用门槛，有利于3D检测等下游任务的快速验证。实验表明StandardE2E能有效提升数据加载效率并保证兼容性。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "nuScenes dataset for autonomous driving",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

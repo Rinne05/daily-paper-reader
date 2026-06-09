@@ -1,0 +1,54 @@
+{
+  "label": "2026-06-09",
+  "date": "2026-06-09",
+  "generated_at": "2026-06-09T21:47:50",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202606/09/2606.08680v1-distortion-aware-petr-for-bev-object-detection-with-mixed-pinhole-fisheye-cameras",
+      "section": "deep",
+      "title_en": "Distortion-Aware PETR for BEV Object Detection with Mixed Pinhole-Fisheye Cameras",
+      "authors": "Xiangzhong Liu",
+      "date": "2026-06-07",
+      "pdf": "https://arxiv.org/pdf/2606.08680v1",
+      "score": "8.0",
+      "evidence": "用于自动驾驶的多视角相机3D目标检测方法",
+      "tldr": "鱼眼相机因低成本广视角被用于自动驾驶，但其径向畸变破坏BEV检测的均匀采样假设。本文提出DAPETR，通过可学习的畸变感知位置编码和双向特征-几何共同调制模块，无需图像校正即可适应混合针孔-鱼眼相机。在KITTI-360上，DAPETR优于基于极坐标的PolarPETR，但发现学习自适应与显式几何重参数化组合时存在冲突，导致性能下降。该工作为畸变感知3D检测提供了新思路，揭示了两类策略的互斥性。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Fisheye cameras are widely deployed in autonomous driving perception suites for their low cost and full-coverage field of view (FOV), yet their potential remains underleveraged in 3D object detection. Severe radial distortion challenges most BEV detectors by violating the fundamental assumption of uniform sampling. To bridge this gap, we propose Distortion-Aware PETR (DAPETR), a projection-free detector tailored for mixed pinhole-fisheye camera setups. DAPETR incorporates two key learned-adaptive modules: a unified distortion-aware positional embedding that harmonizes positional encodings for image representations with fisheye geometry, and a bidirectional feature-geometry co-modulation module that mutually adapts image features and 3D positional embeddings. In our experiments on a converted KITTI-360 benchmark, we systematically compare our learned adaptive approach against PETR in polar coordinates (PolarPETR). We find that while both methods improve over the baseline, our learned modules achieve superior performance. Crucially, we uncover a negative interaction when combining both strategies, revealing that learned adaptation and explicit geometric reparameterization can conflict. Our final DAPETR model significantly advances the research and benchmark for fisheye BEV detection, providing critical insights into effective distortion-aware 3D perception design other than image rectification.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/09/2606.09350v1-taming-perception-jitter-uncertainty-aware-lidar-object-detection-for-reliable-motion-classification",
+      "section": "deep",
+      "title_en": "Taming Perception Jitter: Uncertainty-Aware LiDAR Object Detection for Reliable Motion Classification",
+      "authors": "Cornelius Schröder, Žygimantas Marcinkus, Markus Lienkamp",
+      "date": "2026-06-08",
+      "pdf": "https://arxiv.org/pdf/2606.09350v1",
+      "score": "8.0",
+      "evidence": "在nuScenes上进行不确定性感知的LiDAR目标检测用于运动分类",
+      "tldr": "自动驾驶中静态物体被误判为动态会导致不必要的规划干预。本文提出一种部署友好的策略，向3D目标检测器添加偶然不确定性估计，并利用两样本z检验在短时间窗口内区分真实运动与抖动。在nuScenes上与速度阈值法精度相当，但在真实路测中显著减少误判动态和无效停车，证明不确定性感知检测与统计检验在噪声场景中的实用价值。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Reliable motion classification is critical for autonomous driving, as false dynamic predictions of static objects can cascade into unnecessary planner interventions. Unstable bounding box predictions can lead to spurious velocity estimates in tracking and falsely predicted trajectories. We present a deployment-friendly mitigation strategy that augments a 3D object detector with aleatoric uncertainty estimates and applies a two-sample z-test over short observation windows to separate true motion from jitter. Integrated into Autoware with minimal changes, the approach reuses existing data association for minimal compute overhead. Empirical results show parity with velocity thresholding on nuScenes, but substantially fewer false dynamic predictions and unnecessary stops in real-world test drives, explained by the presence of an intermediate jitter band in the recorded data that speed-only rules misclassify. This demonstrates that uncertainty-aware detection and lightweight statistical testing can deliver practical performance gains for autonomous driving in noisier real-world settings.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/09/2606.08980v1-eps3d-end-to-end-feed-forward-3d-panoptic-segmentation",
+      "section": "quick",
+      "title_en": "EPS3D: End-to-End Feed-Forward 3D Panoptic Segmentation",
+      "authors": "Runsong Zhu, Jiaxin Guo, Xiaoyang Guo, Zhengzhe Liu, Ka-Hei Hui, Wei Yin, Kai Chen, Wei Chen, Weiqiang Ren, Yunhui Liu, Pheng-Ann Heng, Chi-Wing Fu",
+      "date": "2026-06-08",
+      "pdf": "https://arxiv.org/pdf/2606.08980v1",
+      "score": "7.0",
+      "evidence": "多视图纯视觉3D全景分割，可迁移至纯视觉3D检测",
+      "tldr": "针对开放词汇3D全景分割依赖额外预处理、误差累积的问题，提出EPS3D端到端前馈框架。通过蒸馏训练策略从多视图图像预测3D感知特征，并设计互增强模块实现语义-实例一致性。在Replica数据集上语义mIoU提升13%，每场景推理仅需1秒。为机器人操作和3D场景编辑等任务提供高效解决方案。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "This paper introduces EPS3D, a new end-to-end feed-forward framework for open-vocabulary 3D panoptic segmentation. Unlike existing methods relying on additional preprocessing, we design an end-to-end architecture, with a distillation-based training strategy on diverse 3D scenes to predict 3D-aware semantic and instance features from multi-view images, improving 3D consistency and avoiding error accumulation. We further propose a mutual enhancement module to enforce inherent semantic-instance consistency. By aligning semantics within instances (Ins2Sem) and refining instance features with semantic guidance (Sem2Ins), we achieve more coherent 3D scene understanding. Ultimately, EPS3D outperforms SOTA baselines on two benchmarks (e.g., +13% mIoU for semantics on Replica) with high efficiency (e.g., 1s per scene), supporting tasks like robotic manipulation and 3D scene editing.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

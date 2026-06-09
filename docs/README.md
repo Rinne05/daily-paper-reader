@@ -6,24 +6,29 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-08
-- 运行时间：2026-06-08 21:53:25 UTC
+- 最新运行日期：2026-06-09
+- 运行时间：2026-06-09 21:47:42 UTC
 - 运行状态：成功
-- 本次总论文数：1
-- 精读区：0
+- 本次总论文数：3
+- 精读区：2
 - 速读区：1
 
 ### 今日简报（AI）
-今天关注了1篇关于端到端自动驾驶数据集统一框架的论文。该文提出的标准框架对整合多样化驾驶场景数据有参考价值，值得关注。建议进一步了解该框架如何简化数据标注与模型训练流程。
-- 详情：[/202606/08/README](/202606/08/README)
+今天精读2篇、速读1篇论文，聚焦BEV物体检测与激光雷达运动分类的可靠性提升。最值得关注的是Distortion-Aware PETR处理混合鱼眼-针孔相机畸变，以及Uncertainty-Aware LiDAR解决感知抖动问题。建议深入研究多传感器融合中不确定性建模与畸变矫正的实用方法。
+- 详情：[/202606/09/README](/202606/09/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [Distortion-Aware PETR for BEV Object Detection with Mixed Pinhole-Fisheye Cameras](/202606/09/2606.08680v1-distortion-aware-petr-for-bev-object-detection-with-mixed-pinhole-fisheye-cameras)  
+   标签：评分：8.0/10、query:nuscenes-dod
+   evidence：用于自动驾驶的多视角相机3D目标检测方法
+2. [Taming Perception Jitter: Uncertainty-Aware LiDAR Object Detection for Reliable Motion Classification](/202606/09/2606.09350v1-taming-perception-jitter-uncertainty-aware-lidar-object-detection-for-reliable-motion-classification)  
+   标签：评分：8.0/10、query:nuscenes-dod
+   evidence：在nuScenes上进行不确定性感知的LiDAR目标检测用于运动分类
 
 ### 速读区论文标签
-1. [StandardE2E: A Unified Framework for End-to-End Autonomous Driving Datasets](/202606/08/2606.04271v1-standarde2e-a-unified-framework-for-end-to-end-autonomous-driving-datasets)  
-   标签：评分：6.0/10、query:nuscenes-dod
-   evidence：提供端到端驾驶数据集的统一接口，对nuScenes实验有益
+1. [EPS3D: End-to-End Feed-Forward 3D Panoptic Segmentation](/202606/09/2606.08980v1-eps3d-end-to-end-feed-forward-3d-panoptic-segmentation)  
+   标签：评分：7.0/10、query:nuscenes-dod
+   evidence：多视图纯视觉3D全景分割，可迁移至纯视觉3D检测
 
 
 <div class="dpr-home-promo-card">

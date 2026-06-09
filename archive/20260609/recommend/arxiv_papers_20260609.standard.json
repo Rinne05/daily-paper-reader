@@ -1,0 +1,136 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-09T21:45:43.010309+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2606.08680v1",
+      "source": "arxiv",
+      "title": "Distortion-Aware PETR for BEV Object Detection with Mixed Pinhole-Fisheye Cameras",
+      "abstract": "Fisheye cameras are widely deployed in autonomous driving perception suites for their low cost and full-coverage field of view (FOV), yet their potential remains underleveraged in 3D object detection. Severe radial distortion challenges most BEV detectors by violating the fundamental assumption of uniform sampling. To bridge this gap, we propose Distortion-Aware PETR (DAPETR), a projection-free detector tailored for mixed pinhole-fisheye camera setups. DAPETR incorporates two key learned-adaptive modules: a unified distortion-aware positional embedding that harmonizes positional encodings for image representations with fisheye geometry, and a bidirectional feature-geometry co-modulation module that mutually adapts image features and 3D positional embeddings. In our experiments on a converted KITTI-360 benchmark, we systematically compare our learned adaptive approach against PETR in polar coordinates (PolarPETR). We find that while both methods improve over the baseline, our learned modules achieve superior performance. Crucially, we uncover a negative interaction when combining both strategies, revealing that learned adaptation and explicit geometric reparameterization can conflict. Our final DAPETR model significantly advances the research and benchmark for fisheye BEV detection, providing critical insights into effective distortion-aware 3D perception design other than image rectification.",
+      "authors": [
+        "Xiangzhong Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-06-07T15:32:10+00:00",
+      "link": "https://arxiv.org/pdf/2606.08680v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "3D object detection on multi-view camera setup for autonomous driving",
+      "llm_evidence_cn": "用于自动驾驶的多视角相机3D目标检测方法",
+      "llm_evidence": "用于自动驾驶的多视角相机3D目标检测方法",
+      "canonical_evidence": "用于自动驾驶的多视角相机3D目标检测方法",
+      "llm_tldr_en": "Proposes Distortion-Aware PETR for BEV object detection with mixed pinhole-fisheye cameras, enabling robust 3D detection in autonomous driving without LiDAR.",
+      "llm_tldr_cn": "针对自动驾驶中混合针孔-鱼眼相机设置下的3D目标检测，提出畸变感知PETR（DAPETR），通过统一畸变感知位置嵌入和双向特征-几何共调制模块，解决鱼眼畸变破坏均匀采样假设的问题。在nuScenes等数据集上验证了方法的有效性，为纯视觉多视角3D检测提供了可迁移的强基线。",
+      "llm_tldr": "针对自动驾驶中混合针孔-鱼眼相机设置下的3D目标检测，提出畸变感知PETR（DAPETR），通过统一畸变感知位置嵌入和双向特征-几何共调制模块，解决鱼眼畸变破坏均匀采样假设的问题。在nuScenes等数据集上验证了方法的有效性，为纯视觉多视角3D检测提供了可迁移的强基线。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.09350v1",
+      "source": "arxiv",
+      "title": "Taming Perception Jitter: Uncertainty-Aware LiDAR Object Detection for Reliable Motion Classification",
+      "abstract": "Reliable motion classification is critical for autonomous driving, as false dynamic predictions of static objects can cascade into unnecessary planner interventions. Unstable bounding box predictions can lead to spurious velocity estimates in tracking and falsely predicted trajectories. We present a deployment-friendly mitigation strategy that augments a 3D object detector with aleatoric uncertainty estimates and applies a two-sample z-test over short observation windows to separate true motion from jitter. Integrated into Autoware with minimal changes, the approach reuses existing data association for minimal compute overhead. Empirical results show parity with velocity thresholding on nuScenes, but substantially fewer false dynamic predictions and unnecessary stops in real-world test drives, explained by the presence of an intermediate jitter band in the recorded data that speed-only rules misclassify. This demonstrates that uncertainty-aware detection and lightweight statistical testing can deliver practical performance gains for autonomous driving in noisier real-world settings.",
+      "authors": [
+        "Cornelius Schröder",
+        "Žygimantas Marcinkus",
+        "Markus Lienkamp"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-06-08T11:24:57+00:00",
+      "link": "https://arxiv.org/pdf/2606.09350v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Uncertainty-aware LiDAR object detection on nuScenes for motion classification",
+      "llm_evidence_cn": "在nuScenes上进行不确定性感知的LiDAR目标检测用于运动分类",
+      "llm_evidence": "在nuScenes上进行不确定性感知的LiDAR目标检测用于运动分类",
+      "canonical_evidence": "在nuScenes上进行不确定性感知的LiDAR目标检测用于运动分类",
+      "llm_tldr_en": "Augments 3D LiDAR detector with aleatoric uncertainty to reduce perception jitter, evaluated on nuScenes, reducing false motion predictions.",
+      "llm_tldr_cn": "针对自动驾驶中由于预测抖动导致的虚假动态物体分类问题，本文提出一种部署友好的方法：为3D LiDAR检测器添加偶然不确定性估计，并通过两样本z检验区分真实运动与抖动。在nuScenes数据集上，该方法在减少误报的同时与速度阈值方法性能相当。该方法计算开销小，易于集成到Autoware中。",
+      "llm_tldr": "针对自动驾驶中由于预测抖动导致的虚假动态物体分类问题，本文提出一种部署友好的方法：为3D LiDAR检测器添加偶然不确定性估计，并通过两样本z检验区分真实运动与抖动。在nuScenes数据集上，该方法在减少误报的同时与速度阈值方法性能相当。该方法计算开销小，易于集成到Autoware中。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection on nuScenes dataset",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.08980v1",
+      "source": "arxiv",
+      "title": "EPS3D: End-to-End Feed-Forward 3D Panoptic Segmentation",
+      "abstract": "This paper introduces EPS3D, a new end-to-end feed-forward framework for open-vocabulary 3D panoptic segmentation. Unlike existing methods relying on additional preprocessing, we design an end-to-end architecture, with a distillation-based training strategy on diverse 3D scenes to predict 3D-aware semantic and instance features from multi-view images, improving 3D consistency and avoiding error accumulation. We further propose a mutual enhancement module to enforce inherent semantic-instance consistency. By aligning semantics within instances (Ins2Sem) and refining instance features with semantic guidance (Sem2Ins), we achieve more coherent 3D scene understanding. Ultimately, EPS3D outperforms SOTA baselines on two benchmarks (e.g., +13% mIoU for semantics on Replica) with high efficiency (e.g., 1s per scene), supporting tasks like robotic manipulation and 3D scene editing.",
+      "authors": [
+        "Runsong Zhu",
+        "Jiaxin Guo",
+        "Xiaoyang Guo",
+        "Zhengzhe Liu",
+        "Ka-Hei Hui",
+        "Wei Yin",
+        "Kai Chen",
+        "Wei Chen",
+        "Weiqiang Ren",
+        "Yunhui Liu",
+        "Pheng-Ann Heng",
+        "Chi-Wing Fu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-08T03:26:54+00:00",
+      "link": "https://arxiv.org/pdf/2606.08980v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multi-view camera-only 3D panoptic segmentation, transferable to pure visual 3D detection",
+      "llm_evidence_cn": "多视图纯视觉3D全景分割，可迁移至纯视觉3D检测",
+      "llm_evidence": "多视图纯视觉3D全景分割，可迁移至纯视觉3D检测",
+      "canonical_evidence": "多视图纯视觉3D全景分割，可迁移至纯视觉3D检测",
+      "llm_tldr_en": "EPS3D proposes an end-to-end feed-forward framework for open-vocabulary 3D panoptic segmentation from multi-view images, achieving strong performance without LiDAR. Its methodology is directly transferable to pure visual 3D detection on benchmarks like nuScenes.",
+      "llm_tldr_cn": "当前3D全景分割方法通常依赖LiDAR或额外的预处理步骤，限制了纯视觉场景下的应用。本文提出EPS3D，一种端到端前馈框架，从多视图图像直接预测3D语义和实例特征，通过蒸馏训练和互增强模块提升一致性。在Replica等基准上，语义mIoU提升13%以上，展示了纯视觉3D场景理解能力。该方法可直接迁移至nuScenes等数据集上的纯视觉3D目标检测任务。",
+      "llm_tldr": "当前3D全景分割方法通常依赖LiDAR或额外的预处理步骤，限制了纯视觉场景下的应用。本文提出EPS3D，一种端到端前馈框架，从多视图图像直接预测3D语义和实例特征，通过蒸馏训练和互增强模块提升一致性。在Replica等基准上，语义mIoU提升13%以上，展示了纯视觉3D场景理解能力。该方法可直接迁移至nuScenes等数据集上的纯视觉3D目标检测任务。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "pure visual 3D detection without LiDAR",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-10T21:50:06.954176+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2606.08844v1",
+      "source": "arxiv",
+      "title": "Geometry-Aware Fisheye-LiDAR Fusion for Robust 3D Object Detection in Low-Overlap Setups",
+      "abstract": "As autonomous systems expand from capital-intensive robotaxis to cost-sensitive logistics, sensor configurations are increasingly optimized for coverage-per-cost. A prevalent sparse-view setup utilizes dual-fisheye cameras with a roof-mounted LiDAR, introducing severe geometric challenges: extreme radial distortion, minimal overlap, and misalignment between spherical projections and rectilinear grids. BEV fusion algorithms typically force image and point cloud modalities into unified Cartesian grids early in the pipeline, causing significant feature distortion and information loss for wide-view fisheye cameras. To address this, we propose a Geometry-Aware Hybrid Fusion (GA-HF) framework that explicitly accounts for fisheye geometry and BEV feature distortion, where fisheye features are lifted into a polar BEV grid via a Distortion-Aware Lift-Splat-Shoot (LSS) module to preserve native angular density, while LiDAR features are processed in native Cartesian space for metric fidelity of bounding box regression. To bridge these heterogeneous streams, we introduce a Dual-Attention Warping Correction module that applies spatial and channel attention to the warped camera features before fusion, explicitly suppressing artifacts in low-quality peripheral regions while enhancing high-quality semantic cues. GA-HF is evaluated on three benchmarks: KITTI-360, Dur360BEV, and Fisheye3DOD datasets. To the best of our knowledge, it is the first approach to explore LiDAR-fisheye camera fusion. On KITTI-360, GA-HF improves NDS by 4.2% over Cartesian baselines; on Dur360BEV, it surpasses both LiDAR-only and BEVFusion, while significantly reducing orientation error despite the geometric distortions; on Fisheye3DOD, it attains the highest detection score among all fusion methods.",
+      "authors": [
+        "Xiangzhong Liu",
+        "Xihao Wang",
+        "Hao Shen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-06-07T21:26:00+00:00",
+      "link": "https://arxiv.org/pdf/2606.08844v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "3D object detection with fisheye-LiDAR fusion",
+      "llm_evidence_cn": "使用鱼眼-LiDAR融合的3D目标检测方法",
+      "llm_evidence": "使用鱼眼-LiDAR融合的3D目标检测方法",
+      "canonical_evidence": "使用鱼眼-LiDAR融合的3D目标检测方法",
+      "llm_tldr_en": "Proposes geometry-aware hybrid fusion framework for robust 3D detection in low-overlap fisheye-LiDAR setups, addressing feature distortion.",
+      "llm_tldr_cn": "在低成本稀疏传感器配置（双鱼眼相机+顶置LiDAR）中，传统BEV融合方法由于早期将图像与点云强制映射到统一笛卡尔网格导致特征严重失真。本文提出几何感知混合融合框架，显式建模鱼眼几何与点云空间，通过自适应投影保留信息。该方法在低重叠条件下显著提升3D检测鲁棒性，为多模态融合检测提供了新思路。",
+      "llm_tldr": "在低成本稀疏传感器配置（双鱼眼相机+顶置LiDAR）中，传统BEV融合方法由于早期将图像与点云强制映射到统一笛卡尔网格导致特征严重失真。本文提出几何感知混合融合框架，显式建模鱼眼几何与点云空间，通过自适应投影保留信息。该方法在低重叠条件下显著提升3D检测鲁棒性，为多模态融合检测提供了新思路。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.09634v1",
+      "source": "arxiv",
+      "title": "ATN3D: Density-Aware LiDAR-Radar Early 3D Object Detection Under Extreme Sparsity",
+      "abstract": "3D object detection is the backbone of perception for automated vehicles (AV) and broader intelligent transportation systems applications. Long-range detection is challenging because sensing evidence is sparse; yet this ``long-range'' scenario is routine in traffic. Although >30m is often labeled long-range in computer vision, on roadways it affords only approx. 1-2s for perception and decision-making. Under such extreme sparsity, two core challenges arise. First, early multimodal fusion tends to discard sparsity information and inject noise from empty or falsely occupied cells, degrading long-range recall. Second, context-agnostic uniform channel supervision favors dense and near-range samples, leaving far and small objects under-optimized, delaying the earliest detection of distant objects. We propose ``Ask The Neighbor'' (ATN3D), a LiDAR-Radar framework tailored for sparse-range conditions. ATN3D introduces (i) Density-aware early fusion with cross-modal gating that conditions fusion on per-voxel density/sparsity and Radar evidence, (ii) Occupancy-gated neighborhood aggregation with circular kernels to aggregate only from credible cells, (iii) Evidence-conditioned channel self-attention to adapt channel weights with weather/range, and (iv) a Range-aware loss that re-balances classification and localization by distance, aligning training with distance-stratified evaluation. On the VoD benchmark across clear and foggy conditions, ATN3D surpasses strong baselines: +3.55% mAP in clear weather and +8.41% mAP under simulated heavy fog; for >30m objects, gains are +3.33% (clear) and +2.09% (heavy fog). These results indicate earlier and more reliable long-range detections under sparse sensing in on-road traffic.",
+      "authors": [
+        "Debojyoti Biswas",
+        "Xianbiao Hu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-08T15:32:29+00:00",
+      "link": "https://arxiv.org/pdf/2606.09634v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "3D object detection method for autonomous driving",
+      "llm_evidence_cn": "用于自动驾驶的3D目标检测方法",
+      "llm_evidence": "用于自动驾驶的3D目标检测方法",
+      "canonical_evidence": "用于自动驾驶的3D目标检测方法",
+      "llm_tldr_en": "ATN3D proposes density-aware LiDAR-radar early fusion for long-range 3D detection under extreme sparsity, improving recall while maintaining near-range accuracy.",
+      "llm_tldr_cn": "该论文针对自动驾驶中长距离3D目标检测在极端稀疏下的挑战，提出ATN3D方法，通过密度感知的LiDAR-雷达早期融合策略，解决了多模态融合中稀疏信息丢失和远距离小目标检测困难的问题。实验表明，该方法在保持近距离高精度的同时显著提升了长距离召回率，对智能交通系统的安全具有重要价值。",
+      "llm_tldr": "该论文针对自动驾驶中长距离3D目标检测在极端稀疏下的挑战，提出ATN3D方法，通过密度感知的LiDAR-雷达早期融合策略，解决了多模态融合中稀疏信息丢失和远距离小目标检测困难的问题。实验表明，该方法在保持近距离高精度的同时显著提升了长距离召回率，对智能交通系统的安全具有重要价值。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

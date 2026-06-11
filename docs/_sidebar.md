@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-06-11 <!--dpr-date:20260611-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/11/2606.09143v1-camf-det-closure-aware-multimodal-fusion-for-lidar-camera-3d-object-detection-on-uav-platforms" data-sidebar-item="{&quot;title&quot;: &quot;CAMF-Det: Closure-Aware Multimodal Fusion for LiDAR-Camera 3D Object Detection on UAV Platforms&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.09143v1-camf-det-closure-aware-multimodal-fusion-for-lidar-camera-3d-object-detection-on-uav-platforms&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;提出了一种面向无人机的融合LiDAR与相机的3D目标检测方法&quot;}">CAMF-Det: Closure-Aware Multimodal Fusion for LiDAR-Camera 3D Object Detection on UAV Platforms</a>
   * 2026-06-10 <!--dpr-date:20260610-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/10/2606.08844v1-geometry-aware-fisheye-lidar-fusion-for-robust-3d-object-detection-in-low-overlap-setups" data-sidebar-item="{&quot;title&quot;: &quot;Geometry-Aware Fisheye-LiDAR Fusion for Robust 3D Object Detection in Low-Overlap Setups&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.08844v1-geometry-aware-fisheye-lidar-fusion-for-robust-3d-object-detection-in-low-overlap-setups&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;使用鱼眼-LiDAR融合的3D目标检测方法&quot;}">Geometry-Aware Fisheye-LiDAR Fusion for Robust 3D Object Detection in Low-Overlap Setups</a>

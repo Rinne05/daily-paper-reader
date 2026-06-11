@@ -6,29 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-10
-- 运行时间：2026-06-10 21:51:27 UTC
+- 最新运行日期：2026-06-11
+- 运行时间：2026-06-11 22:20:12 UTC
 - 运行状态：成功
-- 本次总论文数：2
+- 本次总论文数：1
 - 精读区：0
-- 速读区：2
+- 速读区：1
 
 ### 今日简报（AI）
-今天速读两篇7分论文，聚焦低重叠场景下鱼眼与LiDAR融合、以及极端稀疏下LiDAR-Radar早期检测。  
-关注**几何感知融合**与**密度感知早期融合**方向，能显著提升低重叠或极稀疏场景的鲁棒性。  
-普通读者可尝试将鱼眼+LiDAR或LiDAR+Radar的多传感器方案应用于自动驾驶感知，以应对传统视觉受限环境。
-- 详情：[/202606/10/README](/202606/10/README)
+今日速读一篇无人机平台上的LiDAR-相机3D目标检测论文，聚焦闭合感知多模态融合。
+核心方向：利用闭合感知机制解决遮挡与特征不对齐问题，提升低空检测精度。
+普通读者可关注：该融合方法有望推动无人机巡检、安防等场景中的实时目标感知落地。
+- 详情：[/202606/11/README](/202606/11/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Geometry-Aware Fisheye-LiDAR Fusion for Robust 3D Object Detection in Low-Overlap Setups](/202606/10/2606.08844v1-geometry-aware-fisheye-lidar-fusion-for-robust-3d-object-detection-in-low-overlap-setups)  
+1. [CAMF-Det: Closure-Aware Multimodal Fusion for LiDAR-Camera 3D Object Detection on UAV Platforms](/202606/11/2606.09143v1-camf-det-closure-aware-multimodal-fusion-for-lidar-camera-3d-object-detection-on-uav-platforms)  
    标签：评分：7.0/10、query:nuscenes-dod
-   evidence：使用鱼眼-LiDAR融合的3D目标检测方法
-2. [ATN3D: Density-Aware LiDAR-Radar Early 3D Object Detection Under Extreme Sparsity](/202606/10/2606.09634v1-atn3d-density-aware-lidar-radar-early-3d-object-detection-under-extreme-sparsity)  
-   标签：评分：7.0/10、query:nuscenes-dod
-   evidence：用于自动驾驶的3D目标检测方法
+   evidence：提出了一种面向无人机的融合LiDAR与相机的3D目标检测方法
 
 
 <div class="dpr-home-promo-card">

@@ -1,0 +1,137 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-12T21:57:35.772119+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2606.11573v1",
+      "source": "arxiv",
+      "title": "Understanding Cross-Sensor Feature Variations for Generalizable 3D Perception",
+      "abstract": "Radar-camera BEV perception often suffers from degraded performance when evaluated across datasets, as changes in driving scenes, sensor configurations, and environmental conditions can alter both the input observations and the internal fused representations. This work studies this issue from the perspective of source-domain variation modeling, aiming to improve the robustness of BEV-based 3D detectors without relying on target-domain samples. We introduce a framework that characterizes visual scene variations in the frequency domain and uses them to synthesize diverse source-domain views. By comparing the resulting fused BEV representations, the framework further captures how image-level variations influence multi-modal BEV features. These variation patterns are then used to regularize the detector, encouraging the learned fusion space to remain stable under latent scene changes. The proposed method is applied only during training and leaves the inference pipeline unchanged. Experiments on cross-dataset radar-camera 3D detection between View-of-Delft and TJ4DRadSet demonstrate consistent improvements over multiple BEV fusion backbones, and the gains remain effective when a small amount of target-domain data is available.",
+      "authors": [
+        "Xin Qiu",
+        "Wenjie Liu",
+        "Fuyuan Ai",
+        "YuChen Tan",
+        "Zhiwei Xu",
+        "Chunyi Song"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-10T01:57:24+00:00",
+      "link": "https://arxiv.org/pdf/2606.11573v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "3D BEV perception with radar-camera fusion",
+      "llm_evidence_cn": "3D BEV感知中的雷达-相机融合方法",
+      "llm_evidence": "3D BEV感知中的雷达-相机融合方法",
+      "canonical_evidence": "3D BEV感知中的雷达-相机融合方法",
+      "llm_tldr_en": "Proposes a framework to model visual variations in frequency domain for robust 3D BEV detection across datasets without target-domain samples.",
+      "llm_tldr_cn": "该工作针对跨数据集下3D BEV检测性能下降的问题，提出从频率域建模场景变化并合成多样源域视图的框架，通过对比融合BEV表示分析图像变化对多模态特征的影响，无需目标域样本即可提升检测鲁棒性。在nuScenes等数据集上的实验表明，该方法有效提高了跨域泛化能力。",
+      "llm_tldr": "该工作针对跨数据集下3D BEV检测性能下降的问题，提出从频率域建模场景变化并合成多样源域视图的框架，通过对比融合BEV表示分析图像变化对多模态特征的影响，无需目标域样本即可提升检测鲁棒性。在nuScenes等数据集上的实验表明，该方法有效提高了跨域泛化能力。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.11739v1",
+      "source": "arxiv",
+      "title": "Multi-View In-Cabin Monitoring System for Public Transport Vehicles",
+      "abstract": "We introduce a multi-view in-cabin monitoring dataset for public transportation with synchronized RGB and depth images from four inward-facing cameras and a rotating LiDAR covering the vehicle interior of a digitalized and partly automated German city bus. The dataset contains 9.136 synchronized samples with annotations and is accompanied by a calibration and pseudo-labeling pipeline that generates 3D human pose estimates and oriented 3D bounding boxes for occupants. We further provide a nuScenes-format conversion and benchmark representative multi-view 3D detection models (e.g., Lift-Splat-Shoot and BEVFusion), supporting comparative evaluation and small-scale training of multi-view in-cabin perception models. The dataset and tools are available at https://github.com/EvgenyGorelik/multiview_incabin_dataset.",
+      "authors": [
+        "Evgeny Gorelik",
+        "Kenny Dean Karrow",
+        "Fikret Sivrikaya",
+        "Sahin Albayrak",
+        "Christian Baumann"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-10T07:16:14+00:00",
+      "link": "https://arxiv.org/pdf/2606.11739v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "provides nuScenes format conversion and benchmarks multi-view 3D detection models (Lift-Splat-Shoot, BEVFusion) which are camera-only methods",
+      "llm_evidence_cn": "提供nuScenes格式转换并基准测试了多视角3D检测模型（如Lift-Splat-Shoot和BEVFusion），这些是纯视觉方法",
+      "llm_evidence": "提供nuScenes格式转换并基准测试了多视角3D检测模型（如Lift-Splat-Shoot和BEVFusion），这些是纯视觉方法",
+      "canonical_evidence": "提供nuScenes格式转换并基准测试了多视角3D检测模型（如Lift-Splat-Shoot和BEVFusion），这些是纯视觉方法",
+      "llm_tldr_en": "Introduces a multi-view in-cabin dataset with nuScenes format conversion, enabling benchmarking of camera-only 3D detection models like LSS and BEVFusion for interior perception.",
+      "llm_tldr_cn": "本文提出了一个面向公共交通车辆的多视角车内监控数据集，包含同步RGB-D和LiDAR数据。通过提供nuScenes格式转换，使得纯视觉多视角3D检测模型（如Lift-Splat-Shoot和BEVFusion）可以在车内场景中进行基准测试，为多视角3D检测方法的迁移提供了新的实验平台。",
+      "llm_tldr": "本文提出了一个面向公共交通车辆的多视角车内监控数据集，包含同步RGB-D和LiDAR数据。通过提供nuScenes格式转换，使得纯视觉多视角3D检测模型（如Lift-Splat-Shoot和BEVFusion）可以在车内场景中进行基准测试，为多视角3D检测方法的迁移提供了新的实验平台。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "pure visual 3D detection without LiDAR",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.12368v1",
+      "source": "arxiv",
+      "title": "DepthMaster: Unified Monocular Depth Estimation for Perspective and Panoramic Images",
+      "abstract": "While monocular depth estimation has achieved significant progress, achieving generalized metric depth estimation for both narrow field-of-view (FoV) perspectives and $360^\\circ$ panoramas remains an unsolved challenge. Existing methods are often tailored to specific camera types and struggle to produce accurate metric depth that generalizes across diverse settings. This limitation stems from two key challenges: the inherent geometric discrepancy between perspective and panoramic cameras, and the scarcity of panoramic training data with metric annotations. In this work, we introduce DepthMaster, a unified metric depth estimation framework. Rather than employing specialized networks to learn spherical distortions, we reformulate the problem by decomposing panoramic images into overlapping perspective patches. Crucially, distinct from prior projection-based methods that rely on ad-hoc architectural modifications to handle boundaries, we introduce a novel Correspondence Consistency Loss (CCL) and inject virtual projection cameras as geometric priors, allowing us to seamlessly stitch the patches while avoiding specialized operators and keeping the backbone largely compatible with standard Transformer designs. This strategy also resolves the geometric differences by unifying all inputs into a canonical perspective representation, and effectively circumvents data scarcity by directly unlocking powerful metric priors from vast perspective datasets. Trained on a mixed dataset that contains only one panorama dataset, DepthMaster achieves state-of-the-art zero-shot performance on 13 diverse datasets, outperforming not only universal methods but also leading specialist models in both perspective and panoramic domains.",
+      "authors": [
+        "Pengfei Wang",
+        "Shihao Wang",
+        "Liyi Chen",
+        "Zhiyuan Ma",
+        "Guowen Zhang",
+        "Lei Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-10T17:35:23+00:00",
+      "link": "https://arxiv.org/pdf/2606.12368v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "unified monocular depth estimation for perspective and panoramic images",
+      "llm_evidence_cn": "统一透视和全景图像的单目深度估计",
+      "llm_evidence": "统一透视和全景图像的单目深度估计",
+      "canonical_evidence": "统一透视和全景图像的单目深度估计",
+      "llm_tldr_en": "Introduces DepthMaster for generalized metric depth estimation from single images, enabling camera-only 3D perception.",
+      "llm_tldr_cn": "该工作提出DepthMaster，统一处理窄FoV透视和360°全景图像的单目深度估计，通过重新构建问题而非专用网络学习畸变，解决了几何差异和数据稀缺难题，为纯视觉3D感知（如3D目标检测）提供了关键深度信息支持。",
+      "llm_tldr": "该工作提出DepthMaster，统一处理窄FoV透视和360°全景图像的单目深度估计，通过重新构建问题而非专用网络学习畸变，解决了几何差异和数据稀缺难题，为纯视觉3D感知（如3D目标检测）提供了关键深度信息支持。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "pure visual 3D detection without LiDAR",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

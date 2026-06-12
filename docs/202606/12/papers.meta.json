@@ -1,0 +1,54 @@
+{
+  "label": "2026-06-12",
+  "date": "2026-06-12",
+  "generated_at": "2026-06-12T21:59:26",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202606/12/2606.11573v1-understanding-cross-sensor-feature-variations-for-generalizable-3d-perception",
+      "section": "quick",
+      "title_en": "Understanding Cross-Sensor Feature Variations for Generalizable 3D Perception",
+      "authors": "Xin Qiu, Wenjie Liu, Fuyuan Ai, YuChen Tan, Zhiwei Xu, Chunyi Song",
+      "date": "2026-06-10",
+      "pdf": "https://arxiv.org/pdf/2606.11573v1",
+      "score": "6.0",
+      "evidence": "3D BEV感知中的雷达-相机融合方法",
+      "tldr": "雷达-相机BEV感知在跨数据集时性能下降，源于场景、传感器和环境变化。本文提出频率域建模视觉变化并合成多样化源域视图，通过对比融合BEV特征捕获变化模式，以正则化检测器稳定融合空间。在跨数据集3D检测上显著提升多个骨干模型，且少量目标域数据下增益仍有效。贡献在于无需目标域样本即可提升泛化鲁棒性。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Radar-camera BEV perception often suffers from degraded performance when evaluated across datasets, as changes in driving scenes, sensor configurations, and environmental conditions can alter both the input observations and the internal fused representations. This work studies this issue from the perspective of source-domain variation modeling, aiming to improve the robustness of BEV-based 3D detectors without relying on target-domain samples. We introduce a framework that characterizes visual scene variations in the frequency domain and uses them to synthesize diverse source-domain views. By comparing the resulting fused BEV representations, the framework further captures how image-level variations influence multi-modal BEV features. These variation patterns are then used to regularize the detector, encouraging the learned fusion space to remain stable under latent scene changes. The proposed method is applied only during training and leaves the inference pipeline unchanged. Experiments on cross-dataset radar-camera 3D detection between View-of-Delft and TJ4DRadSet demonstrate consistent improvements over multiple BEV fusion backbones, and the gains remain effective when a small amount of target-domain data is available.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/12/2606.11739v1-multi-view-in-cabin-monitoring-system-for-public-transport-vehicles",
+      "section": "quick",
+      "title_en": "Multi-View In-Cabin Monitoring System for Public Transport Vehicles",
+      "authors": "Evgeny Gorelik, Kenny Dean Karrow, Fikret Sivrikaya, Sahin Albayrak, Christian Baumann",
+      "date": "2026-06-10",
+      "pdf": "https://arxiv.org/pdf/2606.11739v1",
+      "score": "6.0",
+      "evidence": "提供nuScenes格式转换并基准测试了多视角3D检测模型（如Lift-Splat-Shoot和BEVFusion），这些是纯视觉方法",
+      "tldr": "针对公共交通车内监控缺乏多视角数据集的问题，我们构建了包含4个RGB-D摄像头和旋转LiDAR的多视角采集系统，并生成含9136个同步样本的数据集，附带标定与伪标签流水线输出3D人体姿态和包围框。数据集支持nuScenes格式转换及Lift-Splat-Shoot等模型的小规模训练与评估，为车内智能监控研究提供了基准和工具。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "We introduce a multi-view in-cabin monitoring dataset for public transportation with synchronized RGB and depth images from four inward-facing cameras and a rotating LiDAR covering the vehicle interior of a digitalized and partly automated German city bus. The dataset contains 9.136 synchronized samples with annotations and is accompanied by a calibration and pseudo-labeling pipeline that generates 3D human pose estimates and oriented 3D bounding boxes for occupants. We further provide a nuScenes-format conversion and benchmark representative multi-view 3D detection models (e.g., Lift-Splat-Shoot and BEVFusion), supporting comparative evaluation and small-scale training of multi-view in-cabin perception models. The dataset and tools are available at https://github.com/EvgenyGorelik/multiview_incabin_dataset.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/12/2606.12368v1-depthmaster-unified-monocular-depth-estimation-for-perspective-and-panoramic-images",
+      "section": "quick",
+      "title_en": "DepthMaster: Unified Monocular Depth Estimation for Perspective and Panoramic Images",
+      "authors": "Pengfei Wang, Shihao Wang, Liyi Chen, Zhiyuan Ma, Guowen Zhang, Lei Zhang",
+      "date": "2026-06-10",
+      "pdf": "https://arxiv.org/pdf/2606.12368v1",
+      "score": "6.0",
+      "evidence": "统一透视和全景图像的单目深度估计",
+      "tldr": "针对窄视场透视与360°全景图像的统一度量深度估计难题，现有方法因几何差异与全景数据稀缺而性能受限。本文提出DepthMaster，将全景图分解为重叠透视块，通过引入对应一致性损失和虚拟投影相机作为几何先验，无需专门网络即可无缝拼接块，并利用透视数据集缓解数据稀缺。该方法在13个数据集上达到零样本SOTA，超越通用与专用模型。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "While monocular depth estimation has achieved significant progress, achieving generalized metric depth estimation for both narrow field-of-view (FoV) perspectives and $360^\\circ$ panoramas remains an unsolved challenge. Existing methods are often tailored to specific camera types and struggle to produce accurate metric depth that generalizes across diverse settings. This limitation stems from two key challenges: the inherent geometric discrepancy between perspective and panoramic cameras, and the scarcity of panoramic training data with metric annotations. In this work, we introduce DepthMaster, a unified metric depth estimation framework. Rather than employing specialized networks to learn spherical distortions, we reformulate the problem by decomposing panoramic images into overlapping perspective patches. Crucially, distinct from prior projection-based methods that rely on ad-hoc architectural modifications to handle boundaries, we introduce a novel Correspondence Consistency Loss (CCL) and inject virtual projection cameras as geometric priors, allowing us to seamlessly stitch the patches while avoiding specialized operators and keeping the backbone largely compatible with standard Transformer designs. This strategy also resolves the geometric differences by unifying all inputs into a canonical perspective representation, and effectively circumvents data scarcity by directly unlocking powerful metric priors from vast perspective datasets. Trained on a mixed dataset that contains only one panorama dataset, DepthMaster achieves state-of-the-art zero-shot performance on 13 diverse datasets, outperforming not only universal methods but also leading specialist models in both perspective and panoramic domains.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

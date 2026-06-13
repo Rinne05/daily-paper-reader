@@ -6,32 +6,22 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-12
-- 运行时间：2026-06-12 21:59:20 UTC
+- 最新运行日期：2026-06-13
+- 运行时间：2026-06-13 20:16:36 UTC
 - 运行状态：成功
-- 本次总论文数：3
+- 本次总论文数：0
 - 精读区：0
-- 速读区：3
+- 速读区：0
 
 ### 今日简报（AI）
-今日收录3篇6分论文，聚焦跨传感器感知、公共交通监控与统一深度估计。  
-最值得关注：跨传感器3D感知的泛化能力，以及单目深度估计对不同图像类型的统一处理。  
-建议：可进一步了解跨传感器特征变异的解决方案，或尝试DepthMaster在VR/AR中的应用。
-- 详情：[/202606/12/README](/202606/12/README)
+> 今日无新推荐，系统未产出可展示论文。
+- 详情：[/202606/13/README](/202606/13/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Understanding Cross-Sensor Feature Variations for Generalizable 3D Perception](/202606/12/2606.11573v1-understanding-cross-sensor-feature-variations-for-generalizable-3d-perception)  
-   标签：评分：6.0/10、query:nuscenes-dod
-   evidence：3D BEV感知中的雷达-相机融合方法
-2. [Multi-View In-Cabin Monitoring System for Public Transport Vehicles](/202606/12/2606.11739v1-multi-view-in-cabin-monitoring-system-for-public-transport-vehicles)  
-   标签：评分：6.0/10、query:nuscenes-dod
-   evidence：提供nuScenes格式转换并基准测试了多视角3D检测模型（如Lift-Splat-Shoot和BEVFusion），这些是纯视觉方法
-3. [DepthMaster: Unified Monocular Depth Estimation for Perspective and Panoramic Images](/202606/12/2606.12368v1-depthmaster-unified-monocular-depth-estimation-for-perspective-and-panoramic-images)  
-   标签：评分：6.0/10、query:nuscenes-dod
-   evidence：统一透视和全景图像的单目深度估计
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">

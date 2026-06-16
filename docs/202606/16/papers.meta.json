@@ -1,0 +1,24 @@
+{
+  "label": "2026-06-16",
+  "date": "2026-06-16",
+  "generated_at": "2026-06-16T23:05:13",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202606/16/2606.16960v1-surroundnexo-ego-centric-metric-bridging-for-spatially-consistent-geometry-in-autonomous-driving",
+      "section": "quick",
+      "title_en": "SurroundNEXO: Ego-Centric Metric Bridging for Spatially Consistent Geometry in Autonomous Driving",
+      "authors": "Shuai Yuan, Runxi Tang, Yuzhou Ji, Fudong Ge, Hanshi Wang, Yifei Wang, Xianming Zeng, Jianyun Xu, Xingliang Liu, Yanfeng Wang, Zhipeng Zhang",
+      "date": "2026-06-15",
+      "pdf": "https://arxiv.org/pdf/2606.16960v1",
+      "score": "6.0",
+      "evidence": "面向自动驾驶的多相机度量深度，为3D检测提供几何基础",
+      "tldr": "环视相机视觉重叠低导致多视角几何对应困难，提出SurroundNEXO框架，通过Ego-Ray位置编码使图像令牌具有全局可比较的视角方向，利用稀疏LiDAR作为度量锚点传播绝对尺度，并逐步从局部建模扩展到时空推理和全局融合。在NuScenes、Waymo等基准上，单视图误差降低33.2%，跨视图一致性提升10.5%，度量重建质量提升25.6%，且在极稀疏深度提示下鲁棒，零样本泛化到未见相机布局。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Modern autonomous driving depends on accurate metric 3D understanding for perception, reconstruction, and planning, which in turn requires reliable multi-camera depth prediction. However, the outward-facing nature of vehicle-mounted surround-view camera rigs inherently limits visual overlap across views, challenging the correspondence-based assumptions that underpin conventional multi-view geometry. To bridge this gap, we present SurroundNEXO, named after the Spanish word nexo for a geometric link, a low-overlap multi-camera metric depth framework that grounds cross-view reasoning in ego-centric geometry rather than dense visual correspondences. Instead of directly enforcing early global fusion, SurroundNEXO first assigns image tokens globally comparable ego-frame viewing directions through Ego-Ray Positional Encoding, then uses sparse LiDAR measurements as metric anchors to propagate absolute scale cues, and finally expands feature interaction progressively from view-local modeling to decomposed spatio-temporal reasoning and global integration. This design enables metric-scale depth prediction with improved spatial consistency across weakly overlapping cameras. Across low-overlap autonomous driving benchmarks, including NuScenes, Waymo and DDAD, SurroundNEXO reduces single-view error by 33.2%, improves cross-view consistency by 10.5%, and enhances metric reconstruction quality by 25.6% compared with SOTA methods. It further remains robust under extremely sparse depth prompts and exhibits strong zero-shot generalization to unseen camera layouts.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

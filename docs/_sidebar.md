@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-06-16 <!--dpr-date:20260616-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/16/2606.16960v1-surroundnexo-ego-centric-metric-bridging-for-spatially-consistent-geometry-in-autonomous-driving" data-sidebar-item="{&quot;title&quot;: &quot;SurroundNEXO: Ego-Centric Metric Bridging for Spatially Consistent Geometry in Autonomous Driving&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.16960v1-surroundnexo-ego-centric-metric-bridging-for-spatially-consistent-geometry-in-autonomous-driving&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;面向自动驾驶的多相机度量深度，为3D检测提供几何基础&quot;}">SurroundNEXO: Ego-Centric Metric Bridging for Spatially Consistent Geometry in Autonomous Driving</a>
   * 2026-06-12 <!--dpr-date:20260612-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/12/2606.11573v1-understanding-cross-sensor-feature-variations-for-generalizable-3d-perception" data-sidebar-item="{&quot;title&quot;: &quot;Understanding Cross-Sensor Feature Variations for Generalizable 3D Perception&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.11573v1-understanding-cross-sensor-feature-variations-for-generalizable-3d-perception&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;3D BEV感知中的雷达-相机融合方法&quot;}">Understanding Cross-Sensor Feature Variations for Generalizable 3D Perception</a>

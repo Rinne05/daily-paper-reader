@@ -1,0 +1,69 @@
+{
+  "label": "2026-06-17",
+  "date": "2026-06-17",
+  "generated_at": "2026-06-17T21:04:20",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202606/17/2606.17936v1-spark-low-latency-single-camera-3d-pose-estimation-for-autonomous-racing-using-keypoints",
+      "section": "deep",
+      "title_en": "SPARK: Low Latency Single-Camera 3D Pose Estimation for Autonomous Racing using Keypoints",
+      "authors": "Dominic Ebner, Markus Lienkamp",
+      "date": "2026-06-16",
+      "pdf": "https://arxiv.org/pdf/2606.17936v1",
+      "score": "8.0",
+      "evidence": "用于赛车的单目相机3D检测",
+      "tldr": "自主赛车需要快速检测非合作对手，但LiDAR延迟高且难以部署。SPARK算法基于YOLO关键点检测与赛道固定几何先验，实现低延迟单目3D姿态估计。在真实数据上超越现有单目方法，兼具高精度与低资源消耗。开源代码推动了边缘端视觉感知在高速场景的应用。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "In autonomous racing, fast detection of other participants' movements is required to plan safe, collision-free trajectories with non-cooperative opponents. LiDAR detection is inherently slower and harder to deploy on edge devices than vision methods, causing delayed detections that limit object tracking performance during high-dynamic maneuvering. Utilizing monocular 3D detection enables an easy-to-deploy, low-latency detection of other participants on the racetrack. We present SPARK, a single-camera pose-estimation algorithm for autonomous racing using keypoint detection. It achieves long-range detection with high accuracy, exceeding the performance of state-of-the-art monocular camera detection algorithms while maintaining lower latency. By employing well-optimized YOLO models and leveraging the fixed geometry in the autonomous racing domain, the algorithm also exhibits low latency and resource usage. We evaluate the performance of our approach on real-world autonomous racing data and compare it to state-of-the-art LiDAR and camera detection algorithms. The source code is available at: https://github.com/TUMFTM/SPARK-camera-det",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/17/2606.13127v2-fully-distributed-multi-view-3d-tracking-in-real-time",
+      "section": "quick",
+      "title_en": "Fully Distributed Multi-View 3D Tracking in Real-Time",
+      "authors": "Byron Hernandez, Fangyu Li, Aotian Wu, Paul J. Shin, Kaustubh Purandare, Henry Medeiros",
+      "date": "2026-06-11",
+      "pdf": "https://arxiv.org/pdf/2606.13127v2",
+      "score": "7.0",
+      "evidence": "分布式多视角纯相机3D跟踪",
+      "tldr": "多摄像头追踪通常依赖中心化融合，导致计算瓶颈难以大规模部署。本文提出MV3DT全分布式框架，通过节点间对等协作实现实时三维追踪，无需中心聚合。在WILDTRACK上达到96.5% IDF1，在100摄像头场景下保持30 FPS且通信开销仅2.2%。该框架零样本部署，无需场景特定学习，为大规模网络提供实用方案。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Multi-camera tracking with overlapping fields of view typically relies on centralized fusion, which creates computational bottlenecks that prevent deployment at scale. We present MV3DT, a fully distributed framework for real-time multi-view 3D tracking that achieves accurate identity propagation and occlusion recovery through peer-to-peer coordination, eliminating the need for central aggregation. Each camera node executes a lightweight modular pipeline comprising monocular 3D perception, distributed multi-view association, and collaborative fusion via lightweight messaging. MV3DT achieves 96.5% IDF1, 93.1% MOTA, and 94.6% MOTP on WILDTRACK, competitive with state-of-the-art centralized methods, and unprecedented 41.7% IDF1 and 50.9% MOTA on SCOUT while demonstrating superior scalability: sustaining 30 FPS on 100 cameras with <10ms inter-camera latency and only 2.2% communication overhead. MV3DT operates in a zero-shot regime given camera calibrations, requiring no scene-specific learning and making it directly deployable in new environments. These results establish MV3DT as a practical solution for real-time multi-view tracking in large-scale overlapping camera networks.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/17/2606.16960v1-surroundnexo-ego-centric-metric-bridging-for-spatially-consistent-geometry-in-autonomous-driving",
+      "section": "quick",
+      "title_en": "SurroundNEXO: Ego-Centric Metric Bridging for Spatially Consistent Geometry in Autonomous Driving",
+      "authors": "Shuai Yuan, Runxi Tang, Yuzhou Ji, Fudong Ge, Hanshi Wang, Yifei Wang, Xianming Zeng, Jianyun Xu, Xingliang Liu, Yanfeng Wang, Zhipeng Zhang",
+      "date": "2026-06-15",
+      "pdf": "https://arxiv.org/pdf/2606.16960v1",
+      "score": "7.0",
+      "evidence": "用于自动驾驶的多相机度量深度，支持无LiDAR的视觉3D感知",
+      "tldr": "自动驾驶多相机环视系统视角重叠度低，传统依赖视觉对应的深度估计方法失效。SurroundNEXO提出以自我为中心几何桥梁，通过Ego-Ray位置编码赋予图像全局视角方向，结合稀疏LiDAR度量锚点，逐步从局部到全局融合特征。在NuScenes、Waymo、DDAD上单视图误差降低33.2%，跨视图一致性提升10.5%，度量重建质量提升25.6%。该方法显著提升了低重叠相机的空间一致性深度预测，且对稀疏深度提示鲁棒，可零样本泛化到新相机布局。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Modern autonomous driving depends on accurate metric 3D understanding for perception, reconstruction, and planning, which in turn requires reliable multi-camera depth prediction. However, the outward-facing nature of vehicle-mounted surround-view camera rigs inherently limits visual overlap across views, challenging the correspondence-based assumptions that underpin conventional multi-view geometry. To bridge this gap, we present SurroundNEXO, named after the Spanish word nexo for a geometric link, a low-overlap multi-camera metric depth framework that grounds cross-view reasoning in ego-centric geometry rather than dense visual correspondences. Instead of directly enforcing early global fusion, SurroundNEXO first assigns image tokens globally comparable ego-frame viewing directions through Ego-Ray Positional Encoding, then uses sparse LiDAR measurements as metric anchors to propagate absolute scale cues, and finally expands feature interaction progressively from view-local modeling to decomposed spatio-temporal reasoning and global integration. This design enables metric-scale depth prediction with improved spatial consistency across weakly overlapping cameras. Across low-overlap autonomous driving benchmarks, including NuScenes, Waymo and DDAD, SurroundNEXO reduces single-view error by 33.2%, improves cross-view consistency by 10.5%, and enhances metric reconstruction quality by 25.6% compared with SOTA methods. It further remains robust under extremely sparse depth prompts and exhibits strong zero-shot generalization to unseen camera layouts.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/17/2606.13127v1-fully-distributed-multi-view-3d-tracking-in-real-time",
+      "section": "quick",
+      "title_en": "Fully Distributed Multi-View 3D Tracking in Real-Time",
+      "authors": "Byron Hernandez, Fangyu Li, Aotian Wu, Paul J. Shin, Kaustubh Purandare, Henry Medeiros",
+      "date": "2026-06-11",
+      "pdf": "https://arxiv.org/pdf/2606.13127v1",
+      "score": "6.0",
+      "evidence": "多视角相机3D跟踪，方法可迁移至纯视觉3D检测",
+      "tldr": "多相机跟踪通常依赖中心化融合，带来计算瓶颈难以大规模部署。本文提出MV3DT，一种全分布式实时多视图3D跟踪框架，通过相机节点间的点对点协调实现身份传播与遮挡恢复，无需中心聚合。各节点执行轻量模块：单目3D感知、分布式多视图关联及协同融合。在WILDTRACK数据集上达到94.3% IDF1和93.3% MOTA，与顶尖集中式方法相当；可扩展至100个相机以30FPS运行，延迟低于10ms、通信开销仅2.2%。MV3DT在给定相机标定后零样本部署，无需场景特定学习，为大规模重叠相机网络的实时跟踪提供了实用方案。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Multi-camera tracking with overlapping fields of view typically relies on centralized fusion, which creates computational bottlenecks that prevent deployment at scale. We present MV3DT, a fully distributed framework for real-time multi-view 3D tracking that achieves accurate identity propagation and occlusion recovery through peer-to-peer coordination, eliminating the need for central aggregation. Each camera node executes a lightweight modular pipeline comprising monocular 3D perception, distributed multi-view association, and collaborative fusion via lightweight messaging. MV3DT achieves 94.3% IDF1 and 93.3% MOTA on WILDTRACK, competitive with state-of-the-art centralized methods, while demonstrating superior scalability by sustaining 30 FPS on 100 cameras with less than 10 ms inter-camera latency and only 2.2% communication overhead. MV3DT operates in a zero-shot regime given camera calibrations, requiring no scene-specific learning and making it directly deployable in new environments. These results establish MV3DT as a practical solution for real-time multi-view tracking in large-scale overlapping camera networks.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

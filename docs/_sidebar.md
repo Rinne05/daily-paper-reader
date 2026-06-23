@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-06-23 <!--dpr-date:20260623-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/23/2606.22617v1-omnispace-efficient-geometry-awareness-for-autonomous-vehicles-mllms" data-sidebar-item="{&quot;title&quot;: &quot;OmniSpace: Efficient Geometry Awareness for Autonomous Vehicles MLLMs&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.22617v1-omnispace-efficient-geometry-awareness-for-autonomous-vehicles-mllms&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;面向自动驾驶的多视图纯视觉几何感知&quot;}">OmniSpace: Efficient Geometry Awareness for Autonomous Vehicles MLLMs</a>
   * 2026-06-17 <!--dpr-date:20260617-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/17/2606.17936v1-spark-low-latency-single-camera-3d-pose-estimation-for-autonomous-racing-using-keypoints" data-sidebar-item="{&quot;title&quot;: &quot;SPARK: Low Latency Single-Camera 3D Pose Estimation for Autonomous Racing using Keypoints&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.17936v1-spark-low-latency-single-camera-3d-pose-estimation-for-autonomous-racing-using-keypoints&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;用于赛车的单目相机3D检测&quot;}">SPARK: Low Latency Single-Camera 3D Pose Estimation for Autonomous Racing using Keypoints</a>

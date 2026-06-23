@@ -1,0 +1,24 @@
+{
+  "label": "2026-06-23",
+  "date": "2026-06-23",
+  "generated_at": "2026-06-23T21:22:13",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202606/23/2606.22617v1-omnispace-efficient-geometry-awareness-for-autonomous-vehicles-mllms",
+      "section": "deep",
+      "title_en": "OmniSpace: Efficient Geometry Awareness for Autonomous Vehicles MLLMs",
+      "authors": "Hao Vo, Phu Loc Nguyen, Khoa Vo, Sieu Tran, Duc Minh Nguyen, Ngo Xuan Cuong, Nghi D. Q. Bui, Anh Nguyen, Duy Minh Ho Nguyen, Ngan Le",
+      "date": "2026-06-21",
+      "pdf": "https://arxiv.org/pdf/2606.22617v1",
+      "score": "9.0",
+      "evidence": "面向自动驾驶的多视图纯视觉几何感知",
+      "tldr": "多模态大语言模型在2D视觉任务表现优异，但在自动驾驶等需要空间智能的场景仍存在挑战，现有几何感知方法依赖推理时的辅助3D模型，增加了系统复杂性和级联故障风险。本文提出OmniSpace，一种即插即用范式，通过相机姿态注入器、多视图极线注意力模块和3D几何蒸馏损失，将几何知识直接迁移到MLLM中，仅需2D图像输入。在nuScenes、Bench2Drive规划基准上取得领先，并在风险检测、语言理解和泛化测试中全面超越基线。OmniSpace无需修改推理流程或额外3D模型，为自动驾驶MLLM提供了高效、鲁棒的几何感知能力。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Multimodal Large Language Models (MLLMs) have achieved remarkable performance on 2D visual tasks, yet enhancing their spatial intelligence for real-world applications such as Autonomous Vehicles (AV) remains an open challenge. Existing geometry-aware MLLMs typically rely on auxiliary 3D models at inference time, introducing pipeline complexity and the risk of cascading failures. In this paper, we present OmniSpace, a simple yet effective plug-and-play paradigm for geometry-aware spatial reasoning from purely 2D observations. Motivated by our finding that current MLLMs are bottlenecked by weak cross-view correspondence and depth estimation, OmniSpace introduces a Camera Pose Injector, a Multi-view Epipolar Attention module, and a 3D Geometric Distillation objective that jointly address these two limitations by transferring geometric knowledge into the model. Extensive experiments show that OmniSpace surpasses existing methods on planning benchmarks (nuScenes, Bench2Drive), risk detection (nuInstruct), language (Omnidrive), and generalization (DriveBench).",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

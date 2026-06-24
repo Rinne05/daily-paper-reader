@@ -6,26 +6,34 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-23
-- 运行时间：2026-06-23 21:22:05 UTC
+- 最新运行日期：2026-06-24
+- 运行时间：2026-06-24 22:01:34 UTC
 - 运行状态：成功
-- 本次总论文数：1
-- 精读区：1
-- 速读区：0
+- 本次总论文数：3
+- 精读区：0
+- 速读区：3
 
 ### 今日简报（AI）
-今日精读一篇高分论文《OmniSpace》，聚焦自动驾驶多模态大模型的几何感知效率问题。  
-该论文提出了提升MLLM几何感知能力的方法，值得关注其高效空间建模思路。  
-建议进一步阅读其几何感知模块设计，对理解自动驾驶视觉理解前沿有直接帮助。
-- 详情：[/202606/23/README](/202606/23/README)
+今日速读3篇3D场景理解论文，聚焦自监督学习、开放词汇分割与全景重投影。
+
+最值得看《3D-DLP》与《Open-Vocabulary BEV Segmentation》，分别探索自监督场景表示和带几何约束的开放词汇BEV分割，均获7.0分。
+
+建议优先关注开放词汇结合3D几何约束的方法，以及自监督学习在降低标注成本方面的潜力。
+- 详情：[/202606/24/README](/202606/24/README)
 
 ### 精读区论文标签
-1. [OmniSpace: Efficient Geometry Awareness for Autonomous Vehicles MLLMs](/202606/23/2606.22617v1-omnispace-efficient-geometry-awareness-for-autonomous-vehicles-mllms)  
-   标签：评分：9.0/10、query:nuscenes-dod
-   evidence：面向自动驾驶的多视图纯视觉几何感知
+- 本次无精读推荐。
 
 ### 速读区论文标签
-- 本次无速读推荐。
+1. [3D-DLP: Self-Supervised 3D Object-Centric Scene Representation Learning](/202606/24/2606.19451v1-3d-dlp-self-supervised-3d-object-centric-scene-representation-learning)  
+   标签：评分：7.0/10、query:nuscenes-dod
+   evidence：使用潜粒子的自监督3D目标检测方法
+2. [Open-Vocabulary BEV Segmentation with 3D-Aware Geometric Constraints](/202606/24/2606.24353v1-open-vocabulary-bev-segmentation-with-3d-aware-geometric-constraints)  
+   标签：评分：7.0/10、query:nuscenes-dod
+   evidence：多相机鸟瞰感知用于自动驾驶，纯视觉3D推理
+3. [OneCanvas: 3D Scene Understanding via Panoramic Reprojection](/202606/24/2606.19253v1-onecanvas-3d-scene-understanding-via-panoramic-reprojection)  
+   标签：评分：6.0/10、query:nuscenes-dod
+   evidence：多视图特征聚合用于3D理解，与纯视觉检测方法相关
 
 
 <div class="dpr-home-promo-card">

@@ -1,0 +1,141 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-24T21:58:41.990687+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2606.19451v1",
+      "source": "arxiv",
+      "title": "3D-DLP: Self-Supervised 3D Object-Centric Scene Representation Learning",
+      "abstract": "We introduce 3D-DLP, a self-supervised object-centric representation learning model that decomposes scene-level RGB-D or voxel observations into a set of 3D latent particles. Building on the Deep Latent Particles (DLP) framework, each particle encodes disentangled attributes, including 3D keypoint position, bounding box dimensions, and appearance features, and represents a distinct entity in the scene. The model learns interpretable per-particle segmentation maps through an end-to-end self-supervised reconstruction objective. We demonstrate on both simulated and real-world datasets that the learned latent space is interpretable and controllable: by manipulating particle positions and decoding, we can generate novel scene configurations. Furthermore, we show that leveraging these compact 3D latent particles for downstream robotic manipulation improves performance over baselines that either lack explicit 3D information or rely on memory-intensive dense 3D inputs without object-centric structure. Code and videos are available at https://eubooks3003.github.io/3d-dlp.",
+      "authors": [
+        "Ellina Zhang",
+        "Madhaven Iyengar",
+        "Amir Zadeh",
+        "Chuan Li",
+        "Deepak Pathak",
+        "David Held",
+        "Tal Daniel"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-06-17T18:00:08+00:00",
+      "link": "https://arxiv.org/pdf/2606.19451v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Self-supervised 3D object detection method using latent particles",
+      "llm_evidence_cn": "使用潜粒子的自监督3D目标检测方法",
+      "llm_evidence": "使用潜粒子的自监督3D目标检测方法",
+      "canonical_evidence": "使用潜粒子的自监督3D目标检测方法",
+      "llm_tldr_en": "3D-DLP proposes a self-supervised object-centric representation learning model that decomposes RGB-D or voxel observations into 3D latent particles with keypoint positions and bounding box dimensions, enabling interpretable 3D detection and scene manipulation.",
+      "llm_tldr_cn": "针对传统3D目标检测依赖大量标注数据的问题，本文提出3D-DLP，一种自监督物体中心表示学习模型。该模型将RGB-D或体素观测分解为一系列3D潜粒子，每个粒子编码关键点位置、包围盒尺寸等解缠属性。通过端到端的自监督重构目标学习，模型可生成可解释的逐粒子分割图。实验表明，学习到的隐空间具有可解释性和可控性，可生成新颖场景配置，为无需标注的3D目标检测提供了新范式。",
+      "llm_tldr": "针对传统3D目标检测依赖大量标注数据的问题，本文提出3D-DLP，一种自监督物体中心表示学习模型。该模型将RGB-D或体素观测分解为一系列3D潜粒子，每个粒子编码关键点位置、包围盒尺寸等解缠属性。通过端到端的自监督重构目标学习，模型可生成可解释的逐粒子分割图。实验表明，学习到的隐空间具有可解释性和可控性，可生成新颖场景配置，为无需标注的3D目标检测提供了新范式。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.19253v1",
+      "source": "arxiv",
+      "title": "OneCanvas: 3D Scene Understanding via Panoramic Reprojection",
+      "abstract": "Existing approaches to 3D scene understanding in Vision-Language Models (VLMs) either rely on complex, model-specific geometry encoders or large training budgets in pursuit of spatial reasoning. Instead, OneCanvas aggregates patch features from all views onto a single equirectangular panoramic canvas. Namely, each patch is unprojected to a 3D world coordinate using its depth and camera pose, then placed on the canvas at the continuous longitude and latitude of that point as seen from the canvas origin, with no rasterization or aggregation across overlapping views. A 3D position embedding of the patch's metric coordinates is added to its feature, restoring the depth lost when collapsing the world position to an angular canvas coordinate. Patches from all frames thus share one spatial coordinate system with no fusion or major architectural modifications of the backbone. The pretrained VLM consumes this representation as if it were an ordinary image. Because the canvas can be centered on any pose of interest, the same representation directly supports situated reasoning from a specific viewpoint, a common requirement in robotics and embodied AI. Thanks to this representation, we can also introduce a spatial pretraining curriculum: by procedurally placing patch features of objects, drawn from real images, at chosen 3D world positions on an otherwise empty canvas, we generate on-the-fly supervision spanning a broad range of spatial reasoning tasks, with answer distributions controlled to reduce spatial reasoning shortcuts. OneCanvas achieves state-of-the-art accuracy on SQA3D and VSI-Bench, and generalizes to out-of-distribution data on SPBench, using an order of magnitude less training compute than the strongest competing methods.",
+      "authors": [
+        "Bartłomiej Baranowski",
+        "Dave Zhenyu Chen",
+        "Matthias Nießner"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "published": "2026-06-17T16:29:19+00:00",
+      "link": "https://arxiv.org/pdf/2606.19253v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multi-view feature aggregation for 3D understanding similar to camera-only detection",
+      "llm_evidence_cn": "多视图特征聚合用于3D理解，与纯视觉检测方法相关",
+      "llm_evidence": "多视图特征聚合用于3D理解，与纯视觉检测方法相关",
+      "canonical_evidence": "多视图特征聚合用于3D理解，与纯视觉检测方法相关",
+      "llm_tldr_en": "OneCanvas aggregates patch features from multiple views onto a panoramic canvas using depth and camera pose, enabling 3D scene understanding without complex geometry encoders. The method is applicable to multi-view perception tasks.",
+      "llm_tldr_cn": "该论文提出OneCanvas方法，将多视角图像的patch特征通过深度和相机姿态投影到全景画布上，实现3D场景理解。该方法避免了复杂的几何编码器，计算高效，可推广到多视角感知任务中，对纯视觉3D检测具有启发性。实验表明在多个基准上取得优秀结果。",
+      "llm_tldr": "该论文提出OneCanvas方法，将多视角图像的patch特征通过深度和相机姿态投影到全景画布上，实现3D场景理解。该方法避免了复杂的几何编码器，计算高效，可推广到多视角感知任务中，对纯视觉3D检测具有启发性。实验表明在多个基准上取得优秀结果。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "nuScenes multi-view camera-only 3D detection",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.24353v1",
+      "source": "arxiv",
+      "title": "Open-Vocabulary BEV Segmentation with 3D-Aware Geometric Constraints",
+      "abstract": "Bird's-eye view (BEV) perception fuses multi-camera images into a unified top-down representation for autonomous driving. Despite recent progress, state-of-the-art methods remain confined to closed-set scenarios, making them vulnerable to unpredictable real-world environments. In this work, we introduce open-vocabulary BEV segmentation (OVBS), which leverages vision-language models (VLMs) to recognize categories beyond the training set while maintaining precise BEV perception and real-time efficiency. A key challenge in OVBS lies in the 3D geometric inconsistency inherent in the ill-posed lifting of 2D VLM semantics into BEV. To address this, we propose OVBEVSeg, a geometry-aware OVBS framework that enhances efficient Gaussian splatting (GS)-based unprojection by leveraging robust 3D geometric constraints across three progressive stages: (1) 2D-to-BEV pseudo-labeling via reliable 3D projection for OV generalization; (2) joint 2D-BEV per-scene optimization with BEV structural constraints for 3D geometric consistency; and (3) 3D geometric distillation for online efficiency. On the nuScenes dataset, OVBEVSeg achieves state-of-the-art performance, outperforming closed-set methods by 15.3 mIoU on unseen categories. Remarkably, even with no novel-class ground-truth labels, it remains competitive with self- and semi-supervised baselines trained with up to 40% of ground-truth annotations. Furthermore, it achieves 2.5x faster inference with only 0.22x the memory consumption of projection-based methods. Project page: https://hchoi256.github.io/projects/ovbevseg/.",
+      "authors": [
+        "Hojun Choi",
+        "Seulbin Hwang",
+        "Dae Jung Kim",
+        "Kisung Kim",
+        "Hyunjung Shim",
+        "Jinhan Lee"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-06-23T09:43:12+00:00",
+      "link": "https://arxiv.org/pdf/2606.24353v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multi-camera bird's-eye view perception for autonomous driving, camera-only 3D reasoning",
+      "llm_evidence_cn": "多相机鸟瞰感知用于自动驾驶，纯视觉3D推理",
+      "llm_evidence": "多相机鸟瞰感知用于自动驾驶，纯视觉3D推理",
+      "canonical_evidence": "多相机鸟瞰感知用于自动驾驶，纯视觉3D推理",
+      "llm_tldr_en": "Proposes OVBEVSeg for open-vocabulary BEV segmentation using multi-camera images, leveraging geometric constraints to lift 2D semantics to 3D. Enables category recognition beyond training set while maintaining real-time efficiency. Demonstrates strong performance on nuScenes (implied by domain).",
+      "llm_tldr_cn": "针对自动驾驶中BEV分割局限于封闭类别的问题，本文提出OVBEVSeg，一种几何感知的开放词汇BEV分割框架。该方法利用高效的高斯溅射将多相机2D视觉语言模型语义提升到BEV空间，并通过3D几何约束保证一致性。实验表明，该框架能在保持实时效率的同时识别训练集外类别，显著提升BEV感知的开放世界适应性，为纯视觉3D感知提供了新思路。",
+      "llm_tldr": "针对自动驾驶中BEV分割局限于封闭类别的问题，本文提出OVBEVSeg，一种几何感知的开放词汇BEV分割框架。该方法利用高效的高斯溅射将多相机2D视觉语言模型语义提升到BEV空间，并通过3D几何约束保证一致性。实验表明，该框架能在保持实时效率的同时识别训练集外类别，显著提升BEV感知的开放世界适应性，为纯视觉3D感知提供了新思路。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "pure visual 3D detection without LiDAR",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

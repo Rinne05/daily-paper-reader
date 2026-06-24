@@ -1,0 +1,54 @@
+{
+  "label": "2026-06-24",
+  "date": "2026-06-24",
+  "generated_at": "2026-06-24T22:01:41",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202606/24/2606.19451v1-3d-dlp-self-supervised-3d-object-centric-scene-representation-learning",
+      "section": "quick",
+      "title_en": "3D-DLP: Self-Supervised 3D Object-Centric Scene Representation Learning",
+      "authors": "Ellina Zhang, Madhaven Iyengar, Amir Zadeh, Chuan Li, Deepak Pathak, David Held, Tal Daniel",
+      "date": "2026-06-17",
+      "pdf": "https://arxiv.org/pdf/2606.19451v1",
+      "score": "7.0",
+      "evidence": "使用潜粒子的自监督3D目标检测方法",
+      "tldr": "现有自监督场景表示学习缺乏3D物体中心结构，难以解耦实体。本文提出3D-DLP，将RGB-D或体素观测分解为3D潜在粒子，每个粒子编码位置、尺寸和外观等解耦属性。通过自监督重建目标学习可解释的逐粒子分割图，操纵粒子位置即可生成新场景配置。在模拟和真实数据集上验证了表示的可控性，用于机器人操作任务时性能优于缺少显式3D信息或依赖密集输入的基线方法。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "We introduce 3D-DLP, a self-supervised object-centric representation learning model that decomposes scene-level RGB-D or voxel observations into a set of 3D latent particles. Building on the Deep Latent Particles (DLP) framework, each particle encodes disentangled attributes, including 3D keypoint position, bounding box dimensions, and appearance features, and represents a distinct entity in the scene. The model learns interpretable per-particle segmentation maps through an end-to-end self-supervised reconstruction objective. We demonstrate on both simulated and real-world datasets that the learned latent space is interpretable and controllable: by manipulating particle positions and decoding, we can generate novel scene configurations. Furthermore, we show that leveraging these compact 3D latent particles for downstream robotic manipulation improves performance over baselines that either lack explicit 3D information or rely on memory-intensive dense 3D inputs without object-centric structure. Code and videos are available at https://eubooks3003.github.io/3d-dlp.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/24/2606.24353v1-open-vocabulary-bev-segmentation-with-3d-aware-geometric-constraints",
+      "section": "quick",
+      "title_en": "Open-Vocabulary BEV Segmentation with 3D-Aware Geometric Constraints",
+      "authors": "Hojun Choi, Seulbin Hwang, Dae Jung Kim, Kisung Kim, Hyunjung Shim, Jinhan Lee",
+      "date": "2026-06-23",
+      "pdf": "https://arxiv.org/pdf/2606.24353v1",
+      "score": "7.0",
+      "evidence": "多相机鸟瞰感知用于自动驾驶，纯视觉3D推理",
+      "tldr": "鸟瞰图感知在自动驾驶中至关重要，但现有闭集方法难以应对开放环境。本文提出开放词汇BEV分割任务，并设计OVBEVSeg框架，通过高斯溅射反投影结合三维几何约束，在三个渐进阶段实现开放类别识别与几何一致性。在nuScenes上，未见类别mIoU超越闭集方法15.3，推理速度提升2.5倍，内存仅0.22倍，即使无新类标注也能与半监督方法媲美。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Bird's-eye view (BEV) perception fuses multi-camera images into a unified top-down representation for autonomous driving. Despite recent progress, state-of-the-art methods remain confined to closed-set scenarios, making them vulnerable to unpredictable real-world environments. In this work, we introduce open-vocabulary BEV segmentation (OVBS), which leverages vision-language models (VLMs) to recognize categories beyond the training set while maintaining precise BEV perception and real-time efficiency. A key challenge in OVBS lies in the 3D geometric inconsistency inherent in the ill-posed lifting of 2D VLM semantics into BEV. To address this, we propose OVBEVSeg, a geometry-aware OVBS framework that enhances efficient Gaussian splatting (GS)-based unprojection by leveraging robust 3D geometric constraints across three progressive stages: (1) 2D-to-BEV pseudo-labeling via reliable 3D projection for OV generalization; (2) joint 2D-BEV per-scene optimization with BEV structural constraints for 3D geometric consistency; and (3) 3D geometric distillation for online efficiency. On the nuScenes dataset, OVBEVSeg achieves state-of-the-art performance, outperforming closed-set methods by 15.3 mIoU on unseen categories. Remarkably, even with no novel-class ground-truth labels, it remains competitive with self- and semi-supervised baselines trained with up to 40% of ground-truth annotations. Furthermore, it achieves 2.5x faster inference with only 0.22x the memory consumption of projection-based methods. Project page: https://hchoi256.github.io/projects/ovbevseg/.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/24/2606.19253v1-onecanvas-3d-scene-understanding-via-panoramic-reprojection",
+      "section": "quick",
+      "title_en": "OneCanvas: 3D Scene Understanding via Panoramic Reprojection",
+      "authors": "Bartłomiej Baranowski, Dave Zhenyu Chen, Matthias Nießner",
+      "date": "2026-06-17",
+      "pdf": "https://arxiv.org/pdf/2606.19253v1",
+      "score": "6.0",
+      "evidence": "多视图特征聚合用于3D理解，与纯视觉检测方法相关",
+      "tldr": "现有3D场景理解依赖复杂几何编码器或大量训练。OneCanvas将多视图patch特征投影到单一全景画布上，添加3D位置嵌入，无需融合或修改主干。在SQA3D、VSI-Bench上达到SOTA，并泛化到SPBench，训练计算量少一个数量级。该方法简化空间推理，并提出空间预训练课程以减少捷径。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Existing approaches to 3D scene understanding in Vision-Language Models (VLMs) either rely on complex, model-specific geometry encoders or large training budgets in pursuit of spatial reasoning. Instead, OneCanvas aggregates patch features from all views onto a single equirectangular panoramic canvas. Namely, each patch is unprojected to a 3D world coordinate using its depth and camera pose, then placed on the canvas at the continuous longitude and latitude of that point as seen from the canvas origin, with no rasterization or aggregation across overlapping views. A 3D position embedding of the patch's metric coordinates is added to its feature, restoring the depth lost when collapsing the world position to an angular canvas coordinate. Patches from all frames thus share one spatial coordinate system with no fusion or major architectural modifications of the backbone. The pretrained VLM consumes this representation as if it were an ordinary image. Because the canvas can be centered on any pose of interest, the same representation directly supports situated reasoning from a specific viewpoint, a common requirement in robotics and embodied AI. Thanks to this representation, we can also introduce a spatial pretraining curriculum: by procedurally placing patch features of objects, drawn from real images, at chosen 3D world positions on an otherwise empty canvas, we generate on-the-fly supervision spanning a broad range of spatial reasoning tasks, with answer distributions controlled to reduce spatial reasoning shortcuts. OneCanvas achieves state-of-the-art accuracy on SQA3D and VSI-Bench, and generalizes to out-of-distribution data on SPBench, using an order of magnitude less training compute than the strongest competing methods.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,508 @@
+Title: DDStereo: Efficient Dual Decoder Transformers for Stereo 3D Road Anomaly Detection
+
+URL Source: https://arxiv.org/pdf/2606.24805v1
+
+Published Time: Wed, 24 Jun 2026 01:23:51 GMT
+
+Number of Pages: 14
+
+Markdown Content:
+# DDStereo: Efficient Dual Decoder Transformers for Stereo 3D Road Anomaly Detection 
+
+## Shiyi Mu, Zichong Gu, Zhiqi Ai, Yilin Gao Shanghai University 
+
+shiyimu@shu.edu.cn 
+
+## Shugong Xu *
+
+## Xi’an Jiaotong-Liverpool University 
+
+shugong.xu@xjtlu.edu.cn 
+
+## Abstract 
+
+Stereo-based 3D object detection still faces two criti-cal safety challenges: real-time performance and open-set generalization. Existing stereo 3D methods typically achieve twice the accuracy of monocular methods but suffer from significantly lower inference speeds, making them unsuitable for real-time applications. Meanwhile, recent advances in open-world detection have introduced open-set and open-vocabulary algorithms in monocular 2D and 3D settings, yet stereo-based open-set detection re-mains largely unexplored. To bridge this gap, we propose DDStereo, a novel Dual-Decoder Stereo Transformer for real-time open-set 3D object detection. DDStereo features two lightweight decoder branches: one for open-set fore-ground 2D detection and the other for 3D attribute regres-sion. These decoders share object-level queries to achieve unified target-level alignment. To enhance inference effi-ciency, we designed a compact disparity feature extractor and a streamlined decoder architecture. Experiments on public stereo 3D benchmarks demonstrate that DDStereo achieves state-of-the-art accuracy under both closed-set and open-set protocols. Notably, our method surpasses ex-isting stereo 3D detectors in inference speed and, for the first time, achieves real-time performance comparable to monocular approaches. 
+
+## 1. Introduction 
+
+3D object detection has become a cornerstone technology in autonomous driving and robotic perception. While LiDAR-based methods have dominated in accuracy, stereo vision offers a cost-effective alternative, providing dense depth without requiring expensive sensors. Recent stereo 3D de-tection models have reduced latency to around 40 ms, but they still take roughly twice as long as monocular meth-ods. In parallel, monocular 3D detection has progressed to-ward open-vocabulary recognition as OVMono3D[36] and      
+
+> *Shugong Xu is the corresponding author. 10 20 30 40 50
+> Inference Speed (FPS)
+> 0
+> 10
+> 20
+> 30
+> 40
+> AP3D_mod (%)
+> DDStereo(Ours)
+> RTS3D
+> StereoCenterNet
+> RT3D-GMP
+> TS3D
+> DSC3D
+> FGAS-RCNN
+> MonoFlex MonoDETR GUPNet++
+> MonoDGP
+> MonoJSG
+> Accuracy vs. Inference Speed
+> Stereo
+> Monocular
+> Ours
+
+Figure 1. Comparison of inference speed and accuracy with exist-ing monocular and stereo 3D detection methods, reporting the Car class results on the KITTI benchmark (moderate difficulty from online server test). 
+
+3D object detection for anything as DetAny3D[40]. How-ever, most of existing stereo-based 3D approaches operate under a closed-set assumption, limiting their ability to de-tect or reason about objects from unseen categories. In real world environments, this assumption is often violated. Autonomous agents must not only localize known objects but also respond appropriately to Out-of-Distribution(OoD) obstacles, such as novel vehicles, debris, or construction equipment that were not annotated during training. Open-set 3D object detection aims to bridge this gap by equipping detectors with the ability to discover and localize novel instances beyond the predefined label set. S3AD [25] proposes a binary OoD detection method for any foreground obstacles based on stereo vision and introduces an augmented reality-based dataset to enhance generaliza-tion. However, the model’s inference speed exceeds 80 ms, making it unsuitable for real-time performance. Existing open-vocabulary 2D or 3D detection algorithms require input text prompts, or input cues such as points or                        
+
+> arXiv:2606.24805v1 [cs.CV] 23 Jun 2026 2D Encoder
+> (d) DDStereo(Ours)
+> Backbone Backbone
+> (c) SA3D
+> Backbone Backbone
+> Normal 3D Head
+> Concat Correlation Correlation
+> Grounding DINO
+> Text Prompt
+> ：
+> {Car/Dog/...}
+> CLIP Image Encoder
+> RoI Pooling
+> Anchor Alignment & NMS
+> FG 2D Head 2D FG Encoder
+> 2D FG Decoder 3D Box of { Car/Ped/Cyc }+ {OoD }
+> K = N + 1
+> (a) OV-Mono3D
+> Class-Agnostic 2D lifting 🔥
+> SAM Encoder
+> 2D Aggregator
+> 3D Interpreter
+> 🔥
+> DINO Encoder
+> (b) DetAny3D
+> 🔥 3D Decoder 3D Box of { Car/Ped/Cyc }+ {OoD }
+> K = N +1
+> 3D Box of { Car/Dog/... }K= +
+
+∞  
+
+> 3D Box of { Car/Dog/... }K= +
+
+∞   
+
+> Text Prompt
+> ：
+> {Car/Dog/...}
+> query
+> 🔥
+> Left Right Left Right
+
+Figure 2. Compare with other Open-set 3D object detection methods. 
+
+boxes. What is more crucial in autonomous driving sce-narios is open-ended detection [20], where only images are provided to detect potential obstacles and provide detailed categories. Introducing fine-grained multi-class classifica-tion for unknown categories would require the involvement of language models, which incurs significant computational overhead and latency. However, rather than predicting fine-grained obstacle category words or language descriptions, the immediate need is for detecting the presence or absence of obstacles (binary classification: whether they are within a safe distance and detecting as early as possible). Therefore, we simplify the open-world 3D perception problem in driv-ing scenarios into three tasks: regular multi-class detection, new-class binary detection, and real-time detection. For unknown categories, the risk of missed detection is even more pronounced. A small portion of unknown objects may be mistakenly classified as known categories, while the majority are likely to be missed entirely due to the lack of supervision and category priors. Existing open-vocabulary detection methods typically require additional inputs, such as textual prompts[36], point clicks[40], or box hints. How-ever, in autonomous driving scenarios, what is truly needed is an binary OoD detection paradigm that relies solely on visual input to detect all potential obstacles. As shown in Fig. 2, OV-Mono3D[36] and DetAny3D[40] are capable of open-vocabulary 3D object detection based on input text prompts, allowing for recognition of an unlimited number of categories. S3AD[25] extends conventional N -class de-tection by treating OoD objects as an additional (N +1) -th class. Following this N +1 formulation, we propose a more efficient detection framework that achieves the same functionality. The slow inference speed of S3AD is primar-ily attributed to the non-maximum suppression (NMS) over dense anchors and the large channel dimensions introduced by feature concatenation. To address this inefficiency, we adopt an end-to-end Transformer-based architecture com-bined with a task-decoupled dual-branch design. Specifically, we propose DDStereo , a Dual-Decoder 
+
+Stereo transformer network for open-set 3D object detec-tion. The core idea is to decouple foreground localization from multi-category classification: a standard decoder pre-dicts 3D attributes and categories for in-distribution (ID) objects, while a foreground decoder detects all potential object instances using disparity-aware features. Disparity-aware features are largely independent of texture pat-terns. This enables category-agnostic foreground local-ization driven by geometric cues alone. The decoupled dual-decoder design introduces a new challenge: aligning the foreground object boxes with the class-specific detec-tion boxes. To address this, we adopt a shared query de-sign, which ensures spatial consistency between the two branches. During post-processing, anomaly detection is performed based on the consistency between the foreground confidence and the classification confidence. Meanwhile, to avoid the heavy channel concatenation between disparity and 2D features, we decouple depth estimation from 3D at-tribute regression. Specifically, we employ a lightweight convolutional head to predict an object-wise depth map, which is post-fused via center-based sampling. Our contributions are summarized as follows: • We present DDStereo , the first end-to-end Transformer-based stereo 3D detector capable of real-time open-set in-ference (23.5 ms), surpassing all prior stereo methods and matching monocular. • We propose a dual-decoder that decouples foreground lo-calization by disparity and 3D regression by left features, enabling OoD detection without text prompts. • We introduce shared object queries to align the two de-coders for reliable anomaly score estimation, eliminating NMS or anchor matching. • DDStereo achieves state-of-the-art results on both hard level closed-set and open-set stereo 3D benchmark, set-ting new records for stereo 3D detection. 2. Related Work 
+
+2.1. Stereo 3D Object Detection 
+
+Stereo-based 3D object detection methods can be broadly categorized by how they compute disparity or depth cues, typically falling into three paradigms: image-level dispar-ity, region-level disparity, and feature-level disparity. Early approaches rely on image-level disparity estimation, such as RT3DStereo [16] and RT3D-GMP [15]. However, such pipelines often suffer from depth noise and are computa-tionally intensive. Region-level disparity methods extract object-aligned regions using 2D detectors and compute dis-parity only within those areas as TLNet [29], Stereo R-CNN [17], and SIDE [26]. Recent works favor feature-level disparity learning, which leverages stereo feature matching to directly regress 3D attributes from cost volumes or con-catenated features[4, 22, 31]. Although these methods have shown strong accuracy. They typically rely on heavy anchor based heads or 3D cost volumes, leading to limited runtime performance. 
+
+2.2. Open-Set and Unknown 3D Object Detection 
+
+Open-set object detection (OSOD) and open-vocabulary ob-ject detection (OVOD) have been explored as two comple-mentary paradigms to detect unknown objects. In 2D field, OVOD methods learn visual text alignments to localize ar-bitrary categories specified by text queries [5, 6, 8, 21, 34, 38, 39, 44], while OSOD approaches aim to discover any objects absent from the training set, typically labeling them as “unknown” [7, 9, 10, 14, 37]. In 3D field, existing work has focused almost exclusively on OVOD, leveraging 2D open-vocabulary detectors to lift category-agnostic propos-als into class-agnostic 3D detectors [2, 3, 23, 33, 35, 41, 45]. Open-set 3D detection, however, has received limited atten-tion. Cen et al. [3] first formalize the task and propose a two-stage pipeline that scores point-wise entropy to re-ject unseen classes. Alliegro et al. [1] introduce 3DOS, a benchmark and baseline that exposes the sensitivity of point-cloud detectors to semantic novelty. Lu et al. [23] adopt 2D open-vocabulary knowledge to generate pseudo-labels for unknown objects yet stop short of explicit open-set modeling. S3AD [25] is the first method to introduce open-set 3D object detection based on stereo vision, along with the release of the KITTI-AR-OoD benchmark, aim-ing to detect arbitrary potential obstacles and enhance au-tonomous driving safety. However, as S3AD is built upon the YOLOStereo3D [22] framework, its inference time ex-ceeds 80 ms, making it difficult to meet real-time require-ments. 
+
+## 3. Proposed Method 
+
+3.1. Overview 
+
+We propose DDStereo, a Dual-Decoder stereo 3D detec-tion framework tailored for open-world scenarios. As shown in Figure 3, our model consists of three collabora-tive branches: a main 3D detection branch, a foreground detection branch, and an object-level depth map predic-tion branch. These branches are tightly integrated through query-level and point-level alignment strategies. Let IL and IR denote the left and right stereo images, respectively. We extract 2D visual features from the left im-age only using a Resnet backbone, denoted as fV . Mean-while, to encode stereo feature, we compute a correlation volume from the features of IL and IR via cross-view cost aggregation. The resulting disparity-based feature map, de-noted as fD , encodes stereo-aware depth information. The 3D detection main branch operates on fV and utilizes a transformer-based encoder-decoder architecture to predict 3D object properties, including size, orienta-tion, class scores (for known categories), and 2D bounding boxes. Concurrently, the foreground detection branch uti-lizes fD to predict coarse 2D boxes and foreground prob-abilities via binary classification. To align the 2D texture representations and stereo-derived depth cues, both detec-tion branches are conditioned on a shared object queries, facilitating joint reasoning across appearance and depth. To enhance depth map estimation, we upsample the stereo disparity feature fD to produce an object-level depth map, denoted as Mobj . Given the centers of predicted boxes from the main 3D detection branch, we use a grid sampling operation to extract object-centric depth values, which are further used to complement 3D box localization. Finally, we introduce a MNPF module, where MNPF refers to the comparison between the Maximum Normal 
+
+Probability and the Foreground confidence, to estimate the open-set confidence of each detection. This enables our model to identify OoD objects beyond the training cate-gories. 
+
+3.2. Visual feature and Disparity feature 
+
+The left and right stereo images are first processed through a shared backbone to extract multi-scale features at 14 , 18 , 116 
+
+, and 132 resolutions. The multi-scale features from the left view are used as inputs to the visual decoding branch. To construct disparity-aware representations, we com-pute simple correlation volumes between the left and right features at each scale. As illustrated in Fig. 4, we generate these disparity features by shifting the right-view features along the horizontal axis up to a maximum displacement of 
+
+d pixels and calculating per-pixel correlations with the left-view features. The maximum disparity steps for the four scales are set to 24, 24, 16, and 16. Correlation         
+
+> Volume
+> Left
+> MNPF
+> Right
+> Shared queries
+> OoD
+> ？
+> Grid Sample
+> Depth Map
+> Self Attn
+> Cross Att
+> FFN
+> Upsample
+> Upsample
+> 2D features
+> （Left Only ）
+> Fg Decoder 3D Decoder
+> Centers
+> FFN
+> 3D Encoder
+> FFN
+> Fg Encoder
+> Linear
+> Linear
+> Linear
+> Linear
+> 3D Size
+> 2D Box & Center Orientation Cls (Normal)
+> Linear
+> Linear 2D Box* Cls (Foreground)
+> Obj Depth
+> 3D Heads Fg Heads
+> Disparity features
+> q
+> Self Attn
+> Cross Att
+> FFN
+> Self Attn  Self Attn
+> Conv
+> Foreground Det Branch 3D Det Main Branch Depth Map Prediction
+> Conv
+
+Figure 3. Overview of the proposed DDStereo architecture. Correlation 
+
+d
+
+d
+
+d
+
+Left 
+
+Right 
+
+Left 
+
+Right 
+
+Left 
+
+Right 
+
+d Correlation  Volume 
+
+fD
+
+Figure 4. Computation process of the stereo correlation volume from left-right feature. 
+
+3.3. Binary Foreground Detection Branch 
+
+It is difficult to determine the specific category of an object from a depth or disparity map. However, it is often suffi-cient to identify whether an obstacle is present. To this end, we design a foreground detection branch as a binary DETR-style decoder based on disparity features. Specifically, the multi-scale disparity features fD are first flattened and fed into an encoder, which consists of a single-layer multi-scale deformable attention module followed by a feed-forward network (FFN). The output embeddings are denoted as f e
+
+> D
+
+.In the decoder, we define a learnable object query q ∈
+
+RN ×C , where N is the maximum number of objects. This same query is also shared with the 3D detection decoder. The decoder is composed of an inter-query self-attention layer, a visual cross-attention layer, and a feed-forward net-work. Finally, two linear layers are used to predict the fore-ground classification and the 2D bounding boxes. SelfAttn (q) = softmax 
+
+ qq ⊤
+
+√C
+
+
+
+q, (1) CrossAttn (q, f e
+
+> D
+
+) = softmax 
+
+ q(f e
+
+> D
+
+)⊤
+
+√C
+
+
+
+f e
+
+> D
+
+. (2) 
+
+3.4. 3D Detection Branch 
+
+Unlike MonoDETR[42] and MonoDGP[28], we do not adopt the depth-guided cross-attention mechanism in the 3D detection branch. Instead, we follow a structure simi-lar to the original 2D detector to predict all attributes except depth, as the dual-decoder design already encodes geome-try via shared queries, making explicit depth attention re-dundant and preserving computational efficiency. Specifically, the left-view visual features fV are fed into an encoder composed of a single-layer self-attention mod-ule followed by a FFN, producing embeddings denoted as 
+
+f eV . In the decoder, we reuse the object query q from the foreground decoder. The decoder consists of an inter-query self-attention layer, a visual cross-attention layer, and a FFN, followed by several linear layers that respectively pre-dict the 3D object size, orientation, normal category (with 
+
+K classes), and the 2D bounding box. Notably, the 2D bounding box is parameterized using the projected 3D ob-ject center on the image plane as the reference point. The box is represented by offsets from the center to the top, bot-tom, left, and right boundaries, resulting in six parameters in total. This projected center will be used in the subsequent object depth sampling process. CrossAttn (q, f e
+
+> V
+
+) = softmax 
+
+ q(f e
+
+> V
+
+)⊤
+
+√C
+
+
+
+f e
+
+> V
+
+. (3) 
+
+3.5. Open-Set Confidence Estimation 
+
+While previous road anomaly segmentation methods pri-marily focus on global pixel-level OoD scoring, we pro-pose an object-level anomaly score estimation. Specifi-cally, the anomaly score MNPF is computed as the dis-tance between the Maximum Normal Probability and the 
+
+Foreground probability Sf :
+
+SOoD = Sf − max  
+
+> i∈K
+
+(σ(Si)) , (4) where K is the set of normal known classes. We set σ as the sigmoid function. If replaced with a softmax operation, the latter term becomes equivalent to MSP [11]. If σ is removed (no normalization is applied), it is equivalent to MaxLogit [12]. 
+
+3.6. Depth map decoder and Sampling Conv1 Block      
+
+> Conv1 Block
+> Conv1 Block
+> Conv1 Block
+> Concat
+> Conv1 Block
+> Concat Conv 1 x1
+> DW Conv 3 x3
+> BN, ReLU
+> BN, ReLU
+> Conv 1 x1
+> BN
+> dCorrelation Volume
+> Conv3 Block
+> Upsample x2
+> Conv3 Block
+> Upsample x2
+> Conv3 Block
+> Conv 3 x3
+> BN
+> ReLU
+> Conv3 Block
+> Depth Map
+> fD, 1/4
+> fD, 1/8
+> fD, 1/16 1/4 1/8 1/16
+
+Figure 5. Multi-scale disparity fusion and depth map prediction. 
+
+In MonoDETR[42] and MonoDGP[28], an explicit and coarse-grained 116 depth map is predicted, where the ground-truth is constructed from the 3D center distance and the corresponding 2D bounding box of each object. The predicted depth is further encoded and fused via a depth encoder and cross-attention to guide the 3D decoding pro-cess. To simplify this pipeline, we propose a more effi-cient strategy that predicts a higher-resolution depth map and directly samples depth values at the predicted object centers from the detection branch. As shown in Fig. 5, the depth prediction module adopts a simple U-shaped archi-tecture. Multi-scale correlation volumes are concatenated after down-sampling and then upsampled through convolu-tional layers to reconstruct a depth map at 14 resolution. The projected 2D center of each 3D object is used to sample the predicted depth as the object’s depth estimate. The ground-truth depth map and supervision loss follow the same setting as in MonoDETR[42] and MonoDGP[28]. 
+
+3.7. Loss Function 
+
+The training loss consists of three main components: the 2D foreground loss, the 3D detection loss for in-distribution categories, and the disparity supervision loss. Both the 2D and 3D branches employ separate Hungarian matching pro-cesses for target assignment. The 2D loss includes a binary classification loss and a bounding box regression loss. The 3D prediction head regresses multiple attributes, including object category, orientation, 3D size, 3D center, and 2D bounding box. 
+
+Ltotal = λ2D · L 2D + λ3D · L 3D + λD · L map (5) Hungarian matching is independently applied for both L2D
+
+and L3D to associate predicted queries with ground-truth objects. 
+
+## 4. Experimental 
+
+4.1. Implementation Details 
+
+We evaluate the algorithm’s closed-set performance on the KITTI Stereo Benchmark and its open-set performance on KITTI-AR-OoD[25]. We conduct closed-set and open-set evaluations to comprehensively assess the performance of our model. For the closed-set evaluation, we divide it into two stages: offline validation and online bench-marking. During offline validation, we follow the same train/val split protocols as adopted in YOLOStereo3D[22] and MonoDETR[42]. For online benchmarking, we strictly train our model using only the original Train subset of the KITTI dataset without any extra data, and directly report the results from the official benchmark server. For the open-set evaluation, we follow the setup defined in S3AD[25]. Specifically, we train our model on the same training sub-set, and evaluate it on a test set containing unseen out-of-distribution categories. All unknown instances are uni-formly labeled as a single class “ OoD ” during evaluation, without further distinguishing between specific word-level categories. All experiments are conducted on a single NVIDIA RTX 4090D GPU with 24 GB of memory. We use the Adam op-timizer with an initial learning rate of 0.0002, and apply a learning rate decay factor of 0.1 at the 125 and 165 epochs. The batch size is set to 16. Table 1. 3D Object Detection of Car Category on KITTI. (IoU >0.7) 
+
+AP 3D (T est ) AP BEV (T est ) AP 3D (V al ) Runtime Method Input Easy Mod Hard Easy Mod Hard Easy Mod Hard (ms) MonoFlex [43] Mono 19.94 13.89 12.07 28.23 19.75 16.89 23.64 17.51 14.83 30 MonoJSG[19] Mono 24.69 16.14 13.64 32.59 21.26 18.18 - - - 42 GUPNet++[24] Mono 24.99 16.48 14.58 - - - 29.03 20.45 17.89 34 MonoDGP[28] Mono 26.35 18.72 15.97 35.24 25.23 22.02 30.76 22.34 19.02 22 MonoDETR[42] Mono 25.00 16.47 13.58 33.60 22.11 18.60 28.84 20.61 16.38 20 OC-Stereo[27] Stereo 55.15 37.60 30.25 68.89 51.47 42.97 64.07 48.34 40.39 350 SIDE[26] Stereo 47.69 30.82 25.68 - - - 61.22 44.46 37.15 260 StereoRCNN[17] Stereo 47.58 30.23 23.72 61.92 41.31 33.42 54.11 36.69 31.07 200 DSC3D[4] Stereo 66.46 42.54 34.04 74.56 51.21 42.07 73.78 48.90 39.85 110 TLNet[29] Stereo 7.46 4.37 3.74 13.71 7.69 6.73 18.15 14.26 13.72 100 FGAS RCNN[32] Stereo 58.02 38.68 32.53 72.56 58.31 46.24 57.92 40.84 34.07 100 TS3D[31] Stereo 64.61 41.29 30.68 73.34 48.59 36.98 64.76 46.70 39.27 88 YoloStereo3D[22] Stereo 65.68 41.25 30.42 76.10 50.28 36.86 - - - 80 RT3DStereo[16] Stereo 29.90 23.28 18.96 58.81 46.82 38.38 - - - 79 RT3D-GMP[15] Stereo 45.79 38.76 30.00 69.14 59.00 45.49 - - - 60 Stereo CenterNet[30] Stereo 49.94 31.30 25.62 62.97 42.12 35.37 55.25 41.44 35.13 43 RTS3D[18] Stereo 58.51 37.38 31.12 72.17 51.79 43.19 64.76 46.70 39.27 39 DDStereo(Ours) Stereo 62.44 43.97 36.16 73.63 53.60 45.02 66.89 48.22 41.06 23.5 
+
+4.2. Main Results on KITTI Benchmark 
+
+We report the 3D object detection performance on the KITTI benchmark in Table 1, including both the offi-cial test server results (for Car) and offline validation set 
+
+evaluations. Our DDStereo achieves state-of-the-art re-sults on the Moderate and Hard difficulty levels of AP 3D
+
+with 43.97% and 36.16% respectively, outperforming all existing stereo-based approaches, including DSC3D [4] and YOLOStereo3D [22]. Since the training set con-tains only 3K stereo pairs, it is insufficient for effectively training a Transformer-based architecture. Consequently, the proposed method does not surpass the CNN-based approaches[4, 22, 31] on the Easy subset. However, it still maintains an accuracy advantage over existing real-time methods[15, 18, 30]. Moreover, the Easy, Mod, and Hard splits are defined by difficulty thresholds, where the Hard set includes the Easy and Mod, thus better reflecting the overall average accuracy. In terms of efficiency, DDStereo runs at 23.5 ms per frame significantly outpacing TS3D (88 ms) [31], RTS3D (39 ms) [18], and YOLOStereo3D (80 ms)[22], while maintaining superior accuracy. 
+
+4.3. Model Efficiency 
+
+We compare the computational efficiency and parameter size of our model with both monocular and stereo-based baselines in Table 2. In terms of computational cost, DDStereo requires only 62.65 GFLOPs, lower than the stereo method YOLOStereo3D[22] and even slightly lower 
+
+> Table 2. Comparison of computational load and parameter count.
+
+Method Time GFLOPs Parameter MonoDETR[42] 20 ms 62.96 37.7 M MonoDGP[28] 22 ms 71.79 42.2 M YOLOStereo3D[22] 80 ms 177.82 107.6 M S3AD[25] 75.4 ms 180.71 109.5 M DDStereo(Ours) 23.5 ms 62.65 19.6 M
+
+than MonoDETR[42] (62.96 GFLOPs). Furthermore, our model contains only 19.6 M parameters, which is nearly half the size of the monocular models, and less than one fifth of YOLOStereo3D[22]. These results demonstrate that our dual-decoder stereo architecture achieves a favorable bal-ance between accuracy and efficiency, making it suitable for real-time deployment in autonomous driving systems. 
+
+4.4. Performance on Pedestrian and Cyclist 
+
+Previous stereo 3D detection works typically report results only for the Car class as Table 1, with fewer evaluating Pedestrian and even fewer Cyclist classes. To further eval-uate the generalization capability of our method on rare ob-ject categories(Pedestrian: 2,921 instances, 15% of Car; Cyclist: 1,083 instances, 5% of Car), we report the 3D detection performance on the Pedestrian and Cyclist cat-egories from the KITTI test server, as shown in Table 4 Table 3. Open-set evaluation results on KITTI-AR-OoD 
+
+AP OoD * AP ped AP car AP cyc 
+
+Method Recall 3D/BEV/2D 3D/BEV/2D 3D/BEV/2D 3D/BEV/2D S3AD[25] R11 74.35 / 76.39 / 90.06 48.26 / 49.07 / 64.80 80.20 / 80.41 / 88.54 25.26 / 25.25 / 37.12 
+
+DDStereo(Ours) R11 74.23 / 83.01 / 98.36 51.86 / 52.16 / 60.33 87.23 / 87.31 / 89.85 32.82 / 32.82 / 33.39 OV-mono3D[36] R40 0.53 / 1.02 / 97.50 18.84 / 20.01 / 100.0 56.54 / 57.50 / 100.0 17.95 / 19.60 / 100.0 
+
+S3AD[25] R40 73.69 / 76.76 / 95.53 45.74 / 46.39 / 63.96 80.25 / 82.23 / 89.01 20.82 / 22.02 / 34.40 DDStereo(Ours) R40 78.09 / 82.44 / 99.14 52.41 / 52.89 / 62.39 87.47 / 87.68 / 93.40 31.68 / 31.69 / 32.75                           
+
+> Table 4. 3D Detection of Pedestrian on The KITTI Test Server.
+> Easy Mod Hard Method 3D/BEV 3D/BEV 3D/BEV
+> MonoFlex[43] 9.43 / 10.36 6.31 / 7.36 5.26 / 6.29 MonoDTR[13] 15.33 / 16.66 10.18 / 10.59 8.61 / 9.00 GUPNet++[24] 12.45 / -8.13 / -6.91 / -RT3DStereo[16] 3.28 / 4.72 2.45 / 3.65 2.35 / 3.00 RT3D-GMP[15] 16.23 / 19.92 11.41 / 14.22 10.12 / 12.83 OC-Stereo[27] 24.48 / 29.79 17.58 / 20.80 15.60 / 18.62 YoloStereo3D[22] 28.49 / 31.01 19.75 / 20.76 16.48 / 18.41 DSC3D[4] 29.60 / 32.25 20.43 / 22.57 17.92 / 19.01 DDStereo(Ours) 32.14 /35.80 21.92 /24.72 19.43 /22.06
+> Table 5. 3D Detection of Cyclist on The KITTI Test Server.
+
+Easy Mod Hard Method 3D/BEV 3D/BEV 3D/BEV 
+
+MonoDTR [13] 5.05 / 5.84 3.27 / 4.11 3.19 / 3.48 GUPNet++[24] 6.71 / - 3.91 / - 3.80 / -RT3DStereo[16] 5.29 / 7.03 3.37 / 4.10 2.57 / 3.88 OC-Stereo[27] 29.40 / 32.47 16.63 / 19.23 14.72 / 17.11 RT3D-GMP[15] 18.31 / 20.59 12.99 / 13.92 10.63 / 12.74 DDStereo(Ours) 34.59 / 37.92 21.80 / 24.36 18.59 / 20.87 
+
+and Table 5, respectively. On the Pedestrian class, our method DDStereo achieves the best performance across all difficulty levels, surpassing all previous stereo methods. DDStereo achieves consistent improvements over the pre-vious best-performing stereo method DSC3D[4] across all difficulty levels. For the Cyclist category, which poses greater challenges, only a few existing works have re-ported results on the KITTI test server. Among the pub-lished stereo-based methods, OC-Stereo[27] achieves the strongest 3D detection performance. Compared to it, our DDStereo achieves consistent improvements across all dif-ficulty levels. Other methods listed in Table 1 did not report results or release code for the Pedestrian and Cyclist classes, and thus are not included in the comparison. 
+
+> Figure 6. Visualization results with 3D boxes and BEV map.
+
+4.5. Open-Set Evaluation on KITTI-AR-OoD 
+
+We evaluate our method under the open-set setting on the KITTI-AR-OoD[25], and report the results in Table 3. Fol-lowing the S3AD[25]. we focus on the moderate difficulty level and set the confidence threshold to 0.25. We report re-sults under both R11 and R40 settings. DDStereo achieves consistently higher accuracy for both known and unknown object categories. On the unknown OoD class, DDStereo attains 74.23% AP 3D , 83.01% AP BEV , 98.36% AP 2D un-der R11 and 78.09%, 82.44%, 99.14% under R40, surpass-ing S3AD[25] especially in BEV localization. Moreover, DDStereo also achieves stronger performance on the known classes Pedestrian, Car, and Cyclist, demonstrating its bal-anced capability in both open-set and close-set 3D detec-tion. Figure 6 presents selected qualitative results. The rhino and the bench shown in the figure belong to cate-gories not present in the training set, but DDStereo suc-cessfully estimates their 3D positions and dimensions. For OV-Mono3D[36], we provided explicit word prompts dur-ing testing. Benefiting from the broad 2D open-vocabulary coverage, it achieved 100% 2D detection accuracy (IoU >
+
+0.25) on cars, pedestrians , and cyclists. However, its 3D and OoD detection performance is inferior to our method. 4.6. Ablation Study 
+
+Shared Queries. The dual-branch architecture separately predicts binary foreground and multi-class 3D attributes. In the CNN-based framework, S3AD[25] aligns anchors in the decoding stage to compute anomaly scores. In this work, a Transformer-based end-to-end framework is adopted, where shared queries are used for query-level alignment. As shown in Tables 6 and 7, shared queries con-sistently boost both closed-set and open-set performance. Especially for open-set detection, employing an indepen-dent query design leads to a decrease of approximately 27% in AP OoD  
+
+> 3D
+
+, primarily because decoding order misalignment interferes with confidence estimation. 
+
+> Table 6. Shared Queries Strategy for Close Set (KITTI Val).
+
+Queries AP Car  
+
+> 3D
+
+(IoU >0.7) AP Cyc  
+
+> 3D
+
+(IoU >0.5) Independent 61.93 / 44.28 / 37.63 34.86 / 19.01 / 17.19 Shared 66.89 / 48.22 / 41.06 37.81 / 20.42 / 18.86  
+
+> Table 7. Queries Strategy on KITTI-AR-OoD. (MoD, IoU >0.25)
+
+Queries AP OoD  
+
+> 3D
+
+AP Car  
+
+> 3D
+
+AP P ed  
+
+> 3D
+
+AP Cyc 
+
+> 3D
+
+Independent 51.19 72.83 41.20 26.01 Shared 78.09 87.43 52.51 31.69 Decoder Design and Depth Prediction Strategy. We conduct an ablation study to investigate the effectiveness of the dual-decoder structure and the depth prediction strat-egy, as shown in Table 8. The table also reports the perfor-mance on OoD and normal categories at a threshold of 0.25. Replacing the dual-decoder decoder with a single design brings a significant drop of 11.72% AP OoD  
+
+> 3D
+
+, demonstrat-ing the benefit of decoupling foreground detection and 3D attribute estimation. For depth prediction, we adopt the av-erage strategy from MonoDETR [42], which computes the mean over multiple depth predictions. When replacing the Grid Sample operation with the Average strategy in Mon-oDETR [42], the AP OoD  
+
+> 3D
+
+decreases by 8.70%.                    
+
+> Table 8. Ablation of decoder and depth strategy (Mod, IoU >0.25).
+> AP OoD
+> 3DAP Car
+> 3DAP P ed
+> 3DAP Cyc
+> 3D
+> DDStereo 78.09 87.43 52.51 31.69 w/o Dual Decoder 66.37 85.21 49.70 27.10 w/o Grid Sample 69.39 86.31 50.66 30.34
+
+OoD Score. As shown in Table 9, we compare differ-ent scoring strategies for open-set detection. Compared to MaxLogit[12], which does not use normalization, and MSP[11], which utilizes Softmax normalization, the Sig-moid normalization used DDStereo achieves higher perfor-mance. This could be attributed to the use of Sigmoid-based Focal loss classification loss during the training phase. Our strategy of subtracting the highest known-class score from the binary foreground score is simple yet effective. 
+
+> Table 9. OoD scoring strategy comparison (Mod, IoU >0.25).
+
+AP OoD  
+
+> 3D
+
+AP OoD BEV AP OoD 
+
+> 2D
+
+MaxLogit[12] 67.71 71.52 84.51 MSP [11] 75.16 79.28 92.22 MNPF(Ours) 78.09 82.44 99.14 Generalization with Limited Extra Data. S3AD[25] proposed using synthetic datasets to generalize scale pre-diction capabilities, with its open-set detection performance improving as more supplementary data is introduced. In Table 10, we compare the performance of DDStereo and S3AD under limited additional data. When only 10% (400 images) of the extra synthetic dataset is added, our method demonstrates a more pronounced performance advantage. 
+
+> Table 10. Generalization with Limited Extra Data
+
+AR-ExD Method AP OoD  
+
+> 3D
+
+AP P ed  
+
+> 3D
+
+AP Cyc 
+
+> 3D
+
+×10% S3AD[25] 24.45 42.88 21.58 
+
+×10% DDStereo 54.65 47.76 29.27 
+
+×100% S3AD[25] 73.69 45.74 20.82 
+
+×100% DDStereo 78.09 52.51 31.69 
+
+## 5. Conclusion and Discussion 
+
+In this work, we present DDStereo, a dual-decoder stereo transformer for real-time open-set 3D detection. The frame-work unifies foreground to anomaly reasoning with shared queries and achieves a good balance between accuracy and efficiency through a compact disparity encoder and lightweight decoders. Experiments show that DDStereo surpasses prior stereo detectors under both closed-set and open-set settings, becoming the first real-time stereo detec-tor competitive with monocular baselines. Future work will investigate diverse camera parameters and stereo configura-tions to improve real-world adaptability, and leverage foun-dation models with large-scale synthetic data to boost zero-shot generalization and reduce obstacle-avoidance costs in autonomous driving and robotics. References 
+
+[1] Antonio Alliegro, Francesco Cappio Borlino, and Tatiana Tommasi. 3dos: Towards 3d open set learning – benchmark-ing and understanding semantic novelty detection on point clouds. arXiv e-prints , 2022. 3 [2] Yang Cao, Zeng Yihan, Hang Xu, and Dan Xu. Coda: Col-laborative novel box discovery and cross-modal alignment for open-vocabulary 3d object detection. Advances in Neu-ral Information Processing Systems , 36, 2024. 3 [3] Jun Cen, Peng Yun, Junhao Cai, Michael Yu Wang, and Ming Liu. Open-set 3d object detection. In 2021 International conference on 3D vision (3DV) , pages 869–878. IEEE, 2021. 3[4] Jiawei Chen, Qi Song, Wenzhong Guo, and Rui Huang. Dsc3d: Deformable sampling constraints in stereo 3d ob-ject detection for autonomous driving. IEEE Transactions on Circuits and Systems for Video Technology , 35(3):2794– 2805, 2025. 3, 6, 7 [5] Tianheng Cheng, Lin Song, Yixiao Ge, Wenyu Liu, Xing-gang Wang, and Ying Shan. Yolo-world: Real-time open-vocabulary object detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 16901–16911, 2024. 3 [6] Lin Chuang, Jiang Yi, Qu Lizhen, Yuan Zehuan, and Cai Jianfei. Generative region-language pretraining for open-ended object detection. In Proceedings of IEEE Conference on Computer Vision and Pattern Recognition (CVPR) , 2024. 3[7] Akshay Dhamija, Manuel Gunther, Jonathan Ventura, and Terrance Boult. The overlooked elephant of object detection: Open set. In Proceedings of the IEEE/CVF winter conference on applications of computer vision , pages 1021–1030, 2020. 3[8] Xiuye Gu, Tsung-Yi Lin, Weicheng Kuo, and Yin Cui. Open-vocabulary object detection via vision and language knowledge distillation. arXiv preprint arXiv:2104.13921 ,2021. 3 [9] Akshita Gupta, Sanath Narayan, KJ Joseph, Salman Khan, Fahad Shahbaz Khan, and Mubarak Shah. Ow-detr: Open-world detection transformer. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 9235–9244, 2022. 3 [10] Jiaming Han, Yuqiang Ren, Jian Ding, Xingjia Pan, Ke Yan, and Gui-Song Xia. Expanding low-density latent regions for open-set object detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition ,pages 9591–9600, 2022. 3 [11] Dan Hendrycks and Kevin Gimpel. A baseline for detect-ing misclassified and out-of-distribution examples in neural networks. In International Conference on Learning Repre-sentations , 2017. 5, 8 [12] Dan Hendrycks, Steven Basart, Mantas Mazeika, Andy Zou, Joseph Kwon, Mohammadreza Mostajabi, Jacob Steinhardt, and Dawn Song. Scaling out-of-distribution detection for real-world settings. In International Conference on Machine Learning , pages 8759–8773. PMLR, 2022. 5, 8 [13] Kuan-Chih Huang, Tsung-Han Wu, Hung-Ting Su, and Win-ston H Hsu. Monodtr: Monocular 3d object detection with depth-aware transformer. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition ,pages 4012–4021, 2022. 7 [14] KJ Joseph, Salman Khan, Fahad Shahbaz Khan, and Vi-neeth N Balasubramanian. Towards open world object de-tection. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 5830–5840, 2021. 3 [15] Hendrik Konigshof and Christoph Stiller. Learning-based shape estimation with grid map patches for realtime 3d ob-ject detection for automated driving. In 2020 IEEE 23rd In-ternational conference on intelligent transportation systems (ITSC) , pages 1–6. IEEE, 2020. 3, 6, 7 [16] Hendrik Konigshof, Niels Ole Salscheider, and Christoph Stiller. Realtime 3d object detection for automated driving using stereo vision and semantic information. In 2019 IEEE Intelligent Transportation Systems Conference (ITSC) , 2019. 3, 6, 7 [17] Peiliang Li, Xiaozhi Chen, and Shaojie Shen. Stereo r-cnn based 3d object detection for autonomous driving. In 
+
+2019 IEEE/CVF Conference on Computer Vision and Pat-tern Recognition (CVPR) , 2019. 3, 6 [18] Peixuan Li, Shun Su, and Huaici Zhao. Rts3d: Real-time stereo 3d detection from 4d feature-consistency em-bedding space for autonomous driving. In Proceedings of the AAAI Conference on Artificial Intelligence , pages 1930– 1939, 2021. 6 [19] Qing Lian, Peiliang Li, and Xiaozhi Chen. Monojsg: Joint semantic and geometric cost volume for monocular 3d ob-ject detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 1070– 1079, 2022. 6 [20] Chuang Lin, Yi Jiang, Lizhen Qu, Zehuan Yuan, and Jianfei Cai. Generative region-language pretraining for open-ended object detection. In Proceedings of the IEEE/CVF Confer-ence on Computer Vision and Pattern Recognition , pages 13958–13968, 2024. 2 [21] Shilong Liu, Zhaoyang Zeng, Tianhe Ren, Feng Li, Hao Zhang, Jie Yang, Qing Jiang, Chunyuan Li, Jianwei Yang, Hang Su, et al. Grounding dino: Marrying dino with grounded pre-training for open-set object detection. arXiv preprint arXiv:2303.05499 , 2023. 3 [22] Yuxuan Liu, Lujia Wang, and Ming Liu. Yolostereo3d: A step back to 2d for efficient stereo 3d detection. In 2021 IEEE International Conference on Robotics and Automation (ICRA) , 2021. 3, 5, 6, 7, 1 [23] Yuheng Lu, Chenfeng Xu, Xiaobao Wei, Xiaodong Xie, Masayoshi Tomizuka, Kurt Keutzer, and Shanghang Zhang. Open-vocabulary point-cloud object detection without 3d an-notation. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 1190–1199, 2023. 3 [24] Yan Lu, Xinzhu Ma, Lei Yang, Tianzhu Zhang, Yating Liu, Qi Chu, Tong He, Yonghui Li, and Wanli Ouyang. Gupnet++: Geometry uncertainty propagation network for monocular 3d object detection. IEEE Transactions on Pat-tern Analysis and Machine Intelligence , 2024. 6, 7 [25] Shiyi Mu, Zichong Gu, Hanqi Lyu, Yilin Gao, and Shugong Xu. Stereo-based 3d anomaly object detection for au-tonomous driving: A new dataset and baseline. arXiv preprint arXiv:2507.09214 , 2025. 1, 2, 3, 5, 6, 7, 8 [26] Xidong Peng, Xinge Zhu, Tai Wang, and Yuexin Ma. Side: Center-based stereo 3d detector with structure-aware in-stance depth estimation. In Proceedings of the IEEE/CVF winter conference on applications of computer vision , pages 119–128, 2022. 3, 6 [27] Alex D. Pon, Jason Ku, Chengyao Li, and Steven L. Waslan-der. Object-centric stereo matching for 3d object detection. In 2020 IEEE International Conference on Robotics and Au-tomation (ICRA) , pages 8383–8389, 2020. 6, 7 [28] Fanqi Pu, Yifan Wang, Jiru Deng, and Wenming Yang. Mon-odgp: Monocular 3d object detection with decoupled-query and geometry-error priors. In Proceedings of the Computer Vision and Pattern Recognition Conference , pages 6520– 6530, 2025. 4, 5, 6 [29] Zengyi Qin, Jinglu Wang, and Yan Lu. Triangulation learn-ing network: from monocular to stereo 3d object detection. In Proceedings of the IEEE/CVF conference on computer vi-sion and pattern recognition , pages 7615–7623, 2019. 3, 6 [30] Yuguang Shi, Yu Guo, Zhenqiang Mi, and Xinjie Li. Stereo centernet-based 3d object detection for autonomous driving. 
+
+Neurocomputing , 471:219–229, 2022. 6 [31] Hanqing Sun, Yanwei Pang, Jiale Cao, Jin Xie, and Xuelong Li. Transformer-based stereo-aware 3d object detection from binocular images. IEEE Transactions on Intelligent Trans-portation Systems , 25(12):19675–19687, 2024. 3, 6 [32] Chongben Tao, Chunlin Cao, Hanjing Cheng, Zhen Gao, Xizhao Luo, Zuofeng Zhang, and Sifa Zheng. An efficient 3d object detection method based on fast guided anchor stereo rcnn. Advanced Engineering Informatics , 57:102069, 2023. 6[33] Zhenyu Wang, Yali Li, Taichi Liu, Hengshuang Zhao, and Shengjin Wang. Ov-uni3detr: Towards unified open-vocabulary 3d object detection via cycle-modality propaga-tion. arXiv preprint arXiv:2403.19580 , 2024. 3 [34] Xiaoshi Wu, Feng Zhu, Rui Zhao, and Hongsheng Li. Cora: Adapting clip for open-vocabulary detection with region prompting and anchor pre-matching. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 7031–7040, 2023. 3 [35] Le Xue, Mingfei Gao, Chen Xing, Roberto Mart´ ın-Mart´ ın, Jiajun Wu, Caiming Xiong, Ran Xu, Juan Carlos Niebles, and Silvio Savarese. Ulip: Learning a unified representation of language, images, and point clouds for 3d understanding. In Proceedings of the IEEE/CVF conference on computer vi-sion and pattern recognition , pages 1179–1189, 2023. 3 [36] Jin Yao, Hao Gu, Xuweiyi Chen, Jiayun Wang, and Zezhou Cheng. Open vocabulary monocular 3d object detection. 
+
+arXiv preprint arXiv:2411.16833 , 2024. 1, 2, 7 [37] Lewei Yao, Jianhua Han, Youpeng Wen, Xiaodan Liang, Dan Xu, Wei Zhang, Zhenguo Li, Chunjing Xu, and Hang Xu. Detclip: Dictionary-enriched visual-concept paralleled pre-training for open-world detection. Advances in Neural Infor-mation Processing Systems , 35:9125–9138, 2022. 3 [38] Lewei Yao, Jianhua Han, Xiaodan Liang, Dan Xu, Wei Zhang, Zhenguo Li, and Hang Xu. Detclipv2: Scal-able open-vocabulary object detection pre-training via word-region alignment. In Proceedings of the IEEE/CVF Con-ference on Computer Vision and Pattern Recognition , pages 23497–23506, 2023. 3 [39] Lewei Yao, Renjie Pi, Jianhua Han, Xiaodan Liang, Hang Xu, Wei Zhang, Zhenguo Li, and Dan Xu. Detclipv3: To-wards versatile generative open-vocabulary object detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 27391–27401, 2024. 3[40] Hanxue Zhang, Haoran Jiang, Qingsong Yao, Yanan Sun, Renrui Zhang, Hao Zhao, Hongyang Li, Hongzi Zhu, and Zetong Yang. Detect anything 3d in the wild. arXiv preprint arXiv:2504.07958 , 2025. 1, 2 [41] Renrui Zhang, Ziyu Guo, Wei Zhang, Kunchang Li, Xu-peng Miao, Bin Cui, Yu Qiao, Peng Gao, and Hongsheng Li. Pointclip: Point cloud understanding by clip. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 8552–8562, 2022. 3 [42] Renrui Zhang, Han Qiu, Tai Wang, Ziyu Guo, Ziteng Cui, Yu Qiao, Hongsheng Li, and Peng Gao. Monodetr: Depth-guided transformer for monocular 3d object detection. In 
+
+Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 9155–9166, 2023. 4, 5, 6, 8, 1 [43] Yunpeng Zhang, Jiwen Lu, and Jie Zhou. Objects are differ-ent: Flexible monocular 3d object detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pat-tern Recognition , pages 3289–3298, 2021. 6, 7 [44] Tiancheng Zhao, Peng Liu, Xuan He, Lu Zhang, and Kyu-song Lee. Real-time transformer-based open-vocabulary detection with efficient fusion head. arXiv preprint arXiv:2403.06892 , 2024. 3 [45] Chenming Zhu, Wenwei Zhang, Tai Wang, Xihui Liu, and Kai Chen. Object2scene: Putting objects in context for open-vocabulary 3d detection. arXiv preprint arXiv:2309.09456 ,2023. 3 DDStereo: Efficient Dual Decoder Transformers for Stereo 3D Road Anomaly Detection 
+
+# Supplementary Material 
+
+## 6. Ablation of depth map and disparity loss 
+
+DDStereo continues the auxiliary-supervision paradigm of disparity-map and depth-map prediction introduced in YOLOStereo3D[22] and MonoDETR[42], and adopts the same loss functions. In Table 11 and Table 12 we compare the impact of these auxiliary losses on both open-set and closed-set detection, reporting results at Mod difficulty. As can be seen, auxiliary supervision improves overall network performance, using depth supervision or disparity supervi-sion alone, or combining the two, yields comparable ac-curacy, whereas removing auxiliary supervision altogether gives the worst performance. 
+
+Table 11. Ablation of depth map and disparity loss@AP25.                           
+
+> AP OoD
+> 3DAP Car
+> 3DAP P ed
+> 3DAP Cyc
+> 3D
+> IoU >25 IoU >25 IoU >25 IoU >25 DDStereo 78.09 87.43 52.51 31.69
+> w/o Disp Map 77.08 86.75 52.19 31.02 w/o Depth Map 77.56 87.39 51.23 31.43 w/o Disp or Depth Map 75.95 87.32 51.95 30.82
+
+Table 12. Ablation of depth map and disparity loss @AP50.                           
+
+> AP OoD
+> 3DAP Car
+> 3DAP P ed
+> 3DAP Cyc
+> 3D
+> IoU >50 IoU >70 IoU >50 IoU >50 DDStereo 19.33 45.25 25.88 22.07
+> w/o Disp Map 18.69 45.04 25.41 19.58 w/o Depth Map 18.24 45.39 25.84 20.08 w/o Disp or Depth Map 18.39 44.63 23.00 18.38
+
+## 7. Visualization 
+
+Figures 7– 11 visualize open-set detections. Figure 7 local-izes the scarecrow and lion statue, yet the scale estimates still exhibit noticeable error. Figure 8 successfully detects the elephant and cougar. Figure 9 identifies the red and gray discarded metal barrels. Figure 10 presents results for large trash bins, owing to the limited viewing angle, the length of the second bin cannot be accurately estimated. For the bench and blue metal box in Figure 11, DDStereo recov-ers their 3D locations. Note the black box in the lower-right corner of Figure 11, DDStereo misses it because the object frequently appears in training-set backgrounds with-out any annotation and is consequently predicted as back-ground. This remains a future challenge: objects deliber-ately labeled as background are harder to recover than those never seen during training. Figure 7. Detection results for the scarecrow and lion statues. 
+
+Figure 8. Detection results for the animal category. Figure 9. Detection results for metal barrels. 
+
+Figure 10. Detection results for trash bins. Figure 11. Detection results for benches and metal boxes.

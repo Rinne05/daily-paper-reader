@@ -1,0 +1,54 @@
+{
+  "label": "2026-06-25",
+  "date": "2026-06-25",
+  "generated_at": "2026-06-25T21:34:45",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202606/25/2606.25652v1-auto-labelling-based-domain-transfer-for-3d-object-detection-on-a-bicycle-mounted-lidar-platform",
+      "section": "deep",
+      "title_en": "Auto-Labelling-Based Domain Transfer for 3D Object Detection on a Bicycle-Mounted LiDAR Platform",
+      "authors": "Mario Finkbeiner, Max A. Buettner, Kanak Mazumder, Fabian B. Flohr",
+      "date": "2026-06-24",
+      "pdf": "https://arxiv.org/pdf/2606.25652v1",
+      "score": "9.0",
+      "evidence": "使用nuScenes数据集评估3D检测",
+      "tldr": "针对自行车平台缺乏3D标注数据的问题，提出自动标注管道实现域迁移。在FUSE-Bike数据集上评估4个nuScenes预训练检测器，微调后mAP提升23.4点，行人和自行车类增益最大。检测器质量超越自动标注标签，表明自动标注可替代人工标注，为弱势道路用户检测提供可复现基准。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Reliable 3D perception of vulnerable road users (VRUs) such as cyclists and pedestrians is essential for their safety in urban traffic and a core requirement for autonomous driving (AD). Alongside advances in vehicle-based perception, research increasingly equips bicycles with sensors to study traffic from a perspective native to VRUs. Such platforms still rely on LiDAR detectors originally trained on vehicle data, yet annotated 3D data from a cyclist's perspective is scarce. How well these detectors generalise to this setting has not been evaluated. We present a 3D object detection benchmark of 1,027 annotated LiDAR keyframes (over 18,000 3D bounding boxes) from the FUSE-Bike platform in urban Munich. We evaluate four nuScenes-pre-trained detectors against 1,854 human-verified ground-truth (GT) boxes both in their original form and after finetuning on training labels produced by a VRU-dedicated auto-labelling pipeline that requires no manual annotation. The zero-shot domain gap is concentrated on the VRU classes. Finetuning recovers most of it, improving mean average precision (mAP) by up to 23.4 points with the largest gains on pedestrians and cyclists, and the adapted detectors even surpass the quality of the auto-labels they were trained on. The benchmark provides a reproducible baseline for VRU-centric 3D detection and shows that auto-labels are a viable substitute for manual annotation when adapting vehicle-trained detectors to a cyclist platform.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/25/2606.24805v1-ddstereo-efficient-dual-decoder-transformers-for-stereo-3d-road-anomaly-detection",
+      "section": "deep",
+      "title_en": "DDStereo: Efficient Dual Decoder Transformers for Stereo 3D Road Anomaly Detection",
+      "authors": "Shiyi Mu, Zichong Gu, Zhiqi Ai, Yilin Gao, Shugong Xu",
+      "date": "2026-06-23",
+      "pdf": "https://arxiv.org/pdf/2606.24805v1",
+      "score": "8.0",
+      "evidence": "立体3D目标检测方法",
+      "tldr": "针对立体3D检测实时性不足和开集泛化能力缺失的问题，提出DDStereo双解码器Transformer。通过共享查询的轻量级2D开集检测和3D回归分支，结合紧凑视差提取与精简解码架构，在公共基准测试中实现闭集与开集场景下的最优精度，推理速度首次达到与单目方法相当的实时水平，填补了立体开集检测的空白。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Stereo-based 3D object detection still faces two critical safety challenges: real-time performance and open-set generalization. Existing stereo 3D methods typically achieve twice the accuracy of monocular methods but suffer from significantly lower inference speeds, making them unsuitable for real-time applications. Meanwhile, recent advances in open-world detection have introduced open-set and open-vocabulary algorithms in monocular 2D and 3D settings, yet stereo-based open-set detection remains largely unexplored. To bridge this gap, we propose DDStereo, a novel Dual-Decoder Stereo Transformer for real-time open-set 3D object detection. DDStereo features two lightweight decoder branches: one for open-set foreground 2D detection and the other for 3D attribute regression. These decoders share object-level queries to achieve unified target-level alignment. To enhance inference efficiency, we designed a compact disparity feature extractor and a streamlined decoder architecture. Experiments on public stereo 3D benchmarks demonstrate that DDStereo achieves state-of-the-art accuracy under both closed-set and open-set protocols. Notably, our method surpasses existing stereo 3D detectors in inference speed and, for the first time, achieves real-time performance comparable to monocular approaches.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/25/2606.21292v1-lightweight-3d-feature-pretraining-by-bayesian-inversion-of-2d-foundation-models",
+      "section": "quick",
+      "title_en": "Lightweight 3D Feature Pretraining by Bayesian Inversion of 2D Foundation Models",
+      "authors": "Marwane Hariat, Gianni Franchi, David Filliat, Antoine Manzanera",
+      "date": "2026-06-19",
+      "pdf": "https://arxiv.org/pdf/2606.21292v1",
+      "score": "6.0",
+      "evidence": "提出从多视图2D嵌入中轻量级预训练3D特征的方法",
+      "tldr": "针对多视图2D基础模型嵌入存在噪声和模糊性的问题，提出Casper3D轻量级概率框架，通过贝叶斯反演将噪声视图级语义特征转化为潜在3D语义表示。采用基于集合的变分模型结合相对姿态进行多视图推理，并利用新视点语义预测自监督训练。实验表明，该方法在模糊和噪声场景下比简单多视图池化产生更稳定的3D语义，且支持开放词汇理解，与骨干网络无关。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "We present Casper3D, a lightweight probabilistic framework for converting noisy multi-view 2D foundation-model embeddings into a latent 3D semantic representation. We model view-level semantic features as noisy observations of an underlying 3D semantic state and infer this state with a set-based variational model that incorporates relative pose during multi-view reasoning. Casper3D is trained by predicting held-out semantic observations from novel viewpoints, while remaining aligned with visual and text semantic spaces for open-vocabulary 3D understanding. The framework is backbone-agnostic and applies to both language-aligned and self-supervised embeddings. Experiments show that Casper3D produces more stable 3D semantics than simple multi-view pooling, especially in ambiguous and noisy settings.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

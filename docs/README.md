@@ -6,29 +6,22 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-25
-- 运行时间：2026-06-25 21:34:37 UTC
+- 最新运行日期：2026-06-26
+- 运行时间：2026-06-26 22:01:19 UTC
 - 运行状态：成功
-- 本次总论文数：3
-- 精读区：2
-- 速读区：1
+- 本次总论文数：0
+- 精读区：0
+- 速读区：0
 
 ### 今日简报（AI）
-今日精读两篇高分的3D检测与异常检测，速读一篇轻量级3D特征预训练。最值得关注的是自行车LiDAR平台的自动标注领域迁移方法（9.0分）和双解码器Transformer的道路异常检测（8.0分）。建议优先精读这两篇，关注无监督迁移与高效异常检测的实用价值。
-- 详情：[/202606/25/README](/202606/25/README)
+> 今日无新推荐，系统未产出可展示论文。
+- 详情：[/202606/26/README](/202606/26/README)
 
 ### 精读区论文标签
-1. [Auto-Labelling-Based Domain Transfer for 3D Object Detection on a Bicycle-Mounted LiDAR Platform](/202606/25/2606.25652v1-auto-labelling-based-domain-transfer-for-3d-object-detection-on-a-bicycle-mounted-lidar-platform)  
-   标签：评分：9.0/10、query:nuscenes-dod
-   evidence：使用nuScenes数据集评估3D检测
-2. [DDStereo: Efficient Dual Decoder Transformers for Stereo 3D Road Anomaly Detection](/202606/25/2606.24805v1-ddstereo-efficient-dual-decoder-transformers-for-stereo-3d-road-anomaly-detection)  
-   标签：评分：8.0/10、query:nuscenes-dod
-   evidence：立体3D目标检测方法
+- 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Lightweight 3D Feature Pretraining by Bayesian Inversion of 2D Foundation Models](/202606/25/2606.21292v1-lightweight-3d-feature-pretraining-by-bayesian-inversion-of-2d-foundation-models)  
-   标签：评分：6.0/10、query:nuscenes-dod
-   evidence：提出从多视图2D嵌入中轻量级预训练3D特征的方法
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">

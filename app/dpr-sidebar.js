@@ -728,6 +728,16 @@
     return { activeKey: active, tabs: tabs, groups: groups };
   }
 
+  function axisSectionStateKey(group, mode, sectionKey) {
+    return [group || '', mode || '', sectionKey || ''].join(':');
+  }
+
+  function normalizeSet(value) {
+    if (value instanceof Set) return value;
+    if (Array.isArray(value)) return new Set(value);
+    return new Set();
+  }
+
   // ---------- 状态 ----------
   var state = {
     model: { home: null, tutorial: null, daily: [], conferences: [] },
@@ -739,6 +749,7 @@
     search: '',
     lastFetchAt: 0,
     expandedGroups: { conference: true, daily: true },
+    collapsedAxisSections: new Set(),
     dailyViewMode: 'date',
     conferenceViewMode: 'conf',
     activeDailyDate: '',
@@ -771,6 +782,7 @@
           conference: obj.groups.conference !== false,
           daily: obj.groups.daily !== false,
         } : null,
+        collapsedAxisSections: Array.isArray(obj.sections) ? new Set(obj.sections) : new Set(),
       };
     } catch (e) {
       return null;
@@ -780,6 +792,7 @@
     try {
       var payload = {
         groups: state.expandedGroups || { conference: true, daily: true },
+        sections: state.collapsedAxisSections ? Array.prototype.slice.call(state.collapsedAxisSections) : [],
       };
       window.localStorage && window.localStorage.setItem(COLLAPSE_KEY, JSON.stringify(payload));
     } catch (e) {}
@@ -863,6 +876,7 @@
       search: String(vs.search || ''),
       filter: vs.filter === 'unread' ? 'unread' : 'all',
       readMap: vs.readMap || {},
+      collapsedAxisSections: normalizeSet(vs.collapsedAxisSections),
     };
   }
 
@@ -899,6 +913,7 @@
           toggleLabel: vs.conferenceViewMode === 'tag' ? '按会议' : '按标签',
           totalCount: conferenceTotal,
           unreadCount: conferenceUnread,
+          collapsedAxisSections: vs.collapsedAxisSections,
         }));
       }
     }
@@ -922,6 +937,7 @@
           toggleLabel: vs.dailyViewMode === 'tag' ? '按日期' : '按标签',
           totalCount: dailyTotal,
           unreadCount: dailyUnread,
+          collapsedAxisSections: vs.collapsedAxisSections,
         }));
       }
     }
@@ -943,6 +959,7 @@
       search: state.search,
       filter: state.filter,
       readMap: ReadState.getAll(),
+      collapsedAxisSections: state.collapsedAxisSections,
     };
     state.bodyEl.innerHTML = renderBodyHtml(state.model, viewState);
     syncResolvedAxisState();
@@ -964,6 +981,7 @@
     var groupClass = opts.group === 'conference' ? 'dpr-sidebar-group-conference' : 'dpr-sidebar-group-daily';
     var expandedClass = opts.expanded ? ' is-expanded' : '';
     var resultClass = opts.view && opts.view.resultMode ? ' is-result-mode' : '';
+    var axisMode = opts.view && opts.view.resultMode ? 'results' : opts.mode;
     var totalCount = typeof opts.totalCount === 'number' ? opts.totalCount : countPapersInView(opts.view);
     var unreadCount = typeof opts.unreadCount === 'number' ? opts.unreadCount : 0;
     html.push('<section class="dpr-sidebar-group dpr-sidebar-panel ' + groupClass + expandedClass + resultClass + '" data-panel="' + safeAttr(opts.group) + '">');
@@ -974,7 +992,7 @@
     html.push('  </button>');
     html.push('  <div class="dpr-sidebar-panel-content">');
     html.push(renderAxisTabs(opts.group, opts.mode, opts.view, opts.toggleLabel));
-    html.push(renderAxisContent(opts.group, opts.view));
+    html.push(renderAxisContent(opts.group, axisMode, opts.view, opts.collapsedAxisSections));
     html.push('  </div>');
     html.push('</section>');
     return html.join('');
@@ -1001,15 +1019,22 @@
     return html.join('');
   }
 
-  function renderAxisContent(group, view) {
+  function renderAxisContent(group, mode, view, collapsedAxisSections) {
     var html = [];
+    var collapsed = normalizeSet(collapsedAxisSections);
     html.push('<div class="dpr-sidebar-axis-content" data-axis-content="' + safeAttr(group) + '">');
     (view.groups || []).forEach(function (item) {
       var sectionClass = group === 'conference'
         ? ' dpr-sidebar-axis-section-conference'
         : ' dpr-sidebar-axis-section-daily';
-      html.push('<section class="dpr-sidebar-axis-section' + sectionClass + '" data-axis-section="' + safeAttr(item.key) + '">');
-      html.push('  <div class="dpr-sidebar-axis-section-label">' + safeText(item.label) + ' <span>' + safeText((item.papers || []).length) + '</span></div>');
+      var stateKey = axisSectionStateKey(group, mode, item.key);
+      var isExpanded = !collapsed.has(stateKey);
+      var expandedClass = isExpanded ? ' is-expanded' : '';
+      html.push('<section class="dpr-sidebar-axis-section' + sectionClass + expandedClass + '" data-axis-section="' + safeAttr(item.key) + '" data-axis-section-key="' + safeAttr(stateKey) + '">');
+      html.push('  <button type="button" class="dpr-sidebar-axis-section-header" data-axis-section-toggle="' + safeAttr(stateKey) + '" aria-expanded="' + (isExpanded ? 'true' : 'false') + '">');
+      html.push('    <span class="dpr-sidebar-day-arrow" aria-hidden="true">▸</span>');
+      html.push('    <span class="dpr-sidebar-axis-section-label">' + safeText(item.label) + ' <span>' + safeText((item.papers || []).length) + '</span></span>');
+      html.push('  </button>');
       html.push('  <ul class="dpr-sidebar-axis-papers">');
       (item.papers || []).forEach(function (paper) {
         html.push(renderPaper(paper));
@@ -1244,6 +1269,24 @@
         rerenderSidebarBody({ syncActive: false });
         return;
       }
+      var sectionToggle = e.target.closest('.dpr-sidebar-axis-section-header');
+      if (sectionToggle) {
+        var sectionKey = sectionToggle.getAttribute('data-axis-section-toggle') || '';
+        var section = sectionToggle.closest('.dpr-sidebar-axis-section');
+        if (!state.collapsedAxisSections) state.collapsedAxisSections = new Set();
+        var openSection;
+        if (state.collapsedAxisSections.has(sectionKey)) {
+          state.collapsedAxisSections.delete(sectionKey);
+          openSection = true;
+        } else {
+          state.collapsedAxisSections.add(sectionKey);
+          openSection = false;
+        }
+        if (section) section.classList.toggle('is-expanded', openSection);
+        sectionToggle.setAttribute('aria-expanded', openSection ? 'true' : 'false');
+        persistCollapse();
+        return;
+      }
       // 论文点击：移动端自动关闭抽屉
       var paperLink = e.target.closest('.dpr-sidebar-paper-link');
       if (paperLink) {
@@ -1291,8 +1334,10 @@
     var persisted = loadPersistedCollapse();
     if (persisted) {
       state.expandedGroups = persisted.expandedGroups || { conference: true, daily: true };
+      state.collapsedAxisSections = persisted.collapsedAxisSections || new Set();
     } else {
       state.expandedGroups = { conference: true, daily: true };
+      state.collapsedAxisSections = new Set();
     }
     var href = findActivePaper();
     if (href) syncAxisStateToHref(href);
@@ -1383,6 +1428,7 @@
         buildConferenceTagView: buildConferenceTagView,
         buildConferenceResultView: buildConferenceResultView,
         computeModelReadSummary: computeModelReadSummary,
+        axisSectionStateKey: axisSectionStateKey,
         renderBodyHtml: renderBodyHtml,
         normalizeReadStatus: normalizeReadStatus,
       },

@@ -169,6 +169,38 @@ function testRenderBodyPutsConferenceAboveDaily() {
   assert.ok(html.includes('data-axis-mode="date"'));
 }
 
+function testAxisSectionsAreExpandable() {
+  const sidebar = loadSidebarForTest('#/conference/neurips-2024/paper-c');
+  const tools = sidebar.__test;
+  const model = tools.parseSidebar(sampleSidebar);
+  assert.equal(typeof tools.axisSectionStateKey, 'function');
+
+  const sectionKey = tools.axisSectionStateKey('conference', 'conf', 'neurips-2024:rl');
+  const expandedHtml = tools.renderBodyHtml(model, {
+    expandedGroups: { conference: true, daily: true },
+    conferenceViewMode: 'conf',
+    dailyViewMode: 'date',
+    activeConference: 'neurips-2024',
+    activeDailyDate: '20260624',
+  });
+
+  assert.ok(expandedHtml.includes('class="dpr-sidebar-axis-section dpr-sidebar-axis-section-conference is-expanded"'));
+  assert.ok(expandedHtml.includes(`data-axis-section-toggle="${sectionKey}"`));
+  assert.ok(expandedHtml.includes('aria-expanded="true"'));
+
+  const collapsedHtml = tools.renderBodyHtml(model, {
+    expandedGroups: { conference: true, daily: true },
+    conferenceViewMode: 'conf',
+    dailyViewMode: 'date',
+    activeConference: 'neurips-2024',
+    activeDailyDate: '20260624',
+    collapsedAxisSections: new Set([sectionKey]),
+  });
+
+  assert.ok(collapsedHtml.includes('data-axis-section-toggle="' + sectionKey + '" aria-expanded="false"'));
+  assert.ok(!collapsedHtml.includes('dpr-sidebar-axis-section-conference is-expanded" data-axis-section="neurips-2024:rl"'));
+}
+
 function testPanelCountsUseFullModel() {
   const sidebar = loadSidebarForTest('#/202606/24/paper-a');
   const tools = sidebar.__test;
@@ -288,6 +320,7 @@ function testReadStatusNormalization() {
 testSidebarNavigationContract();
 testAxisViewsForDailyAndConference();
 testRenderBodyPutsConferenceAboveDaily();
+testAxisSectionsAreExpandable();
 testPanelCountsUseFullModel();
 testSearchResultsComeFromFullModel();
 testSearchNoResultsShowsEmptyState();

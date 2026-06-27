@@ -7084,14 +7084,38 @@ body.dpr-sidebar-v2 .content {
 .dpr-sidebar-axis-section {
   margin: 0;
 }
+.dpr-sidebar-axis-section-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+.dpr-sidebar-axis-section-header:hover {
+  background: #f8fafc;
+}
 .dpr-sidebar-axis-section-label {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 14px 4px 28px;
+  flex: 1;
+  min-width: 0;
+  padding: 5px 14px 4px 0;
   font-size: 11px;
   color: #64748b;
   font-weight: 600;
+}
+.dpr-sidebar-axis-section-header > .dpr-sidebar-day-arrow {
+  margin-left: 14px;
+}
+.dpr-sidebar-axis-section.is-expanded > .dpr-sidebar-axis-section-header .dpr-sidebar-day-arrow {
+  transform: rotate(90deg);
 }
 .dpr-sidebar-axis-section-label span {
   margin-left: auto;
@@ -7102,6 +7126,9 @@ body.dpr-sidebar-v2 .content {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.dpr-sidebar-axis-section:not(.is-expanded) > .dpr-sidebar-axis-papers {
+  display: none;
 }
 .dpr-sidebar-day-arrow {
   display: inline-block;

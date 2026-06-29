@@ -1,0 +1,57 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-29T21:50:46.894860+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2606.22631v1",
+      "source": "arxiv",
+      "title": "4DVLT: Dynamic Scene Understanding with Worldline-Centered Vision-Language Tracking",
+      "abstract": "4D dynamic scene understanding requires grounding language to a persistent worldline that binds identity, metric 3D motion, and synchronized multi-view 2D projections. Existing paradigms capture only part of this structure: large multimodal models reason over rich visual evidence but rarely preserve metric topology, while vision-language tracking remains tied to fragmented 2D or 3D outputs and local continuation. We therefore introduce \\textbf{4DVLT}, a worldline-centered task for instruction-conditioned 4D dynamic scene understanding in fully observed multi-view video, and \\textbf{Instruct-4D}, a benchmark with 129.4K question-answer pairs, 64.7K target entities, 851 scenes, and 9 reasoning-oriented query types. To address this setting, we present \\textbf{4DTrack}, which casts instruction-conditioned tracking as graph-conditioned worldline inference through an object-centric 4D state graph, metric-guided routing, bidirectional decoding, and kinematic calibration. On Instruct-4D, 4DTrack-Qwen3.5-9B reaches 62.68 $\\mathrm{TGA}_{\\mathrm{Top1}}$ and surpasses the best adapted VLT baseline by 19.62 points. These results show that worldline-centered modeling improves both target grounding and recovered worldline quality. The project page is available at https://github.com/mikubaka88/4DVLT.",
+      "authors": [
+        "Chaoyue Li",
+        "Boxue Yang",
+        "Shengyao Zhou",
+        "Haoyang Wu",
+        "Rui Qian",
+        "Linfeng Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-21T18:33:15+00:00",
+      "link": "https://arxiv.org/pdf/2606.22631v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multi-view 4D scene understanding with language tracking",
+      "llm_evidence_cn": "多视图4D场景理解与语言跟踪",
+      "llm_evidence": "多视图4D场景理解与语言跟踪",
+      "canonical_evidence": "多视图4D场景理解与语言跟踪",
+      "llm_tldr_en": "4DVLT introduces a worldline-centered task for instruction-conditioned 4D dynamic scene understanding from multi-view video, combining metric 3D motion with synchronized 2D projections.",
+      "llm_tldr_cn": "现有方法在4D动态场景理解中难以同时保持度量拓扑和语言关联。本文提出4DVLT任务和Instruct-4D基准，以世界线为中心，将语言指令与多视图视频中的3D运动轨迹对齐。方法结合了多视图2D投影和3D度量信息，为多视图3D感知提供了新范式，但并非直接检测。",
+      "llm_tldr": "现有方法在4D动态场景理解中难以同时保持度量拓扑和语言关联。本文提出4DVLT任务和Instruct-4D基准，以世界线为中心，将语言指令与多视图视频中的3D运动轨迹对齐。方法结合了多视图2D投影和3D度量信息，为多视图3D感知提供了新范式，但并非直接检测。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

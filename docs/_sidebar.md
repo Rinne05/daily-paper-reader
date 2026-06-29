@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-06-29 <!--dpr-date:20260629-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/29/2606.22631v1-4dvlt-dynamic-scene-understanding-with-worldline-centered-vision-language-tracking" data-sidebar-item="{&quot;title&quot;: &quot;4DVLT: Dynamic Scene Understanding with Worldline-Centered Vision-Language Tracking&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.22631v1-4dvlt-dynamic-scene-understanding-with-worldline-centered-vision-language-tracking&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;多视图4D场景理解与语言跟踪&quot;}">4DVLT: Dynamic Scene Understanding with Worldline-Centered Vision-Language Tracking</a>
   * 2026-06-25 <!--dpr-date:20260625-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202606/25/2606.25652v1-auto-labelling-based-domain-transfer-for-3d-object-detection-on-a-bicycle-mounted-lidar-platform" data-sidebar-item="{&quot;title&quot;: &quot;Auto-Labelling-Based Domain Transfer for 3D Object Detection on a Bicycle-Mounted LiDAR Platform&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.25652v1-auto-labelling-based-domain-transfer-for-3d-object-detection-on-a-bicycle-mounted-lidar-platform&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;使用nuScenes数据集评估3D检测&quot;}">Auto-Labelling-Based Domain Transfer for 3D Object Detection on a Bicycle-Mounted LiDAR Platform</a>

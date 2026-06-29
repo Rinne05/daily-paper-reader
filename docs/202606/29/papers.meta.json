@@ -1,0 +1,24 @@
+{
+  "label": "2026-06-29",
+  "date": "2026-06-29",
+  "generated_at": "2026-06-29T21:52:02",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202606/29/2606.22631v1-4dvlt-dynamic-scene-understanding-with-worldline-centered-vision-language-tracking",
+      "section": "quick",
+      "title_en": "4DVLT: Dynamic Scene Understanding with Worldline-Centered Vision-Language Tracking",
+      "authors": "Chaoyue Li, Boxue Yang, Shengyao Zhou, Haoyang Wu, Rui Qian, Linfeng Zhang",
+      "date": "2026-06-21",
+      "pdf": "https://arxiv.org/pdf/2606.22631v1",
+      "score": "6.0",
+      "evidence": "多视图4D场景理解与语言跟踪",
+      "tldr": "现有4D动态场景理解无法将语言与时空中持续存在的物体世界线有效关联。为此，提出4DVLT任务与Instruct-4D基准，包含129.4K问答对与9类推理查询。并设计4DTrack框架，构建物体中心4D状态图，通过度量引导路由、双向解码与运动学校准实现指令条件的世界线推理。在基准上，4DTrack达到62.68 TGA_Top1，超越最佳基线19.62分，表明世界线中心建模可同时提升目标定位与世界线质量。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "4D dynamic scene understanding requires grounding language to a persistent worldline that binds identity, metric 3D motion, and synchronized multi-view 2D projections. Existing paradigms capture only part of this structure: large multimodal models reason over rich visual evidence but rarely preserve metric topology, while vision-language tracking remains tied to fragmented 2D or 3D outputs and local continuation. We therefore introduce \\textbf{4DVLT}, a worldline-centered task for instruction-conditioned 4D dynamic scene understanding in fully observed multi-view video, and \\textbf{Instruct-4D}, a benchmark with 129.4K question-answer pairs, 64.7K target entities, 851 scenes, and 9 reasoning-oriented query types. To address this setting, we present \\textbf{4DTrack}, which casts instruction-conditioned tracking as graph-conditioned worldline inference through an object-centric 4D state graph, metric-guided routing, bidirectional decoding, and kinematic calibration. On Instruct-4D, 4DTrack-Qwen3.5-9B reaches 62.68 $\\mathrm{TGA}_{\\mathrm{Top1}}$ and surpasses the best adapted VLT baseline by 19.62 points. These results show that worldline-centered modeling improves both target grounding and recovered worldline quality. The project page is available at https://github.com/mikubaka88/4DVLT.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

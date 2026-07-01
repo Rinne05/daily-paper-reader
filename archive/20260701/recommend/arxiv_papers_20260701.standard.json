@@ -1,0 +1,95 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-01T20:55:55.545952+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2606.31096v1",
+      "source": "arxiv",
+      "title": "Horizon3D: Sparse Radar-Camera Fusion for Long-Range 3D Perception in Autonomous Driving",
+      "abstract": "Long-range 3D object detection is critical for safe autonomous driving at highway speeds, yet existing radar-camera fusion methods remain limited at extended ranges. BEV-based methods capture scene-level context but incur rapidly growing computation and often lose fine-grained object detail, while query-based methods are efficient but provide limited scene-level context. Temporal fusion further requires both multi-frame accumulation for sparse distant observations and object-level motion modeling for fast-moving objects. We propose Horizon3D, a sparse radar-camera fusion framework for long-range 3D object detection that combines Gaussian primitives with sparse BEV features. Horizon3D initializes Gaussian primitives at radar- and camera-estimated object keypoints using Keypoint-Guided Gaussian Initialization, refines them through Object-Centric Sparse Fusion, and splats them onto the BEV plane to fuse object-level detail with sparse radar BEV context. It further introduces Dual-Path Temporal Fusion, which aggregates temporal cues through a BEV path for scene-level accumulation and a Gaussian path for object-level motion propagation. Experiments on TruckScenes show that Horizon3D achieves state-of-the-art radar-camera 3D detection performance. On the validation set, it outperforms the previous best method by +3.0 NDS and +1.6 mAP while maintaining competitive inference speed.",
+      "authors": [
+        "Geonho Bang",
+        "Geunju Baek",
+        "Dongyoung Lee",
+        "Wonjun Jeong",
+        "Jun Won Choi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-30T03:36:00+00:00",
+      "link": "https://arxiv.org/pdf/2606.31096v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "long-range 3D object detection using radar-camera fusion with Gaussian primitives",
+      "llm_evidence_cn": "使用雷达-相机融合和高斯原语的长距离3D目标检测方法",
+      "llm_evidence": "使用雷达-相机融合和高斯原语的长距离3D目标检测方法",
+      "canonical_evidence": "使用雷达-相机融合和高斯原语的长距离3D目标检测方法",
+      "llm_tldr_en": "Horizon3D proposes a sparse radar-camera fusion framework for long-range 3D object detection, combining Gaussian primitives with sparse BEV features to handle distant objects effectively.",
+      "llm_tldr_cn": "针对自动驾驶长距离3D目标检测，现有雷达-相机融合方法在远距离性能有限。本文提出Horizon3D框架，利用高斯原语和稀疏BEV特征进行雷达-相机融合，有效检测远处物体。实验在长距离场景上验证了其优越性能。该方法虽非纯视觉，但其高斯原语和稀疏表示技术可被纯视觉3D检测借鉴。",
+      "llm_tldr": "针对自动驾驶长距离3D目标检测，现有雷达-相机融合方法在远距离性能有限。本文提出Horizon3D框架，利用高斯原语和稀疏BEV特征进行雷达-相机融合，有效检测远处物体。实验在长距离场景上验证了其优越性能。该方法虽非纯视觉，但其高斯原语和稀疏表示技术可被纯视觉3D检测借鉴。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.30754v1",
+      "source": "arxiv",
+      "title": "Streaming Gaussian Encoding for 4D Panoptic Occupancy Tracking",
+      "abstract": "Camera-based 4D panoptic occupancy tracking (4D-POT) is a promising paradigm for holistic scene understanding from multi-view imagery, enabling joint reasoning about geometry, semantics, and object identities across time. Recent mask-based pipelines achieve strong performance by propagating instance queries across frames. However, their underlying volumetric representations are typically recomputed at each timestep, limiting geometric temporal consistency, particularly under occlusion and for static scene elements. To address this limitation, we propose a streaming Gaussian encoder that maintains a persistent volumetric scene representation for 4D-POT. Our method models the scene as a fixed-size set of latent Gaussian queries that are propagated via ego-motion compensation and refreshed under a confidence-guided budget constraint. Crucially, we shape Gaussian opacities through depth-based supervision to serve as proxy for visibility, enabling confidence to accumulate as a temporally aggregated measure of persistent scene support. Together with a warmup-based multi-frame training strategy, this yields representation-level temporal coherence beyond decoder-only tracking. Extensive experiments on Occ3D-extended nuScenes and Waymo establish a new state-of-the-art for camera-based 4D-POT, improving tracking consistency with negligible computational overhead while remaining fully compatible with existing mask-based pipelines. We provide code and models at https://sge.cs.uni-freiburg.de.",
+      "authors": [
+        "Maximilian Luz",
+        "Thomas Nürnberg",
+        "Yakov Miron",
+        "Abhinav Valada"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-06-29T18:00:42+00:00",
+      "link": "https://arxiv.org/pdf/2606.30754v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multi-view camera-based 4D occupancy tracking method transferable to 3D detection",
+      "llm_evidence_cn": "多视角相机4D占据跟踪方法，可迁移至3D目标检测",
+      "llm_evidence": "多视角相机4D占据跟踪方法，可迁移至3D目标检测",
+      "canonical_evidence": "多视角相机4D占据跟踪方法，可迁移至3D目标检测",
+      "llm_tldr_en": "Proposes streaming Gaussian encoder for multi-view camera-based 4D panoptic occupancy tracking, maintaining persistent volumetric representation; method can inform camera-only 3D detection.",
+      "llm_tldr_cn": "针对多视图相机场景理解，现有4D全景占据跟踪方法每步重建体素表示导致时间不一致。本文提出流式高斯编码器，维护持久场景表示，通过潜在高斯查询和自运动传播实现高效跟踪。该方法虽非直接目标检测，但其提出的多视图表示和跟踪方案可启发纯视觉3D检测中的时空建模，具有方法迁移价值。",
+      "llm_tldr": "针对多视图相机场景理解，现有4D全景占据跟踪方法每步重建体素表示导致时间不一致。本文提出流式高斯编码器，维护持久场景表示，通过潜在高斯查询和自运动传播实现高效跟踪。该方法虽非直接目标检测，但其提出的多视图表示和跟踪方案可启发纯视觉3D检测中的时空建模，具有方法迁移价值。",
+      "llm_tags": [
+        "query:nuscenes-dod:composite"
+      ],
+      "matched_query_tag": "query:nuscenes-dod:composite",
+      "matched_query_text": "Papers central to 使用nuScenes数据集的多视角纯视觉3D目标检测相关论文, especially work that connects or combines: nuScenes dataset for autonomous driving; 3D object detection methods; nuScenes multi-view camera-only 3D detection; 3D object detection on nuScenes dataset; pure visual 3D detection without LiDAR; research papers on 3D object detection using the nuScenes dataset; nuScenes multi view camera only 3D object detection papers; multi view 3D object detection on nuScenes dataset; pure visual 3D detection using nuScenes.",
+      "matched_requirement_id": "req-composite-nuscenes-dod",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

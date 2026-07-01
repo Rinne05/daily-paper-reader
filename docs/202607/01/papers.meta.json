@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-01",
+  "date": "2026-07-01",
+  "generated_at": "2026-07-01T20:58:11",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/01/2606.31096v1-horizon3d-sparse-radar-camera-fusion-for-long-range-3d-perception-in-autonomous-driving",
+      "section": "deep",
+      "title_en": "Horizon3D: Sparse Radar-Camera Fusion for Long-Range 3D Perception in Autonomous Driving",
+      "authors": "Geonho Bang, Geunju Baek, Dongyoung Lee, Wonjun Jeong, Jun Won Choi",
+      "date": "2026-06-30",
+      "pdf": "https://arxiv.org/pdf/2606.31096v1",
+      "score": "8.0",
+      "evidence": "使用雷达-相机融合和高斯原语的长距离3D目标检测方法",
+      "tldr": "针对高速自动驾驶中长距离3D检测难题，现有雷达-相机融合方法在远距离性能有限。Horizon3D提出稀疏融合框架，利用高斯原语与稀疏BEV特征，通过关键点引导初始化、对象中心融合及双路径时序聚合，在TruckScenes数据集上以+3.0 NDS和+1.6 mAP超越先前最优方法，同时保持竞争性推理速度。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Long-range 3D object detection is critical for safe autonomous driving at highway speeds, yet existing radar-camera fusion methods remain limited at extended ranges. BEV-based methods capture scene-level context but incur rapidly growing computation and often lose fine-grained object detail, while query-based methods are efficient but provide limited scene-level context. Temporal fusion further requires both multi-frame accumulation for sparse distant observations and object-level motion modeling for fast-moving objects. We propose Horizon3D, a sparse radar-camera fusion framework for long-range 3D object detection that combines Gaussian primitives with sparse BEV features. Horizon3D initializes Gaussian primitives at radar- and camera-estimated object keypoints using Keypoint-Guided Gaussian Initialization, refines them through Object-Centric Sparse Fusion, and splats them onto the BEV plane to fuse object-level detail with sparse radar BEV context. It further introduces Dual-Path Temporal Fusion, which aggregates temporal cues through a BEV path for scene-level accumulation and a Gaussian path for object-level motion propagation. Experiments on TruckScenes show that Horizon3D achieves state-of-the-art radar-camera 3D detection performance. On the validation set, it outperforms the previous best method by +3.0 NDS and +1.6 mAP while maintaining competitive inference speed.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/01/2606.30754v1-streaming-gaussian-encoding-for-4d-panoptic-occupancy-tracking",
+      "section": "quick",
+      "title_en": "Streaming Gaussian Encoding for 4D Panoptic Occupancy Tracking",
+      "authors": "Maximilian Luz, Thomas Nürnberg, Yakov Miron, Abhinav Valada",
+      "date": "2026-06-29",
+      "pdf": "https://arxiv.org/pdf/2606.30754v1",
+      "score": "6.0",
+      "evidence": "多视角相机4D占据跟踪方法，可迁移至3D目标检测",
+      "tldr": "现有基于相机的4D全景占用追踪方法逐帧重建体积表示，导致时间一致性差。本文提出流式高斯编码器，维护固定大小的潜伏高斯查询集，通过自运动补偿和置信度预算进行传播刷新，利用深度监督使高斯不透明度作为可见性代理，实现表示级时间连贯。结合预热多帧训练，在Occ3D扩展的nuScenes和Waymo上取得SOTA，追踪一致性显著提升且计算开销极低，兼容现有掩码管道。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Camera-based 4D panoptic occupancy tracking (4D-POT) is a promising paradigm for holistic scene understanding from multi-view imagery, enabling joint reasoning about geometry, semantics, and object identities across time. Recent mask-based pipelines achieve strong performance by propagating instance queries across frames. However, their underlying volumetric representations are typically recomputed at each timestep, limiting geometric temporal consistency, particularly under occlusion and for static scene elements. To address this limitation, we propose a streaming Gaussian encoder that maintains a persistent volumetric scene representation for 4D-POT. Our method models the scene as a fixed-size set of latent Gaussian queries that are propagated via ego-motion compensation and refreshed under a confidence-guided budget constraint. Crucially, we shape Gaussian opacities through depth-based supervision to serve as proxy for visibility, enabling confidence to accumulate as a temporally aggregated measure of persistent scene support. Together with a warmup-based multi-frame training strategy, this yields representation-level temporal coherence beyond decoder-only tracking. Extensive experiments on Occ3D-extended nuScenes and Waymo establish a new state-of-the-art for camera-based 4D-POT, improving tracking consistency with negligible computational overhead while remaining fully compatible with existing mask-based pipelines. We provide code and models at https://sge.cs.uni-freiburg.de.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

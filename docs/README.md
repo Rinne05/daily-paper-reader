@@ -6,26 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-01
-- 运行时间：2026-07-01 20:58:03 UTC
+- 最新运行日期：2026-07-02
+- 运行时间：2026-07-02 21:40:29 UTC
 - 运行状态：成功
-- 本次总论文数：2
-- 精读区：1
+- 本次总论文数：1
+- 精读区：0
 - 速读区：1
 
 ### 今日简报（AI）
-今日精读高分论文《Horizon3D》，探索稀疏雷达与相机融合实现远程3D感知；速读关注4D全景占用跟踪的流式高斯编码。最值得看的是雷达-相机融合的长距离感知方案，在自动驾驶中潜力突出。建议关注融合策略如何平衡稀疏性与远距离精度，适合入门深度学习感知。
-- 详情：[/202607/01/README](/202607/01/README)
+今天仅速读一篇关于多视角行人检测的论文，核心是融合3D与2D信息。
+建议关注其提出的双几何约束机制，对提升跨视角检测一致性有启发。
+下一步可尝试验证该方法在密集遮挡场景中的实际效果。
+- 详情：[/202607/02/README](/202607/02/README)
 
 ### 精读区论文标签
-1. [Horizon3D: Sparse Radar-Camera Fusion for Long-Range 3D Perception in Autonomous Driving](/202607/01/2606.31096v1-horizon3d-sparse-radar-camera-fusion-for-long-range-3d-perception-in-autonomous-driving)  
-   标签：评分：8.0/10、query:nuscenes-dod
-   evidence：使用雷达-相机融合和高斯原语的长距离3D目标检测方法
+- 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Streaming Gaussian Encoding for 4D Panoptic Occupancy Tracking](/202607/01/2606.30754v1-streaming-gaussian-encoding-for-4d-panoptic-occupancy-tracking)  
+1. [MVDGC: Joint 3D and 2D Multi-view Pedestrian Detection via Dual Geometric Constraints](/202607/02/2607.00273v1-mvdgc-joint-3d-and-2d-multi-view-pedestrian-detection-via-dual-geometric-constraints)  
    标签：评分：6.0/10、query:nuscenes-dod
-   evidence：多视角相机4D占据跟踪方法，可迁移至3D目标检测
+   evidence：多视角行人检测使用BEV投影，类似纯视觉3D检测
 
 
 <div class="dpr-home-promo-card">

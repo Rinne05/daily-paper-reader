@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-02",
+  "date": "2026-07-02",
+  "generated_at": "2026-07-02T21:40:35",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/02/2607.00273v1-mvdgc-joint-3d-and-2d-multi-view-pedestrian-detection-via-dual-geometric-constraints",
+      "section": "quick",
+      "title_en": "MVDGC: Joint 3D and 2D Multi-view Pedestrian Detection via Dual Geometric Constraints",
+      "authors": "Thinh Phan, Hao Vo, Khoa Vo, Thanh Ngo, Cuong Pham, Ngan Le",
+      "date": "2026-06-30",
+      "pdf": "https://arxiv.org/pdf/2607.00273v1",
+      "score": "6.0",
+      "evidence": "多视角行人检测使用BEV投影，类似纯视觉3D检测",
+      "tldr": "多视点行人检测中，将图像特征投影到鸟瞰图时存在严重畸变，导致空间结构破坏和特征模糊。本工作提出MVDGC框架，采用稀疏3D圆柱查询同时约束鸟瞰图与图像视图的几何一致性，直接从完整图像特征提取信息，避免投影畸变。通过联合优化3D圆柱位置和形状，统一了鸟瞰图定位与2D检测任务，在密集场景下显著提升了定位精度。该工作首次将双几何约束融入统一框架，为多视点检测提供了高效鲁棒的新范式。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "The core challenge in multi-view pedestrian detection (MVPD) lies in effective aggregation of visual features from different viewpoints for robust occlusion reasoning. Recent approaches have addressed this by first projecting image-view features onto a Bird's Eye View (BEV) map, where ground localization is then performed. Despite impressive performance, the perspective transformation induces severe distortion, causing spatial structure break and degrading the quality of object feature extraction. The blurred and ambiguous features hinder accurate BEV point localization, especially in densely populated regions. Moreover, the strong mutual relationship between the BEV ground point and image bounding boxes is not capitalized on. Although multi-view consistency of 2D detections can serve as a powerful constraint in BEV space, these detections are commonly treated as auxiliary signals rather than being jointly optimized with the primary task.In this work, we propose \\textbf{MVDGC}, a unified framework that \\emph{jointly estimates pedestrian locations on the BEV plane and 2D bounding boxes in image views}. MVDGC employs a \\emph{sparse set of 3D cylindrical queries} that embraces geometric context across both BEV and image views, enforcing dual spatial constraints for precise localization. Specifically, the geometric constraints is established by modeling each pedestrian as a vertical cylinder whose center lies on the BEV plane and whose projection casts a rectangular box in the image views. These queries function as shape anchors that directly extract 2D features from the intact image-view features using camera projection, eliminating projection-induced distortions. The 3D cylindrical query enables the unification of BEV and ImV localization into a single task: 3D cylinder position and shape refinement. Code is available at: https://github.com/UARK-AICV/MVDGC",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

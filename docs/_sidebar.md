@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-02 <!--dpr-date:20260702-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/02/2607.00273v1-mvdgc-joint-3d-and-2d-multi-view-pedestrian-detection-via-dual-geometric-constraints" data-sidebar-item="{&quot;title&quot;: &quot;MVDGC: Joint 3D and 2D Multi-view Pedestrian Detection via Dual Geometric Constraints&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.00273v1-mvdgc-joint-3d-and-2d-multi-view-pedestrian-detection-via-dual-geometric-constraints&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;多视角行人检测使用BEV投影，类似纯视觉3D检测&quot;}">MVDGC: Joint 3D and 2D Multi-view Pedestrian Detection via Dual Geometric Constraints</a>
   * 2026-07-01 <!--dpr-date:20260701-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/01/2606.31096v1-horizon3d-sparse-radar-camera-fusion-for-long-range-3d-perception-in-autonomous-driving" data-sidebar-item="{&quot;title&quot;: &quot;Horizon3D: Sparse Radar-Camera Fusion for Long-Range 3D Perception in Autonomous Driving&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2606.31096v1-horizon3d-sparse-radar-camera-fusion-for-long-range-3d-perception-in-autonomous-driving&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;使用雷达-相机融合和高斯原语的长距离3D目标检测方法&quot;}">Horizon3D: Sparse Radar-Camera Fusion for Long-Range 3D Perception in Autonomous Driving</a>

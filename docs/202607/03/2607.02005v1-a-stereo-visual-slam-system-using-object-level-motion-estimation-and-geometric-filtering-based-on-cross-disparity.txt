@@ -1,0 +1,370 @@
+Title: A Stereo Visual SLAM System Using Object-Level Motion Estimation and Geometric Filtering Based on Cross Disparity
+
+URL Source: https://arxiv.org/pdf/2607.02005v1
+
+Published Time: Fri, 03 Jul 2026 01:09:22 GMT
+
+Number of Pages: 10
+
+Markdown Content:
+> 1
+
+# A Stereo Visual SLAM System Using Object-Level Motion Estimation and Geometric Filtering Based on Cross Disparity 
+
+Sujan Kumar Dhali, Bhaskar Dasgupta 
+
+Abstract —This paper presents OCD SLAM, a dynamic stereo visual SLAM framework that extends ORB-SLAM2 by jointly addressing dynamic objects and dynamic features in the scene. Usual visual SLAM systems operating in dynamic environments often fail in the presence of moving objects, due to the static-world assumption used in pose estimation and mapping. To address this predicament, we introduce a novel geometric ap-proach based on the discrepancy between disparity and a newly proposed notion called “cross disparity”, which exploits both temporal and stereo inconsistency to identify dynamic feature points. Complementary to this feature-level motion analysis, OCD SLAM integrates a 3D object detection module (SMOKE) with Kalman filter-based object tracking to perform object-level motion classification, enabling robust separation of static and dynamic scene elements for accurate pose estimation. The pro-posed approach has been evaluated on various sequences from the KITTI Odometry and KITTI Raw datasets. Results demonstrate that OCD SLAM achieves significant improvement in trajectory accuracy compared to ORB-SLAM2 and several state-of-the-art dynamic SLAM methods. Ablation studies further demonstrate the effectiveness of the cross disparity module in the KITTI Raw dataset and show that this method is able to detect dynamic features that are missed by the 3D object detection scheme alone. 
+
+Index Terms —Visual SLAM, Cross disparity, Dynamic map points, 3D object detection, Autonomous driving. 
+
+I. I NTRODUCTION 
+
+One of the fundamental requirements for applications like autonomous driving, robotic navigation etc., is the perception of the environment and self-localization. To address such purposes, simultaneous localization and mapping (i.e., SLAM) was developed. SLAM relies on onboard sensors such as LiDAR and cameras to estimate the vehicle’s trajectory while constructing a map of the environment. Visual SLAM (vS-LAM) is a subset of the SLAM domain that uses cameras or camera-like sensors, and has become well known for its cost-effectiveness and strong performance. ORB-SLAM2 [1], DSO-SLAM [2], LSD SLAM [3], RGBD SLAM [4] are some of the well-known vSLAM algorithms that have been used extensively over the last decade. However, the key limitation of these methods is the assumption that the environment is static; thus, they fail when objects in the field of view are in motion. To mitigate the effect of dynamic objects, several methods have been proposed, including geometric, deep learning, and hybrid approaches. In geometric methods, the motion or prop-erties of image features are analyzed to segregate dynamic and static elements. These methods use several properties 
+
+> S. K. Dhali is with Department of Mechanical Engineering, Indian Institute of Technology Kanpur, Kanpur 208016, India (e-mail: sujankd20@iitk.ac.in). B. Dasgupta is with Department of Mechanical Engineering, Indian Institute of Technology Kanpur, Kanpur 208016, India (e-mail: dasgupta@iitk.ac.in).
+
+of the features, such as the epipolar or Euclidean distance between correspondences, the error between measured and projected depth, etc. In the case of deep learning methods, various learning models are used to detect predefined dynamic objects such as cars, bicycles, and pedestrians so that their influence can be excluded from the SLAM process. In other deep learning-based approaches, dynamic objects are identified by tracking their motion in the environment. These methods have several limitations, which are discussed in the following. (a) In most deep learning-based methods, the segmented mask areas or the regions within the detected bounding boxes are removed from the frame so that features are not extracted from those regions. However, this may degrade performance, as it can remove areas that are temporarily static and useful for estimation, such as parked vehicles. (b) Deep learning networks are typically trained to recog-nize a limited set of predefined object classes, such as cars or pedestrians. Consequently, if a dynamic object does not belong to any of these classes, the system may fail to detect it, and features on that object may negatively affect the bundle adjustment process. (c) On the contrary, geometric methods scrutinize each feature in the environment; often, through misinterpretation, removing many static features that clearly belong to static objects. (d) In geometric methods, epipolar or multi-view geometric constraints are commonly used, which mainly verify positional consistency (2D geometric relations) rather than depth consis-tency. Thus, these methods fail when dynamic objects move along the epipolar line, which frequently occurs in outdoor scenarios. (e) Depth-based geometric methods also have limitations; they are highly sensitive to sensor noise, do not account for pixel-level accuracy, and often assume that 3D points are tracked perfectly. To solve the above problem, we propose a stereo SLAM system named OCD SLAM, which integrates a method for detecting and tracking 3D objects to identify moving and dynamic objects. Moreover, this paper introduces a novel geo-metric approach based on “cross disparity,” which effectively addresses disparity rather than depth, and provides a better detection method for motion classification of features. OCD SLAM is so named due to its being “object-aware” through stereo vision and using cross disparity in the pro-cedure. It is based on the framework of ORB-SLAM2. This method uses SMOKE (Single-Stage Monocular 3D Object Detection via Keypoint Estimation) [5] for detecting the 3D properties of objects, which are further used for tracking and 
+
+> arXiv:2607.02005v1 [cs.RO] 2 Jul 2026 2
+
+later participate in the Kalman filter–based velocity estimation process that classifies the motion of the detected objects. After classification, the map points belonging to dynamic objects are excluded from the estimation process, whereas the features on static objects are labeled as static. To identify dynamic features that belong to the objects missed or undetected by the 3D segmentation module, the present paper introduces a novel geometric entity named cross disparity, enabling a better understanding of the motion properties of the feature. The ge-ometric module based on it is further responsible for allocating higher weight to static points, which helps achieve better esti-mation in the bundle adjustment process. The proposed OCD SLAM is evaluated on public benchmark datasets, including the KITTI Odometry [6] and KITTI raw [7] sequences, and its performance is compared against ORB-SLAM2 and several state-of-the-art dynamic SLAM approaches. The next section reviews the various methods of dynamic SLAM. Section III describes the methodology and implemen-tation details. Section IV analyzes the experimental results and compares the proposed method with other algorithms. Finally, in Section V, the method and results are summarized, outlining directions for future work. II. R ELATED WORK 
+
+Literature on detection of dynamic points or features can be broadly categorized into two groups: geometric methods and deep learning-based methods. (a) Geometric Methods: In geometric methods, the features of the environment are separated between static and dynamic points using various spatial and temporal properties. The geometric evaluation of features is particularly important in cases where no prior knowledge about the environment is available. Some of the geometric methods are discussed below. Li and Lee [8] proposed a method for computing vi-sual odometry in dynamic environments by assigning higher weights to static features in the Intensity-Assisted Iterative Closest Points (IAICP) algorithm of Shile and Dongheui [9]. The weights of the features (i.e., the detected foreground depth edges) were determined by comparing the ego-motion of the point clouds between the current and previous keyframes. MVS-SLAM [10] used RANSAC based on the epipolar con-straint to remove most outliers; furthermore, the differences in distance and angle between actual and reprojected 3D points were analyzed to detect the motion properties of these points. Similarly, Tan et al. [11] developed a method that used an improved RANSAC algorithm based on the inlier and outlier ratios of the previous frame for sample generation and hypoth-esis evaluation in the current frame. Dai et al. [12] proposed an RGB-D SLAM approach that removed dynamic points by optimizing the graph that represents the correlation between adjacent map points. Sun et al. [13] proposed a method for detecting dynamic regions using depth image segmentation and particle filter tracking. In StaticFusion [14], dynamic features were differentiated by comparing the geometric and photometric errors between the current and synthetically gen-erated images. The synthetic image was produced using the estimated pose and the previous frame. (b) Deep Learning Based Methods: Deep learning-based methods often offer an advantage over geometric methods as they leverage prior knowledge about the environment. This prior information about objects enables the accurate detection of entire dynamic regions, leading to more reliable segregation of dynamic points. Several studies have focused exclusively on deep learning-based approaches. Mask-SLAM [15] employs DeepLabv2 [16] to segment predefined dynamic objects, using only the features from static regions for visual odometry estimation. Feng et al. [17] adopted a similar strategy but utilized an enhanced semantic segmentation network. Fangwei et al. [18], Yubao et al. [19], and Ao et al. [20] proposed methods that update the motion probability of features using purely semantic cues. Ganti et al. [21] introduced a method that selects features from the environment with lower likeli-hoods of motion, improving robustness in dynamic scenes. The purely semantic or object detection-based methods have a major limitation, as they often fail to detect objects that are moving but not predefined as dynamic in the segmentation algorithm. Furthermore, whenever these objects are detected, they are interpreted as dynamic even if they are parked. To overcome this limitation, many approaches combine both deep learning and geometric techniques. This integration leverages the strengths of both domains—semantic awareness from deep networks and motion consistency from geometric constraints. In DS-SLAM [22], a semantic network such as SegNet [23] is used to remove features from the predefined dynamic segments. The remaining features are then verified using the epipolar constraint for motion consistency. Similarly, the method proposed by Wen et al. [24] uses SegNet, where static and dynamic objects are first segmented. The 3D scene flow of all features between consecutive frames is then computed, and dynamic features are identified by finding the discrepancy in the pixel displacement. DynaSLAM [25] uses Mask R-CNN [26] as its semantic network and computes the difference between projected and actual 3D points to determine the motion properties of map points. Dhali and Dasgupta [27] proposed a better motion constraint based on the trifocal constraint and further incorporated YOLOv8 [28] as a seg-mentation module. Similar to Dai et al. [12], AirDos [29] incorporates a rigidity constraint in addition to reprojection and motion constraints. This rigidity constraint ensures that the distance between two features of the same object remains consistent over time. DGS-SLAM [30] uses semantic segmentation with YOLACT++ [31] to remove predefined dynamic objects. It further segments image regions by applying k-means clustering on the depth map and determines the motion characteristics of each segment by counting the number of dynamic points identified through differences between actual and projected depths. RSO-SLAM [32] is another method that uses k-means clustering on dense optical flow to segment regions with different motion patterns. Furthermore, it uses YOLOv5 [33] for semantic segmentation. Yang et al. [34] proposed a method that detects static points on dynamically labeled objects. They used DeepLabv3 [35] to assign semantic labels to each feature and S2R-DepthNet [36] 3
+
+Fig. 1: Framework of the OCD SLAM system. ORB SLAM2 framework is enhanced with several modules (shown in yellow); namely static point detection, 3D object detection and tracking, motion labeling, and velocity-based map point culling. to compute feature depth. By jointly verifying the label and depth consistency, static points were identified. Several deep learning-based approaches detect dynamic ob-jects by tracking them over time. Quang et al. [37] introduced a method in which YOLOv8 is used to obtain both bounding boxes and segmentation masks of objects, then the bounding boxes of the objects are tracked through feature-based associ-ation to identify whether they are moving or static. Zhang et al. [38] proposed a similar tracking strategy but further improved robustness by estimating object velocities from the associated 3D points. Song et al. [39] proposed a dynamic SLAM framework that identifies and tracks objects using CenterNet [40], which tracks objects based on the predicted displacement of object centers. In OCD-SLAM, the focus is on object-level motion detec-tion, where detected objects are tracked across consecutive frames, and stationary objects are utilized in the pose esti-mation process. To further enhance the system’s robustness, a novel geometric technique, termed cross disparity, is intro-duced in the present paper. This method enables feature-level motion classification by exploiting disparity consistency across stereo pairs, thereby facilitating more accurate separation of static and dynamic features. III. M ETHODOLOGY 
+
+The proposed OCD-SLAM is based on the stereo ar-chitecture of ORB-SLAM2 [1], with the addition of a 3D object segmentation thread and various submodules. Figure 1 illustrates the overall framework of OCD SLAM. Our method consists of four parallel threads, namely track-ing, local mapping, loop closing, and a 3D object detection thread. One image (by practice, usually the left) from each stereo pair (grayscale or RGB) first enters both the 3D object detection thread and the feature detection module in the tracking thread, where the former is responsible for estimating the 3D information of visible objects, such as their spatial dimensions, orientations, and 3D locations with respect to the camera coordinate system, while the latter detects image features. Next, the 3D information of the detected objects at several instances and the extracted features are passed through various submodules to estimate the velocity of the objects. To estimate object velocity, the features detected by the ORB extractor are first associated with each detected object. These objects are then assigned unique IDs and tracked across consecutive frames, and their velocities are estimated using a Kalman filter. The estimated velocity is then used to assign a motion label to each object. Based on the velocity of the tracked object and its corresponding covariance, an object is classified as “Static” (or parked) or “Dynamic” (moving). After motion labels are assigned, they are used for filtering the features — features belonging to “Dynamic” objects are labeled as dynamic, while features associated with “Static” objects are treated as static. Additionally, to identify dynamic features belonging to undetected moving objects, a geometric approach based on 
+
+cross disparity is proposed. The static features determined through both velocity-based and geometry-based approaches are subsequently used in bundle adjustment. In the following sections, these components are explained in detail. 
+
+A. Cross disparity-based geometric motion constraint 
+
+To classify the motion properties of feature points (or associated map points), several geometric approaches have been proposed as discussed in Section II. In this work, a novel geometric approach is introduced that distinguishes static from dynamic features by comparing their disparity and cross disparity. In stereo vision, disparity refers to the horizontal shift of a feature’s projection between the left and right images of a rectified stereo pair. It is defined as 
+
+Dt = ( ptL)x − (ptR)x (1) 4
+
+where ptL and ptR denote the corresponding feature positions in the left and right images at time t, and (·)x denotes the horizontal image coordinate. This disparity is commonly used to compute depth and reconstruct 3D map points. We define cross disparity as follows. Let pt−1 
+
+> L
+
+be a feature point in the previous left image, which reappears in the current left image at location qtL, and its corresponding 3D position is 
+
+Qt. When Qt is projected into the right image of the previous frame, its position is denoted by qt−1 
+
+> R
+
+. For a static point, qt−1
+
+> R
+
+is coincident with pt−1 
+
+> R
+
+, though not necessarily for a moving point. In the definition of disparity, using qt−1 
+
+> R
+
+instead of pt−1
+
+> R
+
+would provide a new entity, named here as cross disparity ,and given by 
+
+Dt−1 
+
+> cross
+
+= ( pt−1 
+
+> L
+
+)x − (qt−1 
+
+> R
+
+)x . (2) The difference between the disparity Dt−1 and the cross disparity Dt−1 
+
+> cross
+
+of a feature indicates that the feature lies on a moving object, and it is therefore classified as dynamic. The converse of it, when these quantities are consistent (i.e., their values are close within a tolerance), the feature being static, is also mostly true. The cross disparity constraint associated with the geometric error of a feature is defined by 
+
+|Dt−1 
+
+> cross
+
+− Dt−1| ≤ τ , (3) using a tolerance τ .
+
+Fig. 2: Principle of the proposed cross disparity constraint. Consistent disparity and cross disparity values indicate static features (object A), while large deviations signify dynamic features (object B → B′) resulting from independent motion between frames. Figure 2 illustrates the principle of the proposed geometric method for distinguishing static and dynamic features. At time 
+
+(t − 1) , the stereo pair ( CamL t−1, CamR t−1) captures both objects A and B. Between time (t − 1) and t, the camera undergoes a known motion t−1Tt, while object A remains fixed and object B moves to a new position B′. Consequently, in the current frame CamL t, the image reflects the new scene configuration: A in its original location and B shifted to B′.To evaluate feature consistency, correspondences are first established between CamL t−1, CamL t (shown in the blue dotted line), showing where the features observed in the previous frame appear in the current frame. These features of 
+
+CamL t are then triangulated to obtain the 3D position, and projected back into the view of CamR t−1 using the relative pose t−1Tt and baseline distance. For the static object A, the back-projected points align consistently with their locations in CamR t−1, resulting in the disparity (between CamL t−1,
+
+CamR t−1) and the cross disparity (between CamL t−1 and the back-projected points in CamR t−1) being almost same. In contrast, features belonging to the moving object B do not align. Although the features of object B are observed in CamL t−1, their corresponding 3D map points derived from CamL t project to different positions in CamR t−1,leading to a mismatch between disparity and cross disparity. This difference in values shows that the feature lies on a dynamic object. Unlike conventional depth comparison meth-ods, which validate depth consistency by projecting features from the current frame ( CamL t) onto the previous left image (CamL t−1), the proposed cross disparity approach performs validation through an additional viewpoint ( CamR t−1), that means, checking geometric consistency from a completely different viewpoint. This cross-view verification establishes a wider geometric baseline that combines both temporal and stereo perspectives. Algorithm 1 summarizes this method for identifying static points. 
+
+Algorithm 1: Cross Disparity Based Dynamic Feature Detection                                                                      
+
+> Input: Stereo pairs (CamL t−1, CamR t−1),(CamL t, CamR t);Relative pose Tt−1→t; Disparity maps Dt−1
+> Output: Labels of static and dynamic feature points
+> 1Detect and match feature correspondences between CamL t−1and
+> CamL t;
+> 2for each matched feature pt−1
+> L↔qtLdo
+> 3a. Triangulate 3D point Qtfrom the current stereo pair
+> (CamL t, CamR t);
+> 4b. Back-project the transformed 3D point Qtinto CamR t−1to obtain its projected position qt−1
+> R;
+> 5c. Dt−1= ( pt−1
+> L)x−(pt−1
+> R)x;*/Compute disparity
+> 6d. Dt−1
+> X= ( pt−1
+> L)x−(qt−1
+> R)x;*/Compute cross disparity
+> 7e. ∆D=|Dt−1−Dt−1
+> X|;*/Calculate C-disparity error
+> 8if ∆D≤τthen
+> 9Label feature as static ;
+> 10 else
+> 11 Label feature as dynamic ;
+> 12 end
+> 13 end
+
+After the map points are categorized, separate weights are assigned to static and dynamic features, which are utilized in the bundle adjustment process. Notably, the geometric module operates only on features that are not part of detected objects (as described in Section III-B), thereby avoiding the unin-tended removal of static features. In the proposed approach, static and dynamic points are assigned weights of 1.0 and 0.001, respectively. By assigning a significantly lower weight to dynamic points, their influence on pose estimation and map optimization is effectively minimized, thereby achieving the intended objective of the method. 
+
+B. 3D Object Detection Thread 
+
+Our system uses SMOKE (Single-Stage Monocular 3D Ob-ject Detection via Keypoint Estimation) [5] to estimate the 3D bounding box of objects. This object detection thread operates on each incoming image and produces the components of a 5
+
+3D bounding box, such as a projected 3D keypoint (x, y, z ),dimensions (h, w, l ), and the yaw angle (φ).SMOKE is trained on the KITTI [6] dataset, which includes cars, pedestrians, and bicycles — the majority of dynamic objects in outdoor driving environments. As a backbone, this model uses DLA-34 [41] with deformable convolutions to extract feature maps. It has two parallel prediction heads attached to such a feature map: (a) a keypoint classification head that predicts a heatmap whose peaks represent keypoint, i.e. the projected 3D centers of objects on the image plane, and (b) a regression head that encodes an 8-dimensional vector (depth offset, two subpixel offsets on the downsampled grid, residuals of object dimensions, and a vectorial encoding of the local orientation; i.e. δz, [δx, δy ], [δh, δw, δl ], [sin α, cos α])for each keypoint, which are required to construct 3D bound-ing box. In this method, the yaw angle is not directly estimated but can be computed using object location and local orientation as 
+
+φ = α + arctan 
+
+ xz
+
+
+
+. (4) With the dimension of an object, yaw angle ( φ), and the 3D location of the center of the object, the eight corners of the 3D bounding box with respect to the camera coordinates can be computed using equation (5). The eight corner points of the 3D bounding box can be projected further onto the image plane using equation (6) with the known camera calibration matrix. Here, [ ui 
+
+> wi
+
+, vi 
+
+> wi
+
+]T is the image point of corner {i} and 
+
+K is the 3×3 calibration matrix. Figure 3 shows the projected 3D bounding box. 
+
+
+
+xic
+
+yic
+
+zic
+
+
+
+> {i=1:8 }
+
+= Rot( y, φ )
+
+
+
+±h/ 2
+
+±w/ 2
+
+±l/ 2
+
+ +
+
+
+
+xyz
+
+ , (5) 
+
+
+
+ui
+
+vi
+
+wi
+
+ = K
+
+
+
+xic
+
+yic
+
+zic
+
+ . (6) 
+
+Fig. 3: Visualization of 3D object detection results generated by SMOKE [5]. Each green box represents a projected 3D bounding box estimated from monocular images. 
+
+C. Assigning features to each object 
+
+For assigning a feature to an object, the first objective is to find a polygon that encloses that object, with minimum background inclusion. The usual practice of using the rect-angular bounding box, as shown in Figure 4a, often encloses a significant area of the background in it. In our method, we compute a convex hull with the projected corner points, which creates a polygon around the object as shown in Figure 4b. If any features from the image are inside the polygon, they are considered as a part of the object. One of the advantages of using a convex hull instead of a 2D bounding box is that the polygon computed from the projected 3D corner points define a somewhat better (tighter) periphery of an object compared to the 2D bounding box. This more accurate coverage helps in producing clearer separation between background and fore-ground, and thereby helps in better allocation of feature points to an object.  
+
+> (a) (b)
+
+Fig. 4: Illustration of object boundary refinement in OCD SLAM. The 2D bounding box (left) encloses a larger back-ground area, while the constructed convex hull (right) defines a more accurate polygonal contour around the object. 
+
+D. Assigning ID to each object 
+
+To track an object through the stream of frames, first we have to identify the object in both the current and the previous frames. After the data association is complete, each object is assigned an ID, based on its previous frame ID, which helps it to be tracked in latter frames. Objects from the previous and current frames are associated by comparing them against multiple criteria. One method is to match the descriptors of the features associated with two objects. Qiang et al. [37] used a similar approach for identifying these associations. However, in outdoor scenarios where cars are parked in proximity, comparing only the features is not good enough for association. Therefore, we have used additional properties for matching the object between two frames. Two such properties are (i) the relative difference between the volumes of two objects, where the volume can be computed by multiplying the estimated height, width, and length; and (ii) the difference between the estimated 3D locations of two objects. The first property checks the size difference between two objects, while the latter checks whether the objects are in sufficient positional continuity across the images. After computing these two similarity measures in addition to the feature matching, a weighted sum of these parameters is calculated for each object in the current frame with every other object of the previous frame, and the object corresponding to the lowest error is assigned the same ID as the previous object ID. Table I shows a quantitative comparison of object tracking performance between the feature-only method and the proposed method. The table reports, for each object, the total number of frames during which the object was detected by the object detection 6
+
+module, the number of frames in which it was correctly tracked with a consistent ID, and the number of inconsistent ID observed. Our proposed method has fewer to no such cases of ID inconsistency compared to the feature-only method, which indicates better tracking.                       
+
+> Object Car A Car B Car C Car D Frames Visible 926 38 25 Frames tracked correctly (Feature-only) 822 25 16 Frames tracked correctly (Proposed)
+> 926 38 25
+> Different-ID (Feature-only) 1415 9Different-ID (Proposed)
+> 0020
+
+TABLE I: Quantitative comparison of object tracking perfor-mance between the feature-only and proposed method. The proposed method achieves significant reduction in cases of wrong ID assignments and improved tracking consistency across objects A–D. If an object detected in the current frame has no predecessor or failed to find the correct data association in the previous frame, it is assigned a new unique ID. 
+
+E. Velocity estimation of the tracked objects 
+
+This section describes how the velocity of each object is estimated and how motion labels are assigned accordingly. The procedure comprises two stages. (a) Velocity estimation with a Kalman filter: Although a naive idea of velocity can be obtained from finite difference of two consecutive positions, such estimates are highly sensitive to noise in both the 3D object location and the camera poses. To obtain reliable velocities, a Linear Kalman filter is employed, which takes into account the position of the object across all frames and updates the velocity iteratively. In the Kalman filter, the state vector is defined as 
+
+Xk =
+
+pk
+
+vk
+
+
+
+. (7) where pk is the 3D position of the object, transformed into the world frame, and vk is the object velocity. Under the assumption of the velocity vk−1 and the sampling interval ∆t
+
+held constant, the state vector will become 
+
+Xk = F X k−1 + wk , (8) 
+
+F =
+
+
+
+1 0 0 ∆t 0 00 1 0 0 ∆t 00 0 1 0 0 ∆t
+
+0 0 0 1 0 00 0 0 0 1 00 0 0 0 0 1
+
+
+
+;
+
+where F is the state transition model, wk ∼ N (0 , Q k) is a Gaussian white noise with zero mean covariance Qk.Since only the position is used as measurements, the obser-vation model is: 
+
+zk = HX k + nk, (9) 
+
+H =
+
+
+
+1 0 0 0 0 00 1 0 0 0 00 0 1 0 0 0
+
+ ;
+
+where zk is the observed position at time k, H is the obser-vation model, and nk ∼ N (0 , R k) is the measurement noise. The upper bound of the process noise and the measurement noise are set to Qk = 0 .1 ∗ I6x6 and Rk = 0 .01 ∗ I3x3,respectively. The values of the bounds are empirically tuned to balance smoothness and responsiveness. Initial covariance of the velocity is set high as the velocity is unknown and the initial velocity is set to zero. After several updates, once it becomes sufficiently small (indicating that the measured velocity has higher confidence), the velocity component X4:6 
+
+is used for the assessment. (b) Motion labeling: Each object is assigned any one of three different labels based on the estimated velocity and its uncertainty:  
+
+> •
+
+Static (Parked) if the speed is below a fixed threshold;  
+
+> •
+
+Dynamic (Moving) if the speed exceeds the threshold;  
+
+> •
+
+Unknown if the velocity covariance is high (low confi-dence), or the object has just been assigned a new ID. Features (i.e., the associated map points) are removed from the object when it is assigned a label, Dynamic. For objects labeled Unknown , though the map points are not removed, they are not used in the BA process. Finally, if the tracked object has a status of “Parked”, all the map points within it will be considered static and given higher weight. This step also updates the weight of the map point, which was accidentally given a weight of a dynamic point in the geometric module, as the object is found to be “Parked”, and its feature points do not need further scrutiny. IV. R ESULTS AND DISCUSSION 
+
+In this section, the performance of OCD SLAM is evaluated on various sequences of the KITTI dataset [6], [7]. In this quantitative evaluation 1, OCD SLAM is compared with the original ORB-SLAM2 and other state-of-the-art SLAM meth-ods. An ablation study is also conducted to demonstrate the 
+
+> 1All results reported in this section are average values of 25 independent executions of each algorithm with each dataset; in order to reduce the effect of associated randomness. 7
+
+effectiveness of the cross disparity module. Finally, the com-putational performance of the proposed method is reported. These computational experiments were conducted on an AMD Ryzen 7 7700X CPU with a GeForce RTX 4080 GPU and 32 GB of RAM. As evaluation parameters, we use ATE (Absolute Trajectory Error) and RPE (Relative Pose Error). The absolute trajectory error measures the Euclidean distance between the estimated camera trajectory and the aligned ground-truth trajectory at each timestamp. Alternatively, the relative pose error evaluates the local drift—that is, the relative motion between consecutive frames—with respect to the ground truth, in both rotation and translation. 
+
+A. Evaluation on KITTI Odometry Dataset 
+
+The KITTI odometry [6] consists of 22 stereo sequences, of which 11 sequences have ground truth trajectories as well. These sequences comprise stereo image pairs of outdoor scenes covering both urban road and residential areas. In the eleven sequences, Sequences “0, 2, 3, 5, 6, 8, 10” contain moderately dynamic objects, while Sequences “1, 4, 7, 9” contain higher numbers of moving cars and pedestrians. TABLE II: Comparison of Absolute Trajectory Error (ATE) and Relative Pose Error (RPE) between ORB-SLAM2 and the proposed OCD SLAM across KITTI Odometry sequences.                                                                       
+
+> Sequence ORB-SLAM2 OCD SLAM
+> ATE (m) RPE (◦/f )RPE (m/f) ATE (m) RPE (◦/f )RPE (m/f) 00 1.30 0.19 0.05 1.13 0.20 0.05 01 10.96 0.04 0.06 8.68 0.05 0.05
+> 02 5.62 0.09 0.03 4.94 0.09 0.03 03 0.70 0.05 0.03 0.70 0.06 0.03 04 0.19 0.04 0.02 0.21 0.05 0.02 05 0.77 0.07 0.02 0.81 0.08 0.02 06 0.87 0.04 0.02 0.64 0.05 0.02 07 0.53 0.06 0.03 0.46 0.07 0.03 08 3.35 0.06 0.09 3.27 0.07 0.09 09 3.60 0.06 0.03 2.98 0.07 0.03 10 1.14 0.07 0.03 1.13 0.08 0.03
+
+Table II presents the Absolute Trajectory Error (ATE) and Relative Pose Error (RPE) for ORB-SLAM2 and the proposed OCD SLAM on the KITTI odometry dataset. The columns 
+
+RP E (◦/f ) and RP E (m/f ) denote the rotational and trans-lational components of RPE, respectively. Results indicate that the proposed system achieves lower ATE values than ORB-SLAM2 in most sequences, except Sequences 03, 04, and 05. In particular, for highly dynamic sequences such as Sequences 01, 07, and 09, our method demonstrates signifi-cant improvements in absolute trajectory accuracy. Figures 5a and 5b illustrate the results of our method on Sequence 01 and 07, respectively. Both figures demonstrate that our method can distinguish between the static and dynamic vehicles; accordingly, it removes the features from the dynamic object while the static features remain intact. To avoid clutter, only the static points are shown in the figures. 
+
+(a) 
+
+(b) 
+
+Fig. 5: The parked cars are enclosed by 3D boxes with white edges and labeled as PARKED, while the moving cars are shown with different colors. It can also be observed that improvements in ATE do not consistently translate into lower RPE. This behavior is expected, since dynamic SLAM systems often discard or down-weight features associated with moving objects during bundle adjustment, thereby reducing long-term drift (improved ATE) but at the cost of showing higher short-term motion noise (similar or slightly worse RPE). Consequently, while the absolute trajectory is improved in our approach, the local odometry, which reflects relative position, the accuracy remains comparable to that of ORB-SLAM2, on an average. Table III compares the proposed OCD SLAM with Dy-naSLAM [25], the methods of Wen et al. [24], Yang et al. [34], as well as RSO-SLAM [32]. The evaluation is based on the Absolute Trajectory Error (ATE). ORB-SLAM2 and Dy-naSLAM results here have been reproduced using their open source code , whereas for the remaining methods, the results have been taken directly from their original papers. The best result for each sequence is highlighted in bold. Results show TABLE III: Comparison of ATE of OCD SLAM with other state-of-the-art methods in KITTI Odometry sequences.                                                                          
+
+> SEQ ORB SLAM2 Dyna SLAM Wen et al. Yang et al. RSO SLAM OCD SLAM 00 1.30 1.40 1.31 1.21 1.27 1.13
+> 01 10.96 9.40 8.78 10.0 9.8 8.68
+> 02 5.62 6.70 5.83 4.96 5.3 4.94
+> 03 0.70 0.60 0.772 −0.56 0.70 04 0.19 0.20 0.20 0.2 0.18 0.21 05 0.77 0.80 0.8 0.8 0.75 0.81 06 0.87 0.80 0.78 0.5 0.74 0.64 07 0.53 0.50 0.521 0.5 0.5 0.46
+> 08 3.35 3.50 3.425 −3.49 3.27
+> 09 3.60 1.60 2.89 3.15 1.7 2.98 10 1.14 1.20 0.97 11.16 1.13 Total 0/11 1/11 2/11 2/11 4/11 5/11 8
+
+that the proposed system performs better than other dynamic SLAM approaches in several sequences, which suggests that our cross disparity based geometric constraint, combined with motion categorization based on object velocity measurement, demonstrate improvements in trajectory estimation. Results of DynaSLAM suggest that simply removing po-tentially dynamic regions is not always beneficial, since such regions may also contain static objects that provide reliable features. Approaches such as those of Wen et al. and Yang et al., which attempt to recover static features within segmented dynamic regions, improve robustness to some extent but remain limited. In these cases, some features belonging to truly static objects may be lost due to motion constraints on the segmented region, while several features from dynamic objects may occasionally be misclassified as static, thereby degrading performance. RSO-SLAM achieves modest improvement by incorporating stronger geometric constraints, as reflected in the results. However, its performance is still constrained by the same limitations. In contrast, the proposed system benefits from explicitly distinguishing between static and dynamic objects by tracking them over time and estimating their velocities; 
+
+preventing features on static objects from losing their effect in the final evaluation. This strategy enables more reliable feature selection, resulting in superior overall accuracy. 
+
+B. Evaluation on KITTI Raw Dataset 
+
+OCD SLAM is further evaluated on several sequences from the KITTI raw dataset [7]. These sequences present more challenging environments compared to the KITTI odometry dataset. For example, Sequence 0926-0013 contains both parked and moving cars, while Sequences 0926-0009, 0926-0014, 0926-0051, and 0926-0101 include highly dynamic traffic with a large number of moving vehicles. Sequences such as 0929-0004 and 1003-0047 represent heavy traffic with slow-moving vehicles. These sequences also include objects that are not explicitly detected by the proposed 3D object detection module, such as buses, trucks, and trams. By using these data, we evaluated the effectiveness of the cross disparity module in handling such challenging cases. TABLE IV: Comparison of ATE of OCD SLAM with other state-of-the-art methods in KITTI Raw sequences.                                    
+
+> Sequence ORB SLAM2 Dyna SLAM AirDos OCD SLAM 0926-0009 0.86 0.95 0.87 0.77
+> 0926-0013 0.96 1.00 0.73 0.86 0926-0014 2.10 2.00 1.85 1.81
+> 0926-0051 0.80 0.90 0.76 0.62
+> 0926-0101 4.81 4.26 6.21 3.69
+> 0929-0004 1.81 1.78 1.54 1.27
+> 1003-0047 20.99 6.00 22.09 12.09 Total 0/7 1/7 2/7 5/7
+
+In this evaluation, the proposed method was compared against ORB-SLAM2, DynaSLAM [25], and AirDos [29]. Note that in the KITTI raw dataset evaluation, though several studies (such as [24], [42], [43]) reported ATE results, many of them either applied scaled alignment or used different camera calibration parameters, making direct comparison in-consistent. Therefore, only those methods providing open-source stereo implementations were considered for evaluation. Table IV reports the Absolute Trajectory Error (ATE) for these methods. Results indicate that our method consistently outperformed ORB-SLAM2 across all sequences. Compared with DynaSLAM and AirDos, the proposed method achieved better results in the majority of sequences. However, in Se-quence 1003-0047, although our method improved upon ORB-SLAM2, it performed worse than DynaSLAM, which achieved the lowest error in this case. 
+
+C. Ablation Experiment 
+
+In this section, each component of the proposed method is evaluated separately to analyze its contribution to the overall performance. Table V presents results for three variants: using only the SMOKE module, only the cross disparity module, and also the full OCD SLAM system that integrates both modules. When using only the SMOKE (3D object detection) module, features on static objects (e.g., parked cars) are retained, while features on dynamic objects are removed. However, since 3D object detection can occasionally miss certain objects or fail to identify dynamic categories that are not predefined in the detection model, residual dynamic features may remain and negatively influence pose estimation. Figures 6a and 6b illustrate such cases, where features persist on cars and buses, respectively. By contrast, when using only the cross disparity TABLE V: Ablation results of ATE on the KITTI Raw dataset comparing three configurations: SMOKE only, cross disparity only, and the full OCD SLAM system.                       
+
+> Sequence Only SMOKE Only Cross Disparity OCD SLAM (full) 0926-0009 0.85 0.80 0.77
+> 0926-0013 0.99 0.88 0.86
+> 0926-0014 1.91 1.85 1.81
+> 0926-0051 0.84 0.69 0.62
+> 0926-0101 4.46 3.84 3.69
+> 0929-0004 1.72 1.33 1.27
+> 1003-0047 12.81 21.04 12.09
+
+module (see figures 6c and 6d), dynamic features 2 can be identified effectively without relying on object categories, which leads to better performance in several sequences. For example, in Sequences 0926-0101 and 0929-0004, the cross disparity module achieved lower ATE values compared to   
+
+> 2A minor proportion of features on ‘categorically’ known static objects, like trees, appearing as dynamic will be inconsequential; because the purpose here is to ensure the absence of static features on moving objects, and not the other way round. 9
+> (a) (b)
+> (c) (d)
+
+Fig. 6: Ablation study illustrating the effect of different modules on dynamic feature removal. (a–b) Results using only the SMOKE module, where static features remain on moving objects (e.g., cars and buses) due to incomplete object detection. (c–d) Results using the cross disparity module, which detects dynamic features (shown in red). SMOKE. On the other hand, cross disparity alone fails in scenarios with many slow-moving dynamic objects, as seen in Sequence 1003-0047 (in Table V), with significantly higher errors. However, the full OCD SLAM system, which combines SMOKE and cross disparity modules, consistently yields the best results across all of the sequences. This demonstrates that the two modules are complementary: SMOKE ensures robust handling of categorically known dynamic objects, while cross disparity captures undetected or uncategorized moving objects, leading to improved trajectory estimation overall. 
+
+D. Computational Time 
+
+Average computational time costs of the three main com-ponents of OCD SLAM — feature extraction, static point detection, and 3D object detection — are given in Table VI. TABLE VI: Time costs of components of OCD SLAM.     
+
+> Task Component Time per frame (ms)
+> Feature Extraction 15.63 Static Point Detection 38.97 3D Object Detection 22.54
+
+In this result, the static point detection component was observed to consume the largest portion of computational time, followed by the 3D object detection module. Compared to ORB-SLAM2, which operates at approximately 23–25 frames per second (fps), the proposed method achieves a processing rate of 12–14 fps. Although this performance is somewhat lower for real-time operation, it can possibly be enhanced by reducing the overall inference time through code optimization and also better hardware components. V. C ONCLUSION 
+
+This paper proposes OCD-SLAM, a dynamic visual SLAM framework designed to improve camera localization and map-ping in highly dynamic environments. The system extends ORB-SLAM2 by integrating SMOKE, a 3D object detection module, and a Kalman filter-based velocity estimation frame-work, enabling object-level motion classification. A novel geometric module is introduced here that defines a quantity named “cross disparity” and compares it with the disparity itself, establishing both temporal and stereo perspectives to identify dynamic features belonging to undetected moving objects. By combining velocity- and geometry-based motion filtering, the system successfully reduces the effect of dynamic features on the bundle adjustment process while preserving reliable static points. Experimental evaluations on multiple sequences of the KITTI odometry and KITTI raw datasets demonstrate that the proposed method significantly improves absolute trajec-tory accuracy compared to (conventional) ORB-SLAM2 and other state-of-the-art dynamic SLAM approaches. The ablation study further showed that the inclusion of the cross disparity module provides a better detection approach in cases where the object detection module fails to detect uncategorized or partially occluded objects. In the detection of dynamic features and objects, the cross disparity module was observed to exhibit a complementary performance with other existing approaches (like SMOKE), making a compelling case for their deployment in combination. In the current implementation, the 3D object detection module is trained to detect a very limited set of objects, such as cars, bicycles, and pedestrians. While this is sufficient for 10 
+
+most scenarios in the KITTI Odometry dataset, the KITTI Raw dataset contains several additional object types that fall outside these categories. Although the proposed cross disparity module is useful in identifying dynamic features belonging to undetected objects, its effectiveness may suffer if too many such dynamic objects appear simultaneously in the view. Future work may strive to expand the set of detectable object categories to improve awareness and ensure more accurate motion estimation in complex real-world scenes. REFERENCES [1] R. Mur-Artal and J. D. Tard´ os, “Orb-slam2: An open-source slam system for monocular, stereo, and rgb-d cameras,” IEEE Transactions on Robotics , vol. 33, no. 5, pp. 1255–1262, 2017. [2] J. J. Engel, V. Koltun, and D. Cremers, “Direct sparse odometry,” 2016. [Online]. Available: http://arxiv.org/abs/1607.02565 [3] J. Engel, T. Sch¨ ops, and D. Cremers, “Lsd-slam: Large-scale direct monocular slam,” in Computer Vision – ECCV 2014 , D. Fleet, T. Pajdla, B. Schiele, and T. Tuytelaars, Eds. Cham: Springer International Publishing, 2014, pp. 834–849. [4] F. Endres, J. Hess, N. Engelhard, J. Sturm, D. Cremers, and W. Burgard, “An evaluation of the rgb-d slam system,” in 2012 IEEE International Conference on Robotics and Automation , 2012, pp. 1691–1696. [5] Z. Liu, Z. Wu, and R. T´ oth, “Smoke: Single-stage monocular 3d object detection via keypoint estimation,” 2020. [Online]. Available: https://arxiv.org/abs/2002.10111 [6] A. Geiger, P. Lenz, and R. Urtasun, “Are we ready for autonomous driving? the kitti vision benchmark suite,” in Conference on Computer Vision and Pattern Recognition (CVPR) , 2012. [7] A. Geiger, P. Lenz, C. Stiller, and R. Urtasun, “Vision meets robotics: The kitti dataset,” International Journal of Robotics Research (IJRR) ,2013. [8] S. Li and D. Lee, “Rgb-d slam in dynamic environments using static point weighting,” IEEE Robotics and Automation Letters , vol. 2, no. 4, pp. 2263–2270, 2017. [9] L. Shile and L. Dongheui, “Fast visual odometry using intensity-assisted iterative closest point,” IEEE Robotics and Automation Letters , vol. 1, no. 2, pp. 992–999, 2016. [10] Q. U. Islam, H. Ibrahim, P. K. Chin, K. Lim, and M. Z. Abdullah, “Mvs-slam: Enhanced multiview geometry for improved semantic rgbd slam in dynamic environment,” Journal of Field Robotics , vol. 41, no. 1, pp. 109–130, 2024. [11] W. Tan, H. Liu, Z. Dong, G. Zhang, and H. Bao, “Robust monocular slam in dynamic environments,” in 2013 IEEE International Symposium on Mixed and Augmented Reality (ISMAR) , 2013, pp. 209–218. [12] W. Dai, Y. Zhang, P. Li, Z. Fang, and S. Scherer, “Rgb-d slam in dynamic environments using point correlations,” IEEE Transactions on Pattern Analysis and Machine Intelligence , vol. 44, no. 1, pp. 373–389, 2022. [13] Y. Sun, M. Liu, and M. Q.-H. Meng, “Improving rgb-d slam in dynamic environments: A motion removal approach,” Robotics and Autonomous Systems , vol. 89, pp. 110–122, 2017. [14] R. Scona, M. Jaimez, Y. R. Petillot, M. Fallon, and D. Cremers, “Stat-icfusion: Background reconstruction for dense rgb-d slam in dynamic environments,” in 2018 IEEE International Conference on Robotics and Automation (ICRA) , 2018, pp. 3849–3856. [15] M. Kaneko, K. Iwami, T. Ogawa, T. Yamasaki, and K. Aizawa, “Mask-slam: Robust feature-based monocular slam by masking using semantic segmentation,” in 2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW) . Los Alamitos, CA, USA: IEEE Computer Society, Jun. 2018, pp. 371–3718. [16] L.-C. Chen, G. Papandreou, I. Kokkinos, K. Murphy, and A. L. Yuille, “Deeplab: Semantic image segmentation with deep convolutional nets, atrous convolution, and fully connected crfs,” IEEE Transactions on Pattern Analysis and Machine Intelligence , vol. 40, no. 4, pp. 834–848, 2018. [17] F. Li, W. Chen, W. Xu, L. Huang, D. Li, S. Cai, M. Yang, X. Xiong, Y. Liu, and W. Li, “A mobile robot visual slam system with enhanced semantics segmentation,” IEEE Access , vol. 8, pp. 25 442–25 458, 2020. [18] F. Zhong, S. Wang, Z. Zhang, C. Chen, and Y. Wang, “Detect-slam: Making object detection and slam mutually beneficial,” in 2018 IEEE Winter Conference on Applications of Computer Vision (WACV) , 2018, pp. 1001–1010. [19] Y. Liu and J. Miura, “Rds-slam: Real-time dynamic slam using semantic segmentation methods,” IEEE Access , vol. 9, pp. 23 772–23 785, 2021. [20] A. Li, J. Wang, M. Xu, and Z. Chen, “Dp-slam: A visual slam with moving probability towards dynamic environments,” Information Sciences , vol. 556, pp. 128–142, 2021. [21] P. Ganti and S. L. Waslander, “Network uncertainty informed semantic feature selection for visual slam,” in 2019 16th Conference on Computer and Robot Vision (CRV) , 2019, pp. 121–128. [22] C. Yu, Z. Liu, X.-J. Liu, F. Xie, Y. Yang, Q. Wei, and Q. Fei, “Ds-slam: A semantic visual slam towards dynamic environments,” in 2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) , 2018, pp. 1168–1174. [23] V. Badrinarayanan, A. Kendall, and R. Cipolla, “Segnet: A deep con-volutional encoder-decoder architecture for image segmentation,” IEEE Transactions on Pattern Analysis and Machine Intelligence , vol. 39, pp. 2481–2495, 2015. [24] S. Wen, X. Li, X. Liu, J. Li, S. Tao, Y. Long, and T. Qiu, “Dynamic slam: A visual slam in outdoor dynamic scenes,” IEEE Transactions on Instrumentation and Measurement , vol. 72, pp. 1–11, 2023. [25] B. Bescos, J. M. F´ acil, J. Civera, and J. Neira, “Dynaslam: Tracking, mapping, and inpainting in dynamic scenes,” IEEE Robotics and Au-tomation Letters , vol. 3, no. 4, pp. 4076–4083, 2018. [26] K. He, G. Gkioxari, P. Doll´ ar, and R. B. Girshick, “Mask R-CNN,” 2017. [Online]. Available: http://arxiv.org/abs/1703.06870 [27] S. K. Dhali and B. Dasgupta, “Trifocal slam: A dynamic slam based on three frame views,” Neurocomputing , vol. 652, p. 130993, 2025. [28] M. Yaseen, “What is yolov8: An in-depth exploration of the internal features of the next-generation object detector,” 2024. [Online]. Available: https://arxiv.org/abs/2408.15857 [29] Y. Qiu, C. Wang, W. Wang, M. Henein, and S. A. Scherer, “Airdos: Dynamic slam benefits from articulated objects,” 2022 International Conference on Robotics and Automation (ICRA) , pp. 8047–8053, 2021. [30] L. Yan, X. Hu, L. Zhao, Y. Chen, P. Wei, and H. Xie, “Dgs-slam: A fast and robust rgbd slam in dynamic environments combined by geometric and semantic information,” Remote Sensing , vol. 14, no. 3, 2022. [31] D. Bolya, C. Zhou, F. Xiao, and Y. J. Lee, “Yolact++ better real-time instance segmentation,” IEEE Transactions on Pattern Analysis and Machine Intelligence , vol. 44, no. 2, pp. 1108–1121, 2022. [32] L. Qin, C. Wu, Z. Chen, X. Kong, Z. Lv, and Z. Zhao, “Rso-slam: A robust semantic visual slam with optical flow in complex dynamic en-vironments,” IEEE Transactions on Intelligent Transportation Systems ,vol. 25, no. 10, pp. 14 669–14 684, 2024. [33] R. Khanam and M. Hussain, “What is yolov5: A deep look into the internal features of the popular object detector,” 2024. [Online]. Available: https://arxiv.org/abs/2407.20892 [34] L. Yang and L. Wang, “A semantic slam-based dense mapping approach for large-scale dynamic outdoor environment,” Measurement , vol. 204, p. 112001, 2022. [35] L. Chen, G. Papandreou, F. Schroff, and H. Adam, “Rethinking atrous convolution for semantic image segmentation,” 2017. [Online]. Available: http://arxiv.org/abs/1706.05587 [36] X. Chen, Y. Wang, X. Chen, and W. Zeng, “S2r-depthnet: Learning a generalizable depth-specific structural representation,” 2021. [Online]. Available: https://arxiv.org/abs/2104.00877 [37] Q. Ji, Z. Zhang, Y. Chen, and E. Zheng, “Drv-slam: An adaptive real-time semantic visual slam based on instance segmentation toward dynamic environments,” IEEE Access , vol. 12, pp. 43 827–43 837, 2024. [38] J. Zhang, M. Henein, R. E. Mahony, and V. Ila, “VDO-SLAM: A visual dynamic object-aware SLAM system,” CoRR , vol. abs/2005.11052, 2020. [Online]. Available: https://arxiv.org/abs/2005.11052 [39] B. Song, X. Yuan, Z. Ying, B. Yang, Y. Song, and F. Zhou, “Dgm-vins: Visual–inertial slam for complex dynamic environments with joint geometry feature extraction and multiple object tracking,” IEEE Transactions on Instrumentation and Measurement , vol. 72, pp. 1–11, 2023. [40] X. Zhou, D. Wang, and P. Kr¨ ahenb¨ uhl, “Objects as points,” CoRR , vol. abs/1904.07850, 2019. [Online]. Available: http://arxiv.org/abs/1904. 07850 [41] F. Yu, D. Wang, E. Shelhamer, and T. Darrell, “Deep layer aggregation,” in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) , June 2018. [42] B. Besc´ os, C. Campos, J. D. Tard´ os, and J. Neira, “Dynaslam ii: Tightly-coupled multi-object tracking and slam,” IEEE Robotics and Automation Letters , vol. 6, pp. 5191–5198, 2020. [43] P. Li, T. Qin, Shen, and Shaojie, “Stereo vision-based semantic 3d object and ego-motion tracking for autonomous driving,” in Proceedings of the European Conference on Computer Vision (ECCV) , September 2018.

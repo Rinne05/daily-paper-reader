@@ -1,0 +1,171 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-03T21:14:51.381493+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.01983v1",
+      "source": "arxiv",
+      "title": "Open-Weather Robust 3D Detection via Dual-Critic Diffusion Alignment",
+      "abstract": "Robust 3D object detection under adverse weather remains a critical hurdle for autonomous driving. Despite progress with LiDAR-4D radar fusion, most methods are constrained by a closed-world assumption, implicitly requiring training and test weather to align in both type and severity. This premise fails in practice: the open-ended nature of weather, and even variations within a single type like rain, cause dramatically different LiDAR degradation patterns, leading to significant performance drops in unseen conditions. To address this, we present Dual-Critic Guided Diffusion Alignment (DCDA), a weather-agnostic framework that learns to recover degraded LiDAR features toward a clean manifold. Rather than modeling specific weather types, DCDA employs a 4D radar-conditioned diffusion process to progressively refine features, guided by two complementary critics. (i) A detection-guided critic, anchored by a pre-trained clean-weather model, ensures that the refined features retain object-level discriminability and localization accuracy. (ii) A weather adversarial critic enforces holistic distributional consistency with clean-weather representations. By aligning features through semantic and distributional constraints rather than explicit weather modeling, DCDA generalizes effectively to unseen weather types and severities without requiring paired data or weather labels. We further introduce a structured open-weather benchmark with held-out type-severity combinations and extensive experiments verify DCDA's advantages.",
+      "authors": [
+        "Shuyao Li",
+        "Chuanxing Geng",
+        "Heyang Sun",
+        "Qiang Zhou",
+        "Jingjing Gu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-02T10:13:41+00:00",
+      "link": "https://arxiv.org/pdf/2607.01983v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "3D object detection under adverse weather",
+      "llm_evidence_cn": "恶劣天气下的3D目标检测方法",
+      "llm_evidence": "恶劣天气下的3D目标检测方法",
+      "canonical_evidence": "恶劣天气下的3D目标检测方法",
+      "llm_tldr_en": "Proposes Dual-Critic Guided Diffusion Alignment (DCDA) for weather-agnostic 3D detection using LiDAR-4D radar fusion, recovering degraded features toward clean manifold.",
+      "llm_tldr_cn": "针对现有LiDAR-4D雷达融合方法在开放天气下性能下降的问题，本文提出双评论家引导扩散对齐（DCDA）框架，通过学习将退化LiDAR特征恢复到干净流形，实现与天气类型无关的鲁棒3D目标检测，在未见天气条件下显著提升检测精度。",
+      "llm_tldr": "针对现有LiDAR-4D雷达融合方法在开放天气下性能下降的问题，本文提出双评论家引导扩散对齐（DCDA）框架，通过学习将退化LiDAR特征恢复到干净流形，实现与天气类型无关的鲁棒3D目标检测，在未见天气条件下显著提升检测精度。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.30754v1",
+      "source": "arxiv",
+      "title": "Streaming Gaussian Encoding for 4D Panoptic Occupancy Tracking",
+      "abstract": "Camera-based 4D panoptic occupancy tracking (4D-POT) is a promising paradigm for holistic scene understanding from multi-view imagery, enabling joint reasoning about geometry, semantics, and object identities across time. Recent mask-based pipelines achieve strong performance by propagating instance queries across frames. However, their underlying volumetric representations are typically recomputed at each timestep, limiting geometric temporal consistency, particularly under occlusion and for static scene elements. To address this limitation, we propose a streaming Gaussian encoder that maintains a persistent volumetric scene representation for 4D-POT. Our method models the scene as a fixed-size set of latent Gaussian queries that are propagated via ego-motion compensation and refreshed under a confidence-guided budget constraint. Crucially, we shape Gaussian opacities through depth-based supervision to serve as proxy for visibility, enabling confidence to accumulate as a temporally aggregated measure of persistent scene support. Together with a warmup-based multi-frame training strategy, this yields representation-level temporal coherence beyond decoder-only tracking. Extensive experiments on Occ3D-extended nuScenes and Waymo establish a new state-of-the-art for camera-based 4D-POT, improving tracking consistency with negligible computational overhead while remaining fully compatible with existing mask-based pipelines. We provide code and models at https://sge.cs.uni-freiburg.de.",
+      "authors": [
+        "Maximilian Luz",
+        "Thomas Nürnberg",
+        "Yakov Miron",
+        "Abhinav Valada"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-06-29T18:00:42+00:00",
+      "link": "https://arxiv.org/pdf/2606.30754v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multi-view camera-based 4D occupancy tracking, method transferable to 3D detection",
+      "llm_evidence_cn": "基于多视图相机的4D占用跟踪方法，可迁移至3D检测",
+      "llm_evidence": "基于多视图相机的4D占用跟踪方法，可迁移至3D检测",
+      "canonical_evidence": "基于多视图相机的4D占用跟踪方法，可迁移至3D检测",
+      "llm_tldr_en": "Proposes streaming Gaussian encoder for camera-based 4D panoptic occupancy tracking from multi-view imagery; method maintains persistent scene representation, enabling temporal consistency and potentially benefiting multi-view 3D detection.",
+      "llm_tldr_cn": "该论文针对多视图相机下的4D全景占用跟踪问题，提出一种流式高斯编码器，通过维护持久化的体素场景表示并利用自运动传播，解决了现有方法中几何时间一致性差的问题。该方法基于多视图输入，与纯视觉3D检测共享技术基础，其场景表示和时序聚合策略可迁移至3D目标检测任务。实验表明在占用跟踪任务上取得显著提升，为多视图3D感知提供了新思路。",
+      "llm_tldr": "该论文针对多视图相机下的4D全景占用跟踪问题，提出一种流式高斯编码器，通过维护持久化的体素场景表示并利用自运动传播，解决了现有方法中几何时间一致性差的问题。该方法基于多视图输入，与纯视觉3D检测共享技术基础，其场景表示和时序聚合策略可迁移至3D目标检测任务。实验表明在占用跟踪任务上取得显著提升，为多视图3D感知提供了新思路。",
+      "llm_tags": [
+        "query:nuscenes-dod:composite"
+      ],
+      "matched_query_tag": "query:nuscenes-dod:composite",
+      "matched_query_text": "Papers central to 使用nuScenes数据集的多视角纯视觉3D目标检测相关论文, especially work that connects or combines: nuScenes dataset for autonomous driving; 3D object detection methods; nuScenes multi-view camera-only 3D detection; 3D object detection on nuScenes dataset; pure visual 3D detection without LiDAR; research papers on 3D object detection using the nuScenes dataset; nuScenes multi view camera only 3D object detection papers; multi view 3D object detection on nuScenes dataset; pure visual 3D detection using nuScenes.",
+      "matched_requirement_id": "req-composite-nuscenes-dod",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.01827v1",
+      "source": "arxiv",
+      "title": "C2E: Boosting Ego-Only 3D Object Detection via Multi-Teacher Contrastive Knowledge Distillation",
+      "abstract": "LiDAR-based 3D object detection is essential for autonomous driving systems. However, traditional Ego-only Perception (Eo-Perception) suffers from limited perspective and occlusions in a complex outdoor environment, leading to performance bottlenecks. Recently, research on multi-agent Collaborative Perception (Co-Perception) has demonstrated excellent performance, but high communication costs and accumulated pose error hinder its application. To address this, we explore a novel C2E (Co-Perception to Eo-Perception) paradigm through the Multi-to-Single (M2S) agent contrastive knowledge distillation framework. Our M2S framework first designs Multi-Level Feature Enhancement module to provide more stable features, and introduces Auxiliary Point Cloud Reconstruction and Multi-Teacher Contrastive Distillation mechanisms to mitigate domain gaps in point cloud and feature distributions within the C2E paradigm. Benefiting from this, our M2S can retain the excellent performance of collaborative perception while effectively avoiding the drawbacks, such as communication delays and positioning errors. Extensive experiments on the V2XSet, V2V4Real and DAIR-V2X datasets show the effectiveness and generalizability of our M2S framework when combined with the state-of-the-art CoSDH model and other excellent 3D detectors. Our M2S framework can deliver up to a 8.64% improvement in 3D mAP performance without introducing any communication costs.",
+      "authors": [
+        "Jinlong Wang",
+        "Xun Huang",
+        "Qiming Xia",
+        "Shijia Zhao",
+        "Chenglu Wen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-02T07:48:22+00:00",
+      "link": "https://arxiv.org/pdf/2607.01827v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "3D object detection via knowledge distillation",
+      "llm_evidence_cn": "通过知识蒸馏提升3D目标检测",
+      "llm_evidence": "通过知识蒸馏提升3D目标检测",
+      "canonical_evidence": "通过知识蒸馏提升3D目标检测",
+      "llm_tldr_en": "Explores C2E paradigm: distilling multi-agent collaborative knowledge into ego-only LiDAR 3D detectors via contrastive learning.",
+      "llm_tldr_cn": "针对传统单车3D检测视角有限、易受遮挡的问题，提出C2E范式，通过多教师对比知识蒸馏将多智能体协作感知知识迁移至单车LiDAR检测器，显著提升单车型检测性能。",
+      "llm_tldr": "针对传统单车3D检测视角有限、易受遮挡的问题，提出C2E范式，通过多教师对比知识蒸馏将多智能体协作感知知识迁移至单车LiDAR检测器，显著提升单车型检测性能。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.02005v1",
+      "source": "arxiv",
+      "title": "A Stereo Visual SLAM System Using Object-Level Motion Estimation and Geometric Filtering Based on Cross Disparity",
+      "abstract": "This paper presents OCD SLAM, a dynamic stereo visual SLAM framework that extends ORB-SLAM2 by jointly addressing dynamic objects and dynamic features in the scene. Usual visual SLAM systems operating in dynamic environments often fail in the presence of moving objects, due to the static-world assumption used in pose estimation and mapping. To address this predicament, we introduce a novel geometric approach based on the discrepancy between disparity and a newly proposed notion called ``cross disparity'', which exploits both temporal and stereo inconsistency to identify dynamic feature points. Complementary to this feature-level motion analysis, OCD SLAM integrates a 3D object detection module (SMOKE) with Kalman filter-based object tracking to perform object-level motion classification, enabling robust separation of static and dynamic scene elements for accurate pose estimation. The proposed approach has been evaluated on various sequences from the KITTI Odometry and KITTI Raw datasets. Results demonstrate that OCD SLAM achieves significant improvement in trajectory accuracy compared to ORB-SLAM2 and several state-of-the-art dynamic SLAM methods. Ablation studies further demonstrate the effectiveness of the cross disparity module in the KITTI Raw dataset and show that this method is able to detect dynamic features that are missed by the 3D object detection scheme alone.",
+      "authors": [
+        "Sujan Kumar Dhali",
+        "Bhaskar Dasgupta"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-07-02T10:41:10+00:00",
+      "link": "https://arxiv.org/pdf/2607.02005v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "integrates 3D object detection (SMOKE) in visual SLAM",
+      "llm_evidence_cn": "在视觉SLAM中集成3D目标检测模块SMOKE",
+      "llm_evidence": "在视觉SLAM中集成3D目标检测模块SMOKE",
+      "canonical_evidence": "在视觉SLAM中集成3D目标检测模块SMOKE",
+      "llm_tldr_en": "Extends ORB-SLAM2 with a 3D object detection module (SMOKE) and geometric filtering for dynamic stereo SLAM.",
+      "llm_tldr_cn": "提出OCD SLAM动态立体视觉SLAM框架，通过集成SMOKE单目3D目标检测器和基于交叉视差的几何滤波，联合处理动态物体和动态特征点，在KITTI数据集上提升了定位与建图的准确性，展示了纯视觉3D检测与SLAM的结合潜力。",
+      "llm_tldr": "提出OCD SLAM动态立体视觉SLAM框架，通过集成SMOKE单目3D目标检测器和基于交叉视差的几何滤波，联合处理动态物体和动态特征点，在KITTI数据集上提升了定位与建图的准确性，展示了纯视觉3D检测与SLAM的结合潜力。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

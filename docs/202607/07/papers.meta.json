@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-07",
+  "date": "2026-07-07",
+  "generated_at": "2026-07-07T21:56:06",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/07/2607.04098v1-sparse4d-radar-an-efficient-and-robust-framework-for-surround-view-3d-object-detection-via-4d-radar-camera-fusion",
+      "section": "quick",
+      "title_en": "Sparse4D-Radar: An Efficient and Robust Framework for Surround-View 3D Object Detection via 4D Radar-Camera Fusion",
+      "authors": "Fuyuan Ai, Yuchen Tan, Jiehui Chen, Zhiwei Xu, Chunyi Song",
+      "date": "2026-07-05",
+      "pdf": "https://arxiv.org/pdf/2607.04098v1",
+      "score": "7.0",
+      "evidence": "使用雷达-相机融合的环绕视图3D目标检测",
+      "tldr": "现有4D雷达-相机融合方法仅支持前视感知，且扩展到环视面临计算开销过大的问题。为此，本文提出Sparse4D-Radar，一种高效鲁棒的环视多模态融合框架。该框架设计了可变形融合模块将雷达-相机特征嵌入稀疏查询，并引入速度一致采样和自适应模态门控来提升定位精度与模态稳定性。在OmniHD-Scenes数据集上，相比先前方法mAP提升7%、ODS提升10%，运行速度接近10 FPS，实现了检测精度、环境鲁棒性和推理效率的良好平衡。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "In recent years, 4D imaging radar has gained wide attention in autonomous driving for its robustness against harsh weather and ability to output target velocity. Nevertheless, mainstream 4D radar-camera fusion methods only support front-view perception, lacking mature solutions for surround-view sensing. Directly expanding these pipelines to full 360° coverage introduces excessive computation cost and limits real-world deployment. To tackle these limitations, this work proposes Sparse4D-Radar, an efficient robust surround-view multi-modal fusion framework. We first design a Deformable Fusion module to embed radar-camera features into sparse queries, constructing the lightweight base version Sparse4D-Radar-Base. Two dedicated modules are further introduced to boost localization accuracy and modality stability: Velocity-Consistency Sampling (VCS) refines features via radar velocity cues for motion awareness, and Adaptive Modality Gating (AMG) dynamically adjusts cross-modal fusion weights according to feature confidence. Combining all components, we build Sparse4D-Radar-Acc for high-precision detection demands. Comprehensive experiments on OmniHD-Scenes verify that our approach achieves state-of-the-art surround-view 3D detection performance. Compared with prior arts, our method obtains over 7% mAP and 10% ODS improvements under complex driving scenes while running at nearly 10 FPS, striking a favorable trade-off among detection accuracy, environmental robustness and inference efficiency. Our open-source code is available at https://github.com/Aiuan/Sparse4D-Radar.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

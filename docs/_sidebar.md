@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-07 <!--dpr-date:20260707-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/07/2607.04098v1-sparse4d-radar-an-efficient-and-robust-framework-for-surround-view-3d-object-detection-via-4d-radar-camera-fusion" data-sidebar-item="{&quot;title&quot;: &quot;Sparse4D-Radar: An Efficient and Robust Framework for Surround-View 3D Object Detection via 4D Radar-Camera Fusion&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.04098v1-sparse4d-radar-an-efficient-and-robust-framework-for-surround-view-3d-object-detection-via-4d-radar-camera-fusion&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;使用雷达-相机融合的环绕视图3D目标检测&quot;}">Sparse4D-Radar: An Efficient and Robust Framework for Surround-View 3D Object Detection via 4D Radar-Camera Fusion</a>
   * 2026-07-03 <!--dpr-date:20260703-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/03/2607.01983v1-open-weather-robust-3d-detection-via-dual-critic-diffusion-alignment" data-sidebar-item="{&quot;title&quot;: &quot;Open-Weather Robust 3D Detection via Dual-Critic Diffusion Alignment&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.01983v1-open-weather-robust-3d-detection-via-dual-critic-diffusion-alignment&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;恶劣天气下的3D目标检测方法&quot;}">Open-Weather Robust 3D Detection via Dual-Critic Diffusion Alignment</a>

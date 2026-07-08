@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-08",
+  "date": "2026-07-08",
+  "generated_at": "2026-07-08T21:47:28",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/08/2607.04732v1-sparseocc-geometry-aware-sparse-latent-representation-for-semantic-occupancy-prediction",
+      "section": "quick",
+      "title_en": "SparseOcc++: Geometry-Aware Sparse Latent Representation for Semantic Occupancy Prediction",
+      "authors": "Pin Tang, Zhongdao Wang, Guoqing Wang, Xiangxuan Ren, Chao Ma",
+      "date": "2026-07-06",
+      "pdf": "https://arxiv.org/pdf/2607.04732v1",
+      "score": "6.0",
+      "evidence": "基于视觉的3D占用预测，与无LiDAR纯视觉3D感知相关",
+      "tldr": "针对3D语义占用预测中密集体素表示浪费空空间、稀疏表示计算复杂且几何模糊的问题，提出SparseOcc++框架。该方法显式解耦场景完成与语义分割，将完成重定义为稀疏锚点上的有符号距离回归，并采用几何引导传播将语义分割限制在验证区域。在nuScenes上IoU提升2.3点，速度快3.9倍，在SemanticKITTI上比OccFormer快5.9倍，实现新SOTA。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Vision-based 3D semantic occupancy prediction is essential for autonomous driving, yet dense voxel representations waste computation on largely empty space, while BEV and TPV projections compromise fine-grained 3D structure. Fully sparse representations offer an attractive alternative, but existing methods, including SparseOcc, entangle scene completion with semantic prediction by indiscriminately propagating high-dimensional features into empty regions and applying voxel-wise classification. This creates excessive activations, computational overhead, and geometric ambiguity. We present SparseOcc++, a geometry-aware sparse framework that explicitly decouples scene completion from semantic segmentation. SparseOcc++ reformulates completion as signed-distance regression on sparse anchor voxels through a scene completion field (SCF). To model complex outdoor geometry robustly, it combines orthogonal decomposition with discretized distance learning. A geometry-guided propagation module then converts the SCF into a complete volumetric scene and restricts semantic segmentation to geometrically verified regions. Experiments establish new state of the art: SparseOcc++ improves IoU by 2.3 points and is 3.9x faster than SparseOcc on nuScenes, while achieving a 5.9x speedup over OccFormer on SemanticKITTI.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

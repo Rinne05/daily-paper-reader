@@ -1,0 +1,56 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-08T21:46:17.501475+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.04732v1",
+      "source": "arxiv",
+      "title": "SparseOcc++: Geometry-Aware Sparse Latent Representation for Semantic Occupancy Prediction",
+      "abstract": "Vision-based 3D semantic occupancy prediction is essential for autonomous driving, yet dense voxel representations waste computation on largely empty space, while BEV and TPV projections compromise fine-grained 3D structure. Fully sparse representations offer an attractive alternative, but existing methods, including SparseOcc, entangle scene completion with semantic prediction by indiscriminately propagating high-dimensional features into empty regions and applying voxel-wise classification. This creates excessive activations, computational overhead, and geometric ambiguity. We present SparseOcc++, a geometry-aware sparse framework that explicitly decouples scene completion from semantic segmentation. SparseOcc++ reformulates completion as signed-distance regression on sparse anchor voxels through a scene completion field (SCF). To model complex outdoor geometry robustly, it combines orthogonal decomposition with discretized distance learning. A geometry-guided propagation module then converts the SCF into a complete volumetric scene and restricts semantic segmentation to geometrically verified regions. Experiments establish new state of the art: SparseOcc++ improves IoU by 2.3 points and is 3.9x faster than SparseOcc on nuScenes, while achieving a 5.9x speedup over OccFormer on SemanticKITTI.",
+      "authors": [
+        "Pin Tang",
+        "Zhongdao Wang",
+        "Guoqing Wang",
+        "Xiangxuan Ren",
+        "Chao Ma"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-06T07:10:00+00:00",
+      "link": "https://arxiv.org/pdf/2607.04732v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "vision-based 3D occupancy prediction, related to pure visual 3D perception without LiDAR",
+      "llm_evidence_cn": "基于视觉的3D占用预测，与无LiDAR纯视觉3D感知相关",
+      "llm_evidence": "基于视觉的3D占用预测，与无LiDAR纯视觉3D感知相关",
+      "canonical_evidence": "基于视觉的3D占用预测，与无LiDAR纯视觉3D感知相关",
+      "llm_tldr_en": "Proposes a geometry-aware sparse framework for vision-based 3D semantic occupancy prediction, decoupling scene completion from semantic segmentation to reduce computation and geometric ambiguity.",
+      "llm_tldr_cn": "针对现有密集体素表示计算浪费而BEV/TPV损失精细结构的问题，提出SparseOcc++框架，显式解耦场景补全与语义分割。通过稀疏潜在表示避免空区域特征传播，大幅降低计算开销并消除几何歧义。在多个占用预测基准上达到最优精度与效率平衡，为自动驾驶3D场景理解提供高效稀疏方案。",
+      "llm_tldr": "针对现有密集体素表示计算浪费而BEV/TPV损失精细结构的问题，提出SparseOcc++框架，显式解耦场景补全与语义分割。通过稀疏潜在表示避免空区域特征传播，大幅降低计算开销并消除几何歧义。在多个占用预测基准上达到最优精度与效率平衡，为自动驾驶3D场景理解提供高效稀疏方案。",
+      "llm_tags": [
+        "query:nuscenes-dod:composite"
+      ],
+      "matched_query_tag": "query:nuscenes-dod:composite",
+      "matched_query_text": "Papers central to 使用nuScenes数据集的多视角纯视觉3D目标检测相关论文, especially work that connects or combines: nuScenes dataset for autonomous driving; 3D object detection methods; nuScenes multi-view camera-only 3D detection; 3D object detection on nuScenes dataset; pure visual 3D detection without LiDAR; research papers on 3D object detection using the nuScenes dataset; nuScenes multi view camera only 3D object detection papers; multi view 3D object detection on nuScenes dataset; pure visual 3D detection using nuScenes.",
+      "matched_requirement_id": "req-composite-nuscenes-dod",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

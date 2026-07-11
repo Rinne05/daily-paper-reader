@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-11",
+  "date": "2026-07-11",
+  "generated_at": "2026-07-11T21:07:00",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/11/2607.05801v1-trig-trajectory-rig-decoupled-metric-geometry-learning",
+      "section": "quick",
+      "title_en": "TRIG: Trajectory-Rig Decoupled Metric Geometry Learning",
+      "authors": "Lizhou Liao, Wentao Xu, Handong Wang, Lirong Yang, Shuai Yang, Weiwei Liu, Chang Huang",
+      "date": "2026-07-07",
+      "pdf": "https://arxiv.org/pdf/2607.05801v1",
+      "score": "7.0",
+      "evidence": "视觉中心的自动驾驶多相机几何，为纯视觉3D检测提供基础几何感知",
+      "tldr": "以视觉为中心的自动驾驶需要准确的度量几何与自车运动估计。现有方法将时变自车运动和静态相机刚体位姿纠缠建模，限制了车辆侧几何先验的利用。本文提出TRIG框架，将相机位姿解耦为自车轨迹和相机刚体两部分，分别进行编码与监督，并设计稀疏时空注意力降低计算成本。在五个自动驾驶基准上，TRIG在姿态估计、度量深度预测和3D重建任务中均达到最先进水平，有效提升了几何感知性能。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Vision-centric autonomous driving requires accurate metric geometry and ego-motion estimation from synchronized multi-camera observations. Recent visual geometry models show strong performance in pose estimation, depth prediction, and 3D reconstruction, but are not tailored to rigid multi-camera driving systems. They often encode camera poses as entangled representations, in which time-varying ego-motion and static camera-rig geometry are jointly modeled, limiting the utilization of vehicle-side geometric priors. We propose Trajectory-Rig Decoupled Metric Geometry Learning (TRIG), a geometry perception framework for autonomous driving. TRIG factorizes camera poses into ego-trajectory and camera-rig components, enabling separate modeling of ego-motion and static multi-camera topology. We introduce decoupled pose encoding and supervision, which separately constrain trajectory evolution and rig geometry for metric-consistent learning. Moreover, sparse Temporal--Spatial attention separates cross-camera interaction from temporal aggregation, reducing global attention cost while preserving geometric reasoning. Experiments on five autonomous driving benchmarks show that TRIG achieves state-of-the-art performance in pose estimation, metric depth prediction, and 3D reconstruction.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/11/2607.03822v1-fdr-occ-factorized-dense-routing-for-full-spectrum-3d-occupancy-prediction",
+      "section": "quick",
+      "title_en": "FDR-Occ: Factorized Dense Routing for Full-Spectrum 3D Occupancy Prediction",
+      "authors": "Dubing Chen, Huan Zheng, Tianyi Yan, Yucheng Zhou, Runzhou Tao, Zhongying Qiu, Jianfei Yang, Jianbing Shen",
+      "date": "2026-07-04",
+      "pdf": "https://arxiv.org/pdf/2607.03822v1",
+      "score": "6.0",
+      "evidence": "基于视觉的3D占用预测，与纯视觉3D目标检测高度相关，可作为场景表示方法",
+      "tldr": "面向视觉3D占用预测，现有显式物理投影方法受限于稀疏相机射线，造成上下文理解不足。本文提出因子化密集路由（FDR），通过层次张量收缩实现全全局密集2D-3D映射，并引入分辨率-上下文解耦架构，兼顾全局语义与局部精度。实验表明该方法在标准设定下达到最先进性能，并在无外参时展现出更强的结构鲁棒性。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Vision-based 3D occupancy prediction fundamentally relies on the 2D-to-3D view transformation. Current paradigms predominantly utilize explicit physical projection, which artificially restricts the routing matrix to strict, sparse camera rays. While computationally efficient, this imposes a severe Locality Bottleneck, preventing the network from constructing holistic contextual understanding and degrading sharply when camera extrinsics are unreliable or absent. To break this bottleneck, we abstract view transformation as unconstrained bipartite routing and propose Factorized Dense Routing (FDR). By approximating dense 2D-to-3D mixing through hierarchical tensor contractions, FDR guarantees a fully-global receptive field with tractable, sub-quadratic complexity. Crucially, the mandatory spatial contraction in dense routing exposes a fundamental Resolution-Context Trade-off. To address this, we introduce a Resolution-Context Decoupled Architecture. We factorize the 3D space into a global macroscopic topological anchor (via FDR) and precise local geometric planes (via explicit projection). This decoupling enables global semantic inference and exact surface localization to complement each other without mutual compromise. Extensive experiments demonstrate that our framework achieves state-of-the-art performance on the Occ3D-nuScenes and Occ3D-Waymo benchmarks. More notably, in an uncalibrated setting where physical extrinsics are withheld, our global routing internalizes the implicit multi-camera rig topology and exhibits substantially stronger structural robustness than physical-projection baselines under the same protocol.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

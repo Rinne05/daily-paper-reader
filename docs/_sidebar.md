@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-13 <!--dpr-date:20260713-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/13/2607.09629v1-4dr360-state-reasoning-for-joint-3d-detection-and-occupancy-prediction-in-4d-radar-camera-full-scene-perception" data-sidebar-item="{&quot;title&quot;: &quot;4DR360: State Reasoning for Joint 3D Detection and Occupancy Prediction in 4D Radar-Camera Full-Scene Perception&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.09629v1-4dr360-state-reasoning-for-joint-3d-detection-and-occupancy-prediction-in-4d-radar-camera-full-scene-perception&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;提出用于自动驾驶的雷达-相机融合3D检测与占据预测方法&quot;}">4DR360: State Reasoning for Joint 3D Detection and Occupancy Prediction in 4D Radar-Camera Full-Scene Perception</a>
   * 2026-07-11 <!--dpr-date:20260711-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/11/2607.05801v1-trig-trajectory-rig-decoupled-metric-geometry-learning" data-sidebar-item="{&quot;title&quot;: &quot;TRIG: Trajectory-Rig Decoupled Metric Geometry Learning&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.05801v1-trig-trajectory-rig-decoupled-metric-geometry-learning&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;视觉中心的自动驾驶多相机几何，为纯视觉3D检测提供基础几何感知&quot;}">TRIG: Trajectory-Rig Decoupled Metric Geometry Learning</a>

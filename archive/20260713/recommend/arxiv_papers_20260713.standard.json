@@ -1,0 +1,58 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-13T21:29:02.112309+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.09629v1",
+      "source": "arxiv",
+      "title": "4DR360: State Reasoning for Joint 3D Detection and Occupancy Prediction in 4D Radar-Camera Full-Scene Perception",
+      "abstract": "Reliable autonomous driving requires full-scene perception that couples foreground objects with dense semantic layout. Recently, 4D millimeter-wave radar has emerged as a robust and affordable sensor, yet its sparse returns make radar-camera fusion necessary for comprehensive scene understanding. Existing radar-camera methods mainly optimize detection, while dual-task systems usually decode boxes and occupancy with limited interaction. To address this gap and advance radar-based multi-task learning, we propose \\method, a 4D radar-camera framework for 360$^\\circ$ full-scene perception, which models semantic occupancy as a persistent scene state rather than a terminal output. \\method{} follows a cross-modal state reasoning paradigm, where the occupancy state is modeled and propagated through stages for coarse-to-fine feature aggregation. Specifically, State-guided BEV Enhancement (SBE) strengthens intra-frame BEV representation, while Doppler-guided Temporal Fusion (DTF) preserves state evidence over longer temporal horizons. Beyond the model, we further extend ManTruckScenes with satellite-map-based generated occupancy labels and pair it with OmniHD-Scenes in a unified cross-dataset detection-and-occupancy protocol. The resulting experiments cover accuracy, robustness, ablation, and efficiency under one radar-camera multi-task evaluation framework. Code and labels will be released upon acceptance.",
+      "authors": [
+        "Xiaokai Bai",
+        "Lianqing Zheng",
+        "Runwei Guan",
+        "Songkai Wang",
+        "Siyuan Cao",
+        "Hui-liang Shen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-10T17:26:19+00:00",
+      "link": "https://arxiv.org/pdf/2607.09629v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "proposes 3D detection and occupancy prediction using radar-camera fusion for autonomous driving",
+      "llm_evidence_cn": "提出用于自动驾驶的雷达-相机融合3D检测与占据预测方法",
+      "llm_evidence": "提出用于自动驾驶的雷达-相机融合3D检测与占据预测方法",
+      "canonical_evidence": "提出用于自动驾驶的雷达-相机融合3D检测与占据预测方法",
+      "llm_tldr_en": "Proposes 4DR360, a 4D radar-camera framework for joint 3D detection and occupancy prediction in autonomous driving, achieving full-scene perception by modeling occupancy as a persistent state.",
+      "llm_tldr_cn": "现有雷达-相机融合方法多侧重检测，且双任务系统交互有限。本文提出4DR360框架，通过将语义占据建模为持续场景状态，实现4D雷达-相机全景感知中的联合3D检测与占据预测。实验表明该方法在多任务学习上具有优势。",
+      "llm_tldr": "现有雷达-相机融合方法多侧重检测，且双任务系统交互有限。本文提出4DR360框架，通过将语义占据建模为持续场景状态，实现4D雷达-相机全景感知中的联合3D检测与占据预测。实验表明该方法在多任务学习上具有优势。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

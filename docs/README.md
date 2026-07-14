@@ -6,24 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-13
-- 运行时间：2026-07-13 21:29:43 UTC
+- 最新运行日期：2026-07-14
+- 运行时间：2026-07-14 21:17:01 UTC
 - 运行状态：成功
 - 本次总论文数：1
-- 精读区：0
-- 速读区：1
+- 精读区：1
+- 速读区：0
 
 ### 今日简报（AI）
-今日速读了一篇评分7.0的4D雷达-相机全场景感知论文，聚焦3D检测与占用预测的联合推理。值得留意的是，该方法通过状态推理统一处理动态与静态场景，在4D雷达与相机融合上取得平衡。建议后续关注该方向与纯视觉方案的对比实验，以及实际部署时的计算开销。
-- 详情：[/202607/13/README](/202607/13/README)
+今日精读一篇关于LiDAR目标检测中输入分辨率缩放的研究。  
+值得关注的是，该工作探讨了如何在任意时刻调整输入分辨率以平衡精度与效率，评分8.0/10。  
+对于普通读者，建议关注分辨率缩放策略对实时3D检测的实用价值。
+- 详情：[/202607/14/README](/202607/14/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [On Exploring Input Resolution Scaling For Anytime LiDAR Object Detection](/202607/14/2607.08391v1-on-exploring-input-resolution-scaling-for-anytime-lidar-object-detection)  
+   标签：评分：8.0/10、query:nuscenes-dod
+   evidence：基于LiDAR的3D目标检测方法，提出分辨率缩放策略
 
 ### 速读区论文标签
-1. [4DR360: State Reasoning for Joint 3D Detection and Occupancy Prediction in 4D Radar-Camera Full-Scene Perception](/202607/13/2607.09629v1-4dr360-state-reasoning-for-joint-3d-detection-and-occupancy-prediction-in-4d-radar-camera-full-scene-perception)  
-   标签：评分：7.0/10、query:nuscenes-dod
-   evidence：提出用于自动驾驶的雷达-相机融合3D检测与占据预测方法
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">

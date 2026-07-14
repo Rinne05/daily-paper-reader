@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-14 <!--dpr-date:20260714-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/14/2607.08391v1-on-exploring-input-resolution-scaling-for-anytime-lidar-object-detection" data-sidebar-item="{&quot;title&quot;: &quot;On Exploring Input Resolution Scaling For Anytime LiDAR Object Detection&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.08391v1-on-exploring-input-resolution-scaling-for-anytime-lidar-object-detection&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;基于LiDAR的3D目标检测方法，提出分辨率缩放策略&quot;}">On Exploring Input Resolution Scaling For Anytime LiDAR Object Detection</a>
   * 2026-07-13 <!--dpr-date:20260713-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/13/2607.09629v1-4dr360-state-reasoning-for-joint-3d-detection-and-occupancy-prediction-in-4d-radar-camera-full-scene-perception" data-sidebar-item="{&quot;title&quot;: &quot;4DR360: State Reasoning for Joint 3D Detection and Occupancy Prediction in 4D Radar-Camera Full-Scene Perception&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.09629v1-4dr360-state-reasoning-for-joint-3d-detection-and-occupancy-prediction-in-4d-radar-camera-full-scene-perception&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;提出用于自动驾驶的雷达-相机融合3D检测与占据预测方法&quot;}">4DR360: State Reasoning for Joint 3D Detection and Occupancy Prediction in 4D Radar-Camera Full-Scene Perception</a>

@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-14",
+  "date": "2026-07-14",
+  "generated_at": "2026-07-14T21:17:07",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/14/2607.08391v1-on-exploring-input-resolution-scaling-for-anytime-lidar-object-detection",
+      "section": "deep",
+      "title_en": "On Exploring Input Resolution Scaling For Anytime LiDAR Object Detection",
+      "authors": "Ahmet Soyyigit, Shuochao Yao, Heechul Yun",
+      "date": "2026-07-09",
+      "pdf": "https://arxiv.org/pdf/2607.08391v1",
+      "score": "8.0",
+      "evidence": "基于LiDAR的3D目标检测方法，提出分辨率缩放策略",
+      "tldr": "LiDAR点云3D检测面临动态时序需求挑战。提出一种多分辨率推理方法，支持pillar/voxel模型动态缩放输入分辨率，仅需单个模型内存高效。配合截止时间感知调度器，通过准确预测不同分辨率执行时间选择最高可行分辨率。在nuScenes数据集上显著优于现有任意时间计算方法，仿真部署实现无碰撞导航。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Making tradeoffs between execution latency and result utility (i.e., anytime computing) for adapting to dynamic operational requirements has been shown to enhance the performance of cyber-physical systems. In this work, we focus on enabling anytime computing for deep neural networks (DNNs) that process LiDAR point clouds for 3D object detection. We propose a novel method that enables multi-resolution inference for models that process point clouds as pillars or voxels, allowing the input to be dynamically scaled and processed at the resolution needed to meet timing requirements. Importantly, our memory-efficient approach requires the deployment of only a single DNN model, avoiding the need to deploy multiple models, each trained for a different input resolution. We also introduce a deadline-aware scheduler that selects the highest possible resolution for any given input by accurately predicting the execution time for all possible resolutions at runtime, which is challenging due to the irregularity of LiDAR point clouds. Experimental results on the nuScenes autonomous driving dataset demonstrate that our method significantly outperforms existing anytime computing approaches for LiDAR object detection. Finally, we deploy our approach in a simulated autonomous driving system, where it consistently enables collision-free navigation while avoiding unnecessary stalls caused by environmental complexity.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

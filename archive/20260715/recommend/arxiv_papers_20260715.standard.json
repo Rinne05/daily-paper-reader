@@ -1,0 +1,103 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-15T21:28:44.176315+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.11588v1",
+      "source": "arxiv",
+      "title": "FoundationGeo: Learning Spatial Pixel-Wise Fields for Monocular Metric Geometry",
+      "abstract": "We present FoundationGeo, a two-stage framework that explicitly bridges relative and metric prediction via spatial calibration and principled data design. Stage 1 learns a high-fidelity, affine-invariant geometry model by initializing with DINOv3 and training on a curated 10.2M-sample multi-domain corpus with complementary local-detail supervision, yielding sharp boundaries and strong cross-domain generalization. Stage 2 moves beyond global scaling by introducing lightweight pixel-wise calibration fields for metric estimation: a scale field for spatially varying metric alignment and a ray-direction correction field that mitigates directional bias in point-map geometry, together producing metrically consistent 3D point maps. Beyond model design, we identify camera intrinsic coverage, especially focal length distribution mismatch between training and test data, as a key bottleneck for zero-shot metric generalization: performance drops sharply when test intrinsics fall outside the training distribution. To address this, we synthesize additional training data across diverse focal lengths using a Blender-based data engine, repairing under-covered focal regimes and improving robustness under intrinsic shift. Extensive zero-shot evaluations across seven benchmarks show that FoundationGeo significantly strengthens cross-domain robustness, staying near the top across diverse domains while avoiding the sharp cross-domain performance drops observed in other methods. This consistency translates into the best overall performance, surpassing heavier baselines by over 5.2% on average.",
+      "authors": [
+        "Muxin Liu",
+        "Xiaoyang Lyu",
+        "Tianhe Ren",
+        "Peng Dai",
+        "Xiaoshan Wu",
+        "Zhiyue Zhang",
+        "Jiaqi Zhang",
+        "Jiehong Lin",
+        "Shaoshuai Shi",
+        "Xiaojuan Qi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-13T14:10:01+00:00",
+      "link": "https://arxiv.org/pdf/2607.11588v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Monocular metric geometry estimation for pure visual 3D perception",
+      "llm_evidence_cn": "单目度量几何估计，可用于纯视觉3D感知",
+      "llm_evidence": "单目度量几何估计，可用于纯视觉3D感知",
+      "canonical_evidence": "单目度量几何估计，可用于纯视觉3D感知",
+      "llm_tldr_en": "FoundationGeo learns pixel-wise scale and ray-direction fields to produce metrically consistent 3D point maps, enabling metric depth for visual-based detection.",
+      "llm_tldr_cn": "本文提出FoundationGeo两阶段框架，先用大规模多领域数据训练仿射不变几何模型，再引入轻量像素级校准场（尺度场和射线方向修正场），输出度量一致的3D点图。该方法为纯视觉3D检测提供精确的深度和点云基础，在多个零样本评估中表现优异。",
+      "llm_tldr": "本文提出FoundationGeo两阶段框架，先用大规模多领域数据训练仿射不变几何模型，再引入轻量像素级校准场（尺度场和射线方向修正场），输出度量一致的3D点图。该方法为纯视觉3D检测提供精确的深度和点云基础，在多个零样本评估中表现优异。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "pure visual 3D detection without LiDAR",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.12433v1",
+      "source": "arxiv",
+      "title": "ARDepth: Auto-regressive Monocular Depth Estimation with Progressive Visual Conditioning",
+      "abstract": "Diffusion models have recently become the dominant paradigm for monocular depth estimation (MDE). However, they implicitly assume that depth can be recovered as a globally smooth field through iterative denoising, which does not explicitly reflect the piecewise and scale-dependent organization of scene geometry. In practice, geometric structure emerges progressively across spatial scales, where coarse layout, surfaces, and boundaries are constructed in a hierarchical manner. Motivated by this observation, we introduce ARDepth, which formulates depth estimation as structured auto-regressive generation. Instead of recovering depth through global refinement, ARDepth progressively constructs depth representations as spatial resolution increases. To support this generative process, we introduce Scale-Progressive Conditioning (SPC) to inject multi-scale visual features at each generation stage, and Semantic-Aware Guidance (SAG) to provide scene-level semantic priors that enhance global structural consistency. Together, these designs enable the model to capture fine-grained local details while maintaining coherent global geometry. Empirical results demonstrate that our approach achieves strong performance and produces structurally consistent depth predictions across scales, validating auto-regressive generation as a promising alternative paradigm for geometric modeling.",
+      "authors": [
+        "Zijie Wang",
+        "Wei Zhang",
+        "Weiming Zhang",
+        "Xiao Tan",
+        "Weikai Chen",
+        "Xiaoxu Li",
+        "Guanbin Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-14T07:06:46+00:00",
+      "link": "https://arxiv.org/pdf/2607.12433v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "auto-regressive monocular depth estimation method transferable to 3D object detection",
+      "llm_evidence_cn": "可迁移至3D目标检测的自回归单目深度估计方法",
+      "llm_evidence": "可迁移至3D目标检测的自回归单目深度估计方法",
+      "canonical_evidence": "可迁移至3D目标检测的自回归单目深度估计方法",
+      "llm_tldr_en": "ARDepth formulates monocular depth estimation as auto-regressive generation, progressively constructing depth from coarse to fine, offering a new paradigm that can improve geometric reasoning in 3D detection.",
+      "llm_tldr_cn": "ARDepth将单目深度估计建模为结构化自回归生成，通过渐进视觉条件构建多层次深度表示，避免了扩散模型全局平滑假设的局限。该方法在标准深度估计基准上取得领先结果，其分层几何建模思路可直接迁移至3D目标检测任务，提升模型对场景结构的理解能力。",
+      "llm_tldr": "ARDepth将单目深度估计建模为结构化自回归生成，通过渐进视觉条件构建多层次深度表示，避免了扩散模型全局平滑假设的局限。该方法在标准深度估计基准上取得领先结果，其分层几何建模思路可直接迁移至3D目标检测任务，提升模型对场景结构的理解能力。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

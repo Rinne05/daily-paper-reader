@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-15",
+  "date": "2026-07-15",
+  "generated_at": "2026-07-15T21:30:06",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/15/2607.11588v1-foundationgeo-learning-spatial-pixel-wise-fields-for-monocular-metric-geometry",
+      "section": "quick",
+      "title_en": "FoundationGeo: Learning Spatial Pixel-Wise Fields for Monocular Metric Geometry",
+      "authors": "Muxin Liu, Xiaoyang Lyu, Tianhe Ren, Peng Dai, Xiaoshan Wu, Zhiyue Zhang, Jiaqi Zhang, Jiehong Lin, Shaoshuai Shi, Xiaojuan Qi",
+      "date": "2026-07-13",
+      "pdf": "https://arxiv.org/pdf/2607.11588v1",
+      "score": "6.0",
+      "evidence": "单目度量几何估计，可用于纯视觉3D感知",
+      "tldr": "单目度量几何预测面临跨域泛化困难与度量校准不足的问题。本文提出FoundationGeo两阶段框架：阶段一利用DINOv3初始化并在10.2M多域数据上训练，结合局部细节监督学习高保真仿射不变几何模型；阶段二引入像素级尺度场和射线方向校正场，实现空间变化的度量对齐与方向偏差修正，输出度量一致的3D点云。研究发现相机内参（尤其焦距）分布不匹配是零样本泛化的关键瓶颈，通过Blender数据引擎合成多样焦距数据修复欠覆盖区域。零样本评估在七个基准上平均超越强基线5.2%，显著提升跨域鲁棒性。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "We present FoundationGeo, a two-stage framework that explicitly bridges relative and metric prediction via spatial calibration and principled data design. Stage 1 learns a high-fidelity, affine-invariant geometry model by initializing with DINOv3 and training on a curated 10.2M-sample multi-domain corpus with complementary local-detail supervision, yielding sharp boundaries and strong cross-domain generalization. Stage 2 moves beyond global scaling by introducing lightweight pixel-wise calibration fields for metric estimation: a scale field for spatially varying metric alignment and a ray-direction correction field that mitigates directional bias in point-map geometry, together producing metrically consistent 3D point maps. Beyond model design, we identify camera intrinsic coverage, especially focal length distribution mismatch between training and test data, as a key bottleneck for zero-shot metric generalization: performance drops sharply when test intrinsics fall outside the training distribution. To address this, we synthesize additional training data across diverse focal lengths using a Blender-based data engine, repairing under-covered focal regimes and improving robustness under intrinsic shift. Extensive zero-shot evaluations across seven benchmarks show that FoundationGeo significantly strengthens cross-domain robustness, staying near the top across diverse domains while avoiding the sharp cross-domain performance drops observed in other methods. This consistency translates into the best overall performance, surpassing heavier baselines by over 5.2% on average.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/15/2607.12433v1-ardepth-auto-regressive-monocular-depth-estimation-with-progressive-visual-conditioning",
+      "section": "quick",
+      "title_en": "ARDepth: Auto-regressive Monocular Depth Estimation with Progressive Visual Conditioning",
+      "authors": "Zijie Wang, Wei Zhang, Weiming Zhang, Xiao Tan, Weikai Chen, Xiaoxu Li, Guanbin Li",
+      "date": "2026-07-14",
+      "pdf": "https://arxiv.org/pdf/2607.12433v1",
+      "score": "6.0",
+      "evidence": "可迁移至3D目标检测的自回归单目深度估计方法",
+      "tldr": "现有扩散模型假设深度可通过全局平滑去噪恢复，忽略了场景几何的层次性。ARDepth将深度估计转化为自回归生成，随分辨率递增逐步构建深度表示。通过尺度渐进条件注入多尺度视觉特征，并利用语义感知引导增强全局一致性。实验表明该方法在保持结构一致性的同时捕获细节，为几何建模提供了新范式。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "Diffusion models have recently become the dominant paradigm for monocular depth estimation (MDE). However, they implicitly assume that depth can be recovered as a globally smooth field through iterative denoising, which does not explicitly reflect the piecewise and scale-dependent organization of scene geometry. In practice, geometric structure emerges progressively across spatial scales, where coarse layout, surfaces, and boundaries are constructed in a hierarchical manner. Motivated by this observation, we introduce ARDepth, which formulates depth estimation as structured auto-regressive generation. Instead of recovering depth through global refinement, ARDepth progressively constructs depth representations as spatial resolution increases. To support this generative process, we introduce Scale-Progressive Conditioning (SPC) to inject multi-scale visual features at each generation stage, and Semantic-Aware Guidance (SAG) to provide scene-level semantic priors that enhance global structural consistency. Together, these designs enable the model to capture fine-grained local details while maintaining coherent global geometry. Empirical results demonstrate that our approach achieves strong performance and produces structurally consistent depth predictions across scales, validating auto-regressive generation as a promising alternative paradigm for geometric modeling.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-16 <!--dpr-date:20260716-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/16/2607.10071v1-flashbev-fast-and-memory-efficient-exact-bev-transformation-with-io-awareness" data-sidebar-item="{&quot;title&quot;: &quot;FlashBEV: Fast and Memory-Efficient Exact BEV Transformation with IO-Awareness&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.10071v1-flashbev-fast-and-memory-efficient-exact-bev-transformation-with-io-awareness&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;自动驾驶中基于相机的BEV视角高效变换&quot;}">FlashBEV: Fast and Memory-Efficient Exact BEV Transformation with IO-Awareness</a>
   * 2026-07-15 <!--dpr-date:20260715-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/15/2607.11588v1-foundationgeo-learning-spatial-pixel-wise-fields-for-monocular-metric-geometry" data-sidebar-item="{&quot;title&quot;: &quot;FoundationGeo: Learning Spatial Pixel-Wise Fields for Monocular Metric Geometry&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.11588v1-foundationgeo-learning-spatial-pixel-wise-fields-for-monocular-metric-geometry&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;单目度量几何估计，可用于纯视觉3D感知&quot;}">FoundationGeo: Learning Spatial Pixel-Wise Fields for Monocular Metric Geometry</a>

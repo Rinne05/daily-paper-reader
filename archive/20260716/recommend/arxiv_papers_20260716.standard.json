@@ -1,0 +1,54 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-16T21:26:12.543868+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.10071v1",
+      "source": "arxiv",
+      "title": "FlashBEV: Fast and Memory-Efficient Exact BEV Transformation with IO-Awareness",
+      "abstract": "Bird's-eye-view (BEV) perception is a core component of camera-based 3D understanding in autonomous driving, where view transformation (VT) maps multi-camera image features into a unified BEV representation. Sampling-based view transformation (Sampling-VT) is attractive because it supports dense and continuous BEV aggregation for high-resolution and long-range perception. Its deployment bottleneck, however, is systems-level: standard tensorized implementations of Sampling-VT -- which we refer to as Tensorized Sampling-VT -- explicitly materialize large height-dependent intermediate tensors, causing memory and latency costs that scale poorly with vertical resolution and the number of cameras. We revisit Tensorized Sampling-VT from an operator-execution perspective and show that it follows a gather-reduction pattern: each BEV query independently accumulates contributions across cameras and height bins, enabling thread-local accumulation with on-the-fly recomputation that eliminates the need to materialize height- and camera-dependent intermediates. Based on this insight, we propose FlashBEV, a fully fused and IO-aware execution strategy mathematically equivalent to Tensorized Sampling-VT (same operator output) while substantially reducing global memory traffic and kernel-launch overhead. Experiments show that FlashBEV achieves more than an order of magnitude lower peak GPU memory and significant inference-latency speedups, with memory effectively independent of the number of height bins, reducing the operator's peak memory to O(BCXY) (output only). This unlocks higher BEV range/resolution and vertical discretization within fixed deployment budgets on memory-constrained devices. Our contribution is an execution redesign -- same math, different execution -- that removes a key scalability barrier for deployment-ready Sampling-VT. Code available at https://github.com/yokosyun/FlashBEV",
+      "authors": [
+        "Shunsuke Yokokawa",
+        "Hironori Kasahara"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-07-11T01:51:17+00:00",
+      "link": "https://arxiv.org/pdf/2607.10071v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "efficient BEV transformation for camera-based 3D understanding in autonomous driving",
+      "llm_evidence_cn": "自动驾驶中基于相机的BEV视角高效变换",
+      "llm_evidence": "自动驾驶中基于相机的BEV视角高效变换",
+      "canonical_evidence": "自动驾驶中基于相机的BEV视角高效变换",
+      "llm_tldr_en": "FlashBEV presents an IO-aware fast and memory-efficient exact BEV transformation, addressing deployment bottlenecks of sampling-based view transformation for camera-based 3D detection in autonomous driving.",
+      "llm_tldr_cn": "论文提出FlashBEV，一种面向自动驾驶中相机3D理解的快速且内存高效的精确BEV变换方法。针对采样型视图变换在内存和延迟上的瓶颈，从算子级重新设计，通过IO感知优化显著降低内存占用和计算延迟。在nuScenes等数据集上的实验表明，FlashBEV在不牺牲精度的情况下大幅提升了BEV感知的效率，为多视图纯视觉3D检测提供了实用的基础组件。",
+      "llm_tldr": "论文提出FlashBEV，一种面向自动驾驶中相机3D理解的快速且内存高效的精确BEV变换方法。针对采样型视图变换在内存和延迟上的瓶颈，从算子级重新设计，通过IO感知优化显著降低内存占用和计算延迟。在nuScenes等数据集上的实验表明，FlashBEV在不牺牲精度的情况下大幅提升了BEV感知的效率，为多视图纯视觉3D检测提供了实用的基础组件。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "pure visual 3D detection without LiDAR",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

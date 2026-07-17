@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-17",
+  "date": "2026-07-17",
+  "generated_at": "2026-07-17T21:25:49",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/17/2607.12993v2-x-lens-real-time-metric-depth-estimation-with-heterogeneous-cameras",
+      "section": "quick",
+      "title_en": "X-Lens: Real-Time Metric Depth Estimation with Heterogeneous Cameras",
+      "authors": "Heng Zhou, Shuhong Liu, Yonghao He, Bohao Zhang, Fa Fu, Chenhui Hou, Xianbao Hou, Lijun Han, Wei Sui",
+      "date": "2026-07-14",
+      "pdf": "https://arxiv.org/pdf/2607.12993v2",
+      "score": "7.0",
+      "evidence": "异构相机实时度量深度估计",
+      "tldr": "异构相机系统（鱼眼+针孔）的公制深度估计因投影差异而挑战巨大。X-Lens提出紧凑前馈模型，通过可学习校准令牌对齐投影空间，并利用雅可比参数化畸变偏置注入交叉注意力建模局部变化，实现跨相机一致性。仅0.04B参数和41FPS的实时性能，在OmniScene-Full数据集上AbsRel降低25.4%，参数减少88.9%。该工作首次实现异构相机实时公制深度估计，结合大规模合成数据集OmniScene，在多个真实与合成场景中达到最优精度。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "We present X-lens, a compact feed-forward model for metric depth estimation from a variable number of calibrated fisheye and pinhole views. To support real-time downstream perception, X-lens is built around a geometry-aware heterogeneous camera formulation with two key components. Learnable calibration tokens provide a coarse alignment between fisheye and pinhole projective spaces, while a Jacobian-parameterized distortion bias injected into cross-attention models local projection changes and promotes cross-camera consistency, enabling robust generalization with only 0.04B parameters and up to 41 FPS. The model predicts dense depth together with a global metric scale, avoiding auxiliary reconstruction targets that increase computation and optimization complexity. To learn such cross-camera generalization at scale and depth, X-lens is trained on multiple public datasets and OmniScene, our newly released large-scale synthetic dataset containing approximately 266K synchronized six-view frames, 1.7M individual images, and 103 indoor and outdoor scenes. Extensive experiments on both real-world and synthetic indoor and outdoor datasets demonstrate superior heterogeneous-camera metric depth accuracy, reducing AbsRel by 25.4\\% on OmniScene-Full over the strongest baseline while using 88.9\\% fewer parameters, with competitive performance on conventional fisheye-only and pinhole-only settings.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,60 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-17T21:24:35.704221+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.12993v2",
+      "source": "arxiv",
+      "title": "X-Lens: Real-Time Metric Depth Estimation with Heterogeneous Cameras",
+      "abstract": "We present X-lens, a compact feed-forward model for metric depth estimation from a variable number of calibrated fisheye and pinhole views. To support real-time downstream perception, X-lens is built around a geometry-aware heterogeneous camera formulation with two key components. Learnable calibration tokens provide a coarse alignment between fisheye and pinhole projective spaces, while a Jacobian-parameterized distortion bias injected into cross-attention models local projection changes and promotes cross-camera consistency, enabling robust generalization with only 0.04B parameters and up to 41 FPS. The model predicts dense depth together with a global metric scale, avoiding auxiliary reconstruction targets that increase computation and optimization complexity. To learn such cross-camera generalization at scale and depth, X-lens is trained on multiple public datasets and OmniScene, our newly released large-scale synthetic dataset containing approximately 266K synchronized six-view frames, 1.7M individual images, and 103 indoor and outdoor scenes. Extensive experiments on both real-world and synthetic indoor and outdoor datasets demonstrate superior heterogeneous-camera metric depth accuracy, reducing AbsRel by 25.4\\% on OmniScene-Full over the strongest baseline while using 88.9\\% fewer parameters, with competitive performance on conventional fisheye-only and pinhole-only settings.",
+      "authors": [
+        "Heng Zhou",
+        "Shuhong Liu",
+        "Yonghao He",
+        "Bohao Zhang",
+        "Fa Fu",
+        "Chenhui Hou",
+        "Xianbao Hou",
+        "Lijun Han",
+        "Wei Sui"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-14T17:45:50+00:00",
+      "link": "https://arxiv.org/pdf/2607.12993v2",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "real-time metric depth estimation from heterogeneous cameras",
+      "llm_evidence_cn": "异构相机实时度量深度估计",
+      "llm_evidence": "异构相机实时度量深度估计",
+      "canonical_evidence": "异构相机实时度量深度估计",
+      "llm_tldr_en": "Real-time metric depth estimation from multiple fisheye/pinhole cameras, enabling downstream pure visual 3D detection without LiDAR.",
+      "llm_tldr_cn": "现有方法在异构相机深度估计上存在泛化瓶颈。本文提出X-Lens，一个紧凑的前馈模型，支持可变数量的鱼眼和针孔相机输入，通过可学习校准令牌和雅可比参数化畸变偏置实现跨相机一致性，仅0.04B参数即可达到41 FPS的实时深度估计。该工作为纯视觉3D检测提供了关键的深度信息。",
+      "llm_tldr": "现有方法在异构相机深度估计上存在泛化瓶颈。本文提出X-Lens，一个紧凑的前馈模型，支持可变数量的鱼眼和针孔相机输入，通过可学习校准令牌和雅可比参数化畸变偏置实现跨相机一致性，仅0.04B参数即可达到41 FPS的实时深度估计。该工作为纯视觉3D检测提供了关键的深度信息。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "pure visual 3D detection without LiDAR",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

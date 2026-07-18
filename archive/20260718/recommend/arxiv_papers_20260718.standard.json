@@ -1,0 +1,56 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-18T21:03:09.457994+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.14710v1",
+      "source": "arxiv",
+      "title": "Variational Inference for Bird's Eye View Segmentation in Autonomous Driving",
+      "abstract": "The bird's eye view (BEV) has emerged as a pivotal approach for environmental perception in autonomous driving, providing a unified spatial representation for vehicles. Nevertheless, despite BEV's significance in addressing the challenges inherent to autonomous driving, effectively fusing data from multiple camera sensors and operating in complex external driving environments remains a considerable challenge. To mitigate this issue, we recast the BEV segmentation problem within a variational inference framework. In this paper, we propose a novel transformer-based variational flow transformation network for BEV segmentation, denoted as TVB. Our architecture implicitly learns the mapping from multiple camera views to a unified canonical BEV map during training by exploiting posterior BEV supervision. TVB employs a conditional variational auto encoder (CVAE) as its backbone and produces multiple BEV map candidates. To augment the realism of the generated BEV maps, we integrate normalizing flows into the map generation process, enabling the construction of more complex and expressive probability distributions. Furthermore, we design a BEV-attention fusion (BAF) module that harnesses attention mechanisms to adaptively integrate the multiple candidate BEV maps. Experimental results, evaluated on both the nuScenes and OPV2Vdatasets, demonstrate that our proposed method achieves superior performance in multi-camera view BEV segmentation and lane environment perception.",
+      "authors": [
+        "Jingyue Shi",
+        "Huaicheng Li",
+        "Junhui Zhao",
+        "Yanxiang Jiang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "eess.SY"
+      ],
+      "published": "2026-07-16T08:20:37+00:00",
+      "link": "https://arxiv.org/pdf/2607.14710v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "proposes a transformer-based variational flow for BEV segmentation from multiple cameras, method relevant to multi-view 3D perception",
+      "llm_evidence_cn": "提出了基于Transformer的变分流网络用于多摄像头BEV分割，与多视角3D感知方法相关",
+      "llm_evidence": "提出了基于Transformer的变分流网络用于多摄像头BEV分割，与多视角3D感知方法相关",
+      "canonical_evidence": "提出了基于Transformer的变分流网络用于多摄像头BEV分割，与多视角3D感知方法相关",
+      "llm_tldr_en": "this paper formulates BEV segmentation as variational inference and proposes a transformer-based network TVB to learn mapping from multi-camera views to BEV map, enabling effective fusion for autonomous driving",
+      "llm_tldr_cn": "针对自动驾驶中多摄像头数据融合和复杂环境感知的挑战，本文提出TVB网络，将BEV分割重新定义为变分推断问题，利用Transformer隐式学习从多视角图像到统一BEV空间的映射。实验表明该方法能有效融合多源信息并提升分割质量，为基于视觉的3D环境感知提供了新的框架思路。",
+      "llm_tldr": "针对自动驾驶中多摄像头数据融合和复杂环境感知的挑战，本文提出TVB网络，将BEV分割重新定义为变分推断问题，利用Transformer隐式学习从多视角图像到统一BEV空间的映射。实验表明该方法能有效融合多源信息并提升分割质量，为基于视觉的3D环境感知提供了新的框架思路。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

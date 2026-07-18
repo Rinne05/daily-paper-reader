@@ -6,24 +6,24 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-17
-- 运行时间：2026-07-17 21:25:45 UTC
+- 最新运行日期：2026-07-18
+- 运行时间：2026-07-18 21:03:51 UTC
 - 运行状态：成功
 - 本次总论文数：1
 - 精读区：0
 - 速读区：1
 
 ### 今日简报（AI）
-今日速读1篇论文《X-Lens》，聚焦异构相机实时公制深度估计技术。该研究实现了多类型相机下的高精度深度预测，对机器人、AR等领域实用性强。建议后续关注其训练数据集与标定方法，以评估是否适配自身硬件平台。
-- 详情：[/202607/17/README](/202607/17/README)
+今日速读一篇自动驾驶鸟瞰图分割的变分推断论文，评分6.0/10。核心是探索用变分推断优化BEV分割模型，但创新性一般。若想入门BEV感知，建议先看传统方案或近期高引工作。
+- 详情：[/202607/18/README](/202607/18/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [X-Lens: Real-Time Metric Depth Estimation with Heterogeneous Cameras](/202607/17/2607.12993v2-x-lens-real-time-metric-depth-estimation-with-heterogeneous-cameras)  
-   标签：评分：7.0/10、query:nuscenes-dod
-   evidence：异构相机实时度量深度估计
+1. [Variational Inference for Bird's Eye View Segmentation in Autonomous Driving](/202607/18/2607.14710v1-variational-inference-for-birds-eye-view-segmentation-in-autonomous-driving)  
+   标签：评分：6.0/10、query:nuscenes-dod
+   evidence：提出了基于Transformer的变分流网络用于多摄像头BEV分割，与多视角3D感知方法相关
 
 
 <div class="dpr-home-promo-card">

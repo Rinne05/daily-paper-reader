@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-18",
+  "date": "2026-07-18",
+  "generated_at": "2026-07-18T21:03:55",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/18/2607.14710v1-variational-inference-for-birds-eye-view-segmentation-in-autonomous-driving",
+      "section": "quick",
+      "title_en": "Variational Inference for Bird's Eye View Segmentation in Autonomous Driving",
+      "authors": "Jingyue Shi, Huaicheng Li, Junhui Zhao, Yanxiang Jiang",
+      "date": "2026-07-16",
+      "pdf": "https://arxiv.org/pdf/2607.14710v1",
+      "score": "6.0",
+      "evidence": "提出了基于Transformer的变分流网络用于多摄像头BEV分割，与多视角3D感知方法相关",
+      "tldr": "针对自动驾驶中多相机融合到BEV分割的挑战，将问题重构成变分推断框架，提出TVB模型。该模型以条件变分自编码器为骨干，结合归一化流生成多个候选BEV图，并设计BEV注意力融合模块自适应整合。在nuScenes和OPV2V数据集上，该方法在多视角BEV分割和车道环境感知任务中取得最优性能，验证了变分推断和归一化流在BEV表示学习中的有效性。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "The bird's eye view (BEV) has emerged as a pivotal approach for environmental perception in autonomous driving, providing a unified spatial representation for vehicles. Nevertheless, despite BEV's significance in addressing the challenges inherent to autonomous driving, effectively fusing data from multiple camera sensors and operating in complex external driving environments remains a considerable challenge. To mitigate this issue, we recast the BEV segmentation problem within a variational inference framework. In this paper, we propose a novel transformer-based variational flow transformation network for BEV segmentation, denoted as TVB. Our architecture implicitly learns the mapping from multiple camera views to a unified canonical BEV map during training by exploiting posterior BEV supervision. TVB employs a conditional variational auto encoder (CVAE) as its backbone and produces multiple BEV map candidates. To augment the realism of the generated BEV maps, we integrate normalizing flows into the map generation process, enabling the construction of more complex and expressive probability distributions. Furthermore, we design a BEV-attention fusion (BAF) module that harnesses attention mechanisms to adaptively integrate the multiple candidate BEV maps. Experimental results, evaluated on both the nuScenes and OPV2Vdatasets, demonstrate that our proposed method achieves superior performance in multi-camera view BEV segmentation and lane environment perception.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-18 <!--dpr-date:20260718-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/18/2607.14710v1-variational-inference-for-birds-eye-view-segmentation-in-autonomous-driving" data-sidebar-item="{&quot;title&quot;: &quot;Variational Inference for Bird&#x27;s Eye View Segmentation in Autonomous Driving&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.14710v1-variational-inference-for-birds-eye-view-segmentation-in-autonomous-driving&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;提出了基于Transformer的变分流网络用于多摄像头BEV分割，与多视角3D感知方法相关&quot;}">Variational Inference for Bird&#x27;s Eye View Segmentation in Autonomous Driving</a>
   * 2026-07-17 <!--dpr-date:20260717-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/17/2607.12993v2-x-lens-real-time-metric-depth-estimation-with-heterogeneous-cameras" data-sidebar-item="{&quot;title&quot;: &quot;X-Lens: Real-Time Metric Depth Estimation with Heterogeneous Cameras&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.12993v2-x-lens-real-time-metric-depth-estimation-with-heterogeneous-cameras&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;异构相机实时度量深度估计&quot;}">X-Lens: Real-Time Metric Depth Estimation with Heterogeneous Cameras</a>

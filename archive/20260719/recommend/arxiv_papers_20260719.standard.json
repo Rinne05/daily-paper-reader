@@ -1,0 +1,176 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-19T21:14:32.508867+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.09985v1",
+      "source": "arxiv",
+      "title": "UniPose9D: Universal Category-Agnostic Object Pose Estimation",
+      "abstract": "Object pose estimation is a fundamental problem in 3D vision. Although recent state-of-the-art approaches achieve strong performance, they often overfit to existing benchmarks and exhibit limited generalization to novel categories and unseen scenes. We propose UniPose9D, a category-agnostic foundation model for 9D object pose estimation: given an instance mask/ROI and either an RGB-D observation or an RGB image with predicted depth, the model estimates rotation, translation, and metric size without category labels, CAD models, mean-shape priors, or reference views. Specifically, UniPose9D samples point pairs from the observed object geometry and uses DINOv2 and PointNet features to predict NOCS coordinates for each pair. To improve accuracy, we introduce a point-pair-based RANSAC N-hop Kabsch--Umeyama algorithm with an adaptive threshold. We further employ flow matching to address symmetric ambiguities and construct a large-scale training set by curating and aligning pose annotations from existing public datasets. Experiments across six datasets show that a single unified model can match or surpass specialist methods while generalizing to unseen objects and in-the-wild scenarios. Our code and model are available on https://github.com/qq456cvb/UniPose9D.",
+      "authors": [
+        "Yang You",
+        "Yi Du",
+        "Cole Harrison",
+        "Leonidas Guibas"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-10T21:24:23+00:00",
+      "link": "https://arxiv.org/pdf/2607.09985v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "category-agnostic 9D object pose estimation, relevant to 3D object detection methods",
+      "llm_evidence_cn": "类别无关的9D目标姿态估计，与3D目标检测方法相关",
+      "llm_evidence": "类别无关的9D目标姿态估计，与3D目标检测方法相关",
+      "canonical_evidence": "类别无关的9D目标姿态估计，与3D目标检测方法相关",
+      "llm_tldr_en": "UniPose9D estimates 9D pose (rotation, translation, metric size) for any object without category labels or CAD models using point-pair NOCS prediction.",
+      "llm_tldr_cn": "针对现有姿态估计方法对类别和场景泛化性差的问题，提出了通用类别无关的9D位姿估计模型。通过采样点对并利用DINOv2和PointNet特征预测NOCS坐标，无需类别标签或CAD模型即可输出旋转、平移和度量尺寸。在多个数据集上展示了强大的零样本泛化能力，为3D目标检测与定位提供了基础方法。",
+      "llm_tldr": "针对现有姿态估计方法对类别和场景泛化性差的问题，提出了通用类别无关的9D位姿估计模型。通过采样点对并利用DINOv2和PointNet特征预测NOCS坐标，无需类别标签或CAD模型即可输出旋转、平移和度量尺寸。在多个数据集上展示了强大的零样本泛化能力，为3D目标检测与定位提供了基础方法。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.14560v1",
+      "source": "arxiv",
+      "title": "Breaking the Model Forgetting Cycle in Long-Incremental 3D Object Detection",
+      "abstract": "Incremental 3D object detection requires a detector to learn novel object classes while remembering previously learned ones over sequentially arriving data. Previous methods, primarily based on pseudo-labeling, perform reasonably in short-incremental stages but still suffer from severe model forgetting when dealing with long-incremental sequences. We investigate this failure and reveal a detrimental self-reinforcing cycle: data distribution shift of novel classes causes model forgetting on old classes, which further produces accumulated error in pseudo-labeling that exacerbates model degradation. To address this issue, we draw inspiration from the human learning process and propose the \\emph{Learning-Dynamics-driven Memory and Review} (LDMR) framework. LDMR monitors per-class detection quality at periodic training checkpoints and uses these learning-dynamics signals to drive two innovative mechanisms, namely (i) human-like intra-stage review that divides each incremental stage into multiple sub-stages' training and concentrates on remembering the most-forgotten objects, and (ii) scene-aware cross-stage memory evolution that evolves a memory bank to transfer knowledge between two consecutive stages by jointly considering scene learnability and diversity. Extensive experiments across multiple long-incremental protocols on indoor benchmarks SUN RGB-D and ScanNetV2 show that LDMR substantially mitigates the model forgetting and outperforms all baselines by a clear margin. Code is available at https://github.com/qianpeisheng/LDMR.",
+      "authors": [
+        "Peisheng Qian",
+        "Jie Xu",
+        "Xulei Yang",
+        "Na Zhao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-16T04:39:35+00:00",
+      "link": "https://arxiv.org/pdf/2607.14560v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "incremental 3D object detection method addressing model forgetting",
+      "llm_evidence_cn": "长增量3D目标检测方法，解决模型遗忘",
+      "llm_evidence": "长增量3D目标检测方法，解决模型遗忘",
+      "canonical_evidence": "长增量3D目标检测方法，解决模型遗忘",
+      "llm_tldr_en": "This paper addresses model forgetting in long-incremental 3D object detection. It identifies a self-reinforcing cycle and proposes LDMR, a learning-dynamics-driven memory and review framework, which significantly improves performance on long sequences.",
+      "llm_tldr_cn": "本文针对长增量3D目标检测中的模型遗忘问题展开研究。通过分析发现数据分布偏移与伪标签误差形成恶性循环，提出了学习动态驱动的记忆与复习框架（LDMR）。该框架利用学习动态信息指导模型记忆与复习，在多个长增量序列数据集上取得了显著效果，有效缓解了灾难性遗忘。该方法具有通用性，可适用于不同检测架构。",
+      "llm_tldr": "本文针对长增量3D目标检测中的模型遗忘问题展开研究。通过分析发现数据分布偏移与伪标签误差形成恶性循环，提出了学习动态驱动的记忆与复习框架（LDMR）。该框架利用学习动态信息指导模型记忆与复习，在多个长增量序列数据集上取得了显著效果，有效缓解了灾难性遗忘。该方法具有通用性，可适用于不同检测架构。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.12959v1",
+      "source": "arxiv",
+      "title": "ViCo3D: Empowering LiDAR-based Collaborative 3D Object Detection with Vision Foundation Models",
+      "abstract": "LiDAR-based collaborative 3D perception in Vehicle-to-Everything (V2X) systems typically relies on fusing bird's-eye-view (BEV) features across agents. However, current BEV representations, typically extracted by LiDAR backbones trained from scratch, are geometry-dominated and lack general semantic priors, inherently limiting the efficacy of feature-level collaboration. Meanwhile, vision foundation models (VFMs) pretrained on large-scale image data have demonstrated strong capability in learning general-purpose and informative visual representations for 2D tasks, and have the potential to enhance agent-wise LiDAR BEV representations for collaboration. Despite this potential, adapting VFMs to LiDAR-based 3D detection remains challenging due to the substantial image-point cloud modality gap. To bridge this gap, we propose ViCo3D, a collaborative 3D object detection framework powered by VFMs. Specifically, ViCo3D adapts VFMs to LiDAR-based collaborative perception from three aspects: First, ViCo3D projects point clouds onto the BEV plane as three-channel images, enabling DINOv2 to extract BEV-space visual features from LiDAR inputs. Besides, to effectively integrate these DINOv2-derived features with LiDAR geometric features, ViCo3D introduces a multi-scale BEV fusion module within the single-agent encoder. In addition, ViCo3D adopts an ego-centric cross-agent fusion strategy to aggregate complementary information from multiple agents. Experiments on DAIR-V2X and V2XSet demonstrate that ViCo3D achieves state-of-the-art 3D detection performance. Remarkably, it delivers up to 1.8x greater collaborative gains than prior methods on DAIR-V2X. The code will be made public available for future investigation.",
+      "authors": [
+        "Haojie Ren",
+        "Songrui Luo",
+        "Lingfeng Wang",
+        "Yan Xia",
+        "Yao Li",
+        "Jing Li",
+        "Lu Zhang",
+        "Jiajun Deng",
+        "Yanyong Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-14T16:56:10+00:00",
+      "link": "https://arxiv.org/pdf/2607.12959v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "ViCo3D proposes a collaborative 3D object detection method using LiDAR",
+      "llm_evidence_cn": "ViCo3D提出了一种基于激光雷达的协作式3D目标检测方法",
+      "llm_evidence": "ViCo3D提出了一种基于激光雷达的协作式3D目标检测方法",
+      "canonical_evidence": "ViCo3D提出了一种基于激光雷达的协作式3D目标检测方法",
+      "llm_tldr_en": "ViCo3D enhances LiDAR-based collaborative 3D detection by integrating vision foundation models to improve BEV feature representations, achieving better detection performance.",
+      "llm_tldr_cn": "针对现有基于激光雷达的协作式3D感知中BEV表示缺乏语义先验的问题，论文提出ViCo3D，通过引入视觉基础模型（VFM）增强BEV特征表征，从而提高协作检测效果。在V2X场景中验证了方法的有效性，表明VFM能够为LiDAR协作带来语义优势。",
+      "llm_tldr": "针对现有基于激光雷达的协作式3D感知中BEV表示缺乏语义先验的问题，论文提出ViCo3D，通过引入视觉基础模型（VFM）增强BEV特征表征，从而提高协作检测效果。在V2X场景中验证了方法的有效性，表明VFM能够为LiDAR协作带来语义优势。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.15058v1",
+      "source": "arxiv",
+      "title": "SUFLECA: Scaling Up Feature Learning for CAD-to-image Alignment",
+      "abstract": "CAD-to-image alignment aims to estimate an object's 9D pose (rotation, translation, and anisotropic scale) from a single RGB image, enabling applications in robotics and augmented reality. Recent zero-shot methods use visual foundation models to match image regions to CAD models, yet typically their correspondences are appearance-driven and degrade under occlusion or sim-to-real domain shift. To address these limitations, we introduce SUFLECA (Scaling Up Feature LEarning for CAD Alignment), a weakly-supervised framework for zero-shot CAD alignment with two key contributions. First, SUFLECA scales up geometry-grounded feature learning from pretrained visual representations through Normalized Object Coordinates (NOCs) supervision on 674K images spanning 12 real and synthetic datasets, learning compact geometry-aware features that generalize across domains. Second, we propose a geometrically consistent matching algorithm that establishes reliable one-to-one CAD-to-image correspondences. Together, these contributions enable accurate, sub-second alignment per object instance without iterative pose refinement. On ScanNet25k, SUFLECA achieves 33.4%/42.3% category/instance accuracy, outperforming, with a smaller computational footprint, the strongest zero-shot baseline by 10.3/12.2 percentage points and, for the first time on this benchmark, even surpassing fully supervised methods. Code is available at: https://github.com/snt-arg/SUFLECA",
+      "authors": [
+        "Saad Ejaz",
+        "Miguel Fernandez-Cortizas",
+        "Javier Civera",
+        "Holger Voos",
+        "Jose Luis Sanchez-Lopez"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-07-16T14:32:34+00:00",
+      "link": "https://arxiv.org/pdf/2607.15058v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "weakly-supervised CAD alignment with NOCS, relevant to 3D object pose estimation methods",
+      "llm_evidence_cn": "弱监督CAD对齐使用NOCS，与3D目标姿态估计方法相关",
+      "llm_evidence": "弱监督CAD对齐使用NOCS，与3D目标姿态估计方法相关",
+      "canonical_evidence": "弱监督CAD对齐使用NOCS，与3D目标姿态估计方法相关",
+      "llm_tldr_en": "SUFLECA uses NOCS supervision on 674K images to learn geometry-grounded features for zero-shot CAD-to-image alignment, improving occlusion robustness.",
+      "llm_tldr_cn": "论文针对CAD到图像对齐中外观驱动匹配易受遮挡和域偏移影响的问题，提出了弱监督框架。通过在674K图像上使用归一化对象坐标作为监督信号，扩展了预训练视觉表示的几何特征学习。实验表明在遮挡和跨域场景下对齐精度显著提升，为零样本9D位姿估计提供了可扩展方案。",
+      "llm_tldr": "论文针对CAD到图像对齐中外观驱动匹配易受遮挡和域偏移影响的问题，提出了弱监督框架。通过在674K图像上使用归一化对象坐标作为监督信号，扩展了预训练视觉表示的几何特征学习。实验表明在遮挡和跨域场景下对齐精度显著提升，为零样本9D位姿估计提供了可扩展方案。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

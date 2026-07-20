@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-20",
+  "date": "2026-07-20",
+  "generated_at": "2026-07-20T20:39:49",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/20/2607.12419v1-degunet-depth-guided-ultra-compact-backbones-for-efficient-lidar-camera-3d-detection",
+      "section": "quick",
+      "title_en": "DeGuNet: Depth-Guided Ultra-Compact Backbones for Efficient LiDAR-Camera 3D Detection",
+      "authors": "Haifa Zhang, Yijing Wang, Peixi Peng, Zhiqiang Zuo",
+      "date": "2026-07-14",
+      "pdf": "https://arxiv.org/pdf/2607.12419v1",
+      "score": "6.0",
+      "evidence": "使用LiDAR-相机融合的3D目标检测方法，属于3D目标检测方法",
+      "tldr": "当前多模态3D检测依赖大规模2D预训练骨干，参数冗余且结构错位。DeGuNet提出超紧凑即插即用图像骨干，通过稀疏感知机制对齐LiDAR深度，防止无效区域污染。在nuScenes上，GPU内存减少66.5%，推理加速1.16倍，mAP提升6.20。该工作建立了参数高效多模态3D感知的新范式。",
+      "tags": "query:nuscenes-dod",
+      "abstract_en": "In autonomous driving perception, the fusion of LiDAR and camera modalities has become the dominant paradigm for 3D object detection. However, current multi-modal frameworks heavily rely on massive visual backbones pretrained on 2D semantic tasks. This reliance introduces substantial parameter redundancy and a structural misalignment, as 2D priors are ill-equipped to handle the extreme sparsity of LiDAR projections required for Bird's-Eye-View geometry. To address this, we present DeGuNet, an ultra-compact and plug-and-play image backbone explicitly designed for depth-guided representation learning. By incorporating sparsity-aware feature extraction mechanisms, DeGuNet effectively aligns multi-view images with unstructured LiDAR depth while strictly preventing invalid-region contamination. Extensive experiments on the nuScenes dataset demonstrate DeGuNet's broad plug-and-play applicability and superior efficiency. When integrated into established baselines, it fundamentally eliminates architectural redundancy, reducing GPU memory consumption by up to 66.5% and achieving a 1.16x inference speedup. Concurrently, DeGuNet delivers up to a 6.20 absolute mAP gain, establishing a new paradigm for parameter-efficient multi-modal 3D perception.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

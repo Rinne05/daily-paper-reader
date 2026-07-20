@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-20 <!--dpr-date:20260720-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/20/2607.12419v1-degunet-depth-guided-ultra-compact-backbones-for-efficient-lidar-camera-3d-detection" data-sidebar-item="{&quot;title&quot;: &quot;DeGuNet: Depth-Guided Ultra-Compact Backbones for Efficient LiDAR-Camera 3D Detection&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.12419v1-degunet-depth-guided-ultra-compact-backbones-for-efficient-lidar-camera-3d-detection&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;使用LiDAR-相机融合的3D目标检测方法，属于3D目标检测方法&quot;}">DeGuNet: Depth-Guided Ultra-Compact Backbones for Efficient LiDAR-Camera 3D Detection</a>
   * 2026-07-19 <!--dpr-date:20260719-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/19/2607.09985v1-unipose9d-universal-category-agnostic-object-pose-estimation" data-sidebar-item="{&quot;title&quot;: &quot;UniPose9D: Universal Category-Agnostic Object Pose Estimation&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.09985v1-unipose9d-universal-category-agnostic-object-pose-estimation&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;nuscenes-dod&quot;}], &quot;evidence&quot;: &quot;类别无关的9D目标姿态估计，与3D目标检测方法相关&quot;}">UniPose9D: Universal Category-Agnostic Object Pose Estimation</a>

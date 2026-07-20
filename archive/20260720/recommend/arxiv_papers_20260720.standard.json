@@ -1,0 +1,55 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-20T20:38:55.435556+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.12419v1",
+      "source": "arxiv",
+      "title": "DeGuNet: Depth-Guided Ultra-Compact Backbones for Efficient LiDAR-Camera 3D Detection",
+      "abstract": "In autonomous driving perception, the fusion of LiDAR and camera modalities has become the dominant paradigm for 3D object detection. However, current multi-modal frameworks heavily rely on massive visual backbones pretrained on 2D semantic tasks. This reliance introduces substantial parameter redundancy and a structural misalignment, as 2D priors are ill-equipped to handle the extreme sparsity of LiDAR projections required for Bird's-Eye-View geometry. To address this, we present DeGuNet, an ultra-compact and plug-and-play image backbone explicitly designed for depth-guided representation learning. By incorporating sparsity-aware feature extraction mechanisms, DeGuNet effectively aligns multi-view images with unstructured LiDAR depth while strictly preventing invalid-region contamination. Extensive experiments on the nuScenes dataset demonstrate DeGuNet's broad plug-and-play applicability and superior efficiency. When integrated into established baselines, it fundamentally eliminates architectural redundancy, reducing GPU memory consumption by up to 66.5% and achieving a 1.16x inference speedup. Concurrently, DeGuNet delivers up to a 6.20 absolute mAP gain, establishing a new paradigm for parameter-efficient multi-modal 3D perception.",
+      "authors": [
+        "Haifa Zhang",
+        "Yijing Wang",
+        "Peixi Peng",
+        "Zhiqiang Zuo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-14T06:46:30+00:00",
+      "link": "https://arxiv.org/pdf/2607.12419v1",
+      "tags": [
+        "keyword:nuscenes-dod",
+        "query:nuscenes-dod"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "3D object detection method using LiDAR-camera fusion, relevant to 3D object detection methods",
+      "llm_evidence_cn": "使用LiDAR-相机融合的3D目标检测方法，属于3D目标检测方法",
+      "llm_evidence": "使用LiDAR-相机融合的3D目标检测方法，属于3D目标检测方法",
+      "canonical_evidence": "使用LiDAR-相机融合的3D目标检测方法，属于3D目标检测方法",
+      "llm_tldr_en": "DeGuNet proposes an ultra-compact image backbone for LiDAR-camera 3D detection, using depth-guided representation learning to reduce redundancy.",
+      "llm_tldr_cn": "本文提出DeGuNet，一个超紧凑的图像骨干网络，专门为LiDAR-相机3D检测设计。通过深度引导表示学习和稀疏感知特征提取，有效减少参数冗余并解决结构错位问题。实验表明该方法在保持性能的同时大幅降低计算量，为多模态3D检测提供了高效的backbone设计思路。",
+      "llm_tldr": "本文提出DeGuNet，一个超紧凑的图像骨干网络，专门为LiDAR-相机3D检测设计。通过深度引导表示学习和稀疏感知特征提取，有效减少参数冗余并解决结构错位问题。实验表明该方法在保持性能的同时大幅降低计算量，为多模态3D检测提供了高效的backbone设计思路。",
+      "llm_tags": [
+        "query:nuscenes-dod"
+      ],
+      "matched_query_tag": "query:nuscenes-dod",
+      "matched_query_text": "3D object detection methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
